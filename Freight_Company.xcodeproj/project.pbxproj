@@ -54,6 +54,10 @@
 		427C6990200CA5CA006A9EBB /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 427C698E200CA5C9006A9EBB /* LoginViewController.xib */; };
 		427C6993200CA626006A9EBB /* CCWebViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C6992200CA626006A9EBB /* CCWebViewViewController.m */; };
 		427C6996200CCABF006A9EBB /* AddInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C6995200CCABF006A9EBB /* AddInfoViewController.m */; };
+		427C699A200D9A19006A9EBB /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C6998200D9A19006A9EBB /* ReviewViewController.m */; };
+		427C699B200D9A19006A9EBB /* ReviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 427C6999200D9A19006A9EBB /* ReviewViewController.xib */; };
+		427C69A1200D9D0B006A9EBB /* NODataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C69A0200D9D0B006A9EBB /* NODataView.m */; };
+		427C69AC200EE277006A9EBB /* AddInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C69AB200EE277006A9EBB /* AddInfoTableViewCell.m */; };
 		B52FBD6EFDDB0053CDAD176F /* libPods-Freight_Company.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7531F0399824241557149359 /* libPods-Freight_Company.a */; };
 /* End PBXBuildFile section */
 
@@ -151,6 +155,13 @@
 		427C6992200CA626006A9EBB /* CCWebViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCWebViewViewController.m; sourceTree = "<group>"; };
 		427C6994200CCABF006A9EBB /* AddInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddInfoViewController.h; sourceTree = "<group>"; };
 		427C6995200CCABF006A9EBB /* AddInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInfoViewController.m; sourceTree = "<group>"; };
+		427C6997200D9A19006A9EBB /* ReviewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReviewViewController.h; sourceTree = "<group>"; };
+		427C6998200D9A19006A9EBB /* ReviewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReviewViewController.m; sourceTree = "<group>"; };
+		427C6999200D9A19006A9EBB /* ReviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReviewViewController.xib; sourceTree = "<group>"; };
+		427C699F200D9D0B006A9EBB /* NODataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NODataView.h; sourceTree = "<group>"; };
+		427C69A0200D9D0B006A9EBB /* NODataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NODataView.m; sourceTree = "<group>"; };
+		427C69AA200EE277006A9EBB /* AddInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddInfoTableViewCell.h; sourceTree = "<group>"; };
+		427C69AB200EE277006A9EBB /* AddInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInfoTableViewCell.m; sourceTree = "<group>"; };
 		4429C470FFB6F6CA84B03013 /* Pods-Freight_Company.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Freight_Company.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Freight_Company/Pods-Freight_Company.debug.xcconfig"; sourceTree = "<group>"; };
 		537AE1D939255ECA6F4D0FBB /* Pods-Freight_Company.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Freight_Company.release.xcconfig"; path = "Pods/Target Support Files/Pods-Freight_Company/Pods-Freight_Company.release.xcconfig"; sourceTree = "<group>"; };
 		7531F0399824241557149359 /* libPods-Freight_Company.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Freight_Company.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -437,11 +448,18 @@
 		427C6945200C98C4006A9EBB /* Login&Regist */ = {
 			isa = PBXGroup;
 			children = (
+				427C699F200D9D0B006A9EBB /* NODataView.h */,
+				427C69A0200D9D0B006A9EBB /* NODataView.m */,
 				427C698C200CA5C9006A9EBB /* LoginViewController.h */,
 				427C698D200CA5C9006A9EBB /* LoginViewController.m */,
 				427C698E200CA5C9006A9EBB /* LoginViewController.xib */,
 				427C6994200CCABF006A9EBB /* AddInfoViewController.h */,
 				427C6995200CCABF006A9EBB /* AddInfoViewController.m */,
+				427C6997200D9A19006A9EBB /* ReviewViewController.h */,
+				427C6998200D9A19006A9EBB /* ReviewViewController.m */,
+				427C6999200D9A19006A9EBB /* ReviewViewController.xib */,
+				427C69AA200EE277006A9EBB /* AddInfoTableViewCell.h */,
+				427C69AB200EE277006A9EBB /* AddInfoTableViewCell.m */,
 			);
 			path = "Login&Regist";
 			sourceTree = "<group>";
@@ -622,6 +640,7 @@
 				427C68D4200C9849006A9EBB /* LaunchScreen.storyboard in Resources */,
 				427C68D1200C9849006A9EBB /* Assets.xcassets in Resources */,
 				427C6990200CA5CA006A9EBB /* LoginViewController.xib in Resources */,
+				427C699B200D9A19006A9EBB /* ReviewViewController.xib in Resources */,
 				427C695D200C98C4006A9EBB /* arrowdown@2x.png in Resources */,
 				427C68CC200C9849006A9EBB /* Main.storyboard in Resources */,
 				427C695C200C98C4006A9EBB /* arrowup@2x.png in Resources */,
@@ -709,7 +728,10 @@
 				427C698B200C9EE3006A9EBB /* OrderViewController.m in Sources */,
 				427C6956200C98C4006A9EBB /* DIc.m in Sources */,
 				427C6993200CA626006A9EBB /* CCWebViewViewController.m in Sources */,
+				427C699A200D9A19006A9EBB /* ReviewViewController.m in Sources */,
+				427C69AC200EE277006A9EBB /* AddInfoTableViewCell.m in Sources */,
 				427C6984200C98C5006A9EBB /* UserInfoViewController.m in Sources */,
+				427C69A1200D9D0B006A9EBB /* NODataView.m in Sources */,
 				427C6970200C98C4006A9EBB /* UIButton+SSEdgeInsets.m in Sources */,
 				427C6963200C98C4006A9EBB /* ViewController.m in Sources */,
 				427C6958200C98C4006A9EBB /* DicToString.m in Sources */,
