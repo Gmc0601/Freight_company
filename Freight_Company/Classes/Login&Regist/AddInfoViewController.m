@@ -10,9 +10,16 @@
 #import "AddInfoTableViewCell.h"
 #import <YYKit.h>
 #import "ReviewViewController.h"
+#import "GTMBase64.h"
+
+
+@implementation AddInfoModel
+
+@end
 
 @interface AddInfoViewController ()<UITableViewDelegate,  UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>{
     BOOL isman;
+    BOOL photo;
 }
 
 @property (nonatomic, retain) UIButton *commitBtn;
@@ -25,6 +32,8 @@
 
 @property (nonatomic, retain) UIButton *man, *womam;
 
+@property (nonatomic, retain) AddInfoModel *model;
+
 @end
 
 @implementation AddInfoViewController
@@ -33,6 +42,11 @@
     [super viewDidLoad];
     isman = YES;
     [self resetFather];
+    
+    self.model = [[AddInfoModel alloc] init];
+    self.model.man = YES;
+    photo = NO;
+    
     
     [self.view addSubview:self.noUseTableView];
     [self.view addSubview:self.commitBtn];
@@ -72,6 +86,29 @@
     }
     cell.title = self.titleArr[indexPath.row];
 
+    cell.textBlock = ^(NSString *text) {
+        switch (indexPath.row) {
+            case 0:
+                self.model.compayName = text;
+                break;
+            case 1:
+                self.model.userName = text;
+                break;
+            case 2:
+                self.model.phone = text;
+                break;
+            case 3:
+                self.model.QQ =  text;
+                break;
+            case 4:
+                self.model.address = text;
+                break;
+                
+            default:
+                break;
+        }
+    };
+    
     return cell;
     
 }
@@ -153,13 +190,35 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    photo = YES;
     self.logoImage.image = editedImage;
-    [self.noUseTableView reloadData];
+    
+    NSData *imgData = UIImageJPEGRepresentation(editedImage,0.5);
+    NSString *imgStr = [GTMBase64 stringByEncodingData:imgData];
+    
+    self.model.photoStr = imgStr;
+    
     [picker dismissViewControllerAnimated:YES completion:^{
         
     }];
 }
 - (void)commitClick {
+    
+    if (!self.model.compayName) {
+        [ConfigModel mbProgressHUD:@"请输入企业全称" andView:nil];
+        return;
+    }
+    
+    if (!self.model.userName) {
+        [ConfigModel mbProgressHUD:@"请输入联系人" andView:nil];
+        return;
+    }
+    
+    if (!photo) {
+        [ConfigModel mbProgressHUD:@"请上传营业执照" andView:nil];
+        return;
+    }
+    
     [self.navigationController pushViewController:[ReviewViewController new] animated:YES];
 }
 
@@ -249,9 +308,11 @@
         if (sender.tag == 100) {
             self.womam.selected = NO;
             isman = YES;
+            self.model.man = YES;
         }else {
             self.man.selected = NO;
             isman = NO;
+            self.model.man = NO;
         }
     }
    

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		42399A8E20109B0D009263E5 /* MyDriverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42399A8D20109B0D009263E5 /* MyDriverViewController.m */; };
+		42399A9120109BBF009263E5 /* TrasformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42399A8F20109BBF009263E5 /* TrasformViewController.m */; };
+		42399A9420109BE2009263E5 /* TransformTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42399A9320109BE2009263E5 /* TransformTableViewCell.m */; };
+		42399A9720109E17009263E5 /* SonMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42399A9620109E17009263E5 /* SonMemberViewController.m */; };
+		42399A9A2010A3A5009263E5 /* MyDriverTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42399A992010A3A5009263E5 /* MyDriverTableViewCell.m */; };
+		42399A9D2010D204009263E5 /* SonMemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42399A9C2010D204009263E5 /* SonMemberTableViewCell.m */; };
 		427C68CC200C9849006A9EBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 427C68CA200C9849006A9EBB /* Main.storyboard */; };
 		427C68CF200C9849006A9EBB /* Freight_Company.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 427C68CD200C9849006A9EBB /* Freight_Company.xcdatamodeld */; };
 		427C68D1200C9849006A9EBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 427C68D0200C9849006A9EBB /* Assets.xcassets */; };
@@ -62,6 +68,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		42399A8C20109B0D009263E5 /* MyDriverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyDriverViewController.h; sourceTree = "<group>"; };
+		42399A8D20109B0D009263E5 /* MyDriverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyDriverViewController.m; sourceTree = "<group>"; };
+		42399A8F20109BBF009263E5 /* TrasformViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrasformViewController.m; sourceTree = "<group>"; };
+		42399A9020109BBF009263E5 /* TrasformViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrasformViewController.h; sourceTree = "<group>"; };
+		42399A9220109BE2009263E5 /* TransformTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransformTableViewCell.h; sourceTree = "<group>"; };
+		42399A9320109BE2009263E5 /* TransformTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransformTableViewCell.m; sourceTree = "<group>"; };
+		42399A9520109E17009263E5 /* SonMemberViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SonMemberViewController.h; sourceTree = "<group>"; };
+		42399A9620109E17009263E5 /* SonMemberViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SonMemberViewController.m; sourceTree = "<group>"; };
+		42399A982010A3A5009263E5 /* MyDriverTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyDriverTableViewCell.h; sourceTree = "<group>"; };
+		42399A992010A3A5009263E5 /* MyDriverTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyDriverTableViewCell.m; sourceTree = "<group>"; };
+		42399A9B2010D204009263E5 /* SonMemberTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SonMemberTableViewCell.h; sourceTree = "<group>"; };
+		42399A9C2010D204009263E5 /* SonMemberTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SonMemberTableViewCell.m; sourceTree = "<group>"; };
 		427C68C1200C9849006A9EBB /* Freight_Company.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Freight_Company.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		427C68CB200C9849006A9EBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		427C68CE200C9849006A9EBB /* Freight_Company.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Freight_Company.xcdatamodel; sourceTree = "<group>"; };
@@ -519,10 +537,16 @@
 		427C6950200C98C4006A9EBB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				42399A9020109BBF009263E5 /* TrasformViewController.h */,
+				42399A8F20109BBF009263E5 /* TrasformViewController.m */,
 				427C6952200C98C4006A9EBB /* MeViewController.h */,
 				427C6953200C98C4006A9EBB /* MeViewController.m */,
 				427C6951200C98C4006A9EBB /* UserInfoViewController.h */,
 				427C6954200C98C4006A9EBB /* UserInfoViewController.m */,
+				42399A8C20109B0D009263E5 /* MyDriverViewController.h */,
+				42399A8D20109B0D009263E5 /* MyDriverViewController.m */,
+				42399A9520109E17009263E5 /* SonMemberViewController.h */,
+				42399A9620109E17009263E5 /* SonMemberViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -530,6 +554,12 @@
 		427C6955200C98C4006A9EBB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				42399A9220109BE2009263E5 /* TransformTableViewCell.h */,
+				42399A9320109BE2009263E5 /* TransformTableViewCell.m */,
+				42399A982010A3A5009263E5 /* MyDriverTableViewCell.h */,
+				42399A992010A3A5009263E5 /* MyDriverTableViewCell.m */,
+				42399A9B2010D204009263E5 /* SonMemberTableViewCell.h */,
+				42399A9C2010D204009263E5 /* SonMemberTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -711,6 +741,7 @@
 				427C6978200C98C5006A9EBB /* NSObject+SXRuntime.m in Sources */,
 				427C6974200C98C5006A9EBB /* UINavigationController+SXFullScreen.m in Sources */,
 				427C698F200CA5CA006A9EBB /* LoginViewController.m in Sources */,
+				42399A9420109BE2009263E5 /* TransformTableViewCell.m in Sources */,
 				427C6971200C98C4006A9EBB /* UITabBar+TBBadge.m in Sources */,
 				427C696E200C98C4006A9EBB /* BaseViewController.m in Sources */,
 				427C6981200C98C5006A9EBB /* NextViewController.m in Sources */,
@@ -729,6 +760,7 @@
 				427C6956200C98C4006A9EBB /* DIc.m in Sources */,
 				427C6993200CA626006A9EBB /* CCWebViewViewController.m in Sources */,
 				427C699A200D9A19006A9EBB /* ReviewViewController.m in Sources */,
+				42399A9D2010D204009263E5 /* SonMemberTableViewCell.m in Sources */,
 				427C69AC200EE277006A9EBB /* AddInfoTableViewCell.m in Sources */,
 				427C6984200C98C5006A9EBB /* UserInfoViewController.m in Sources */,
 				427C69A1200D9D0B006A9EBB /* NODataView.m in Sources */,
@@ -740,14 +772,18 @@
 				427C6972200C98C4006A9EBB /* TBTabBar.m in Sources */,
 				427C6975200C98C5006A9EBB /* UINavigation+SXFixSpace.m in Sources */,
 				427C697E200C98C5006A9EBB /* ConfigModel.m in Sources */,
+				42399A9120109BBF009263E5 /* TrasformViewController.m in Sources */,
 				427C6968200C98C4006A9EBB /* TBTabBarController.m in Sources */,
 				427C696D200C98C4006A9EBB /* CCBaseViewController.m in Sources */,
+				42399A8E20109B0D009263E5 /* MyDriverViewController.m in Sources */,
 				427C6983200C98C5006A9EBB /* MeViewController.m in Sources */,
 				427C68CF200C9849006A9EBB /* Freight_Company.xcdatamodeld in Sources */,
 				427C6973200C98C5006A9EBB /* UIViewController+BarButton.m in Sources */,
 				427C6962200C98C4006A9EBB /* NSString+SBJSON.m in Sources */,
 				427C6964200C98C4006A9EBB /* main.m in Sources */,
 				427C6976200C98C5006A9EBB /* UIBarButtonItem+SXCreate.m in Sources */,
+				42399A9720109E17009263E5 /* SonMemberViewController.m in Sources */,
+				42399A9A2010A3A5009263E5 /* MyDriverTableViewCell.m in Sources */,
 				427C6977200C98C5006A9EBB /* UIView+TBFrame.m in Sources */,
 				427C6961200C98C4006A9EBB /* SBJSON.m in Sources */,
 				427C6982200C98C5006A9EBB /* MessageViewController.m in Sources */,

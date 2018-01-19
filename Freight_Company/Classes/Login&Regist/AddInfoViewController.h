@@ -8,6 +8,14 @@
 
 #import "CCBaseViewController.h"
 
+@interface AddInfoModel: NSObject
+
+@property (nonatomic,copy) NSString *compayName, *userName, *phone, *QQ, *address, *photoStr;
+
+@property (nonatomic) BOOL man;
+
+@end
+
 @interface AddInfoViewController : CCBaseViewController
 
 @end

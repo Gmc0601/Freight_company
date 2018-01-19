@@ -36,7 +36,6 @@
     self.view1.layer.borderColor = [UIColorFromHex(0x999999) CGColor];
     self.view2.layer.borderColor = [UIColorFromHex(0x999999) CGColor];
     [self.leftBar setImage:[UIImage imageNamed:@"dl_icon_sc"] forState:UIControlStateNormal];
-    self.LoginBtn.userInteractionEnabled = NO;
     [self.phoneText addTarget:self action:@selector(textchange) forControlEvents:UIControlEventEditingChanged];
     [self.codeText addTarget:self action:@selector(textchange) forControlEvents:UIControlEventEditingChanged];
     
@@ -63,11 +62,7 @@
 }
 
 - (void)textchange {
-    if (self.phoneText.text.length == 11 && self.codeText.text.length == 4) {
-        self.LoginBtn.userInteractionEnabled = YES;
-        self.LoginBtn.backgroundColor = RGBColor(102, 143, 218);
-        [self.LoginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    }
+
 }
 
 - (IBAction)codeBtnClick:(id)sender {
@@ -126,6 +121,18 @@
 }
 - (IBAction)loginBtnClick:(id)sender {
     //  登录
+    
+    if (self.phoneText.text.length != 11) {
+        [ConfigModel mbProgressHUD:@"请输入11位手机号" andView:nil];
+        return;
+    }
+    
+    
+    if (self.codeText.text.length != 4) {
+        [ConfigModel mbProgressHUD:@"请输入4位验证码" andView:nil];
+        return;
+    }
+    
     [self.navigationController pushViewController:[AddInfoViewController new] animated:YES];
     
 }

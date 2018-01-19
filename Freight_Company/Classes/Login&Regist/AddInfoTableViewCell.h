@@ -14,7 +14,9 @@
 
 @property (nonatomic, retain) UILabel *titleLab;
 
-@property (nonatomic, retain) UITextView *text;
+@property (nonatomic, retain) UITextField *text;
+
+@property (nonatomic, copy) void(^textBlock)(NSString *text);
 
 
 @end

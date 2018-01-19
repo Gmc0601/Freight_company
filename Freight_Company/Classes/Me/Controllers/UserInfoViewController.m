@@ -32,7 +32,7 @@
     [logoutBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [logoutBtn addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
 //    logoutBtn.titleLabel.font = BOLDSYSTEMFONT(18);
-    [self.view addSubview:logoutBtn];
+//    [self.view addSubview:logoutBtn];
     
 }
 
