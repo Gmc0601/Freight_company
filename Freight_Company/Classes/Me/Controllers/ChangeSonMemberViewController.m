@@ -1,24 +1,25 @@
 //
-//  SonMemberViewController.m
+//  ChangeSonMemberViewController.m
 //  Freight_Company
 //
-//  Created by cc on 2018/1/18.
+//  Created by cc on 2018/1/19.
 //  Copyright © 2018年 cc. All rights reserved.
 //
 
-#import "SonMemberViewController.h"
-#import "SonMemberTableViewCell.h"
 #import "ChangeSonMemberViewController.h"
+#import "AddInfoTableViewCell.h"
 
-@interface SonMemberViewController ()<UITableViewDelegate,  UITableViewDataSource>
+@interface ChangeSonMemberViewController ()<UITableViewDelegate,  UITableViewDataSource>
 
 @property (nonatomic, retain) UITableView *noUseTableView;
+
+@property (nonatomic, retain) NSArray *titleArr, *pleaceArr;
 
 @property (nonatomic, retain) UIButton *addBtn;
 
 @end
 
-@implementation SonMemberViewController
+@implementation ChangeSonMemberViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,30 +29,32 @@
 }
 
 - (void)resetFather {
-    self.titleLab.text = @"子账号管理";
+    self.titleLab.text = @"编辑子账号";
     self.rightBar.hidden = YES;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return 2;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *cellId = [NSString stringWithFormat:@"%d", indexPath.row];
-    SonMemberTableViewCell *cell = [self.noUseTableView dequeueReusableCellWithIdentifier:cellId];
+    AddInfoTableViewCell *cell = [self.noUseTableView dequeueReusableCellWithIdentifier:cellId];
     if (!cell) {
-        cell = [[SonMemberTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+        cell = [[AddInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
+        UILabel *line = [[UILabel alloc] initWithFrame:FRAME(0, SizeHeight(55) - 1, kScreenW, 1)];
+        line.backgroundColor = RGB(239, 240, 241);
+        [cell.contentView addSubview:line];
     }
+    
+    cell.title = self.titleArr[indexPath.row];
+    cell.text.placeholder = self.pleaceArr[indexPath.row];
     WeakSelf(weak);
-    cell.changeBlock = ^{
-        [weak.navigationController pushViewController:[ChangeSonMemberViewController new] animated:YES];
-    };
-    cell.delBlock = ^{
+    cell.textBlock = ^(NSString *text) {
         
     };
     
@@ -61,7 +64,7 @@
 
 #pragma mark - UITableDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return SizeHeight(74);
+    return SizeHeight(55);
 }
 
 
@@ -88,11 +91,25 @@
     return _noUseTableView;
 }
 
+- (NSArray *)titleArr {
+    if (!_titleArr) {
+        _titleArr = @[@"员工姓名", @"手机号"];
+    }
+    return _titleArr;
+}
+
+- (NSArray *)pleaceArr {
+    if (!_pleaceArr) {
+        _pleaceArr = @[@"请输入员工姓名", @"请输入11位手机号"];
+    }
+    return _pleaceArr;
+}
+
 - (UIButton *)addBtn {
     if (!_addBtn) {
         _addBtn = [[UIButton alloc] initWithFrame:FRAME(SizeWidth(10), kScreenH - SizeHeight(50), kScreenW - SizeWidth(20), SizeHeight(40))];
         _addBtn.backgroundColor = UIColorFromHex(0x018BF2);
-        [_addBtn setTitle:@"+ 添加子账号" forState:UIControlStateNormal];
+        [_addBtn setTitle:@"保存" forState:UIControlStateNormal];
         [_addBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_addBtn addTarget:self action:@selector(addmember) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -100,7 +117,8 @@
 }
 
 - (void)addmember {
-    [self.navigationController pushViewController:[ChangeSonMemberViewController new] animated:YES];
+    //  baocun
+
 }
 
 

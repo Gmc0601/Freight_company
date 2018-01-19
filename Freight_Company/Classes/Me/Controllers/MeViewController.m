@@ -14,6 +14,9 @@
 #import "UserInfoViewController.h"
 #import "SonMemberViewController.h"
 #import "CCWebViewViewController.h"
+#import "UIButton+SSEdgeInsets.h"
+#import "SystemMessageViewController.h"
+
 
 @interface MeViewController ()<UITableViewDelegate, UITableViewDataSource>{
     NSString *phone;
@@ -25,6 +28,8 @@
 @property (nonatomic, retain) UIImageView *headView;
 
 @property (nonatomic, retain) UILabel *nickName, *companyName, *balanceLab;
+
+@property (nonatomic, retain) UIButton *messageBtn;
 
 @end
 
@@ -93,8 +98,6 @@
     return SizeHeight(60);
 }
 
-
-
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
@@ -143,11 +146,22 @@
     return _noUseTableView;
 }
 
+- (void)messageClick {
+    [self.navigationController pushViewController:[SystemMessageViewController new] animated:YES];
+}
+
 - (void)addheadView:(UIView *)view {
     
     UIImageView *back = [[UIImageView alloc] initWithFrame:view.frame];
     back.image = [UIImage imageNamed:@"wd_bg_grzx"];
     [view addSubview:back];
+    
+    self.messageBtn = [[UIButton alloc] initWithFrame:FRAME(kScreenW - SizeWidth(46), SizeHeight(34), SizeWidth(30), SizeHeight(24))];
+    self.messageBtn.backgroundColor = [UIColor clearColor];
+    [self.messageBtn setImage:[UIImage imageNamed:@"nav_icon_xx"] forState:UIControlStateNormal];
+    [self.messageBtn setBadgeValue:10];
+    [self.messageBtn addTarget:self action:@selector(messageClick) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:self.messageBtn];
     
     self.headView = [[UIImageView alloc] initWithFrame:FRAME(SizeWidth(20), SizeHeight(68), SizeWidth(70), SizeWidth(70))];
     self.headView.backgroundColor = [UIColor clearColor];
@@ -177,13 +191,11 @@
     self.balanceLab.backgroundColor = [UIColor clearColor];
     self.balanceLab.textColor = UIColorFromHex(0xF4923E);
     self.balanceLab.font = [UIFont systemFontOfSize:13];
-//    self.balanceLab.centerY = halfView.centerY;
     self.balanceLab.text = @"余额：￥110,110,110.00";
     [halfView addSubview:self.balanceLab];
     
     UIImageView *logo = [[UIImageView alloc] initWithFrame:FRAME(kScreenW - SizeWidth(20) - SizeWidth(15), SizeHeight(15), SizeWidth(10), SizeHeight(16))];
     logo.backgroundColor = [UIColor clearColor];
-//    logo.centerY = halfView.centerY;
     logo.image = [UIImage imageNamed:@"wd_icon_gd 拷贝"];
     [halfView addSubview:logo];
     
@@ -193,7 +205,6 @@
     textlab.textAlignment = NSTextAlignmentRight;
     textlab.font = [UIFont systemFontOfSize:13];
     textlab.text = @"查看交易记录";
-//    textlab.centerY = halfView.centerY;
     [halfView addSubview:textlab];
     [view addSubview:halfView];
     
@@ -220,6 +231,13 @@
 }
 
 - (void)logout {
+        LoginViewController *vc = [[LoginViewController alloc] init];
+        vc.homeBlocl = ^{
+            self.tabBarController.selectedIndex = 0;
+        };
+    
+        UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self presentViewController:na animated:YES completion:nil];
  }
 
 - (void)didReceiveMemoryWarning {

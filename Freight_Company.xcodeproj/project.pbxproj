@@ -13,6 +13,11 @@
 		42399A9720109E17009263E5 /* SonMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42399A9620109E17009263E5 /* SonMemberViewController.m */; };
 		42399A9A2010A3A5009263E5 /* MyDriverTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42399A992010A3A5009263E5 /* MyDriverTableViewCell.m */; };
 		42399A9D2010D204009263E5 /* SonMemberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 42399A9C2010D204009263E5 /* SonMemberTableViewCell.m */; };
+		42399AA32011A19F009263E5 /* ChangeSonMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42399AA22011A19E009263E5 /* ChangeSonMemberViewController.m */; };
+		4268EE752011D49900091D5F /* SystemMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4268EE742011D49900091D5F /* SystemMessageViewController.m */; };
+		4268EE782011DA3F00091D5F /* SystemCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4268EE772011DA3F00091D5F /* SystemCellTableViewCell.m */; };
+		4268EE7B2011E2E900091D5F /* UILabel+StringFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 4268EE7A2011E2E900091D5F /* UILabel+StringFrame.m */; };
+		4268EE7E2011E75400091D5F /* UIButton+SSEdgeInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = 4268EE7D2011E75400091D5F /* UIButton+SSEdgeInsets.m */; };
 		427C68CC200C9849006A9EBB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 427C68CA200C9849006A9EBB /* Main.storyboard */; };
 		427C68CF200C9849006A9EBB /* Freight_Company.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 427C68CD200C9849006A9EBB /* Freight_Company.xcdatamodeld */; };
 		427C68D1200C9849006A9EBB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 427C68D0200C9849006A9EBB /* Assets.xcassets */; };
@@ -38,7 +43,6 @@
 		427C696D200C98C4006A9EBB /* CCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C6917200C98C4006A9EBB /* CCBaseViewController.m */; };
 		427C696E200C98C4006A9EBB /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C6918200C98C4006A9EBB /* BaseViewController.m */; };
 		427C696F200C98C4006A9EBB /* BaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C6919200C98C4006A9EBB /* BaseTableView.m */; };
-		427C6970200C98C4006A9EBB /* UIButton+SSEdgeInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C691E200C98C4006A9EBB /* UIButton+SSEdgeInsets.m */; };
 		427C6971200C98C4006A9EBB /* UITabBar+TBBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C691F200C98C4006A9EBB /* UITabBar+TBBadge.m */; };
 		427C6972200C98C4006A9EBB /* TBTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C6921200C98C4006A9EBB /* TBTabBar.m */; };
 		427C6973200C98C5006A9EBB /* UIViewController+BarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C692B200C98C4006A9EBB /* UIViewController+BarButton.m */; };
@@ -80,6 +84,16 @@
 		42399A992010A3A5009263E5 /* MyDriverTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyDriverTableViewCell.m; sourceTree = "<group>"; };
 		42399A9B2010D204009263E5 /* SonMemberTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SonMemberTableViewCell.h; sourceTree = "<group>"; };
 		42399A9C2010D204009263E5 /* SonMemberTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SonMemberTableViewCell.m; sourceTree = "<group>"; };
+		42399AA12011A19E009263E5 /* ChangeSonMemberViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeSonMemberViewController.h; sourceTree = "<group>"; };
+		42399AA22011A19E009263E5 /* ChangeSonMemberViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeSonMemberViewController.m; sourceTree = "<group>"; };
+		4268EE732011D49900091D5F /* SystemMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemMessageViewController.h; sourceTree = "<group>"; };
+		4268EE742011D49900091D5F /* SystemMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemMessageViewController.m; sourceTree = "<group>"; };
+		4268EE762011DA3F00091D5F /* SystemCellTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemCellTableViewCell.h; sourceTree = "<group>"; };
+		4268EE772011DA3F00091D5F /* SystemCellTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SystemCellTableViewCell.m; sourceTree = "<group>"; };
+		4268EE792011E2E900091D5F /* UILabel+StringFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+StringFrame.h"; sourceTree = "<group>"; };
+		4268EE7A2011E2E900091D5F /* UILabel+StringFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+StringFrame.m"; sourceTree = "<group>"; };
+		4268EE7C2011E75400091D5F /* UIButton+SSEdgeInsets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+SSEdgeInsets.h"; sourceTree = "<group>"; };
+		4268EE7D2011E75400091D5F /* UIButton+SSEdgeInsets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+SSEdgeInsets.m"; sourceTree = "<group>"; };
 		427C68C1200C9849006A9EBB /* Freight_Company.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Freight_Company.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		427C68CB200C9849006A9EBB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		427C68CE200C9849006A9EBB /* Freight_Company.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Freight_Company.xcdatamodel; sourceTree = "<group>"; };
@@ -130,7 +144,6 @@
 		427C691A200C98C4006A9EBB /* CCBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBaseViewController.h; sourceTree = "<group>"; };
 		427C691B200C98C4006A9EBB /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		427C691C200C98C4006A9EBB /* BaseTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableView.h; sourceTree = "<group>"; };
-		427C691E200C98C4006A9EBB /* UIButton+SSEdgeInsets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+SSEdgeInsets.m"; sourceTree = "<group>"; };
 		427C691F200C98C4006A9EBB /* UITabBar+TBBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+TBBadge.m"; sourceTree = "<group>"; };
 		427C6920200C98C4006A9EBB /* UIViewController+BarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+BarButton.h"; sourceTree = "<group>"; };
 		427C6921200C98C4006A9EBB /* TBTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBTabBar.m; sourceTree = "<group>"; };
@@ -141,7 +154,6 @@
 		427C6926200C98C4006A9EBB /* UINavigation+SXFixSpace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigation+SXFixSpace.h"; sourceTree = "<group>"; };
 		427C6927200C98C4006A9EBB /* UIBarButtonItem+SXCreate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+SXCreate.h"; sourceTree = "<group>"; };
 		427C6928200C98C4006A9EBB /* UITabBar+TBBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+TBBadge.h"; sourceTree = "<group>"; };
-		427C6929200C98C4006A9EBB /* UIButton+SSEdgeInsets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+SSEdgeInsets.h"; sourceTree = "<group>"; };
 		427C692A200C98C4006A9EBB /* TBTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBTabBar.h; sourceTree = "<group>"; };
 		427C692B200C98C4006A9EBB /* UIViewController+BarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+BarButton.m"; sourceTree = "<group>"; };
 		427C692C200C98C4006A9EBB /* UINavigationController+SXFullScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+SXFullScreen.m"; sourceTree = "<group>"; };
@@ -310,6 +322,8 @@
 		427C68FD200C98C4006A9EBB /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				4268EE7C2011E75400091D5F /* UIButton+SSEdgeInsets.h */,
+				4268EE7D2011E75400091D5F /* UIButton+SSEdgeInsets.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -367,26 +381,24 @@
 		427C691D200C98C4006A9EBB /* UINavigationBar */ = {
 			isa = PBXGroup;
 			children = (
-				427C691E200C98C4006A9EBB /* UIButton+SSEdgeInsets.m */,
-				427C691F200C98C4006A9EBB /* UITabBar+TBBadge.m */,
 				427C6920200C98C4006A9EBB /* UIViewController+BarButton.h */,
+				427C692B200C98C4006A9EBB /* UIViewController+BarButton.m */,
+				427C692A200C98C4006A9EBB /* TBTabBar.h */,
 				427C6921200C98C4006A9EBB /* TBTabBar.m */,
 				427C6922200C98C4006A9EBB /* UINavigationController+SXFullScreen.h */,
+				427C692C200C98C4006A9EBB /* UINavigationController+SXFullScreen.m */,
 				427C6923200C98C4006A9EBB /* UIFactory.h */,
+				427C6931200C98C4006A9EBB /* UIFactory.m */,
+				427C692F200C98C4006A9EBB /* UIView+TBFrame.m */,
 				427C6924200C98C4006A9EBB /* UIView+TBFrame.h */,
 				427C6925200C98C4006A9EBB /* NSObject+SXRuntime.h */,
-				427C6926200C98C4006A9EBB /* UINavigation+SXFixSpace.h */,
-				427C6927200C98C4006A9EBB /* UIBarButtonItem+SXCreate.h */,
-				427C6928200C98C4006A9EBB /* UITabBar+TBBadge.h */,
-				427C6929200C98C4006A9EBB /* UIButton+SSEdgeInsets.h */,
-				427C692A200C98C4006A9EBB /* TBTabBar.h */,
-				427C692B200C98C4006A9EBB /* UIViewController+BarButton.m */,
-				427C692C200C98C4006A9EBB /* UINavigationController+SXFullScreen.m */,
-				427C692D200C98C4006A9EBB /* UINavigation+SXFixSpace.m */,
-				427C692E200C98C4006A9EBB /* UIBarButtonItem+SXCreate.m */,
-				427C692F200C98C4006A9EBB /* UIView+TBFrame.m */,
 				427C6930200C98C4006A9EBB /* NSObject+SXRuntime.m */,
-				427C6931200C98C4006A9EBB /* UIFactory.m */,
+				427C6926200C98C4006A9EBB /* UINavigation+SXFixSpace.h */,
+				427C692D200C98C4006A9EBB /* UINavigation+SXFixSpace.m */,
+				427C6928200C98C4006A9EBB /* UITabBar+TBBadge.h */,
+				427C691F200C98C4006A9EBB /* UITabBar+TBBadge.m */,
+				427C6927200C98C4006A9EBB /* UIBarButtonItem+SXCreate.h */,
+				427C692E200C98C4006A9EBB /* UIBarButtonItem+SXCreate.m */,
 			);
 			path = UINavigationBar;
 			sourceTree = "<group>";
@@ -547,6 +559,10 @@
 				42399A8D20109B0D009263E5 /* MyDriverViewController.m */,
 				42399A9520109E17009263E5 /* SonMemberViewController.h */,
 				42399A9620109E17009263E5 /* SonMemberViewController.m */,
+				42399AA12011A19E009263E5 /* ChangeSonMemberViewController.h */,
+				42399AA22011A19E009263E5 /* ChangeSonMemberViewController.m */,
+				4268EE732011D49900091D5F /* SystemMessageViewController.h */,
+				4268EE742011D49900091D5F /* SystemMessageViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -554,12 +570,16 @@
 		427C6955200C98C4006A9EBB /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4268EE792011E2E900091D5F /* UILabel+StringFrame.h */,
+				4268EE7A2011E2E900091D5F /* UILabel+StringFrame.m */,
 				42399A9220109BE2009263E5 /* TransformTableViewCell.h */,
 				42399A9320109BE2009263E5 /* TransformTableViewCell.m */,
 				42399A982010A3A5009263E5 /* MyDriverTableViewCell.h */,
 				42399A992010A3A5009263E5 /* MyDriverTableViewCell.m */,
 				42399A9B2010D204009263E5 /* SonMemberTableViewCell.h */,
 				42399A9C2010D204009263E5 /* SonMemberTableViewCell.m */,
+				4268EE762011DA3F00091D5F /* SystemCellTableViewCell.h */,
+				4268EE772011DA3F00091D5F /* SystemCellTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -739,6 +759,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				427C6978200C98C5006A9EBB /* NSObject+SXRuntime.m in Sources */,
+				4268EE752011D49900091D5F /* SystemMessageViewController.m in Sources */,
 				427C6974200C98C5006A9EBB /* UINavigationController+SXFullScreen.m in Sources */,
 				427C698F200CA5CA006A9EBB /* LoginViewController.m in Sources */,
 				42399A9420109BE2009263E5 /* TransformTableViewCell.m in Sources */,
@@ -746,15 +767,18 @@
 				427C696E200C98C4006A9EBB /* BaseViewController.m in Sources */,
 				427C6981200C98C5006A9EBB /* NextViewController.m in Sources */,
 				427C696C200C98C4006A9EBB /* TBNavigationController.m in Sources */,
+				4268EE7B2011E2E900091D5F /* UILabel+StringFrame.m in Sources */,
 				427C696F200C98C4006A9EBB /* BaseTableView.m in Sources */,
 				427C6980200C98C5006A9EBB /* FirstViewController.m in Sources */,
 				427C697A200C98C5006A9EBB /* MainApi.m in Sources */,
 				427C6979200C98C5006A9EBB /* UIFactory.m in Sources */,
 				427C6960200C98C4006A9EBB /* NSObject+SBJSON.m in Sources */,
 				427C6959200C98C4006A9EBB /* NSDictionary+Smart.m in Sources */,
+				4268EE782011DA3F00091D5F /* SystemCellTableViewCell.m in Sources */,
 				427C6957200C98C4006A9EBB /* NSString+MD5.m in Sources */,
 				427C695A200C98C4006A9EBB /* TBRefreshHeadView.m in Sources */,
 				427C695E200C98C4006A9EBB /* UIScrollView+TBRefresh.m in Sources */,
+				4268EE7E2011E75400091D5F /* UIButton+SSEdgeInsets.m in Sources */,
 				427C6996200CCABF006A9EBB /* AddInfoViewController.m in Sources */,
 				427C698B200C9EE3006A9EBB /* OrderViewController.m in Sources */,
 				427C6956200C98C4006A9EBB /* DIc.m in Sources */,
@@ -764,7 +788,6 @@
 				427C69AC200EE277006A9EBB /* AddInfoTableViewCell.m in Sources */,
 				427C6984200C98C5006A9EBB /* UserInfoViewController.m in Sources */,
 				427C69A1200D9D0B006A9EBB /* NODataView.m in Sources */,
-				427C6970200C98C4006A9EBB /* UIButton+SSEdgeInsets.m in Sources */,
 				427C6963200C98C4006A9EBB /* ViewController.m in Sources */,
 				427C6958200C98C4006A9EBB /* DicToString.m in Sources */,
 				427C695B200C98C4006A9EBB /* TBRefreshFootView.m in Sources */,
@@ -772,6 +795,7 @@
 				427C6972200C98C4006A9EBB /* TBTabBar.m in Sources */,
 				427C6975200C98C5006A9EBB /* UINavigation+SXFixSpace.m in Sources */,
 				427C697E200C98C5006A9EBB /* ConfigModel.m in Sources */,
+				42399AA32011A19F009263E5 /* ChangeSonMemberViewController.m in Sources */,
 				42399A9120109BBF009263E5 /* TrasformViewController.m in Sources */,
 				427C6968200C98C4006A9EBB /* TBTabBarController.m in Sources */,
 				427C696D200C98C4006A9EBB /* CCBaseViewController.m in Sources */,
