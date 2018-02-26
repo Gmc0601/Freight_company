@@ -69,6 +69,64 @@
 		427C69A1200D9D0B006A9EBB /* NODataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C69A0200D9D0B006A9EBB /* NODataView.m */; };
 		427C69AC200EE277006A9EBB /* AddInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C69AB200EE277006A9EBB /* AddInfoTableViewCell.m */; };
 		B52FBD6EFDDB0053CDAD176F /* libPods-Freight_Company.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7531F0399824241557149359 /* libPods-Freight_Company.a */; };
+		F61217302033BC6C002D762A /* JYBOrderLogisInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F612172F2033BC6C002D762A /* JYBOrderLogisInfoVC.m */; };
+		F61217332033BCD7002D762A /* JYBHomeOrderLogisItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61217322033BCD7002D762A /* JYBHomeOrderLogisItemCell.m */; };
+		F61217362033D2D8002D762A /* JYBOrderOtherCostItmeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61217352033D2D8002D762A /* JYBOrderOtherCostItmeCell.m */; };
+		F61217392033D305002D762A /* JYBOrderOtherCostMarkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61217382033D305002D762A /* JYBOrderOtherCostMarkCell.m */; };
+		F612173C2033D321002D762A /* JYBOrderOtherCostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F612173B2033D321002D762A /* JYBOrderOtherCostImageCell.m */; };
+		F612173F2033DC60002D762A /* JYBOrderOtherCostVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F612173E2033DC60002D762A /* JYBOrderOtherCostVC.m */; };
+		F61B8461202E8FB5003AF684 /* JYBHomeTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8460202E8FB5003AF684 /* JYBHomeTitleCell.m */; };
+		F61B8464202E8FCE003AF684 /* JYBHomeModuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8463202E8FCE003AF684 /* JYBHomeModuleCell.m */; };
+		F61B8467202E8FEF003AF684 /* JYBHomeTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8466202E8FEF003AF684 /* JYBHomeTagCell.m */; };
+		F61B846A202EC686003AF684 /* JYBPortSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8469202EC686003AF684 /* JYBPortSelectCell.m */; };
+		F61B846E202EDA3B003AF684 /* ESPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B846C202EDA3B003AF684 /* ESPickerView.m */; };
+		F61B8471202FB544003AF684 /* JYBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8470202FB544003AF684 /* JYBAlertView.m */; };
+		F61B8474202FB6C8003AF684 /* NSString+commom.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8473202FB6C8003AF684 /* NSString+commom.m */; };
+		F61B8477202FBEEE003AF684 /* JYBHomeEditPacktingListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8476202FBEEE003AF684 /* JYBHomeEditPacktingListVC.m */; };
+		F61B847A202FBF5D003AF684 /* JYBHomePackingSelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8479202FBF5D003AF684 /* JYBHomePackingSelCell.m */; };
+		F61B847D202FBF7D003AF684 /* JYBHomePackingInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B847C202FBF7C003AF684 /* JYBHomePackingInputCell.m */; };
+		F61B8480202FD25D003AF684 /* UIView+line.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B847E202FD25C003AF684 /* UIView+line.m */; };
+		F61B8483202FE07C003AF684 /* JYBHomeFetchBoxListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8482202FE07C003AF684 /* JYBHomeFetchBoxListVC.m */; };
+		F61B8486202FE306003AF684 /* TYLimitedTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8484202FE306003AF684 /* TYLimitedTextField.m */; };
+		F61B8489202FE38B003AF684 /* TYLimitedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8488202FE38B003AF684 /* TYLimitedTextView.m */; };
+		F61B848C202FE3CC003AF684 /* JYBHomeSendDriveMesgVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B848B202FE3CC003AF684 /* JYBHomeSendDriveMesgVC.m */; };
+		F61B848F202FE43B003AF684 /* JYBHomeHasDriveMsgCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B848E202FE43B003AF684 /* JYBHomeHasDriveMsgCell.m */; };
+		F61B8492202FEA3A003AF684 /* UITextView+FastKit.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8490202FEA39003AF684 /* UITextView+FastKit.m */; };
+		F61B8495202FEAD2003AF684 /* JYBHomeSendDriveHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8494202FEAD2003AF684 /* JYBHomeSendDriveHeaderView.m */; };
+		F61B8498202FF1AE003AF684 /* JYBHomeManageFetchBoxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8497202FF1AE003AF684 /* JYBHomeManageFetchBoxVC.m */; };
+		F61B849B202FF239003AF684 /* JYBHomeManageFetchBoxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B849A202FF239003AF684 /* JYBHomeManageFetchBoxCell.m */; };
+		F61B849E20313E8E003AF684 /* JYBImproveFetchBoxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B849D20313E8E003AF684 /* JYBImproveFetchBoxVC.m */; };
+		F61B84A120313FE3003AF684 /* JYBHomeFetchBoxPortCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84A020313FE3003AF684 /* JYBHomeFetchBoxPortCell.m */; };
+		F61B84A420314EB1003AF684 /* JYBHomeQuickOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84A320314EB1003AF684 /* JYBHomeQuickOrderView.m */; };
+		F61B84A7203150E3003AF684 /* JYBHomeQuickOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84A6203150E3003AF684 /* JYBHomeQuickOrderCell.m */; };
+		F61B84AA20317475003AF684 /* JYBHomeDriverSelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84A920317475003AF684 /* JYBHomeDriverSelVC.m */; };
+		F61B84AD203174E7003AF684 /* JYBHomeDriverSelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84AC203174E7003AF684 /* JYBHomeDriverSelCell.m */; };
+		F61B84B020317F52003AF684 /* JYBHomeImproveBoxInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84AF20317F52003AF684 /* JYBHomeImproveBoxInfoVC.m */; };
+		F61B84B320318251003AF684 /* JYBHomeInproveBoxInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84B220318251003AF684 /* JYBHomeInproveBoxInfoCell.m */; };
+		F61B84B620326D08003AF684 /* JYBHomeOtherCostVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84B520326D08003AF684 /* JYBHomeOtherCostVC.m */; };
+		F61B84B920326F34003AF684 /* JYBHomeGoodWeightCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84B820326F34003AF684 /* JYBHomeGoodWeightCell.m */; };
+		F61B84BC20326F4F003AF684 /* JYBHomePortCostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84BB20326F4F003AF684 /* JYBHomePortCostCell.m */; };
+		F61B84BF203274ED003AF684 /* JYBHomeOtherCostItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84BE203274ED003AF684 /* JYBHomeOtherCostItemCell.m */; };
+		F61B84C22032AC07003AF684 /* JYBHomeBoxInfoSpecView.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84C12032AC07003AF684 /* JYBHomeBoxInfoSpecView.m */; };
+		F61B84C52032ACC0003AF684 /* JYBHomeSpecItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84C42032ACC0003AF684 /* JYBHomeSpecItemCell.m */; };
+		F61B84CA2032B893003AF684 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84C92032B892003AF684 /* HMSegmentedControl.m */; };
+		F61B84CD2032B96A003AF684 /* JYBOrderSingleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84CC2032B96A003AF684 /* JYBOrderSingleVC.m */; };
+		F61B84D12032C1F5003AF684 /* JYBHomeOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84D02032C1F5003AF684 /* JYBHomeOrderListCell.m */; };
+		F61B84D42032E23B003AF684 /* JYBOrderPayPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84D32032E23B003AF684 /* JYBOrderPayPopView.m */; };
+		F61B84D72032FE03003AF684 /* JYBOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84D62032FE03003AF684 /* JYBOrderDetailVC.m */; };
+		F658428F2033089D0040B194 /* JYBOrderDetailLogisUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F658428E2033089D0040B194 /* JYBOrderDetailLogisUserCell.m */; };
+		F6584292203308C00040B194 /* JYBOrderDetailLogisInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6584291203308C00040B194 /* JYBOrderDetailLogisInfoCell.m */; };
+		F6584295203308DE0040B194 /* JYBOrderDetailAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6584294203308DE0040B194 /* JYBOrderDetailAddressCell.m */; };
+		F6584298203308F70040B194 /* JYBOrderDetailBoxInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6584297203308F70040B194 /* JYBOrderDetailBoxInfoCell.m */; };
+		F658429B203309320040B194 /* JYBOrderDetailMarkInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F658429A203309320040B194 /* JYBOrderDetailMarkInfoCell.m */; };
+		F658429E2033094B0040B194 /* JYBOrderDetailCostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F658429D2033094B0040B194 /* JYBOrderDetailCostCell.m */; };
+		F66A6A26202A0C0E00E40F56 /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = F66A6A19202A0C0E00E40F56 /* TAAbstractDotView.m */; };
+		F66A6A27202A0C0E00E40F56 /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = F66A6A1B202A0C0E00E40F56 /* TAAnimatedDotView.m */; };
+		F66A6A28202A0C0E00E40F56 /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = F66A6A1D202A0C0E00E40F56 /* TADotView.m */; };
+		F66A6A29202A0C0E00E40F56 /* TAPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = F66A6A1F202A0C0E00E40F56 /* TAPageControl.m */; };
+		F66A6A2A202A0C0E00E40F56 /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F66A6A21202A0C0E00E40F56 /* SDCollectionViewCell.m */; };
+		F66A6A2B202A0C0E00E40F56 /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F66A6A23202A0C0E00E40F56 /* SDCycleScrollView.m */; };
+		F66A6A2C202A0C0E00E40F56 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = F66A6A25202A0C0E00E40F56 /* UIView+SDExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -195,6 +253,122 @@
 		4429C470FFB6F6CA84B03013 /* Pods-Freight_Company.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Freight_Company.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Freight_Company/Pods-Freight_Company.debug.xcconfig"; sourceTree = "<group>"; };
 		537AE1D939255ECA6F4D0FBB /* Pods-Freight_Company.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Freight_Company.release.xcconfig"; path = "Pods/Target Support Files/Pods-Freight_Company/Pods-Freight_Company.release.xcconfig"; sourceTree = "<group>"; };
 		7531F0399824241557149359 /* libPods-Freight_Company.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Freight_Company.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F612172E2033BC6C002D762A /* JYBOrderLogisInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderLogisInfoVC.h; sourceTree = "<group>"; };
+		F612172F2033BC6C002D762A /* JYBOrderLogisInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderLogisInfoVC.m; sourceTree = "<group>"; };
+		F61217312033BCD7002D762A /* JYBHomeOrderLogisItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeOrderLogisItemCell.h; sourceTree = "<group>"; };
+		F61217322033BCD7002D762A /* JYBHomeOrderLogisItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeOrderLogisItemCell.m; sourceTree = "<group>"; };
+		F61217342033D2D8002D762A /* JYBOrderOtherCostItmeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderOtherCostItmeCell.h; sourceTree = "<group>"; };
+		F61217352033D2D8002D762A /* JYBOrderOtherCostItmeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderOtherCostItmeCell.m; sourceTree = "<group>"; };
+		F61217372033D305002D762A /* JYBOrderOtherCostMarkCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderOtherCostMarkCell.h; sourceTree = "<group>"; };
+		F61217382033D305002D762A /* JYBOrderOtherCostMarkCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderOtherCostMarkCell.m; sourceTree = "<group>"; };
+		F612173A2033D321002D762A /* JYBOrderOtherCostImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderOtherCostImageCell.h; sourceTree = "<group>"; };
+		F612173B2033D321002D762A /* JYBOrderOtherCostImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderOtherCostImageCell.m; sourceTree = "<group>"; };
+		F612173D2033DC60002D762A /* JYBOrderOtherCostVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderOtherCostVC.h; sourceTree = "<group>"; };
+		F612173E2033DC60002D762A /* JYBOrderOtherCostVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderOtherCostVC.m; sourceTree = "<group>"; };
+		F61B845F202E8FB5003AF684 /* JYBHomeTitleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeTitleCell.h; sourceTree = "<group>"; };
+		F61B8460202E8FB5003AF684 /* JYBHomeTitleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeTitleCell.m; sourceTree = "<group>"; };
+		F61B8462202E8FCE003AF684 /* JYBHomeModuleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeModuleCell.h; sourceTree = "<group>"; };
+		F61B8463202E8FCE003AF684 /* JYBHomeModuleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeModuleCell.m; sourceTree = "<group>"; };
+		F61B8465202E8FEF003AF684 /* JYBHomeTagCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeTagCell.h; sourceTree = "<group>"; };
+		F61B8466202E8FEF003AF684 /* JYBHomeTagCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeTagCell.m; sourceTree = "<group>"; };
+		F61B8468202EC686003AF684 /* JYBPortSelectCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBPortSelectCell.h; sourceTree = "<group>"; };
+		F61B8469202EC686003AF684 /* JYBPortSelectCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBPortSelectCell.m; sourceTree = "<group>"; };
+		F61B846C202EDA3B003AF684 /* ESPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ESPickerView.m; sourceTree = "<group>"; };
+		F61B846D202EDA3B003AF684 /* ESPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ESPickerView.h; sourceTree = "<group>"; };
+		F61B846F202FB544003AF684 /* JYBAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBAlertView.h; sourceTree = "<group>"; };
+		F61B8470202FB544003AF684 /* JYBAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBAlertView.m; sourceTree = "<group>"; };
+		F61B8472202FB6C8003AF684 /* NSString+commom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+commom.h"; sourceTree = "<group>"; };
+		F61B8473202FB6C8003AF684 /* NSString+commom.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+commom.m"; sourceTree = "<group>"; };
+		F61B8475202FBEEE003AF684 /* JYBHomeEditPacktingListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeEditPacktingListVC.h; sourceTree = "<group>"; };
+		F61B8476202FBEEE003AF684 /* JYBHomeEditPacktingListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeEditPacktingListVC.m; sourceTree = "<group>"; };
+		F61B8478202FBF5D003AF684 /* JYBHomePackingSelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomePackingSelCell.h; sourceTree = "<group>"; };
+		F61B8479202FBF5D003AF684 /* JYBHomePackingSelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomePackingSelCell.m; sourceTree = "<group>"; };
+		F61B847B202FBF7C003AF684 /* JYBHomePackingInputCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomePackingInputCell.h; sourceTree = "<group>"; };
+		F61B847C202FBF7C003AF684 /* JYBHomePackingInputCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomePackingInputCell.m; sourceTree = "<group>"; };
+		F61B847E202FD25C003AF684 /* UIView+line.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+line.m"; sourceTree = "<group>"; };
+		F61B847F202FD25C003AF684 /* UIView+line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+line.h"; sourceTree = "<group>"; };
+		F61B8481202FE07C003AF684 /* JYBHomeFetchBoxListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeFetchBoxListVC.h; sourceTree = "<group>"; };
+		F61B8482202FE07C003AF684 /* JYBHomeFetchBoxListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeFetchBoxListVC.m; sourceTree = "<group>"; };
+		F61B8484202FE306003AF684 /* TYLimitedTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYLimitedTextField.m; sourceTree = "<group>"; };
+		F61B8485202FE306003AF684 /* TYLimitedTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYLimitedTextField.h; sourceTree = "<group>"; };
+		F61B8487202FE38B003AF684 /* TYLimitedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TYLimitedTextView.h; sourceTree = "<group>"; };
+		F61B8488202FE38B003AF684 /* TYLimitedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TYLimitedTextView.m; sourceTree = "<group>"; };
+		F61B848A202FE3CC003AF684 /* JYBHomeSendDriveMesgVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeSendDriveMesgVC.h; sourceTree = "<group>"; };
+		F61B848B202FE3CC003AF684 /* JYBHomeSendDriveMesgVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeSendDriveMesgVC.m; sourceTree = "<group>"; };
+		F61B848D202FE43B003AF684 /* JYBHomeHasDriveMsgCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeHasDriveMsgCell.h; sourceTree = "<group>"; };
+		F61B848E202FE43B003AF684 /* JYBHomeHasDriveMsgCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeHasDriveMsgCell.m; sourceTree = "<group>"; };
+		F61B8490202FEA39003AF684 /* UITextView+FastKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+FastKit.m"; sourceTree = "<group>"; };
+		F61B8491202FEA39003AF684 /* UITextView+FastKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+FastKit.h"; sourceTree = "<group>"; };
+		F61B8493202FEAD2003AF684 /* JYBHomeSendDriveHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeSendDriveHeaderView.h; sourceTree = "<group>"; };
+		F61B8494202FEAD2003AF684 /* JYBHomeSendDriveHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeSendDriveHeaderView.m; sourceTree = "<group>"; };
+		F61B8496202FF1AE003AF684 /* JYBHomeManageFetchBoxVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeManageFetchBoxVC.h; sourceTree = "<group>"; };
+		F61B8497202FF1AE003AF684 /* JYBHomeManageFetchBoxVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeManageFetchBoxVC.m; sourceTree = "<group>"; };
+		F61B8499202FF239003AF684 /* JYBHomeManageFetchBoxCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeManageFetchBoxCell.h; sourceTree = "<group>"; };
+		F61B849A202FF239003AF684 /* JYBHomeManageFetchBoxCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeManageFetchBoxCell.m; sourceTree = "<group>"; };
+		F61B849C20313E8E003AF684 /* JYBImproveFetchBoxVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBImproveFetchBoxVC.h; sourceTree = "<group>"; };
+		F61B849D20313E8E003AF684 /* JYBImproveFetchBoxVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBImproveFetchBoxVC.m; sourceTree = "<group>"; };
+		F61B849F20313FE3003AF684 /* JYBHomeFetchBoxPortCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeFetchBoxPortCell.h; sourceTree = "<group>"; };
+		F61B84A020313FE3003AF684 /* JYBHomeFetchBoxPortCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeFetchBoxPortCell.m; sourceTree = "<group>"; };
+		F61B84A220314EB0003AF684 /* JYBHomeQuickOrderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeQuickOrderView.h; sourceTree = "<group>"; };
+		F61B84A320314EB1003AF684 /* JYBHomeQuickOrderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeQuickOrderView.m; sourceTree = "<group>"; };
+		F61B84A5203150E3003AF684 /* JYBHomeQuickOrderCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeQuickOrderCell.h; sourceTree = "<group>"; };
+		F61B84A6203150E3003AF684 /* JYBHomeQuickOrderCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeQuickOrderCell.m; sourceTree = "<group>"; };
+		F61B84A820317475003AF684 /* JYBHomeDriverSelVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeDriverSelVC.h; sourceTree = "<group>"; };
+		F61B84A920317475003AF684 /* JYBHomeDriverSelVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeDriverSelVC.m; sourceTree = "<group>"; };
+		F61B84AB203174E7003AF684 /* JYBHomeDriverSelCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeDriverSelCell.h; sourceTree = "<group>"; };
+		F61B84AC203174E7003AF684 /* JYBHomeDriverSelCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeDriverSelCell.m; sourceTree = "<group>"; };
+		F61B84AE20317F52003AF684 /* JYBHomeImproveBoxInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeImproveBoxInfoVC.h; sourceTree = "<group>"; };
+		F61B84AF20317F52003AF684 /* JYBHomeImproveBoxInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeImproveBoxInfoVC.m; sourceTree = "<group>"; };
+		F61B84B120318251003AF684 /* JYBHomeInproveBoxInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeInproveBoxInfoCell.h; sourceTree = "<group>"; };
+		F61B84B220318251003AF684 /* JYBHomeInproveBoxInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeInproveBoxInfoCell.m; sourceTree = "<group>"; };
+		F61B84B420326D08003AF684 /* JYBHomeOtherCostVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeOtherCostVC.h; sourceTree = "<group>"; };
+		F61B84B520326D08003AF684 /* JYBHomeOtherCostVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeOtherCostVC.m; sourceTree = "<group>"; };
+		F61B84B720326F34003AF684 /* JYBHomeGoodWeightCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeGoodWeightCell.h; sourceTree = "<group>"; };
+		F61B84B820326F34003AF684 /* JYBHomeGoodWeightCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeGoodWeightCell.m; sourceTree = "<group>"; };
+		F61B84BA20326F4F003AF684 /* JYBHomePortCostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomePortCostCell.h; sourceTree = "<group>"; };
+		F61B84BB20326F4F003AF684 /* JYBHomePortCostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomePortCostCell.m; sourceTree = "<group>"; };
+		F61B84BD203274ED003AF684 /* JYBHomeOtherCostItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeOtherCostItemCell.h; sourceTree = "<group>"; };
+		F61B84BE203274ED003AF684 /* JYBHomeOtherCostItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeOtherCostItemCell.m; sourceTree = "<group>"; };
+		F61B84C02032AC07003AF684 /* JYBHomeBoxInfoSpecView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeBoxInfoSpecView.h; sourceTree = "<group>"; };
+		F61B84C12032AC07003AF684 /* JYBHomeBoxInfoSpecView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeBoxInfoSpecView.m; sourceTree = "<group>"; };
+		F61B84C32032ACC0003AF684 /* JYBHomeSpecItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeSpecItemCell.h; sourceTree = "<group>"; };
+		F61B84C42032ACC0003AF684 /* JYBHomeSpecItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeSpecItemCell.m; sourceTree = "<group>"; };
+		F61B84C82032B892003AF684 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
+		F61B84C92032B892003AF684 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
+		F61B84CB2032B96A003AF684 /* JYBOrderSingleVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderSingleVC.h; sourceTree = "<group>"; };
+		F61B84CC2032B96A003AF684 /* JYBOrderSingleVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderSingleVC.m; sourceTree = "<group>"; };
+		F61B84CF2032C1F5003AF684 /* JYBHomeOrderListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeOrderListCell.h; sourceTree = "<group>"; };
+		F61B84D02032C1F5003AF684 /* JYBHomeOrderListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeOrderListCell.m; sourceTree = "<group>"; };
+		F61B84D22032E23B003AF684 /* JYBOrderPayPopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderPayPopView.h; sourceTree = "<group>"; };
+		F61B84D32032E23B003AF684 /* JYBOrderPayPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderPayPopView.m; sourceTree = "<group>"; };
+		F61B84D52032FE03003AF684 /* JYBOrderDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderDetailVC.h; sourceTree = "<group>"; };
+		F61B84D62032FE03003AF684 /* JYBOrderDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderDetailVC.m; sourceTree = "<group>"; };
+		F658428D2033089D0040B194 /* JYBOrderDetailLogisUserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderDetailLogisUserCell.h; sourceTree = "<group>"; };
+		F658428E2033089D0040B194 /* JYBOrderDetailLogisUserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderDetailLogisUserCell.m; sourceTree = "<group>"; };
+		F6584290203308C00040B194 /* JYBOrderDetailLogisInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderDetailLogisInfoCell.h; sourceTree = "<group>"; };
+		F6584291203308C00040B194 /* JYBOrderDetailLogisInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderDetailLogisInfoCell.m; sourceTree = "<group>"; };
+		F6584293203308DE0040B194 /* JYBOrderDetailAddressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderDetailAddressCell.h; sourceTree = "<group>"; };
+		F6584294203308DE0040B194 /* JYBOrderDetailAddressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderDetailAddressCell.m; sourceTree = "<group>"; };
+		F6584296203308F70040B194 /* JYBOrderDetailBoxInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderDetailBoxInfoCell.h; sourceTree = "<group>"; };
+		F6584297203308F70040B194 /* JYBOrderDetailBoxInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderDetailBoxInfoCell.m; sourceTree = "<group>"; };
+		F6584299203309320040B194 /* JYBOrderDetailMarkInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderDetailMarkInfoCell.h; sourceTree = "<group>"; };
+		F658429A203309320040B194 /* JYBOrderDetailMarkInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderDetailMarkInfoCell.m; sourceTree = "<group>"; };
+		F658429C2033094B0040B194 /* JYBOrderDetailCostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderDetailCostCell.h; sourceTree = "<group>"; };
+		F658429D2033094B0040B194 /* JYBOrderDetailCostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderDetailCostCell.m; sourceTree = "<group>"; };
+		F66A6A18202A0C0E00E40F56 /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
+		F66A6A19202A0C0E00E40F56 /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
+		F66A6A1A202A0C0E00E40F56 /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
+		F66A6A1B202A0C0E00E40F56 /* TAAnimatedDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAnimatedDotView.m; sourceTree = "<group>"; };
+		F66A6A1C202A0C0E00E40F56 /* TADotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TADotView.h; sourceTree = "<group>"; };
+		F66A6A1D202A0C0E00E40F56 /* TADotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TADotView.m; sourceTree = "<group>"; };
+		F66A6A1E202A0C0E00E40F56 /* TAPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPageControl.h; sourceTree = "<group>"; };
+		F66A6A1F202A0C0E00E40F56 /* TAPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPageControl.m; sourceTree = "<group>"; };
+		F66A6A20202A0C0E00E40F56 /* SDCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCollectionViewCell.h; sourceTree = "<group>"; };
+		F66A6A21202A0C0E00E40F56 /* SDCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCollectionViewCell.m; sourceTree = "<group>"; };
+		F66A6A22202A0C0E00E40F56 /* SDCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCycleScrollView.h; sourceTree = "<group>"; };
+		F66A6A23202A0C0E00E40F56 /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
+		F66A6A24202A0C0E00E40F56 /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
+		F66A6A25202A0C0E00E40F56 /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -238,6 +412,7 @@
 		427C68C3200C9849006A9EBB /* Freight_Company */ = {
 			isa = PBXGroup;
 			children = (
+				F61B846B202EDA26003AF684 /* Common */,
 				427C6906200C98C4006A9EBB /* SuperClass */,
 				427C693E200C98C4006A9EBB /* Classes */,
 				427C68FD200C98C4006A9EBB /* Category */,
@@ -256,6 +431,7 @@
 		427C68DD200C98C4006A9EBB /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				F66A6A16202A0C0E00E40F56 /* SDCycleScrollView */,
 				427C68DE200C98C4006A9EBB /* Md5 */,
 				427C68E7200C98C4006A9EBB /* MJRefresh */,
 				427C68F1200C98C4006A9EBB /* Base64 */,
@@ -322,8 +498,14 @@
 		427C68FD200C98C4006A9EBB /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				F61B8491202FEA39003AF684 /* UITextView+FastKit.h */,
+				F61B8490202FEA39003AF684 /* UITextView+FastKit.m */,
+				F61B847F202FD25C003AF684 /* UIView+line.h */,
+				F61B847E202FD25C003AF684 /* UIView+line.m */,
 				4268EE7C2011E75400091D5F /* UIButton+SSEdgeInsets.h */,
 				4268EE7D2011E75400091D5F /* UIButton+SSEdgeInsets.m */,
+				F61B8472202FB6C8003AF684 /* NSString+commom.h */,
+				F61B8473202FB6C8003AF684 /* NSString+commom.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -445,18 +627,11 @@
 		427C693F200C98C4006A9EBB /* FirstView */ = {
 			isa = PBXGroup;
 			children = (
-				427C6940200C98C4006A9EBB /* Models */,
+				F61B845D202E8F64003AF684 /* Models */,
+				F61B845E202E8F64003AF684 /* Views */,
 				427C6941200C98C4006A9EBB /* Controllers */,
-				427C6944200C98C4006A9EBB /* Views */,
 			);
 			path = FirstView;
-			sourceTree = "<group>";
-		};
-		427C6940200C98C4006A9EBB /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		427C6941200C98C4006A9EBB /* Controllers */ = {
@@ -464,15 +639,24 @@
 			children = (
 				427C6942200C98C4006A9EBB /* FirstViewController.h */,
 				427C6943200C98C4006A9EBB /* FirstViewController.m */,
+				F61B8475202FBEEE003AF684 /* JYBHomeEditPacktingListVC.h */,
+				F61B8476202FBEEE003AF684 /* JYBHomeEditPacktingListVC.m */,
+				F61B8481202FE07C003AF684 /* JYBHomeFetchBoxListVC.h */,
+				F61B8482202FE07C003AF684 /* JYBHomeFetchBoxListVC.m */,
+				F61B848A202FE3CC003AF684 /* JYBHomeSendDriveMesgVC.h */,
+				F61B848B202FE3CC003AF684 /* JYBHomeSendDriveMesgVC.m */,
+				F61B8496202FF1AE003AF684 /* JYBHomeManageFetchBoxVC.h */,
+				F61B8497202FF1AE003AF684 /* JYBHomeManageFetchBoxVC.m */,
+				F61B849C20313E8E003AF684 /* JYBImproveFetchBoxVC.h */,
+				F61B849D20313E8E003AF684 /* JYBImproveFetchBoxVC.m */,
+				F61B84A820317475003AF684 /* JYBHomeDriverSelVC.h */,
+				F61B84A920317475003AF684 /* JYBHomeDriverSelVC.m */,
+				F61B84AE20317F52003AF684 /* JYBHomeImproveBoxInfoVC.h */,
+				F61B84AF20317F52003AF684 /* JYBHomeImproveBoxInfoVC.m */,
+				F61B84B420326D08003AF684 /* JYBHomeOtherCostVC.h */,
+				F61B84B520326D08003AF684 /* JYBHomeOtherCostVC.m */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		427C6944200C98C4006A9EBB /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		427C6945200C98C4006A9EBB /* Login&Regist */ = {
@@ -587,18 +771,11 @@
 		427C6985200C9E93006A9EBB /* Orders */ = {
 			isa = PBXGroup;
 			children = (
-				427C6986200C9E93006A9EBB /* Models */,
+				F61B84CE2032C1D7003AF684 /* Views */,
+				F61B84C72032B747003AF684 /* Models */,
 				427C6987200C9E93006A9EBB /* Controllers */,
-				427C6988200C9E93006A9EBB /* Views */,
 			);
 			path = Orders;
-			sourceTree = "<group>";
-		};
-		427C6986200C9E93006A9EBB /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		427C6987200C9E93006A9EBB /* Controllers */ = {
@@ -606,15 +783,16 @@
 			children = (
 				427C6989200C9EE3006A9EBB /* OrderViewController.h */,
 				427C698A200C9EE3006A9EBB /* OrderViewController.m */,
+				F61B84CB2032B96A003AF684 /* JYBOrderSingleVC.h */,
+				F61B84CC2032B96A003AF684 /* JYBOrderSingleVC.m */,
+				F61B84D52032FE03003AF684 /* JYBOrderDetailVC.h */,
+				F61B84D62032FE03003AF684 /* JYBOrderDetailVC.m */,
+				F612172E2033BC6C002D762A /* JYBOrderLogisInfoVC.h */,
+				F612172F2033BC6C002D762A /* JYBOrderLogisInfoVC.m */,
+				F612173D2033DC60002D762A /* JYBOrderOtherCostVC.h */,
+				F612173E2033DC60002D762A /* JYBOrderOtherCostVC.m */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		427C6988200C9E93006A9EBB /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		BCD13677302E13152EC2CA5D /* Pods */ = {
@@ -624,6 +802,142 @@
 				537AE1D939255ECA6F4D0FBB /* Pods-Freight_Company.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		F61B845D202E8F64003AF684 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F61B845E202E8F64003AF684 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F61B845F202E8FB5003AF684 /* JYBHomeTitleCell.h */,
+				F61B8460202E8FB5003AF684 /* JYBHomeTitleCell.m */,
+				F61B8462202E8FCE003AF684 /* JYBHomeModuleCell.h */,
+				F61B8463202E8FCE003AF684 /* JYBHomeModuleCell.m */,
+				F61B8465202E8FEF003AF684 /* JYBHomeTagCell.h */,
+				F61B8466202E8FEF003AF684 /* JYBHomeTagCell.m */,
+				F61B8468202EC686003AF684 /* JYBPortSelectCell.h */,
+				F61B8469202EC686003AF684 /* JYBPortSelectCell.m */,
+				F61B8478202FBF5D003AF684 /* JYBHomePackingSelCell.h */,
+				F61B8479202FBF5D003AF684 /* JYBHomePackingSelCell.m */,
+				F61B847B202FBF7C003AF684 /* JYBHomePackingInputCell.h */,
+				F61B847C202FBF7C003AF684 /* JYBHomePackingInputCell.m */,
+				F61B848D202FE43B003AF684 /* JYBHomeHasDriveMsgCell.h */,
+				F61B848E202FE43B003AF684 /* JYBHomeHasDriveMsgCell.m */,
+				F61B8493202FEAD2003AF684 /* JYBHomeSendDriveHeaderView.h */,
+				F61B8494202FEAD2003AF684 /* JYBHomeSendDriveHeaderView.m */,
+				F61B8499202FF239003AF684 /* JYBHomeManageFetchBoxCell.h */,
+				F61B849A202FF239003AF684 /* JYBHomeManageFetchBoxCell.m */,
+				F61B849F20313FE3003AF684 /* JYBHomeFetchBoxPortCell.h */,
+				F61B84A020313FE3003AF684 /* JYBHomeFetchBoxPortCell.m */,
+				F61B84A220314EB0003AF684 /* JYBHomeQuickOrderView.h */,
+				F61B84A320314EB1003AF684 /* JYBHomeQuickOrderView.m */,
+				F61B84A5203150E3003AF684 /* JYBHomeQuickOrderCell.h */,
+				F61B84A6203150E3003AF684 /* JYBHomeQuickOrderCell.m */,
+				F61B84AB203174E7003AF684 /* JYBHomeDriverSelCell.h */,
+				F61B84AC203174E7003AF684 /* JYBHomeDriverSelCell.m */,
+				F61B84B120318251003AF684 /* JYBHomeInproveBoxInfoCell.h */,
+				F61B84B220318251003AF684 /* JYBHomeInproveBoxInfoCell.m */,
+				F61B84B720326F34003AF684 /* JYBHomeGoodWeightCell.h */,
+				F61B84B820326F34003AF684 /* JYBHomeGoodWeightCell.m */,
+				F61B84BA20326F4F003AF684 /* JYBHomePortCostCell.h */,
+				F61B84BB20326F4F003AF684 /* JYBHomePortCostCell.m */,
+				F61B84BD203274ED003AF684 /* JYBHomeOtherCostItemCell.h */,
+				F61B84BE203274ED003AF684 /* JYBHomeOtherCostItemCell.m */,
+				F61B84C02032AC07003AF684 /* JYBHomeBoxInfoSpecView.h */,
+				F61B84C12032AC07003AF684 /* JYBHomeBoxInfoSpecView.m */,
+				F61B84C32032ACC0003AF684 /* JYBHomeSpecItemCell.h */,
+				F61B84C42032ACC0003AF684 /* JYBHomeSpecItemCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F61B846B202EDA26003AF684 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F61B84C82032B892003AF684 /* HMSegmentedControl.h */,
+				F61B84C92032B892003AF684 /* HMSegmentedControl.m */,
+				F61B8487202FE38B003AF684 /* TYLimitedTextView.h */,
+				F61B8488202FE38B003AF684 /* TYLimitedTextView.m */,
+				F61B8485202FE306003AF684 /* TYLimitedTextField.h */,
+				F61B8484202FE306003AF684 /* TYLimitedTextField.m */,
+				F61B846D202EDA3B003AF684 /* ESPickerView.h */,
+				F61B846C202EDA3B003AF684 /* ESPickerView.m */,
+				F61B846F202FB544003AF684 /* JYBAlertView.h */,
+				F61B8470202FB544003AF684 /* JYBAlertView.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		F61B84C72032B747003AF684 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F61B84CE2032C1D7003AF684 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F61B84CF2032C1F5003AF684 /* JYBHomeOrderListCell.h */,
+				F61B84D02032C1F5003AF684 /* JYBHomeOrderListCell.m */,
+				F61B84D22032E23B003AF684 /* JYBOrderPayPopView.h */,
+				F61B84D32032E23B003AF684 /* JYBOrderPayPopView.m */,
+				F658428D2033089D0040B194 /* JYBOrderDetailLogisUserCell.h */,
+				F658428E2033089D0040B194 /* JYBOrderDetailLogisUserCell.m */,
+				F6584290203308C00040B194 /* JYBOrderDetailLogisInfoCell.h */,
+				F6584291203308C00040B194 /* JYBOrderDetailLogisInfoCell.m */,
+				F6584293203308DE0040B194 /* JYBOrderDetailAddressCell.h */,
+				F6584294203308DE0040B194 /* JYBOrderDetailAddressCell.m */,
+				F6584296203308F70040B194 /* JYBOrderDetailBoxInfoCell.h */,
+				F6584297203308F70040B194 /* JYBOrderDetailBoxInfoCell.m */,
+				F6584299203309320040B194 /* JYBOrderDetailMarkInfoCell.h */,
+				F658429A203309320040B194 /* JYBOrderDetailMarkInfoCell.m */,
+				F658429C2033094B0040B194 /* JYBOrderDetailCostCell.h */,
+				F658429D2033094B0040B194 /* JYBOrderDetailCostCell.m */,
+				F61217312033BCD7002D762A /* JYBHomeOrderLogisItemCell.h */,
+				F61217322033BCD7002D762A /* JYBHomeOrderLogisItemCell.m */,
+				F61217342033D2D8002D762A /* JYBOrderOtherCostItmeCell.h */,
+				F61217352033D2D8002D762A /* JYBOrderOtherCostItmeCell.m */,
+				F61217372033D305002D762A /* JYBOrderOtherCostMarkCell.h */,
+				F61217382033D305002D762A /* JYBOrderOtherCostMarkCell.m */,
+				F612173A2033D321002D762A /* JYBOrderOtherCostImageCell.h */,
+				F612173B2033D321002D762A /* JYBOrderOtherCostImageCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F66A6A16202A0C0E00E40F56 /* SDCycleScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				F66A6A17202A0C0E00E40F56 /* PageControl */,
+				F66A6A20202A0C0E00E40F56 /* SDCollectionViewCell.h */,
+				F66A6A21202A0C0E00E40F56 /* SDCollectionViewCell.m */,
+				F66A6A22202A0C0E00E40F56 /* SDCycleScrollView.h */,
+				F66A6A23202A0C0E00E40F56 /* SDCycleScrollView.m */,
+				F66A6A24202A0C0E00E40F56 /* UIView+SDExtension.h */,
+				F66A6A25202A0C0E00E40F56 /* UIView+SDExtension.m */,
+			);
+			path = SDCycleScrollView;
+			sourceTree = "<group>";
+		};
+		F66A6A17202A0C0E00E40F56 /* PageControl */ = {
+			isa = PBXGroup;
+			children = (
+				F66A6A18202A0C0E00E40F56 /* TAAbstractDotView.h */,
+				F66A6A19202A0C0E00E40F56 /* TAAbstractDotView.m */,
+				F66A6A1A202A0C0E00E40F56 /* TAAnimatedDotView.h */,
+				F66A6A1B202A0C0E00E40F56 /* TAAnimatedDotView.m */,
+				F66A6A1C202A0C0E00E40F56 /* TADotView.h */,
+				F66A6A1D202A0C0E00E40F56 /* TADotView.m */,
+				F66A6A1E202A0C0E00E40F56 /* TAPageControl.h */,
+				F66A6A1F202A0C0E00E40F56 /* TAPageControl.m */,
+			);
+			path = PageControl;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -744,7 +1058,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -759,58 +1073,116 @@
 			buildActionMask = 2147483647;
 			files = (
 				427C6978200C98C5006A9EBB /* NSObject+SXRuntime.m in Sources */,
+				F61217392033D305002D762A /* JYBOrderOtherCostMarkCell.m in Sources */,
+				F61B84BF203274ED003AF684 /* JYBHomeOtherCostItemCell.m in Sources */,
+				F61B8486202FE306003AF684 /* TYLimitedTextField.m in Sources */,
 				4268EE752011D49900091D5F /* SystemMessageViewController.m in Sources */,
+				F61B84CD2032B96A003AF684 /* JYBOrderSingleVC.m in Sources */,
 				427C6974200C98C5006A9EBB /* UINavigationController+SXFullScreen.m in Sources */,
 				427C698F200CA5CA006A9EBB /* LoginViewController.m in Sources */,
+				F61B84B620326D08003AF684 /* JYBHomeOtherCostVC.m in Sources */,
 				42399A9420109BE2009263E5 /* TransformTableViewCell.m in Sources */,
+				F61B84B320318251003AF684 /* JYBHomeInproveBoxInfoCell.m in Sources */,
+				F61B849E20313E8E003AF684 /* JYBImproveFetchBoxVC.m in Sources */,
+				F61B846A202EC686003AF684 /* JYBPortSelectCell.m in Sources */,
 				427C6971200C98C4006A9EBB /* UITabBar+TBBadge.m in Sources */,
 				427C696E200C98C4006A9EBB /* BaseViewController.m in Sources */,
+				F61B84AA20317475003AF684 /* JYBHomeDriverSelVC.m in Sources */,
+				F6584298203308F70040B194 /* JYBOrderDetailBoxInfoCell.m in Sources */,
 				427C6981200C98C5006A9EBB /* NextViewController.m in Sources */,
+				F66A6A27202A0C0E00E40F56 /* TAAnimatedDotView.m in Sources */,
 				427C696C200C98C4006A9EBB /* TBNavigationController.m in Sources */,
+				F66A6A2B202A0C0E00E40F56 /* SDCycleScrollView.m in Sources */,
+				F61B8480202FD25D003AF684 /* UIView+line.m in Sources */,
+				F66A6A2A202A0C0E00E40F56 /* SDCollectionViewCell.m in Sources */,
 				4268EE7B2011E2E900091D5F /* UILabel+StringFrame.m in Sources */,
+				F66A6A2C202A0C0E00E40F56 /* UIView+SDExtension.m in Sources */,
 				427C696F200C98C4006A9EBB /* BaseTableView.m in Sources */,
 				427C6980200C98C5006A9EBB /* FirstViewController.m in Sources */,
+				F61B8483202FE07C003AF684 /* JYBHomeFetchBoxListVC.m in Sources */,
 				427C697A200C98C5006A9EBB /* MainApi.m in Sources */,
 				427C6979200C98C5006A9EBB /* UIFactory.m in Sources */,
+				F61B8489202FE38B003AF684 /* TYLimitedTextView.m in Sources */,
+				F61B8495202FEAD2003AF684 /* JYBHomeSendDriveHeaderView.m in Sources */,
+				F61B84C52032ACC0003AF684 /* JYBHomeSpecItemCell.m in Sources */,
 				427C6960200C98C4006A9EBB /* NSObject+SBJSON.m in Sources */,
 				427C6959200C98C4006A9EBB /* NSDictionary+Smart.m in Sources */,
+				F658429B203309320040B194 /* JYBOrderDetailMarkInfoCell.m in Sources */,
 				4268EE782011DA3F00091D5F /* SystemCellTableViewCell.m in Sources */,
+				F612173F2033DC60002D762A /* JYBOrderOtherCostVC.m in Sources */,
+				F61B84D72032FE03003AF684 /* JYBOrderDetailVC.m in Sources */,
+				F61217332033BCD7002D762A /* JYBHomeOrderLogisItemCell.m in Sources */,
+				F61B84CA2032B893003AF684 /* HMSegmentedControl.m in Sources */,
+				F61B8471202FB544003AF684 /* JYBAlertView.m in Sources */,
+				F61B847A202FBF5D003AF684 /* JYBHomePackingSelCell.m in Sources */,
+				F61B84D12032C1F5003AF684 /* JYBHomeOrderListCell.m in Sources */,
 				427C6957200C98C4006A9EBB /* NSString+MD5.m in Sources */,
 				427C695A200C98C4006A9EBB /* TBRefreshHeadView.m in Sources */,
+				F61B84AD203174E7003AF684 /* JYBHomeDriverSelCell.m in Sources */,
+				F61B8477202FBEEE003AF684 /* JYBHomeEditPacktingListVC.m in Sources */,
 				427C695E200C98C4006A9EBB /* UIScrollView+TBRefresh.m in Sources */,
+				F61217302033BC6C002D762A /* JYBOrderLogisInfoVC.m in Sources */,
 				4268EE7E2011E75400091D5F /* UIButton+SSEdgeInsets.m in Sources */,
+				F61B846E202EDA3B003AF684 /* ESPickerView.m in Sources */,
+				F61B84B920326F34003AF684 /* JYBHomeGoodWeightCell.m in Sources */,
+				F61B848C202FE3CC003AF684 /* JYBHomeSendDriveMesgVC.m in Sources */,
 				427C6996200CCABF006A9EBB /* AddInfoViewController.m in Sources */,
 				427C698B200C9EE3006A9EBB /* OrderViewController.m in Sources */,
+				F61B84A7203150E3003AF684 /* JYBHomeQuickOrderCell.m in Sources */,
 				427C6956200C98C4006A9EBB /* DIc.m in Sources */,
 				427C6993200CA626006A9EBB /* CCWebViewViewController.m in Sources */,
 				427C699A200D9A19006A9EBB /* ReviewViewController.m in Sources */,
+				F66A6A29202A0C0E00E40F56 /* TAPageControl.m in Sources */,
 				42399A9D2010D204009263E5 /* SonMemberTableViewCell.m in Sources */,
+				F61B8492202FEA3A003AF684 /* UITextView+FastKit.m in Sources */,
+				F61B8474202FB6C8003AF684 /* NSString+commom.m in Sources */,
 				427C69AC200EE277006A9EBB /* AddInfoTableViewCell.m in Sources */,
 				427C6984200C98C5006A9EBB /* UserInfoViewController.m in Sources */,
 				427C69A1200D9D0B006A9EBB /* NODataView.m in Sources */,
+				F61B84C22032AC07003AF684 /* JYBHomeBoxInfoSpecView.m in Sources */,
 				427C6963200C98C4006A9EBB /* ViewController.m in Sources */,
+				F61B8464202E8FCE003AF684 /* JYBHomeModuleCell.m in Sources */,
+				F658428F2033089D0040B194 /* JYBOrderDetailLogisUserCell.m in Sources */,
 				427C6958200C98C4006A9EBB /* DicToString.m in Sources */,
 				427C695B200C98C4006A9EBB /* TBRefreshFootView.m in Sources */,
 				427C695F200C98C4006A9EBB /* GTMBase64.m in Sources */,
+				F658429E2033094B0040B194 /* JYBOrderDetailCostCell.m in Sources */,
 				427C6972200C98C4006A9EBB /* TBTabBar.m in Sources */,
+				F61B84B020317F52003AF684 /* JYBHomeImproveBoxInfoVC.m in Sources */,
 				427C6975200C98C5006A9EBB /* UINavigation+SXFixSpace.m in Sources */,
+				F61B8498202FF1AE003AF684 /* JYBHomeManageFetchBoxVC.m in Sources */,
 				427C697E200C98C5006A9EBB /* ConfigModel.m in Sources */,
 				42399AA32011A19F009263E5 /* ChangeSonMemberViewController.m in Sources */,
 				42399A9120109BBF009263E5 /* TrasformViewController.m in Sources */,
+				F61B848F202FE43B003AF684 /* JYBHomeHasDriveMsgCell.m in Sources */,
+				F6584295203308DE0040B194 /* JYBOrderDetailAddressCell.m in Sources */,
 				427C6968200C98C4006A9EBB /* TBTabBarController.m in Sources */,
+				F61217362033D2D8002D762A /* JYBOrderOtherCostItmeCell.m in Sources */,
+				F61B84D42032E23B003AF684 /* JYBOrderPayPopView.m in Sources */,
 				427C696D200C98C4006A9EBB /* CCBaseViewController.m in Sources */,
 				42399A8E20109B0D009263E5 /* MyDriverViewController.m in Sources */,
+				F61B84A420314EB1003AF684 /* JYBHomeQuickOrderView.m in Sources */,
 				427C6983200C98C5006A9EBB /* MeViewController.m in Sources */,
+				F66A6A26202A0C0E00E40F56 /* TAAbstractDotView.m in Sources */,
 				427C68CF200C9849006A9EBB /* Freight_Company.xcdatamodeld in Sources */,
+				F61B84A120313FE3003AF684 /* JYBHomeFetchBoxPortCell.m in Sources */,
 				427C6973200C98C5006A9EBB /* UIViewController+BarButton.m in Sources */,
 				427C6962200C98C4006A9EBB /* NSString+SBJSON.m in Sources */,
+				F61B8467202E8FEF003AF684 /* JYBHomeTagCell.m in Sources */,
 				427C6964200C98C4006A9EBB /* main.m in Sources */,
 				427C6976200C98C5006A9EBB /* UIBarButtonItem+SXCreate.m in Sources */,
 				42399A9720109E17009263E5 /* SonMemberViewController.m in Sources */,
 				42399A9A2010A3A5009263E5 /* MyDriverTableViewCell.m in Sources */,
+				F612173C2033D321002D762A /* JYBOrderOtherCostImageCell.m in Sources */,
 				427C6977200C98C5006A9EBB /* UIView+TBFrame.m in Sources */,
+				F61B847D202FBF7D003AF684 /* JYBHomePackingInputCell.m in Sources */,
+				F61B8461202E8FB5003AF684 /* JYBHomeTitleCell.m in Sources */,
 				427C6961200C98C4006A9EBB /* SBJSON.m in Sources */,
+				F6584292203308C00040B194 /* JYBOrderDetailLogisInfoCell.m in Sources */,
+				F61B849B202FF239003AF684 /* JYBHomeManageFetchBoxCell.m in Sources */,
+				F61B84BC20326F4F003AF684 /* JYBHomePortCostCell.m in Sources */,
 				427C6982200C98C5006A9EBB /* MessageViewController.m in Sources */,
+				F66A6A28202A0C0E00E40F56 /* TADotView.m in Sources */,
 				427C6965200C98C4006A9EBB /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -950,12 +1322,25 @@
 				DEVELOPMENT_TEAM = PA574T6LR3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Freight_Company/Main/Header.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/IQKeyboardManager\"",
+					"\"${PODS_ROOT}/Headers/Public/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/YYKit\"",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Freight_Company/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cc.Freight-Company";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "\"${SRCROOT}\"/** \"$(SRCROOT)/Pods/SDWebImage\"";
 			};
 			name = Debug;
 		};
@@ -968,12 +1353,25 @@
 				DEVELOPMENT_TEAM = PA574T6LR3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Freight_Company/Main/Header.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/IQKeyboardManager\"",
+					"\"${PODS_ROOT}/Headers/Public/MBProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/MJExtension\"",
+					"\"${PODS_ROOT}/Headers/Public/Masonry\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/YYKit\"",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Freight_Company/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cc.Freight-Company";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "\"${SRCROOT}\"/** \"$(SRCROOT)/Pods/SDWebImage\"";
 			};
 			name = Release;
 		};

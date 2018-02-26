@@ -14,6 +14,18 @@
 #import "MainApi.h"
 #import "UIViewController+BarButton.h"
 
+//三方
+#import <Masonry.h>
+#import <YYKit.h>
+
+//自定义分类
+#import "NSString+commom.h"
+#import "UIView+line.h"
+
+//自定义控件
+#import "JYBAlertView.h"
+
+
 #if TARGET_IPHONE_SIMULATOR
 #define SIMULATOR_TEST  0
 #else
