@@ -13,6 +13,8 @@
 
 @property (nonatomic, retain) UITableView *noUseTableView;
 
+@property (nonatomic, strong) UITextField *text1, *text2;
+
 @property (nonatomic, retain) NSArray *titleArr, *pleaceArr;
 
 @property (nonatomic, retain) UIButton *addBtn;
@@ -50,7 +52,15 @@
         line.backgroundColor = RGB(239, 240, 241);
         [cell.contentView addSubview:line];
     }
-    
+    if (indexPath.row == 0) {
+        self.text1 = cell.text;
+    }else {
+        self.text2 = cell.text;
+    }
+    if (self.type == ChangeInfo) {
+        self.text1.text = self.model.company_user_name;
+        self.text2.text = self.model.company_user_phone;
+    }
     cell.title = self.titleArr[indexPath.row];
     cell.text.placeholder = self.pleaceArr[indexPath.row];
     WeakSelf(weak);
@@ -118,6 +128,34 @@
 
 - (void)addmember {
     //  baocun
+    if (!self.text1.text) {
+        [ConfigModel mbProgressHUD:@"请输入员工姓名" andView:nil];
+    }
+    
+    if (self.text2.text.length != 11) {
+        [ConfigModel mbProgressHUD:@"请输入手机号" andView:nil];
+    }
+//    company_user_id   ...  子账号user_id 编辑时必填
+    NSDictionary* dic = @{
+                          @"company_user_name" : self.text1.text,
+                          @"company_user_phone" : self.text2.text
+                          };
+    
+    [HttpRequest postPath:@"" params:dic resultBlock:^(id responseObject, NSError *error) {
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            [ConfigModel mbProgressHUD:@"操作成功" andView:nil];
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
 
 }
 

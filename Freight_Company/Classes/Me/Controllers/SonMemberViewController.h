@@ -8,6 +8,10 @@
 
 #import "CCBaseViewController.h"
 
+@interface SonmemberModel : NSObject
+@property (nonatomic, copy) NSString *company_user_id, *company_user_phone, *company_user_name;
+@end
+
 @interface SonMemberViewController : CCBaseViewController
 
 @end

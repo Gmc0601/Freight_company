@@ -7,7 +7,10 @@
 //
 
 #import "CCBaseViewController.h"
+#import "LoginViewController.h"
 
 @interface UserInfoViewController : CCBaseViewController
+
+@property (nonatomic, retain) UserModel *model;
 
 @end

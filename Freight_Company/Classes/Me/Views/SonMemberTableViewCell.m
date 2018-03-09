@@ -23,6 +23,11 @@
     return self;
 }
 
+- (void)update:(SonmemberModel *)model {
+    self.nameLab.text = model.company_user_name;
+    self.phoneLab.text = model.company_user_phone;
+}
+
 - (UIView *)addView {
     if (!_addView) {
         _addView = [[UIView alloc] initWithFrame:FRAME(SizeWidth(10), SizeHeight(5), kScreenW - SizeWidth(20), SizeHeight(64))];

@@ -8,6 +8,10 @@
 
 #import "CCBaseViewController.h"
 
+@interface MYDriverModel :NSObject
+@property (nonatomic, copy) NSString *fleet_name, *driver_name, *car_no;
+@end
+
 @interface MyDriverViewController : CCBaseViewController
 
 @end

@@ -19,6 +19,11 @@
     }
     return self;
 }
+- (void)update:(MYDriverModel *)model {
+    self.nameLab.text = model.driver_name;
+    self.carNumLab.text = model.car_no;
+    self.teamLab.text = model.fleet_name;
+}
 
 - (UIView *)addView {
     if (!_addView) {

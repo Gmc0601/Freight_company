@@ -9,10 +9,16 @@
 #import "SonMemberViewController.h"
 #import "SonMemberTableViewCell.h"
 #import "ChangeSonMemberViewController.h"
+#import <MJExtension.h>
 
-@interface SonMemberViewController ()<UITableViewDelegate,  UITableViewDataSource>
+@implementation SonmemberModel
+@end
+
+@interface SonMemberViewController ()<UITableViewDelegate,  UITableViewDataSource, UIAlertViewDelegate>
 
 @property (nonatomic, retain) UITableView *noUseTableView;
+
+@property (nonatomic, strong) NSMutableArray *dataArr;
 
 @property (nonatomic, retain) UIButton *addBtn;
 
@@ -27,6 +33,39 @@
     [self.view addSubview:self.addBtn];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getData];
+}
+
+- (void)getData {
+    [ConfigModel showHud:self];
+    WeakSelf(weak);
+    [self.dataArr removeAllObjects];
+    NSDictionary *dic = @{
+                          @"user_id" : [ConfigModel getStringforKey:UserId]
+                          };
+    [HttpRequest postPath:@"/Home/User/companyUser" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            NSDictionary *data = datadic[@"data"];
+            
+            self.dataArr = [SonmemberModel mj_objectArrayWithKeyValuesArray:data];
+            [self.noUseTableView reloadData];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
+}
+
 - (void)resetFather {
     self.titleLab.text = @"子账号管理";
     self.rightBar.hidden = YES;
@@ -38,7 +77,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return self.dataArr.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -48,10 +87,36 @@
         cell = [[SonMemberTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
     }
     WeakSelf(weak);
+    [cell update:self.dataArr[indexPath.row]];
     cell.changeBlock = ^{
-        [weak.navigationController pushViewController:[ChangeSonMemberViewController new] animated:YES];
+        ChangeSonMemberViewController *son = [[ChangeSonMemberViewController alloc] init];
+        son.type =  ChangeInfo;
+        
+        [weak.navigationController pushViewController:son animated:YES];
     };
+    SonmemberModel *model = self.dataArr[indexPath.row];
     cell.delBlock = ^{
+        [[[JYBAlertView alloc] initWithTitle:@"提示" message:@"是否删除子账号" cancelItem:@"取消" sureItem:@"确认" clickAction:^(NSInteger index) {
+            if (index == 1) {
+                
+                NSDictionary *dic = @{
+                                      @"company_user_id" : model.company_user_id
+                                      };
+                [HttpRequest postPath:@"/Home/User/delUser" params:dic resultBlock:^(id responseObject, NSError *error) {
+                    if([error isEqual:[NSNull null]] || error == nil){
+                        NSLog(@"success");
+                    }
+                    NSDictionary *datadic = responseObject;
+                    if ([datadic[@"success"] intValue] == 1) {
+                        [ConfigModel mbProgressHUD:@"操作成功" andView:nil];
+                    }else {
+                        NSString *str = datadic[@"msg"];
+                        [ConfigModel mbProgressHUD:str andView:nil];
+                    }
+                }];
+                
+            }
+        }] show];
         
     };
     
@@ -101,6 +166,13 @@
 
 - (void)addmember {
     [self.navigationController pushViewController:[ChangeSonMemberViewController new] animated:YES];
+}
+
+- (NSMutableArray *)dataArr {
+    if (!_dataArr) {
+        _dataArr = [NSMutableArray new];
+    }
+    return _dataArr;
 }
 
 

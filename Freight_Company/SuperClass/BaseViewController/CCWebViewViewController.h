@@ -27,6 +27,8 @@
 
 @property (nonatomic, copy) NSString *UrlStr;
 
+@property (nonatomic, copy) NSString *content;
+
 @property (nonatomic, copy) NSString *titlestr;
 
 @end

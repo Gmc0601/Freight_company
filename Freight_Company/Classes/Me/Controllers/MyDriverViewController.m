@@ -8,10 +8,16 @@
 
 #import "MyDriverViewController.h"
 #import "MyDriverTableViewCell.h"
+#import <MJExtension.h>
+
+@implementation MYDriverModel
+@end
 
 @interface MyDriverViewController ()<UITableViewDelegate,  UITableViewDataSource>
 
 @property (nonatomic, retain) UITableView *noUseTableView;
+
+@property (nonatomic, strong) NSMutableArray *dataArr;
 
 @end
 
@@ -21,6 +27,21 @@
     [super viewDidLoad];
     [self resetFather];
     [self.view addSubview:self.noUseTableView];
+    [HttpRequest postPath:@"/Home/User/driverList" params:nil resultBlock:^(id responseObject, NSError *error) {
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            NSDictionary *data = datadic[@"data"];
+            self.dataArr = [MYDriverModel mj_objectArrayWithKeyValuesArray:data];
+            [self.noUseTableView reloadData];
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }  
+    }];
 }
 
 - (void)resetFather {
@@ -36,7 +57,7 @@
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return self.dataArr.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -45,6 +66,7 @@
     if (!cell) {
         cell = [[MyDriverTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
     }
+    [cell update:self.dataArr[indexPath.row]];
     
     return cell;
     
@@ -83,6 +105,11 @@
     }
     return _noUseTableView;
 }
-
+- (NSMutableArray *)dataArr {
+    if (!_dataArr) {
+        _dataArr = [NSMutableArray new];
+    }
+    return _dataArr;
+}
 
 @end

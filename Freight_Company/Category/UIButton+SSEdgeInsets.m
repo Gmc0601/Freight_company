@@ -15,6 +15,8 @@ sizeWithAttributes:@{NSFontAttributeName:font}] : CGSizeZero;
 #define SS_SINGLELINE_TEXTSIZE(text, font) [text length] > 0 ? [text sizeWithFont:font] : CGSizeZero;
 #endif
 
+#define MoreTag 1000000
+
 @implementation UIButton (SSEdgeInsets)
 
 - (void)setImagePositionWithType:(SSImagePositionType)type spacing:(CGFloat)spacing {
@@ -135,16 +137,29 @@ sizeWithAttributes:@{NSFontAttributeName:font}] : CGSizeZero;
     CGSize imageSize = self.imageView.frame.size;
     CGFloat imageX   = self.imageView.frame.origin.x;
     CGFloat imageY   = self.imageView.frame.origin.y;
+   
     
     UILabel *badgeLable = [[UILabel alloc]init];
     badgeLable.text = [NSString stringWithFormat:@"%ld",badgeValue];
     badgeLable.textAlignment = NSTextAlignmentCenter;
     badgeLable.textColor = [UIColor whiteColor];
+    badgeLable.tag = MoreTag;
     badgeLable.font = [UIFont systemFontOfSize:SizeWidth(10)];
     badgeLable.layer.cornerRadius = badgeW*0.5;
     badgeLable.clipsToBounds = YES;
     badgeLable.backgroundColor = UIColorFromHex(0xE84A55);
-    
+    if (badgeValue == 0) {
+        //按照tag值进行移除
+        for (UIView *subView in self.subviews) {
+            
+            if (subView.tag == MoreTag) {
+                
+                [subView removeFromSuperview];
+                
+            }
+        }
+        return;
+    }
     CGFloat badgeX = imageX + imageSize.width - badgeW*0.5;
     CGFloat badgeY = imageY - badgeW*0.25;
     badgeLable.frame = CGRectMake(badgeX, badgeY, badgeW, badgeW);

@@ -10,7 +10,9 @@
 #import <UIImageView+WebCache.h>
 #import "GTMBase64.h"
 
-@interface UserInfoViewController ()<UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface UserInfoViewController ()<UITableViewDelegate, UITableViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate>{
+    BOOL havephoto;
+}
 
 @property (nonatomic,retain) UITableView *noUseTableView;
 
@@ -24,39 +26,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    havephoto = NO;
     [self resetFather];
+    self.nickName.text = self.model.user_name;
+    [self.headImage sd_setImageWithURL:[NSURL URLWithString:self.model.head_img] placeholderImage:nil];
     [self.view addSubview:self.noUseTableView];
-    UIButton *logoutBtn =  [[UIButton alloc] initWithFrame:FRAME(0, kScreenH - SizeHeight(60), kScreenW, SizeHeight(50))];
-    logoutBtn.backgroundColor = [UIColor clearColor];
-    [logoutBtn setTitle:@"退出登录" forState:UIControlStateNormal];
-    [logoutBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    [logoutBtn addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
-//    logoutBtn.titleLabel.font = BOLDSYSTEMFONT(18);
-//    [self.view addSubview:logoutBtn];
-    
 }
-
-- (void)logout:(id)sender {
-    //  退出登录
-    
-    [HttpRequest postPath:@"Public/logout" params:nil resultBlock:^(id responseObject, NSError *error) {
-        if([error isEqual:[NSNull null]] || error == nil){
-            NSLog(@"success");
-        }
-        NSDictionary *datadic = responseObject;
-        if ([datadic[@"success"] intValue] == 1) {
-            
-            [ConfigModel saveBoolObject:NO forKey:IsLogin];
-            [self.navigationController popViewControllerAnimated:YES];
-            
-        }else {
-            NSString *str = datadic[@"msg"];
-            [ConfigModel mbProgressHUD:str andView:nil];
-        }
-    }];
-    
-}
-
 - (void)viewWillDisappear:(BOOL)animated {
     self.navigationController.navigationBar.hidden = YES;
 }
@@ -68,18 +43,29 @@
 
 - (void)more:(UIButton *)sender {
     
+    if (!havephoto && [self.model.user_name isEqualToString:self.nickName.text]) {
+        [self.navigationController popViewControllerAnimated:YES];
+        return;
+    }
+    
     [ConfigModel showHud:self];
     NSData *imgData = UIImageJPEGRepresentation(self.headImage.image,0.5);
     NSString *imgStr = [GTMBase64 stringByEncodingData:imgData];
     if (!imgStr) {
         imgStr = nil;
     }
-    NSDictionary *dic = @{
-                          @"face" : imgStr,
-                          @"nickname" : self.nickName.text
-                          };
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    if (havephoto) {
+        [dic setValue:imgStr forKey:@"company_head_img"];
+    }
+    
+    if (![self.model.user_name isEqualToString:self.nickName.text]) {
+        [dic setValue:self.nickName.text forKey:@"company_user_name"];
+    }
+    
     WeakSelf(weak);
-    [HttpRequest postPath:@"Users/setUserInfo" params:dic resultBlock:^(id responseObject, NSError *error) {
+    [HttpRequest postPath:@"/Home/User/setUserInfo" params:dic resultBlock:^(id responseObject, NSError *error) {
         if([error isEqual:[NSNull null]] || error == nil){
             NSLog(@"success");
         }
@@ -170,6 +156,7 @@
 {
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
     self.headImage.image = editedImage;
+    havephoto = YES;
     [self.noUseTableView reloadData];
     [picker dismissViewControllerAnimated:YES completion:^{
         

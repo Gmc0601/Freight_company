@@ -26,7 +26,7 @@
 
 - (UILabel *)titleLab {
     if (!_titleLab) {
-        _titleLab = [[UILabel alloc] initWithFrame:FRAME(SizeWidth(10), 0, SizeWidth(90), SizeHeight(20))];
+        _titleLab = [[UILabel alloc] initWithFrame:FRAME(SizeWidth(10), 0, SizeWidth(110), SizeHeight(20))];
         _titleLab.font = [UIFont systemFontOfSize:14];
         _titleLab.centerY = self.contentView.centerY;
         _titleLab.text = @"tittle";

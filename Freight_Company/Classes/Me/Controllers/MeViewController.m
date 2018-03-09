@@ -16,10 +16,13 @@
 #import "CCWebViewViewController.h"
 #import "UIButton+SSEdgeInsets.h"
 #import "SystemMessageViewController.h"
+#import <MJExtension.h>
+#import <UIImageView+WebCache.h>
 
 
 @interface MeViewController ()<UITableViewDelegate, UITableViewDataSource>{
-    NSString *phone;
+    NSString *phone, *UserAgreeContent;
+    UserModel *selfuser;
 }
 @property (nonatomic, retain) UITableView *noUseTableView;
 
@@ -47,20 +50,82 @@
     }
     self.noUseTableView.scrollIndicatorInsets = self.noUseTableView.contentInset;
     
+    
+}
+
+- (void)getData {
+    
+//     客服电话
+    [HttpRequest postPath:@"/Home/Public/kfdh" params:nil resultBlock:^(id responseObject, NSError *error) {
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            NSString *data = datadic[@"data"];
+            phone = data;
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+//     用户注册协议
+    [HttpRequest postPath:@"/Home/Public/yhxy" params:nil resultBlock:^(id responseObject, NSError *error) {
+        
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            NSString *data = datadic[@"data"];
+            UserAgreeContent = data;
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
+// 获取用户信息
+    WeakSelf(weak);
+    [HttpRequest postPath:@"/Home/User/getUserInfo" params:nil resultBlock:^(id responseObject, NSError *error) {
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            NSDictionary *data = datadic[@"data"];
+            UserModel *user = [UserModel mj_objectWithKeyValues:data];
+            selfuser = user;
+            [weak.headView sd_setImageWithURL:[NSURL URLWithString:user.head_img] placeholderImage:[UIImage imageNamed:@"ddxq_icon_96  (3)"]];
+            weak.nickName.text = user.user_name;
+            weak.companyName.text = user.company_info.company_name;
+            NSString *blanceStr = [NSString stringWithFormat:@"余额：￥%@", user.company_info.total_amount];
+            weak.balanceLab.text = blanceStr;
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
     [super viewWillAppear:animated];
-//    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
     
-//    LoginViewController *vc = [[LoginViewController alloc] init];
-//    vc.homeBlocl = ^{
-//        self.tabBarController.selectedIndex = 0;
-//    };
-//
-//    UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:vc];
-//    [self presentViewController:na animated:YES completion:nil];
+    if (![ConfigModel getBoolObjectforKey:IsLogin]) {
+        LoginViewController *vc = [[LoginViewController alloc] init];
+        vc.homeBlocl = ^{
+            self.tabBarController.selectedIndex = 0;
+        };
+        UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self presentViewController:na animated:YES completion:nil];
+        return;
+    }
+    [self getData];
     
 }
 
@@ -107,13 +172,13 @@
         [self.navigationController pushViewController:[MyDriverViewController new] animated:YES];
     }
     if (indexPath.row == 2) {
-        NSMutableString* str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",@"110"];
+        NSMutableString* str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",phone];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
     }
     if (indexPath.row == 3) {
         CCWebViewViewController *vc = [[CCWebViewViewController alloc] init];
         vc.titlestr = @"用户协议";
-        vc.UrlStr = @"http://116.62.142.20/Public/zcxy";
+        vc.content = UserAgreeContent;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -224,20 +289,20 @@
 
 - (void)infoClick:(UIButton *)sender {
     if (sender.tag == 101) {
-        [self.navigationController pushViewController:[UserInfoViewController new] animated:YES];
+        UserInfoViewController *vc = [[UserInfoViewController alloc] init];
+        vc.model = selfuser;
+        [self.navigationController pushViewController:vc animated:YES];
     }else {
         [self.navigationController pushViewController:[TrasformViewController new] animated:YES];
     }
 }
 
 - (void)logout {
-        LoginViewController *vc = [[LoginViewController alloc] init];
-        vc.homeBlocl = ^{
-            self.tabBarController.selectedIndex = 0;
-        };
-    
-        UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:vc];
-        [self presentViewController:na animated:YES completion:nil];
+    [[[JYBAlertView alloc] initWithTitle:@"提示" message:@"是否退出账号" cancelItem:@"取消" sureItem:@"确认" clickAction:^(NSInteger index) {
+        if (index == 1) {
+            
+        }
+    }] show];
  }
 
 - (void)didReceiveMemoryWarning {

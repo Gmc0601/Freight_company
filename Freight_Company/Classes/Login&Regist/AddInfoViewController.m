@@ -32,7 +32,7 @@
 
 @property (nonatomic, retain) UIButton *man, *womam;
 
-@property (nonatomic, retain) AddInfoModel *model;
+//@property (nonatomic, retain) AddInfoModel *model;
 
 @end
 
@@ -43,7 +43,7 @@
     isman = YES;
     [self resetFather];
     
-    self.model = [[AddInfoModel alloc] init];
+//    self.model = [[AddInfoModel alloc] init];
     self.model.man = YES;
     photo = NO;
     
@@ -56,6 +56,10 @@
     self.titleLab.text = @"完善企业信息";
     self.rightBar.hidden =  YES;
     
+}
+
+- (void)back:(UIButton *)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -83,9 +87,15 @@
             self.womam.centerY = cell.contentView.centerY;
             cell.text.width = kScreenW/2 - SizeWidth(50);
         }
+        
     }
     cell.title = self.titleArr[indexPath.row];
 
+    if (indexPath.row == 0 || indexPath.row == 1) {
+        
+        [self fuwenbenLabel:cell.titleLab FontNumber:14 AndRange:[self allStr:self.titleArr[indexPath.row] with:@"*"] AndColor:[UIColor redColor]];
+    }
+    
     cell.textBlock = ^(NSString *text) {
         switch (indexPath.row) {
             case 0:
@@ -111,6 +121,22 @@
     
     return cell;
     
+}
+
+- (NSRange)allStr:(NSString *)allstr with:(NSString *)str {
+    NSString *tmpStr = allstr;
+    NSRange range;
+    range = [tmpStr rangeOfString:str];
+    return range;
+}
+-(void)fuwenbenLabel:(UILabel *)labell FontNumber:(CGFloat)font AndRange:(NSRange)range AndColor:(UIColor *)vaColor
+{
+    NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:labell.text];
+    //设置字号
+    //[str addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:range];
+    //设置文字颜色
+    [str addAttribute:NSForegroundColorAttributeName value:vaColor range:range];
+    labell.attributedText = str;
 }
 
 #pragma mark - UITableDelegate
@@ -203,7 +229,7 @@
     }];
 }
 - (void)commitClick {
-    
+
     if (!self.model.compayName) {
         [ConfigModel mbProgressHUD:@"请输入企业全称" andView:nil];
         return;
@@ -213,13 +239,57 @@
         [ConfigModel mbProgressHUD:@"请输入联系人" andView:nil];
         return;
     }
+    [ConfigModel showHud:self];
     
-    if (!photo) {
-        [ConfigModel mbProgressHUD:@"请上传营业执照" andView:nil];
-        return;
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+    [dic setValue:self.model.user_id  forKey:@"user_id"];
+    
+    [dic setValue:self.model.compayName forKey:@"company_name"];
+    
+    [dic setValue:self.model.userName forKey:@"linkman"];
+    
+    [dic setValue:self.model.company_id forKey:@"company_id"];
+    
+    if (isman) {
+        [dic setValue:@"1" forKey:@"linkman_sex"];
+    }else {
+        [dic setValue:@"0" forKey:@"linkman_sex"];
     }
     
-    [self.navigationController pushViewController:[ReviewViewController new] animated:YES];
+    if (self.model.phone) {
+        [dic setObject:self.model.phone forKey:@"company_phone"];
+    }
+    
+    if (self.model.QQ) {
+        [dic setObject:self.model.QQ forKey:@"qq"];
+    }
+    
+    if (self.model.address) {
+        [dic setObject:self.model.address forKey:@"address"];
+    }
+    
+    if (photo) {
+        [dic setObject:self.model.photoStr forKey:@"company_licence_img"];
+    }
+    NSLog(@"%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Public/companyAddOrEdit" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            ReviewViewController *vc = [[ReviewViewController alloc] init];
+            vc.type = Reviewing;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
 }
 
 - (UIButton *)commitBtn {
@@ -235,7 +305,7 @@
 
 - (NSArray *)titleArr {
     if (!_titleArr) {
-        _titleArr = @[@"企业全称", @"企业联系人", @"联系电话", @"联系人QQ", @"办公地址"];
+        _titleArr = @[@"企业全称*", @"企业联系人*", @"联系电话", @"联系人QQ", @"办公地址"];
     }
     return _titleArr;
 }

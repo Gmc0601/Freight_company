@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MyDriverViewController.h"
 @interface MyDriverTableViewCell : UITableViewCell
 
 @property (nonatomic,retain) UIView *addView;
 
 @property (nonatomic, retain) UILabel *nameLab, *teamLab, *carNumLab;
+
+- (void)update:(MYDriverModel *)model;
 
 @end

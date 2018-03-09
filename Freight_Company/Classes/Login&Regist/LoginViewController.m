@@ -10,7 +10,24 @@
 #import "LoginViewController.h"
 #import "CCWebViewViewController.h"
 #import "AddInfoViewController.h"
-@interface LoginViewController ()
+#import <MJExtension.h>
+#import "ReviewViewController.h"
+
+
+@implementation UserModel
+
+
+@end
+
+@implementation CompanyInfo
+
+
+@end
+
+
+@interface LoginViewController (){
+    NSString *UserAgreeContent;
+}
 
 @property (weak, nonatomic) IBOutlet UITextField *phoneText;
 @property (weak, nonatomic) IBOutlet UITextField *codeText;
@@ -38,6 +55,24 @@
     [self.leftBar setImage:[UIImage imageNamed:@"dl_icon_sc"] forState:UIControlStateNormal];
     [self.phoneText addTarget:self action:@selector(textchange) forControlEvents:UIControlEventEditingChanged];
     [self.codeText addTarget:self action:@selector(textchange) forControlEvents:UIControlEventEditingChanged];
+ 
+    
+    [HttpRequest postPath:@"/Home/Public/yhxy" params:nil resultBlock:^(id responseObject, NSError *error) {
+        
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            NSString *data = datadic[@"data"];
+            UserAgreeContent = data;
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
     
 }
 
@@ -54,7 +89,6 @@
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self dismissViewControllerAnimated:YES completion:^{
-            
         }];
     });
    
@@ -76,7 +110,7 @@
     NSDictionary *dic = @{
                           @"phone" : self.phoneText.text,
                           };
-    [HttpRequest postPath:@"Public/sendCode" params:dic resultBlock:^(id responseObject, NSError *error) {
+    [HttpRequest postPath:@"/Home/Public/sendCode" params:dic resultBlock:^(id responseObject, NSError *error) {
         if([error isEqual:[NSNull null]] || error == nil){
             NSLog(@"success");
         }
@@ -133,7 +167,60 @@
         return;
     }
     
-    [self.navigationController pushViewController:[AddInfoViewController new] animated:YES];
+    NSDictionary *dic = @{
+                          @"phone" :self.phoneText.text,
+                          @"vcode" : self.codeText.text
+                          };
+    
+    [HttpRequest postPath:@"/Home/Public/login" params:dic resultBlock:^(id responseObject, NSError *error) {
+        
+        NSLog(@"%@", responseObject);
+        
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            NSDictionary *data = datadic[@"data"];
+            
+            UserModel *user = [UserModel mj_objectWithKeyValues:data];
+            if (IsNULL(user.company_info)) {
+                //   为空去填写 企业资料
+                AddInfoViewController *add = [[AddInfoViewController alloc] init];
+                AddInfoModel *model = [[AddInfoModel alloc] init];
+                model.user_id = user.user_id;
+                model.company_id = user.company_id;
+                add.model = model;
+                [self.navigationController pushViewController:add animated:YES];
+                
+            }else {
+                //   不为空  判断 用户状态  企业状态
+                if ([user.status  intValue] == 0 ) {
+                    ReviewViewController *vc = [[ReviewViewController alloc] init];
+                    if ([user.company_info.company_status intValue] == 1) {
+                        [ConfigModel saveString:user.user_id forKey:UserId];
+                        [ConfigModel saveBoolObject:YES forKey:IsLogin];
+                        [self dismissViewControllerAnimated:YES completion:nil];
+                    }else if ([user.company_info.company_status intValue] == 0 ){
+                        vc.type = Reviewing;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }else {
+                        vc.type = ReviewError;
+                        [self.navigationController pushViewController:vc animated:YES];
+                    }
+                }else {// 用户被禁用
+                    ReviewViewController *vc = [[ReviewViewController alloc] init];
+                    vc.type = ReviewError;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+            }
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
     
 }
 
@@ -145,7 +232,7 @@
 - (IBAction)userAgreeClick:(id)sender {
     CCWebViewViewController *vc = [[CCWebViewViewController alloc] init];
     vc.titlestr = @"注册协议";
-    vc.UrlStr = @"http://116.62.142.20/Public/zcxy";
+    vc.content = UserAgreeContent;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

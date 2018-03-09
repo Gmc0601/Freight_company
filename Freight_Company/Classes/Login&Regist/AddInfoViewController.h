@@ -10,12 +10,14 @@
 
 @interface AddInfoModel: NSObject
 
-@property (nonatomic,copy) NSString *compayName, *userName, *phone, *QQ, *address, *photoStr;
+@property (nonatomic,copy) NSString *compayName, *userName, *phone, *QQ, *address, *photoStr, *company_id, *user_id;
 
 @property (nonatomic) BOOL man;
 
 @end
 
 @interface AddInfoViewController : CCBaseViewController
+
+@property (nonatomic, strong) AddInfoModel *model;
 
 @end

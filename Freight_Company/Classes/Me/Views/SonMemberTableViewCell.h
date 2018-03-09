@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SonMemberViewController.h"
 
 @interface SonMemberTableViewCell : UITableViewCell
 
@@ -19,5 +20,7 @@
 @property (nonatomic, copy) void(^delBlock)();
 
 @property (nonatomic, copy) void(^changeBlock)();
+
+- (void)update:(SonmemberModel *)model;
 
 @end

@@ -22,8 +22,8 @@
 /*****************************测试开关*******************************/
 
 #if HHTest
-
-#define    BaseApi       @"http://116.62.142.20/index.php?s="
+//http://139.224.70.219/jyb/index.php?
+#define    BaseApi       @"http://139.224.70.219/jyb/index.php?s="
 
 #else
 

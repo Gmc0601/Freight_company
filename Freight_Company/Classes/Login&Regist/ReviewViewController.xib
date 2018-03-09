@@ -11,6 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReviewViewController">
             <connections>
+                <outlet property="contentLab" destination="mBX-fE-j9o" id="JMh-R0-PNH"/>
+                <outlet property="icon" destination="Y43-Ky-iYw" id="fJP-1d-Bos"/>
+                <outlet property="subtitleLab" destination="9wz-29-0bm" id="8YF-S3-WbO"/>
+                <outlet property="titlesLab" destination="6Un-GW-uU5" id="0UC-qn-Bk3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
