@@ -69,6 +69,30 @@
 		427C69A1200D9D0B006A9EBB /* NODataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C69A0200D9D0B006A9EBB /* NODataView.m */; };
 		427C69AC200EE277006A9EBB /* AddInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C69AB200EE277006A9EBB /* AddInfoTableViewCell.m */; };
 		B52FBD6EFDDB0053CDAD176F /* libPods-Freight_Company.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7531F0399824241557149359 /* libPods-Freight_Company.a */; };
+		F61080D8205998F3007781A0 /* JYBHomeBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F61080D7205998F3007781A0 /* JYBHomeBannerModel.m */; };
+		F61080DB20599CBF007781A0 /* JYBHomePortModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F61080DA20599CBF007781A0 /* JYBHomePortModel.m */; };
+		F61080F0205BE97F007781A0 /* JYBHomeSelectStationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F61080EF205BE97F007781A0 /* JYBHomeSelectStationVC.m */; };
+		F61080F3205BE9E3007781A0 /* JYBHomeSeleStationHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F61080F2205BE9E3007781A0 /* JYBHomeSeleStationHeaderView.m */; };
+		F61080F6205BF026007781A0 /* LGCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F61080F4205BF026007781A0 /* LGCityPickerView.m */; };
+		F61080F9205BF052007781A0 /* LGProvinceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F61080F8205BF052007781A0 /* LGProvinceModel.m */; };
+		F61080FB205BF0D6007781A0 /* bpCityList.plist in Resources */ = {isa = PBXBuildFile; fileRef = F61080FA205BF0D5007781A0 /* bpCityList.plist */; };
+		F61080FE205BF3F0007781A0 /* LGCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F61080FC205BF3F0007781A0 /* LGCityModel.m */; };
+		F6108101205BFC62007781A0 /* NSMutableDictionary+common.m in Sources */ = {isa = PBXBuildFile; fileRef = F6108100205BFC62007781A0 /* NSMutableDictionary+common.m */; };
+		F6108104205BFCD7007781A0 /* JYBHomeStationSeleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6108103205BFCD7007781A0 /* JYBHomeStationSeleModel.m */; };
+		F6108107205BFDBA007781A0 /* JYBHomeSeleStaionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6108106205BFDBA007781A0 /* JYBHomeSeleStaionCell.m */; };
+		F610810A205C0726007781A0 /* JYBHomeQuickOrderPriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6108109205C0726007781A0 /* JYBHomeQuickOrderPriceModel.m */; };
+		F610810D205C073B007781A0 /* JYBHomeQuickOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F610810C205C073B007781A0 /* JYBHomeQuickOrderModel.m */; };
+		F6108110205C09D0007781A0 /* JYBHomeQuickModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F610810F205C09D0007781A0 /* JYBHomeQuickModel.m */; };
+		F6108113205C1625007781A0 /* JYBHomeDockWeightModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6108112205C1625007781A0 /* JYBHomeDockWeightModel.m */; };
+		F6108116205C17B5007781A0 /* JYBHomeDotModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6108115205C17B5007781A0 /* JYBHomeDotModel.m */; };
+		F6108119205C2BB7007781A0 /* CPHomeMyDriverModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6108118205C2BB7007781A0 /* CPHomeMyDriverModel.m */; };
+		F610811C205C32B7007781A0 /* JYBHomePackAddressListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F610811B205C32B7007781A0 /* JYBHomePackAddressListVC.m */; };
+		F610811F205C3328007781A0 /* JYBHomePackAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F610811E205C3328007781A0 /* JYBHomePackAddressCell.m */; };
+		F6108122205CD3CA007781A0 /* CPHomeBoxAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6108121205CD3CA007781A0 /* CPHomeBoxAddressModel.m */; };
+		F6108125205CD582007781A0 /* JYBHomePackAddressSectionFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F6108124205CD582007781A0 /* JYBHomePackAddressSectionFooterView.m */; };
+		F6108128205CD914007781A0 /* JYBOrderListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6108127205CD914007781A0 /* JYBOrderListModel.m */; };
+		F610812B205CDBAD007781A0 /* JYBOrderLogisticsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F610812A205CDBAD007781A0 /* JYBOrderLogisticsModel.m */; };
+		F610812E205CDC31007781A0 /* JYBOrderBoxAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F610812D205CDC31007781A0 /* JYBOrderBoxAddressModel.m */; };
 		F61217302033BC6C002D762A /* JYBOrderLogisInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F612172F2033BC6C002D762A /* JYBOrderLogisInfoVC.m */; };
 		F61217332033BCD7002D762A /* JYBHomeOrderLogisItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61217322033BCD7002D762A /* JYBHomeOrderLogisItemCell.m */; };
 		F61217362033D2D8002D762A /* JYBOrderOtherCostItmeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61217352033D2D8002D762A /* JYBOrderOtherCostItmeCell.m */; };
@@ -253,6 +277,53 @@
 		4429C470FFB6F6CA84B03013 /* Pods-Freight_Company.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Freight_Company.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Freight_Company/Pods-Freight_Company.debug.xcconfig"; sourceTree = "<group>"; };
 		537AE1D939255ECA6F4D0FBB /* Pods-Freight_Company.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Freight_Company.release.xcconfig"; path = "Pods/Target Support Files/Pods-Freight_Company/Pods-Freight_Company.release.xcconfig"; sourceTree = "<group>"; };
 		7531F0399824241557149359 /* libPods-Freight_Company.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Freight_Company.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F61080D6205998F3007781A0 /* JYBHomeBannerModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeBannerModel.h; sourceTree = "<group>"; };
+		F61080D7205998F3007781A0 /* JYBHomeBannerModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeBannerModel.m; sourceTree = "<group>"; };
+		F61080D920599CBF007781A0 /* JYBHomePortModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomePortModel.h; sourceTree = "<group>"; };
+		F61080DA20599CBF007781A0 /* JYBHomePortModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomePortModel.m; sourceTree = "<group>"; };
+		F61080EE205BE97F007781A0 /* JYBHomeSelectStationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeSelectStationVC.h; sourceTree = "<group>"; };
+		F61080EF205BE97F007781A0 /* JYBHomeSelectStationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeSelectStationVC.m; sourceTree = "<group>"; };
+		F61080F1205BE9E3007781A0 /* JYBHomeSeleStationHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeSeleStationHeaderView.h; sourceTree = "<group>"; };
+		F61080F2205BE9E3007781A0 /* JYBHomeSeleStationHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeSeleStationHeaderView.m; sourceTree = "<group>"; };
+		F61080F4205BF026007781A0 /* LGCityPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGCityPickerView.m; sourceTree = "<group>"; };
+		F61080F5205BF026007781A0 /* LGCityPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGCityPickerView.h; sourceTree = "<group>"; };
+		F61080F7205BF052007781A0 /* LGProvinceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGProvinceModel.h; sourceTree = "<group>"; };
+		F61080F8205BF052007781A0 /* LGProvinceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGProvinceModel.m; sourceTree = "<group>"; };
+		F61080FA205BF0D5007781A0 /* bpCityList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bpCityList.plist; sourceTree = "<group>"; };
+		F61080FC205BF3F0007781A0 /* LGCityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LGCityModel.m; sourceTree = "<group>"; };
+		F61080FD205BF3F0007781A0 /* LGCityModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LGCityModel.h; sourceTree = "<group>"; };
+		F61080FF205BFC62007781A0 /* NSMutableDictionary+common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+common.h"; sourceTree = "<group>"; };
+		F6108100205BFC62007781A0 /* NSMutableDictionary+common.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+common.m"; sourceTree = "<group>"; };
+		F6108102205BFCD7007781A0 /* JYBHomeStationSeleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeStationSeleModel.h; sourceTree = "<group>"; };
+		F6108103205BFCD7007781A0 /* JYBHomeStationSeleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeStationSeleModel.m; sourceTree = "<group>"; };
+		F6108105205BFDBA007781A0 /* JYBHomeSeleStaionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeSeleStaionCell.h; sourceTree = "<group>"; };
+		F6108106205BFDBA007781A0 /* JYBHomeSeleStaionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeSeleStaionCell.m; sourceTree = "<group>"; };
+		F6108108205C0726007781A0 /* JYBHomeQuickOrderPriceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeQuickOrderPriceModel.h; sourceTree = "<group>"; };
+		F6108109205C0726007781A0 /* JYBHomeQuickOrderPriceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeQuickOrderPriceModel.m; sourceTree = "<group>"; };
+		F610810B205C073B007781A0 /* JYBHomeQuickOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeQuickOrderModel.h; sourceTree = "<group>"; };
+		F610810C205C073B007781A0 /* JYBHomeQuickOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeQuickOrderModel.m; sourceTree = "<group>"; };
+		F610810E205C09D0007781A0 /* JYBHomeQuickModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeQuickModel.h; sourceTree = "<group>"; };
+		F610810F205C09D0007781A0 /* JYBHomeQuickModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeQuickModel.m; sourceTree = "<group>"; };
+		F6108111205C1625007781A0 /* JYBHomeDockWeightModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeDockWeightModel.h; sourceTree = "<group>"; };
+		F6108112205C1625007781A0 /* JYBHomeDockWeightModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeDockWeightModel.m; sourceTree = "<group>"; };
+		F6108114205C17B5007781A0 /* JYBHomeDotModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeDotModel.h; sourceTree = "<group>"; };
+		F6108115205C17B5007781A0 /* JYBHomeDotModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeDotModel.m; sourceTree = "<group>"; };
+		F6108117205C2BB7007781A0 /* CPHomeMyDriverModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPHomeMyDriverModel.h; sourceTree = "<group>"; };
+		F6108118205C2BB7007781A0 /* CPHomeMyDriverModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CPHomeMyDriverModel.m; sourceTree = "<group>"; };
+		F610811A205C32B7007781A0 /* JYBHomePackAddressListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomePackAddressListVC.h; sourceTree = "<group>"; };
+		F610811B205C32B7007781A0 /* JYBHomePackAddressListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomePackAddressListVC.m; sourceTree = "<group>"; };
+		F610811D205C3328007781A0 /* JYBHomePackAddressCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomePackAddressCell.h; sourceTree = "<group>"; };
+		F610811E205C3328007781A0 /* JYBHomePackAddressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomePackAddressCell.m; sourceTree = "<group>"; };
+		F6108120205CD3CA007781A0 /* CPHomeBoxAddressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CPHomeBoxAddressModel.h; sourceTree = "<group>"; };
+		F6108121205CD3CA007781A0 /* CPHomeBoxAddressModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CPHomeBoxAddressModel.m; sourceTree = "<group>"; };
+		F6108123205CD582007781A0 /* JYBHomePackAddressSectionFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomePackAddressSectionFooterView.h; sourceTree = "<group>"; };
+		F6108124205CD582007781A0 /* JYBHomePackAddressSectionFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomePackAddressSectionFooterView.m; sourceTree = "<group>"; };
+		F6108126205CD914007781A0 /* JYBOrderListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderListModel.h; sourceTree = "<group>"; };
+		F6108127205CD914007781A0 /* JYBOrderListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderListModel.m; sourceTree = "<group>"; };
+		F6108129205CDBAD007781A0 /* JYBOrderLogisticsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderLogisticsModel.h; sourceTree = "<group>"; };
+		F610812A205CDBAD007781A0 /* JYBOrderLogisticsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderLogisticsModel.m; sourceTree = "<group>"; };
+		F610812C205CDC31007781A0 /* JYBOrderBoxAddressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderBoxAddressModel.h; sourceTree = "<group>"; };
+		F610812D205CDC31007781A0 /* JYBOrderBoxAddressModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderBoxAddressModel.m; sourceTree = "<group>"; };
 		F612172E2033BC6C002D762A /* JYBOrderLogisInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderLogisInfoVC.h; sourceTree = "<group>"; };
 		F612172F2033BC6C002D762A /* JYBOrderLogisInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderLogisInfoVC.m; sourceTree = "<group>"; };
 		F61217312033BCD7002D762A /* JYBHomeOrderLogisItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeOrderLogisItemCell.h; sourceTree = "<group>"; };
@@ -421,6 +492,7 @@
 				427C68FE200C98C4006A9EBB /* Main */,
 				427C68CA200C9849006A9EBB /* Main.storyboard */,
 				427C68D0200C9849006A9EBB /* Assets.xcassets */,
+				F61080FA205BF0D5007781A0 /* bpCityList.plist */,
 				427C68D2200C9849006A9EBB /* LaunchScreen.storyboard */,
 				427C68D5200C9849006A9EBB /* Info.plist */,
 				427C68CD200C9849006A9EBB /* Freight_Company.xcdatamodeld */,
@@ -506,6 +578,8 @@
 				4268EE7D2011E75400091D5F /* UIButton+SSEdgeInsets.m */,
 				F61B8472202FB6C8003AF684 /* NSString+commom.h */,
 				F61B8473202FB6C8003AF684 /* NSString+commom.m */,
+				F61080FF205BFC62007781A0 /* NSMutableDictionary+common.h */,
+				F6108100205BFC62007781A0 /* NSMutableDictionary+common.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -655,6 +729,10 @@
 				F61B84AF20317F52003AF684 /* JYBHomeImproveBoxInfoVC.m */,
 				F61B84B420326D08003AF684 /* JYBHomeOtherCostVC.h */,
 				F61B84B520326D08003AF684 /* JYBHomeOtherCostVC.m */,
+				F61080EE205BE97F007781A0 /* JYBHomeSelectStationVC.h */,
+				F61080EF205BE97F007781A0 /* JYBHomeSelectStationVC.m */,
+				F610811A205C32B7007781A0 /* JYBHomePackAddressListVC.h */,
+				F610811B205C32B7007781A0 /* JYBHomePackAddressListVC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -807,6 +885,30 @@
 		F61B845D202E8F64003AF684 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F61080F7205BF052007781A0 /* LGProvinceModel.h */,
+				F61080F8205BF052007781A0 /* LGProvinceModel.m */,
+				F61080FD205BF3F0007781A0 /* LGCityModel.h */,
+				F61080FC205BF3F0007781A0 /* LGCityModel.m */,
+				F61080D6205998F3007781A0 /* JYBHomeBannerModel.h */,
+				F61080D7205998F3007781A0 /* JYBHomeBannerModel.m */,
+				F61080D920599CBF007781A0 /* JYBHomePortModel.h */,
+				F61080DA20599CBF007781A0 /* JYBHomePortModel.m */,
+				F6108102205BFCD7007781A0 /* JYBHomeStationSeleModel.h */,
+				F6108103205BFCD7007781A0 /* JYBHomeStationSeleModel.m */,
+				F6108108205C0726007781A0 /* JYBHomeQuickOrderPriceModel.h */,
+				F6108109205C0726007781A0 /* JYBHomeQuickOrderPriceModel.m */,
+				F610810B205C073B007781A0 /* JYBHomeQuickOrderModel.h */,
+				F610810C205C073B007781A0 /* JYBHomeQuickOrderModel.m */,
+				F610810E205C09D0007781A0 /* JYBHomeQuickModel.h */,
+				F610810F205C09D0007781A0 /* JYBHomeQuickModel.m */,
+				F6108111205C1625007781A0 /* JYBHomeDockWeightModel.h */,
+				F6108112205C1625007781A0 /* JYBHomeDockWeightModel.m */,
+				F6108114205C17B5007781A0 /* JYBHomeDotModel.h */,
+				F6108115205C17B5007781A0 /* JYBHomeDotModel.m */,
+				F6108117205C2BB7007781A0 /* CPHomeMyDriverModel.h */,
+				F6108118205C2BB7007781A0 /* CPHomeMyDriverModel.m */,
+				F6108120205CD3CA007781A0 /* CPHomeBoxAddressModel.h */,
+				F6108121205CD3CA007781A0 /* CPHomeBoxAddressModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -814,6 +916,8 @@
 		F61B845E202E8F64003AF684 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F61080F5205BF026007781A0 /* LGCityPickerView.h */,
+				F61080F4205BF026007781A0 /* LGCityPickerView.m */,
 				F61B845F202E8FB5003AF684 /* JYBHomeTitleCell.h */,
 				F61B8460202E8FB5003AF684 /* JYBHomeTitleCell.m */,
 				F61B8462202E8FCE003AF684 /* JYBHomeModuleCell.h */,
@@ -852,6 +956,14 @@
 				F61B84C12032AC07003AF684 /* JYBHomeBoxInfoSpecView.m */,
 				F61B84C32032ACC0003AF684 /* JYBHomeSpecItemCell.h */,
 				F61B84C42032ACC0003AF684 /* JYBHomeSpecItemCell.m */,
+				F61080F1205BE9E3007781A0 /* JYBHomeSeleStationHeaderView.h */,
+				F61080F2205BE9E3007781A0 /* JYBHomeSeleStationHeaderView.m */,
+				F6108105205BFDBA007781A0 /* JYBHomeSeleStaionCell.h */,
+				F6108106205BFDBA007781A0 /* JYBHomeSeleStaionCell.m */,
+				F610811D205C3328007781A0 /* JYBHomePackAddressCell.h */,
+				F610811E205C3328007781A0 /* JYBHomePackAddressCell.m */,
+				F6108123205CD582007781A0 /* JYBHomePackAddressSectionFooterView.h */,
+				F6108124205CD582007781A0 /* JYBHomePackAddressSectionFooterView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -876,6 +988,12 @@
 		F61B84C72032B747003AF684 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F6108126205CD914007781A0 /* JYBOrderListModel.h */,
+				F6108127205CD914007781A0 /* JYBOrderListModel.m */,
+				F6108129205CDBAD007781A0 /* JYBOrderLogisticsModel.h */,
+				F610812A205CDBAD007781A0 /* JYBOrderLogisticsModel.m */,
+				F610812C205CDC31007781A0 /* JYBOrderBoxAddressModel.h */,
+				F610812D205CDC31007781A0 /* JYBOrderBoxAddressModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1002,6 +1120,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				427C68D4200C9849006A9EBB /* LaunchScreen.storyboard in Resources */,
+				F61080FB205BF0D6007781A0 /* bpCityList.plist in Resources */,
 				427C68D1200C9849006A9EBB /* Assets.xcassets in Resources */,
 				427C6990200CA5CA006A9EBB /* LoginViewController.xib in Resources */,
 				427C699B200D9A19006A9EBB /* ReviewViewController.xib in Resources */,
@@ -1072,6 +1191,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F610811F205C3328007781A0 /* JYBHomePackAddressCell.m in Sources */,
+				F610812E205CDC31007781A0 /* JYBOrderBoxAddressModel.m in Sources */,
 				427C6978200C98C5006A9EBB /* NSObject+SXRuntime.m in Sources */,
 				F61217392033D305002D762A /* JYBOrderOtherCostMarkCell.m in Sources */,
 				F61B84BF203274ED003AF684 /* JYBHomeOtherCostItemCell.m in Sources */,
@@ -1086,6 +1207,7 @@
 				F61B849E20313E8E003AF684 /* JYBImproveFetchBoxVC.m in Sources */,
 				F61B846A202EC686003AF684 /* JYBPortSelectCell.m in Sources */,
 				427C6971200C98C4006A9EBB /* UITabBar+TBBadge.m in Sources */,
+				F61080F9205BF052007781A0 /* LGProvinceModel.m in Sources */,
 				427C696E200C98C4006A9EBB /* BaseViewController.m in Sources */,
 				F61B84AA20317475003AF684 /* JYBHomeDriverSelVC.m in Sources */,
 				F6584298203308F70040B194 /* JYBOrderDetailBoxInfoCell.m in Sources */,
@@ -1099,13 +1221,16 @@
 				F66A6A2C202A0C0E00E40F56 /* UIView+SDExtension.m in Sources */,
 				427C696F200C98C4006A9EBB /* BaseTableView.m in Sources */,
 				427C6980200C98C5006A9EBB /* FirstViewController.m in Sources */,
+				F610811C205C32B7007781A0 /* JYBHomePackAddressListVC.m in Sources */,
 				F61B8483202FE07C003AF684 /* JYBHomeFetchBoxListVC.m in Sources */,
+				F610810A205C0726007781A0 /* JYBHomeQuickOrderPriceModel.m in Sources */,
 				427C697A200C98C5006A9EBB /* MainApi.m in Sources */,
 				427C6979200C98C5006A9EBB /* UIFactory.m in Sources */,
 				F61B8489202FE38B003AF684 /* TYLimitedTextView.m in Sources */,
 				F61B8495202FEAD2003AF684 /* JYBHomeSendDriveHeaderView.m in Sources */,
 				F61B84C52032ACC0003AF684 /* JYBHomeSpecItemCell.m in Sources */,
 				427C6960200C98C4006A9EBB /* NSObject+SBJSON.m in Sources */,
+				F6108107205BFDBA007781A0 /* JYBHomeSeleStaionCell.m in Sources */,
 				427C6959200C98C4006A9EBB /* NSDictionary+Smart.m in Sources */,
 				F658429B203309320040B194 /* JYBOrderDetailMarkInfoCell.m in Sources */,
 				4268EE782011DA3F00091D5F /* SystemCellTableViewCell.m in Sources */,
@@ -1115,13 +1240,17 @@
 				F61B84CA2032B893003AF684 /* HMSegmentedControl.m in Sources */,
 				F61B8471202FB544003AF684 /* JYBAlertView.m in Sources */,
 				F61B847A202FBF5D003AF684 /* JYBHomePackingSelCell.m in Sources */,
+				F61080FE205BF3F0007781A0 /* LGCityModel.m in Sources */,
 				F61B84D12032C1F5003AF684 /* JYBHomeOrderListCell.m in Sources */,
 				427C6957200C98C4006A9EBB /* NSString+MD5.m in Sources */,
+				F6108122205CD3CA007781A0 /* CPHomeBoxAddressModel.m in Sources */,
 				427C695A200C98C4006A9EBB /* TBRefreshHeadView.m in Sources */,
 				F61B84AD203174E7003AF684 /* JYBHomeDriverSelCell.m in Sources */,
 				F61B8477202FBEEE003AF684 /* JYBHomeEditPacktingListVC.m in Sources */,
 				427C695E200C98C4006A9EBB /* UIScrollView+TBRefresh.m in Sources */,
 				F61217302033BC6C002D762A /* JYBOrderLogisInfoVC.m in Sources */,
+				F6108101205BFC62007781A0 /* NSMutableDictionary+common.m in Sources */,
+				F610812B205CDBAD007781A0 /* JYBOrderLogisticsModel.m in Sources */,
 				4268EE7E2011E75400091D5F /* UIButton+SSEdgeInsets.m in Sources */,
 				F61B846E202EDA3B003AF684 /* ESPickerView.m in Sources */,
 				F61B84B920326F34003AF684 /* JYBHomeGoodWeightCell.m in Sources */,
@@ -1146,12 +1275,16 @@
 				427C6958200C98C4006A9EBB /* DicToString.m in Sources */,
 				427C695B200C98C4006A9EBB /* TBRefreshFootView.m in Sources */,
 				427C695F200C98C4006A9EBB /* GTMBase64.m in Sources */,
+				F61080D8205998F3007781A0 /* JYBHomeBannerModel.m in Sources */,
+				F6108128205CD914007781A0 /* JYBOrderListModel.m in Sources */,
 				F658429E2033094B0040B194 /* JYBOrderDetailCostCell.m in Sources */,
 				427C6972200C98C4006A9EBB /* TBTabBar.m in Sources */,
 				F61B84B020317F52003AF684 /* JYBHomeImproveBoxInfoVC.m in Sources */,
 				427C6975200C98C5006A9EBB /* UINavigation+SXFixSpace.m in Sources */,
 				F61B8498202FF1AE003AF684 /* JYBHomeManageFetchBoxVC.m in Sources */,
+				F6108110205C09D0007781A0 /* JYBHomeQuickModel.m in Sources */,
 				427C697E200C98C5006A9EBB /* ConfigModel.m in Sources */,
+				F6108113205C1625007781A0 /* JYBHomeDockWeightModel.m in Sources */,
 				42399AA32011A19F009263E5 /* ChangeSonMemberViewController.m in Sources */,
 				42399A9120109BBF009263E5 /* TrasformViewController.m in Sources */,
 				F61B848F202FE43B003AF684 /* JYBHomeHasDriveMsgCell.m in Sources */,
@@ -1159,16 +1292,24 @@
 				427C6968200C98C4006A9EBB /* TBTabBarController.m in Sources */,
 				F61217362033D2D8002D762A /* JYBOrderOtherCostItmeCell.m in Sources */,
 				F61B84D42032E23B003AF684 /* JYBOrderPayPopView.m in Sources */,
+				F6108125205CD582007781A0 /* JYBHomePackAddressSectionFooterView.m in Sources */,
 				427C696D200C98C4006A9EBB /* CCBaseViewController.m in Sources */,
+				F6108116205C17B5007781A0 /* JYBHomeDotModel.m in Sources */,
 				42399A8E20109B0D009263E5 /* MyDriverViewController.m in Sources */,
 				F61B84A420314EB1003AF684 /* JYBHomeQuickOrderView.m in Sources */,
+				F61080DB20599CBF007781A0 /* JYBHomePortModel.m in Sources */,
+				F61080F6205BF026007781A0 /* LGCityPickerView.m in Sources */,
 				427C6983200C98C5006A9EBB /* MeViewController.m in Sources */,
 				F66A6A26202A0C0E00E40F56 /* TAAbstractDotView.m in Sources */,
 				427C68CF200C9849006A9EBB /* Freight_Company.xcdatamodeld in Sources */,
+				F61080F0205BE97F007781A0 /* JYBHomeSelectStationVC.m in Sources */,
 				F61B84A120313FE3003AF684 /* JYBHomeFetchBoxPortCell.m in Sources */,
+				F610810D205C073B007781A0 /* JYBHomeQuickOrderModel.m in Sources */,
 				427C6973200C98C5006A9EBB /* UIViewController+BarButton.m in Sources */,
+				F61080F3205BE9E3007781A0 /* JYBHomeSeleStationHeaderView.m in Sources */,
 				427C6962200C98C4006A9EBB /* NSString+SBJSON.m in Sources */,
 				F61B8467202E8FEF003AF684 /* JYBHomeTagCell.m in Sources */,
+				F6108119205C2BB7007781A0 /* CPHomeMyDriverModel.m in Sources */,
 				427C6964200C98C4006A9EBB /* main.m in Sources */,
 				427C6976200C98C5006A9EBB /* UIBarButtonItem+SXCreate.m in Sources */,
 				42399A9720109E17009263E5 /* SonMemberViewController.m in Sources */,
@@ -1184,6 +1325,7 @@
 				427C6982200C98C5006A9EBB /* MessageViewController.m in Sources */,
 				F66A6A28202A0C0E00E40F56 /* TADotView.m in Sources */,
 				427C6965200C98C4006A9EBB /* AppDelegate.m in Sources */,
+				F6108104205BFCD7007781A0 /* JYBHomeStationSeleModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

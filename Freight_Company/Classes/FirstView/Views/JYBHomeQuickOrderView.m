@@ -23,10 +23,13 @@
 
 @property (nonatomic,copy) JYBHomeQuickOrderResult myCall;
 
+@property (nonatomic ,strong)NSMutableArray *dataArr;
 @end
 @implementation JYBHomeQuickOrderView
 
 - (instancetype)initWithArr:(NSMutableArray *)arr clickAction:(JYBHomeQuickOrderResult)action{
+    [self.dataArr removeAllObjects];
+    [self.dataArr addObjectsFromArray:arr];
     if (self = [super init]) {
         [self setupArr:arr clickAction:action];
     }
@@ -110,7 +113,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 5;
+    return self.dataArr.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -120,9 +123,9 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
     JYBHomeQuickOrderCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeQuickOrderCell class]) forIndexPath:indexPath];
-    
+    JYBHomeQuickModel *model = [self.dataArr objectAtIndex:indexPath.row];
+    [cell updateCellWithModel:model];
     return cell;
     
 }
@@ -172,5 +175,10 @@
     return _myTableView;
 }
 
-
+- (NSMutableArray *)dataArr{
+    if (!_dataArr) {
+        _dataArr = [[NSMutableArray alloc] init];
+    }
+    return _dataArr;
+}
 @end

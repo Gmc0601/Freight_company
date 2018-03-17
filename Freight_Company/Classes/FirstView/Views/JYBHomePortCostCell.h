@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+#import "JYBHomeDotModel.h"
+
+typedef void(^JYBHomePortBlock)(JYBHomeDotModel *model);
+
 @interface JYBHomePortCostCell : UITableViewCell
+
+@property (nonatomic ,copy)JYBHomePortBlock portBlock;
+
+- (void)updateCellWithArr:(NSMutableArray *)arr;
 
 @end

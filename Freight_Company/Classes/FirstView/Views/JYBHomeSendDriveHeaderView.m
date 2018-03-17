@@ -7,14 +7,11 @@
 //
 
 #import "JYBHomeSendDriveHeaderView.h"
-#import "TYLimitedTextView.h"
 #import "UITextView+FastKit.h"
 
 @interface JYBHomeSendDriveHeaderView ()<TYLimitedTextViewDelegate>
 
 @property (nonatomic ,strong)UIView                 *backView;          ///<背景
-
-@property (nonatomic ,strong)TYLimitedTextView      *inputTextView;     ///<输入框
 
 @property (nonatomic ,strong)UILabel                *lenthLabel;        ///<长度
 

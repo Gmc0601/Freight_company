@@ -17,8 +17,20 @@
 #import "JYBHomeEditPacktingListVC.h"
 #import "JYBHomeQuickOrderView.h"
 #import "JYBHomeImproveBoxInfoVC.h"
+#import "CCWebViewViewController.h"
+#import "JYBHomeSelectStationVC.h"
 
-@interface FirstViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,JYBHomeEditPacktingDelegate>
+
+//model
+#import "JYBHomeBannerModel.h"
+#import "JYBHomePortModel.h"
+#import "JYBHomeQuickOrderPriceModel.h"
+#import "JYBHomeQuickModel.h"
+
+
+
+
+@interface FirstViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,JYBHomeEditPacktingDelegate,JYBHomeSelectStationVCDelegate>
 
 @property (nonatomic ,strong) UIView *headerView;
 
@@ -26,11 +38,15 @@
 
 @property (nonatomic ,strong)NSMutableArray *barnnerArr;
 
+@property (nonatomic ,strong)NSMutableArray *portArr;
+
 @property (nonatomic ,strong)UITableView *myTableView;
 
 @property (nonatomic, strong) ESPickerView *pickerView;
 
-@property (nonatomic ,strong)NSString       *selPortStr;
+@property (nonatomic ,strong)JYBHomePortModel    *selPortModel;
+
+@property (nonatomic ,strong)JYBHomeStationSeleModel *stationModel;
 
 @end
 
@@ -40,7 +56,6 @@
     [super viewDidLoad];
  
     self.view.backgroundColor = [UIColor whiteColor];
-    self.selPortStr = @"宁波港";
     
     [self navigation];
     
@@ -48,7 +63,89 @@
     
     self.myTableView.tableHeaderView = self.headerView;
 
+    //获取banner
+    [self __fetchBannerData];
+    //获取港口
+    [self __fetchPortListData];
 }
+
+- (void)__fetchBannerData{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+    [ConfigModel showHud:self];
+    NSLog(@"%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Index/getBanner" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+
+            for (NSDictionary *subDic in datadic[@"data"]) {
+                JYBHomeBannerModel *model = [JYBHomeBannerModel modelWithDictionary:subDic];
+                [weak.barnnerArr addObject:model];
+            }
+            [weak p_updateBannerWithModelArr:weak.barnnerArr];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
+}
+
+
+- (void)__fetchPortListData{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+    [ConfigModel showHud:self];
+    NSLog(@"%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Public/getPortList" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            for (NSDictionary *subDic in datadic[@"data"]) {
+                JYBHomePortModel *model = [JYBHomePortModel modelWithDictionary:subDic];
+                [weak.portArr addObject:model];
+            }
+            
+//            if (weak.portArr.count) {
+//                self.selPortModel = [weak.portArr firstObject];
+//            }
+            [weak.myTableView reloadData];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
+}
+
+
+
+
+
+- (void)p_updateBannerWithModelArr:(NSMutableArray *)moArr{
+    NSMutableArray *imageStrArr = [[NSMutableArray alloc] init];
+    for (JYBHomeBannerModel *model in moArr) {
+        [imageStrArr addObject:model.ad_img];
+    }
+    self.sdCycleView.imageURLStringsGroup = imageStrArr;
+}
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -88,10 +185,101 @@
 }
 
 
+- (void)__commit{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic addUnEmptyString:self.stationModel.loadarea_id forKey:@"loadarea_id"];
+    [dic addUnEmptyString:self.selPortModel.port_id forKey:@"prot_id"];
+    
+    [ConfigModel showHud:self];
+    NSLog(@"~~~~para:%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Public/quickOrderList" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            JYBHomeQuickOrderPriceModel *model = [JYBHomeQuickOrderPriceModel modelWithDictionary:datadic[@"data"]];
+            [weak __fetchQuickOrderlistWithModel:model];
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
+}
+
+- (void)__fetchQuickOrderlistWithModel:(JYBHomeQuickOrderPriceModel *)model{
+    
+    NSMutableArray *modelArr = [[NSMutableArray alloc] init];
+    NSArray *nameArr = @[@"小柜拼车",@"小柜单放",@"大柜",@"高柜",@"超高柜"];
+    NSArray *sepcArr = @[@"1x20GP(拼)",@"1x20GP",@"1x40GP",@"1x40HQ",@"1x45HQ"];
+    NSArray *freArr = @[model.freight_list.small_carpool,model.freight_list.small_single,model.freight_list.big_cabinet,model.freight_list.tall_cabinet,model.freight_list.super_tall_cabinet];
+    NSArray *cashArr = @[model.cash_list.small_carpool,model.cash_list.small_single,model.cash_list.big_cabinet,model.cash_list.tall_cabinet,model.cash_list.super_tall_cabinet];
+    
+    for (int i = 0; i<5; i++) {
+        JYBHomeQuickModel *submodel = [[JYBHomeQuickModel alloc] init];
+        submodel.name = nameArr[i];
+        submodel.sepc = sepcArr[i];
+        submodel.freight = freArr[i];
+        submodel.cash = cashArr[i];
+        [modelArr addObject:submodel];
+    }
+    
+    WeakObj(self);
+    [[[JYBHomeQuickOrderView alloc] initWithArr:modelArr clickAction:^(NSInteger index) {
+        JYBHomeImproveBoxInfoVC *vc = [[JYBHomeImproveBoxInfoVC alloc] init];
+        vc.loadarea_id = model.loadarea_id;
+        vc.prot_id = model.port_id;
+        vc.port_price_id = model.port_price_id;
+        JYBHomeQuickModel *quickmodel = [modelArr objectAtIndex:index];
+        vc.sepc = quickmodel.sepc;
+        [selfWeak.navigationController pushViewController:vc animated:YES];
+    }] show];
+    
+}
+
+- (void)__pickPort{
+    WeakObj(self);
+    
+    NSMutableArray *titleArr = [[NSMutableArray alloc] init];
+    for (JYBHomePortModel *model in self.portArr) {
+        [titleArr addObject:model.port_name];
+    }
+    [self.pickerView animationShowWithItems:titleArr selectedItemComplete:^(ESPickerView *pickerView, NSString *item, NSDate *date) {
+        if (item) {
+            selfWeak.selPortModel = [selfWeak __selectPortWithName:item];
+            [selfWeak.myTableView reloadData];
+        }
+        
+        [pickerView animationDismiss];
+    }];
+}
+
+- (JYBHomePortModel *)__selectPortWithName:(NSString *)name{
+    
+    for (JYBHomePortModel *model in self.portArr) {
+        if ([model.port_name isEqualToString:name]) {
+            return model;
+        }
+    }
+    return nil;
+}
+
+
+- (void)selectStationModel:(JYBHomeStationSeleModel *)model{
+    self.stationModel = model;
+    [self.myTableView reloadData];
+}
+
+
+#pragma mark -
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if (section == 0) {
@@ -118,7 +306,7 @@
     
     if (indexPath.section == 0) {
         JYBPortSelectCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBPortSelectCell class]) forIndexPath:indexPath];
-        [cell updateCellWithPort:self.selPortStr station:nil];
+        [cell updateCellWithPort:self.selPortModel station:self.stationModel.loadarea_name];
         WeakObj(self);
         [cell setSelectBlock:^{
             [selfWeak __pickPort];
@@ -129,13 +317,16 @@
         }];
         
         [cell setStationBlock:^{
-            JYBHomeEditPacktingListVC *vc = [[JYBHomeEditPacktingListVC alloc] init];
+            
+            JYBHomeSelectStationVC *vc = [[JYBHomeSelectStationVC alloc] init];
             vc.delegate = self;
-            [selfWeak.navigationController pushViewController:vc animated:YES];            
+            [selfWeak.navigationController pushViewController:vc animated:YES];
+            
+//            JYBHomeEditPacktingListVC *vc = [[JYBHomeEditPacktingListVC alloc] init];
+//            vc.delegate = self;
+//            [selfWeak.navigationController pushViewController:vc animated:YES];
         }];
-        
-        
-        
+
         return cell;
     }else{
         if (indexPath.row == 0) {
@@ -151,28 +342,17 @@
     }
 }
 
-- (void)__commit{
-    WeakObj(self);
-    [[[JYBHomeQuickOrderView alloc] initWithArr:nil clickAction:^(NSInteger index) {
-        JYBHomeImproveBoxInfoVC *vc = [[JYBHomeImproveBoxInfoVC alloc] init];
-        [selfWeak.navigationController pushViewController:vc animated:YES];
-    }] show];
-}
-
-- (void)__pickPort{
-    WeakObj(self);
-    [self.pickerView animationShowWithItems:@[@"宁波港",@"上海港"] selectedItemComplete:^(ESPickerView *pickerView, NSString *item, NSDate *date) {
-        selfWeak.selPortStr = item;
-        [selfWeak.myTableView reloadData];
-        [pickerView animationDismiss];
-    }];
-}
 
 
 #pragma mark - SDCycleScrollViewDelegate
 
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
+    JYBHomeBannerModel *model = [self.barnnerArr objectAtIndex:index];
+
+    CCWebViewViewController *vc = [[CCWebViewViewController alloc] init];
+    vc.UrlStr = model.ad_link;
+    [self.navigationController pushViewController:vc animated:YES];
     NSLog(@"---点击了第%ld张图片", (long)index);
     
 }
@@ -229,6 +409,14 @@
     }
     return _barnnerArr;
 }
+
+- (NSMutableArray *)portArr{
+    if (_portArr == nil) {
+        _portArr = [[NSMutableArray alloc] init];
+    }
+    return _portArr;
+}
+
 
 - (ESPickerView *)pickerView {
     if (!_pickerView) {

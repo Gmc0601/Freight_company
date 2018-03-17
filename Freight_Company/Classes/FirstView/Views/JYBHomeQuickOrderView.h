@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JYBHomeQuickModel.h"
 
 /**
  LGCustomAlertView 回调

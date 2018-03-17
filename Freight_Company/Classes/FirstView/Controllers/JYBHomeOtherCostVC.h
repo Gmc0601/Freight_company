@@ -7,7 +7,19 @@
 //
 
 #import "CCBaseViewController.h"
+#import "JYBHomeDockWeightModel.h"
+#import "JYBHomeDotModel.h"
+
+@protocol JYBHomeOtherCostVCDelegate <NSObject>
+
+- (void)selectWeightModel:(JYBHomeDockWeightModel *)weightModel dotModel:(JYBHomeDotModel *)dotModel;
+
+@end
 
 @interface JYBHomeOtherCostVC : CCBaseViewController
+
+@property(nonatomic ,weak)id <JYBHomeOtherCostVCDelegate>delegate;
+
+@property (nonatomic ,strong)NSString       *prot_id;
 
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CPHomeMyDriverModel.h"
 
 @interface JYBHomeDriverSelCell : UITableViewCell
+
+- (void)updateCellWithModel:(CPHomeMyDriverModel *)model;
 
 @end

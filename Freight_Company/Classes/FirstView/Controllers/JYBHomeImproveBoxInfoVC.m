@@ -15,7 +15,7 @@
 #import "JYBHomeOtherCostVC.h"
 #import "JYBHomeBoxInfoSpecView.h"
 
-@interface JYBHomeImproveBoxInfoVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface JYBHomeImproveBoxInfoVC ()<UITableViewDelegate,UITableViewDataSource,JYBHomeOtherCostVCDelegate,JYBHomeSendDriveMesgVCDelegate,JYBHomeDriverSelVCDelegate>
 
 @property (nonatomic ,strong)UITableView *myTableView;
 
@@ -29,7 +29,13 @@
 
 @property (nonatomic ,strong)NSString *endTime;
 
+@property (nonatomic ,strong)JYBHomeDockWeightModel *seleWightModel;
 
+@property (nonatomic ,strong)JYBHomeDotModel *seleDotModel;
+
+@property (nonatomic ,strong)NSString       *seleMessage;
+
+@property (nonatomic ,strong)CPHomeMyDriverModel *seleDriver;
 @end
 
 @implementation JYBHomeImproveBoxInfoVC
@@ -43,16 +49,36 @@
 
 - (void)resetFather {
     self.titleLab.text = @"完善装箱信息";
-    [self.rightBar setTitle:@"1x20GP" forState:UIControlStateNormal];
+    [self.rightBar setTitle:self.sepc forState:UIControlStateNormal];
     
 }
 
 
 - (void)more:(UIButton *)sender{
     
-    [[[JYBHomeBoxInfoSpecView alloc] initWithArr:nil clickAction:^(NSInteger index) {
-        
+    NSArray *sepcArr = @[@"1x20GP(拼)",@"1x20GP",@"1x40GP",@"1x40HQ",@"1x45HQ"];
+
+    [[[JYBHomeBoxInfoSpecView alloc] initWithArr:sepcArr.mutableCopy clickAction:^(NSInteger index) {
+        NSString *sepx = [sepcArr objectAtIndex:index];
+        [self.rightBar setTitle:sepx forState:UIControlStateNormal];
+
     }] show];
+}
+
+- (void)selectWeightModel:(JYBHomeDockWeightModel *)weightModel dotModel:(JYBHomeDotModel *)dotModel{
+    self.seleWightModel = weightModel;
+    self.seleDotModel = dotModel;
+    [self.myTableView reloadData];
+    
+}
+
+- (void)selectDriveMessage:(NSString *)message{
+    self.seleMessage = message;
+    [self.myTableView reloadData];
+}
+
+- (void)selectDriverModel:(CPHomeMyDriverModel *)driverModel{
+    self.seleDriver = driverModel;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -93,11 +119,15 @@
         
     }else{
         if (indexPath.row == 0) {
-            [cell updateCellIcon:@"xd_icon_ewfy" Title:@"额外费用" value:nil BoxType:JYBHomeInproveBoxNormal indexPath:indexPath];
+            NSString *wight;
+            if (self.seleDotModel && self.seleWightModel) {
+                wight = [NSString stringWithFormat:@"%@%@",self.seleWightModel.weight_desc,self.seleDotModel.dock_name];
+            }
+            [cell updateCellIcon:@"xd_icon_ewfy" Title:@"额外费用" value:wight BoxType:JYBHomeInproveBoxNormal indexPath:indexPath];
         }else if (indexPath.row == 1){
-             [cell updateCellIcon:@"xd_icon_sjh" Title:@"给司机捎句话" value:nil BoxType:JYBHomeInproveBoxNormal indexPath:indexPath];
+             [cell updateCellIcon:@"xd_icon_sjh" Title:@"给司机捎句话" value:self.seleMessage BoxType:JYBHomeInproveBoxNormal indexPath:indexPath];
         }else{
-             [cell updateCellIcon:@"xd_icon_yx" Title:@"优先发送给我的司机" value:nil BoxType:JYBHomeInproveBoxNormal indexPath:indexPath];
+             [cell updateCellIcon:@"xd_icon_yx" Title:@"优先发送给我的司机" value:self.seleDriver.fleet_name BoxType:JYBHomeInproveBoxNormal indexPath:indexPath];
         }
     }
     
@@ -113,13 +143,17 @@
     }else{
         if (indexPath.row == 0) {
             JYBHomeOtherCostVC *vc = [[JYBHomeOtherCostVC alloc] init];
+            vc.prot_id = self.prot_id;
+            vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
             
         }else if (indexPath.row == 1){
             JYBHomeSendDriveMesgVC *vc = [[JYBHomeSendDriveMesgVC alloc] init];
+            vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
         }else{
             JYBHomeDriverSelVC *vc = [[JYBHomeDriverSelVC alloc] init];
+            vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }

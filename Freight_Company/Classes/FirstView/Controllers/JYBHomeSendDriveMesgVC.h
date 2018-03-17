@@ -8,6 +8,15 @@
 
 #import "CCBaseViewController.h"
 
+
+@protocol JYBHomeSendDriveMesgVCDelegate <NSObject>
+
+- (void)selectDriveMessage:(NSString *)message;
+
+@end
+
 @interface JYBHomeSendDriveMesgVC : CCBaseViewController
+
+@property (nonatomic ,weak)id <JYBHomeSendDriveMesgVCDelegate>delegate;
 
 @end

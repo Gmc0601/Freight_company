@@ -27,6 +27,44 @@
     return self;
 }
 
+- (void)updateCellWithModel:(JYBHomeDockWeightModel *)model{
+    
+    if (model.select) {
+        self.contentView.layer.borderColor = RGB(75, 157, 252).CGColor;
+        self.contentView.layer.borderWidth = 1;
+        self.nameLab.textColor = RGB(75, 157, 252);
+        self.costLab.textColor = RGB(75, 157, 252);
+    }else{
+        self.contentView.layer.borderColor = RGB(162, 162, 162).CGColor;
+        self.contentView.layer.borderWidth = 1;
+        self.nameLab.textColor = RGB(102, 102, 102);
+        self.costLab.textColor = RGB(162, 162, 162);
+    }
+    
+    self.nameLab.text = model.weight_desc;
+    self.costLab.text = model.weight_price;
+
+}
+
+- (void)updateDotCellWithModel:(JYBHomeDotModel *)model{
+    if (model.select) {
+        self.contentView.layer.borderColor = RGB(75, 157, 252).CGColor;
+        self.contentView.layer.borderWidth = 1;
+        self.nameLab.textColor = RGB(75, 157, 252);
+        self.costLab.textColor = RGB(75, 157, 252);
+    }else{
+        self.contentView.layer.borderColor = RGB(162, 162, 162).CGColor;
+        self.contentView.layer.borderWidth = 1;
+        self.nameLab.textColor = RGB(102, 102, 102);
+        self.costLab.textColor = RGB(162, 162, 162);
+
+
+    }
+    
+    self.nameLab.text = model.dock_name;
+    self.costLab.text = model.dock_price;
+}
+
 - (void)p_initUI{
     [self.contentView addSubview:self.nameLab];
     [self.contentView addSubview:self.costLab];

@@ -10,4 +10,6 @@
 
 @interface JYBHomeSpecItemCell : UITableViewCell
 
+@property (nonatomic ,strong)UILabel    *nameLab;
+
 @end

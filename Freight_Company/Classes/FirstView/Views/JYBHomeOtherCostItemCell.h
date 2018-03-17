@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JYBHomeDockWeightModel.h"
+#import "JYBHomeDotModel.h"
 
 @interface JYBHomeOtherCostItemCell : UICollectionViewCell
+
+- (void)updateCellWithModel:(JYBHomeDockWeightModel *)model;
+
+- (void)updateDotCellWithModel:(JYBHomeDotModel *)model;
 
 @end

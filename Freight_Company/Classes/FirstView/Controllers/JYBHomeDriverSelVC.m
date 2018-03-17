@@ -15,6 +15,8 @@
 
 @property (nonatomic ,strong)UIView   *bottomView;
 
+@property (nonatomic ,strong)NSMutableArray *dataArr;
+
 @end
 
 @implementation JYBHomeDriverSelVC
@@ -26,6 +28,7 @@
     [self.view addSubview:self.myTableView];
     [self.view addSubview:self.bottomView];
     
+    [self __fetchData];
 }
 
 
@@ -35,13 +38,46 @@
     
 }
 
+
+- (void)__fetchData{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+    [ConfigModel showHud:self];
+    NSLog(@"~~~~para:%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/User/driverList" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            for (NSDictionary *subDic in datadic[@"data"]) {
+                CPHomeMyDriverModel *model = [CPHomeMyDriverModel modelWithDictionary:subDic];
+                [weak.dataArr addObject:model];
+            }
+            [weak.myTableView reloadData];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+}
+
+
+
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 4;
+    return self.dataArr.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -51,11 +87,19 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
     JYBHomeDriverSelCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeDriverSelCell class]) forIndexPath:indexPath];
+    CPHomeMyDriverModel *model = [self.dataArr objectAtIndex:indexPath.row];
+    [cell updateCellWithModel:model];
     
     return cell;
     
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    CPHomeMyDriverModel *model = [self.dataArr objectAtIndex:indexPath.row];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(selectDriverModel:)]) {
+        [self.delegate selectDriverModel:model];
+    }
 }
 
 - (void)commitBtnAction{
@@ -82,6 +126,13 @@
         [_myTableView registerClass:[JYBHomeDriverSelCell class] forCellReuseIdentifier:NSStringFromClass([JYBHomeDriverSelCell class])];
     }
     return _myTableView;
+}
+
+- (NSMutableArray *)dataArr{
+    if (!_dataArr) {
+        _dataArr = [[NSMutableArray alloc] init];
+    }
+    return _dataArr;
 }
 
 - (UIView *)bottomView{

@@ -7,7 +7,15 @@
 //
 
 #import "CCBaseViewController.h"
+#import "CPHomeMyDriverModel.h"
 
+@protocol JYBHomeDriverSelVCDelegate <NSObject>
+
+- (void)selectDriverModel:(CPHomeMyDriverModel *)driverModel;
+
+@end
 @interface JYBHomeDriverSelVC : CCBaseViewController
+
+@property (nonatomic ,weak)id <JYBHomeDriverSelVCDelegate>delegate;
 
 @end

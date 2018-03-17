@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JYBHomeDockWeightModel.h"
+
+typedef void(^JYBHomeGoodWeightBlock)(JYBHomeDockWeightModel *model);
 
 @interface JYBHomeGoodWeightCell : UITableViewCell
+
+@property (nonatomic ,copy)JYBHomeGoodWeightBlock weightBlock;
+
+- (void)updateCellWithArr:(NSMutableArray *)arr;
 
 @end

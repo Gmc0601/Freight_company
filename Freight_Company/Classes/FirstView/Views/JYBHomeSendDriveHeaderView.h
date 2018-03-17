@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TYLimitedTextView.h"
 
 @interface JYBHomeSendDriveHeaderView : UIView
+
+@property (nonatomic ,strong)TYLimitedTextView      *inputTextView;     ///<输入框
 
 @end

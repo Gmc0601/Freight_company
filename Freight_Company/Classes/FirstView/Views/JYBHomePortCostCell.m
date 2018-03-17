@@ -14,6 +14,8 @@
 
 @property (nonatomic ,strong)UICollectionView *myCollectionView;
 
+@property (nonatomic ,strong)NSMutableArray     *dataArr;
+
 @end
 
 @implementation JYBHomePortCostCell
@@ -35,6 +37,12 @@
     }];
 }
 
+- (void)updateCellWithArr:(NSMutableArray *)arr{
+    [self.dataArr removeAllObjects];
+    [self.dataArr addObjectsFromArray:arr];
+    [self.myCollectionView reloadData];
+}
+
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return 1;
 }
@@ -42,24 +50,37 @@
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     JYBHomeOtherCostItemCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([JYBHomeOtherCostItemCell class]) forIndexPath:indexPath];
+    JYBHomeDotModel *model = [self.dataArr objectAtIndex:indexPath.row];
+    [cell updateDotCellWithModel:model];
     return cell;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 2;
+    return self.dataArr.count;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    return CGSizeMake((kScreenW - SizeWidth(30)-SizeWidth(10))/2, SizeWidth(55));
+    return CGSizeMake((kScreenW - SizeWidth(30))/2, SizeWidth(55));
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(0, SizeWidth(15), SizeWidth(5), SizeWidth(15));
+    return UIEdgeInsetsMake(SizeWidth(10), SizeWidth(10), SizeWidth(10), SizeWidth(10));
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
+    return SizeWidth(10);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
+    return SizeWidth(10);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
+    JYBHomeDotModel *model = [self.dataArr objectAtIndex:indexPath.row];
+    if (self.portBlock) {
+        self.portBlock(model);
+    }
 }
 
 
@@ -81,6 +102,14 @@
         [_myCollectionView registerClass:[JYBHomeOtherCostItemCell class] forCellWithReuseIdentifier:NSStringFromClass([JYBHomeOtherCostItemCell class])];
     }
     return _myCollectionView;
+}
+
+
+- (NSMutableArray *)dataArr{
+    if (!_dataArr) {
+        _dataArr = [[NSMutableArray alloc] init];
+    }
+    return _dataArr;
 }
 
 

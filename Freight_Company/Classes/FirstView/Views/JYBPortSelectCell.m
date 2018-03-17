@@ -76,9 +76,9 @@
     
 }
 
-- (void)updateCellWithPort:(NSString *)port station:(NSString *)station{
+- (void)updateCellWithPort:(JYBHomePortModel *)port station:(NSString *)station{
     
-    self.portLabel.text = port;
+    self.portLabel.text = [NSString stringIsNilOrEmpty:port.port_name]?@"请选择": port.port_name;
     [self.portStationBtn setTitle:[NSString stringIsNilOrEmpty:station]?@"请输入装箱地点":station forState:UIControlStateNormal];
 }
 

@@ -22,11 +22,14 @@
 
 @property (nonatomic,copy) JYBHomeQuickOrderResult myCall;
 
+@property (nonatomic ,strong)NSMutableArray  *specArr;
+
 @end
 
 @implementation JYBHomeBoxInfoSpecView
 
 - (instancetype)initWithArr:(NSMutableArray *)arr clickAction:(JYBHomeQuickOrderResult)action{
+    self.specArr = arr;
     if (self = [super init]) {
         [self setupArr:arr clickAction:action];
     }
@@ -95,7 +98,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 5;
+    return self.specArr.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -107,7 +110,7 @@
     
     
     JYBHomeSpecItemCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeSpecItemCell class]) forIndexPath:indexPath];
-    
+    cell.nameLab.text = self.specArr[indexPath.row];
     return cell;
     
 }

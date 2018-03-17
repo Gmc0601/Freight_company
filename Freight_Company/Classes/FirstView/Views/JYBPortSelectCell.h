@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JYBHomePortModel.h"
 
 typedef void(^JYBPortSelectBlock)();
 
@@ -22,6 +23,6 @@ typedef void(^JYBPortStationBlock)();
 
 @property (nonatomic ,copy)JYBPortStationBlock stationBlock;
 
-- (void)updateCellWithPort:(NSString *)port station:(NSString *)station;
+- (void)updateCellWithPort:(JYBHomePortModel *)port station:(NSString *)station;
 
 @end

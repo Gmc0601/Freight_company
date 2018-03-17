@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JYBHomeQuickModel.h"
 
 @interface JYBHomeQuickOrderCell : UITableViewCell
+
+- (void)updateCellWithModel:(JYBHomeQuickModel *)model;
 
 @end

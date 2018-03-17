@@ -9,6 +9,8 @@
 #import "JYBHomeOtherCostVC.h"
 #import "JYBHomeGoodWeightCell.h"
 #import "JYBHomePortCostCell.h"
+#import "JYBHomeDockWeightModel.h"
+#import "JYBHomeDotModel.h"
 
 @interface JYBHomeOtherCostVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -17,6 +19,8 @@
 @property (nonatomic ,strong)UIView   *bottomView;
 
 @property (nonatomic ,strong)NSMutableArray *dataArr;
+
+@property (nonatomic ,strong)NSMutableArray *dotArr;
 
 
 @end
@@ -30,6 +34,7 @@
     [self.view addSubview:self.myTableView];
     [self.view addSubview:self.bottomView];
     
+    [self __fetchData];
 }
 
 - (void)resetFather {
@@ -38,6 +43,67 @@
     
 }
 
+- (void)__fetchData{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic addUnEmptyString:self.prot_id forKey:@"port_id"];
+    
+    [ConfigModel showHud:self];
+    NSLog(@"~~~~para:%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Public/getDockWeightPrice" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            for (NSDictionary *subDic in datadic[@"data"]) {
+                JYBHomeDockWeightModel *model = [JYBHomeDockWeightModel modelWithDictionary:subDic];
+                [weak.dataArr addObject:model];
+            }
+            [weak.myTableView reloadData];
+            
+            [weak __fetchDotData];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+}
+
+- (void)__fetchDotData{
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic addUnEmptyString:self.prot_id forKey:@"port_id"];
+    
+    [ConfigModel showHud:self];
+    NSLog(@"~~~~para:%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Public/getDock" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            for (NSDictionary *subDic in datadic[@"data"]) {
+                JYBHomeDotModel *model = [JYBHomeDotModel modelWithDictionary:subDic];
+                [weak.dotArr addObject:model];
+            }
+            [weak.myTableView reloadData];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 2;
@@ -78,9 +144,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        return SizeWidth(60);
+        
+        return (self.dataArr.count/4 +((self.dataArr.count%4 == 0)?0:1))*SizeWidth(75);
+            
     }else{
-        return SizeWidth(60);
+        return (self.dotArr.count/2 +((self.dotArr.count%2 == 0)?0:1))*SizeWidth(75);
     }
     
 }
@@ -88,16 +156,67 @@
     
     if (indexPath.section == 0) {
         JYBHomeGoodWeightCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeGoodWeightCell class]) forIndexPath:indexPath];
+        [cell updateCellWithArr:self.dataArr];
+        WeakSelf(weak)
+        [cell setWeightBlock:^(JYBHomeDockWeightModel *model) {
+            [weak __refreshWightArrWithModel:model];
+        }];
         return cell;
     }else{
         JYBHomePortCostCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomePortCostCell class]) forIndexPath:indexPath];
+        [cell updateCellWithArr:self.dotArr];
+        WeakSelf(weak)
+        [cell setPortBlock:^(JYBHomeDotModel *model) {
+            [weak __refreshDotArrWithModel:model];
+        }];
         return cell;
         
     }
 
 }
 
+- (void)__refreshWightArrWithModel:(JYBHomeDockWeightModel *)model{
+    for (JYBHomeDockWeightModel *subModel in self.dataArr) {
+        if ([subModel.weight_id isEqualToString:model.weight_id]) {
+            subModel.select = YES;
+        }else{
+            subModel.select = NO;
+        }
+    }
+    [self.myTableView reloadData];
+}
+
+- (void)__refreshDotArrWithModel:(JYBHomeDotModel *)model{
+    for (JYBHomeDotModel *subModel in self.dotArr) {
+        if ([subModel.dock_id isEqualToString:model.dock_id]) {
+            subModel.select = YES;
+        }else{
+            subModel.select = NO;
+        }
+    }
+    [self.myTableView reloadData];
+}
+
+
 - (void)commitBtnAction{
+    
+    JYBHomeDockWeightModel *weightModel;
+    for (JYBHomeDockWeightModel *subModel in self.dataArr) {
+        if (subModel.select) {
+            weightModel = subModel;
+        }
+    }
+    
+    JYBHomeDotModel *dotModel;
+    for (JYBHomeDotModel *subModel in self.dotArr) {
+        if (subModel.select) {
+            dotModel = subModel;
+        }
+    }
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(selectWeightModel:dotModel:)]) {
+        [self.delegate selectWeightModel:weightModel dotModel:dotModel];
+    }
     
 }
 
@@ -132,6 +251,13 @@
         _dataArr = [[NSMutableArray alloc] init];
     }
     return _dataArr;
+}
+
+- (NSMutableArray *)dotArr{
+    if (!_dotArr) {
+        _dotArr = [[NSMutableArray alloc] init];
+    }
+    return _dotArr;
 }
 
 - (UIView *)bottomView{

@@ -32,12 +32,43 @@
     self.myTableView.tableHeaderView = self.headerView;
     [self.view addSubview:self.bottomView];
 
+    [self __fetchData];
 }
 
 - (void)resetFather {
     self.titleLab.text = @"给司机捎句话";
     self.rightBar.hidden = YES;
 }
+
+
+- (void)__fetchData{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+    [ConfigModel showHud:self];
+    NSLog(@"~~~~para:%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/User/recentlyMessageList" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            for (NSString *sub in datadic[@"data"]) {
+                [weak.dataArr addObject:sub];
+            }
+            [weak.myTableView reloadData];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -59,7 +90,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 4;
+    return self.dataArr.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -72,14 +103,23 @@
     
     JYBHomeHasDriveMsgCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeHasDriveMsgCell class]) forIndexPath:indexPath];
     
-    cell.contentLab.text = @"斯捷克洛夫就是看了几分快s是粉丝疯狂‘说服力；看 三分乐健康科技克赖斯基弗兰克";
+    cell.contentLab.text = [self.dataArr objectAtIndex:indexPath.row];
     
     return cell;
     
 }
 
-- (void)commitBtnAction{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    NSString *mes = [self.dataArr objectAtIndex:indexPath.row];
+    self.headerView.inputTextView.text = mes;
+
+}
+
+- (void)commitBtnAction{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(selectDriveMessage:)]) {
+        [self.delegate selectDriveMessage:self.headerView.inputTextView.text];
+    }
 }
 
 

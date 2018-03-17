@@ -10,9 +10,8 @@
 
 @interface JYBHomeSpecItemCell ()
 
-@property (nonatomic ,strong)UILabel    *nameLab;
 
-@property (nonatomic ,strong)UIButton   *iconBtn;
+//@property (nonatomic ,strong)UIButton   *iconBtn;
 
 @end
 
@@ -28,20 +27,21 @@
 
 - (void)p_initUI{
     [self.contentView addSubview:self.nameLab];
-    [self.contentView addSubview:self.iconBtn];
+//    [self.contentView addSubview:self.iconBtn];
     
     [self.nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(SizeWidth(15));
         make.top.bottom.equalTo(self.contentView);
         make.width.mas_greaterThanOrEqualTo(10);
+        make.right.equalTo(self.contentView).offset(-SizeWidth(15));
     }];
     
-    [self.iconBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.nameLab.mas_right).offset(SizeWidth(5));
-        make.top.bottom.equalTo(self.contentView);
-        make.width.mas_greaterThanOrEqualTo(40);
-    }];
-    
+//    [self.iconBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.nameLab.mas_right).offset(SizeWidth(5));
+//        make.top.bottom.equalTo(self.contentView);
+//        make.width.mas_greaterThanOrEqualTo(40);
+//    }];
+//
     [self.contentView addLineWithInset:UIEdgeInsetsMake(-1, 0, 0, 0)];
     
 }
@@ -52,16 +52,17 @@
         _nameLab.font = [UIFont systemFontOfSize:SizeWidth(15)];
         _nameLab.textColor = RGB(52, 52, 52);
         _nameLab.text = @"1x20GP";
+        _nameLab.textAlignment = NSTextAlignmentCenter;
     }
     return _nameLab;
 }
-
-- (UIButton *)iconBtn{
-    if (!_iconBtn) {
-        _iconBtn = [[UIButton alloc] init];
-        [_iconBtn setImage:[UIImage imageNamed:@"xd_icon_p"] forState:UIControlStateNormal];
-        _iconBtn.userInteractionEnabled = NO;
-    }
-    return _iconBtn;
-}
+//
+//- (UIButton *)iconBtn{
+//    if (!_iconBtn) {
+//        _iconBtn = [[UIButton alloc] init];
+//        [_iconBtn setImage:[UIImage imageNamed:@"xd_icon_p"] forState:UIControlStateNormal];
+//        _iconBtn.userInteractionEnabled = NO;
+//    }
+//    return _iconBtn;
+//}
 @end

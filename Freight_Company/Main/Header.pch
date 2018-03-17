@@ -21,6 +21,7 @@
 //自定义分类
 #import "NSString+commom.h"
 #import "UIView+line.h"
+#import "NSMutableDictionary+common.h"
 
 //自定义控件
 #import "JYBAlertView.h"
