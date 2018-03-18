@@ -9,4 +9,8 @@ pod 'Masonry'
 pod 'IQKeyboardManager'
 pod 'MJExtension'
 
+pod 'AMap2DMap'
+pod 'AMapSearch'
+pod 'AMapSearch'
+
 end
