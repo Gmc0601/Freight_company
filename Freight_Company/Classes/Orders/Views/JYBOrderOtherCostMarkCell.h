@@ -10,4 +10,6 @@
 
 @interface JYBOrderOtherCostMarkCell : UITableViewCell
 
+- (void)updateCellWithMark:(NSString *)mark;
+
 @end

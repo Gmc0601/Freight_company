@@ -14,6 +14,6 @@
 
 @property (nonatomic ,strong)UITextField *myTextField;
 
-- (void)updateCellWithTitle:(NSString *)title placeHoler:(NSString *)placeHoler;
+- (void)updateCellWithTitle:(NSString *)title placeHoler:(NSString *)placeHoler value:(NSString *)value;
 
 @end

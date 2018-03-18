@@ -10,4 +10,6 @@
 
 @interface JYBOrderOtherCostItmeCell : UITableViewCell
 
+- (void)updateCellWithTitle:(NSString *)title des:(NSString *)des value:(NSString *)value;
+
 @end

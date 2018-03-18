@@ -10,20 +10,79 @@
 #import "JYBHomeOrderListCell.h"
 #import "JYBOrderPayPopView.h"
 #import "JYBOrderDetailVC.h"
+#import "JYBOrderListModel.h"
+#import "TBRefresh.h"
 
 @interface JYBOrderSingleVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic ,strong)UITableView *myTableView;
 
+@property (nonatomic ,strong)NSMutableArray *dataArr;
+
+@property (nonatomic ,assign)NSInteger  currentPage;
 @end
 
 @implementation JYBOrderSingleVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.currentPage = 1;
     [self.view addSubview:self.myTableView];
     
+    [self __fetchOrderList];
 }
+
+- (void)__fetchOrderList{
+    
+    NSString *status;
+    if (self.type == JYBOrderTypeAll) {
+        status = @"";
+    }else if (self.type == JYBOrderTypeWait){
+        status = @"0";
+    }else if (self.type == JYBOrderTypePai){
+        status = @"10";
+    }else if (self.type == JYBOrderTypeReviced){
+        status = @"20";
+    }else{
+        status = @"30";
+    }
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic addUnEmptyString:status forKey:@"order_status"];
+    [dic addUnEmptyString:[NSString stringWithFormat:@"%ld",self.currentPage] forKey:@"page"];
+    [dic addUnEmptyString:@"10" forKey:@"size"];
+
+    [ConfigModel showHud:self];
+    NSLog(@"%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Order/orderList" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        [weak.myTableView.header endHeadRefresh];
+        [weak.myTableView.footer endFooterRefreshing];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            if (weak.currentPage == 1) {
+                [weak.dataArr removeAllObjects];
+            }
+            for (NSDictionary *subDic in datadic[@"data"]) {
+                JYBOrderListModel *model = [JYBOrderListModel modelWithDictionary:subDic];
+                [weak.dataArr addObject:model];
+            }
+            [weak.myTableView reloadData];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
+}
+
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -32,7 +91,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 3;
+    return self.dataArr.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -52,14 +111,16 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     JYBHomeOrderListCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeOrderListCell class]) forIndexPath:indexPath];
+    JYBOrderListModel *model = [self.dataArr objectAtIndex:indexPath.row];
+    [cell udpateCellWithModel:model];
     WeakObj(self);
-    [cell setListBlock:^(JYBHomeOrderListAction action) {
+    [cell setListBlock:^(JYBHomeOrderListAction action,JYBOrderListModel *listModel) {
         if (action == JYBHomeOrderListActionContact) {
-            
+            [selfWeak __phoneWithModel:listModel];
         }else if (action == JYBHomeOrderListActionOrder){
-            
+            [selfWeak __orderWithModel:listModel];
         }else{
-            [selfWeak __pay];
+            [selfWeak __payWithModel:listModel];
         }
     }];
     return cell;
@@ -67,12 +128,32 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    JYBOrderListModel *model = [self.dataArr objectAtIndex:indexPath.row];
     JYBOrderDetailVC *vc = [[JYBOrderDetailVC alloc] init];
+    vc.order_id = model.order_id;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)__phoneWithModel:(JYBOrderListModel *)listModel{
+    UIAlertController *alertVC = [UIAlertController alertControllerWithTitle:nil message:[NSString stringWithFormat:@"确认拨打\n%@",listModel.driver_phone] preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *phoneStr = [NSString stringWithFormat:@"tel://%@",listModel.driver_phone];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneStr]];
+    }];
+    
+    [alertVC addAction:cancelAction];
+    [alertVC addAction:sureAction];
+    [self presentViewController:alertVC animated:YES completion:nil];
+}
 
-- (void)__pay{
+- (void)__orderWithModel:(JYBOrderListModel *)model{
+    
+}
+
+- (void)__payWithModel:(JYBOrderListModel *)model{
     WeakObj(self);
     [[[JYBOrderPayPopView alloc] initWithClickAction:^{
         
@@ -94,10 +175,26 @@
         if (@available(iOS 11.0, *)) {
             _myTableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         }
-        
+        WeakObj(self);
+        [_myTableView addRefreshHeaderWithBlock:^{
+            selfWeak.currentPage = 1;
+            [selfWeak __fetchOrderList];
+        }];
+        [_myTableView addRefreshFootWithBlock:^{
+            selfWeak.currentPage +=1;
+            [selfWeak __fetchOrderList];
+        }];
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_myTableView registerClass:[JYBHomeOrderListCell class] forCellReuseIdentifier:NSStringFromClass([JYBHomeOrderListCell class])];
     }
     return _myTableView;
 }
+
+- (NSMutableArray *)dataArr{
+    if (!_dataArr) {
+        _dataArr = [[NSMutableArray alloc] init];
+    }
+    return _dataArr;
+}
+
 @end

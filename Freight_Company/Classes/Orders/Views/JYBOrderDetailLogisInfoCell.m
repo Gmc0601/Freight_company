@@ -7,6 +7,7 @@
 //  90
 
 #import "JYBOrderDetailLogisInfoCell.h"
+#import "JYBOrderLogisticsModel.h"
 
 @interface JYBOrderDetailLogisInfoCell ()
 
@@ -62,7 +63,14 @@
         make.width.mas_equalTo(SizeWidth(45));
     }];
     
-    
+}
+
+- (void)updateCellWithModel:(JYBOrderListModel *)model{
+    if (model.logistics.count) {
+        JYBOrderLogisticsModel *firLog = [model.logistics firstObject];
+        self.logInfoLab.text = firLog.logistics_title;
+        self.logTimeLab.text = firLog.create_time;
+    }
 }
 
 - (UILabel *)logTitleLab{
@@ -80,7 +88,6 @@
         _logInfoLab = [[UILabel alloc] init];
         _logInfoLab.textColor = RGB(52, 52, 52);
         _logInfoLab.font = [UIFont systemFontOfSize:SizeWidth(16)];
-        _logInfoLab.text = @"司机已提箱成功，正在赶往装箱地点";
     }
     return _logInfoLab;
 }
@@ -90,7 +97,6 @@
         _logTimeLab = [[UILabel alloc] init];
         _logTimeLab.textColor = RGB(162, 162, 162);
         _logTimeLab.font = [UIFont systemFontOfSize:SizeWidth(13)];
-        _logTimeLab.text = @"2017-10-10 12:23:24";
     }
     return _logTimeLab;
 }

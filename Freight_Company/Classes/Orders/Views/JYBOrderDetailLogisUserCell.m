@@ -16,7 +16,7 @@
 
 @property (nonatomic ,strong)UILabel        *numLab;
 
-@property (nonatomic ,strong)UILabel        *pointLab;
+//@property (nonatomic ,strong)UILabel        *pointLab;
 
 @property (nonatomic ,strong)UIButton       *phontBtn;
 
@@ -36,40 +36,55 @@
     [self.contentView addSubview:self.iconImageView];
     [self.contentView addSubview:self.nameLab];
     [self.contentView addSubview:self.numLab];
-    [self.contentView addSubview:self.pointLab];
+//    [self.contentView addSubview:self.pointLab];
     [self.contentView addSubview:self.phontBtn];
     
     [self.iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.bottom.equalTo(self.contentView);
-        make.width.mas_equalTo(SizeWidth(80));
+        make.left.equalTo(self.contentView).offset(SizeWidth(15));
+        make.width.height.mas_equalTo(SizeWidth(50));
+        make.centerY.equalTo(self.contentView);
     }];
     
     [self.nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(SizeWidth(15));
-        make.left.equalTo(self.iconImageView.mas_right);
+        make.left.equalTo(self.iconImageView.mas_right).offset(SizeWidth(10));
         make.width.mas_greaterThanOrEqualTo(SizeWidth(10));
         make.height.mas_equalTo(SizeWidth(20));
     }];
     
     [self.numLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.nameLab.mas_bottom).offset(SizeWidth(15));
-        make.left.equalTo(self.iconImageView.mas_right);
+        make.left.equalTo(self.iconImageView.mas_right).offset(SizeWidth(10));
         make.width.mas_greaterThanOrEqualTo(SizeWidth(10));
         make.height.mas_equalTo(SizeWidth(20));
     }];
     
-    [self.pointLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView).offset(SizeWidth(20));
-        make.left.equalTo(self.nameLab.mas_right).offset(SizeWidth(5));
-        make.width.mas_greaterThanOrEqualTo(SizeWidth(10));
-        make.height.mas_equalTo(SizeWidth(15));
-    }];
+//    [self.pointLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.contentView).offset(SizeWidth(20));
+//        make.left.equalTo(self.nameLab.mas_right).offset(SizeWidth(5));
+//        make.width.mas_greaterThanOrEqualTo(SizeWidth(10));
+//        make.height.mas_equalTo(SizeWidth(15));
+//    }];
     
     [self.phontBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.contentView);
         make.right.equalTo(self.contentView);
         make.width.mas_equalTo(SizeWidth(60));
     }];
+}
+
+- (void)updateCellWithModel:(JYBOrderListModel *)model{
+
+    [self.iconImageView setImageWithURL:[NSURL URLWithString:model.driver_phone] placeholder:[UIImage imageNamed:@"grzx_icon_68  (2)"]];
+    self.nameLab.text = model.driver_name;
+    self.numLab.text = model.driver_id;
+
+}
+
+- (void)phontBtnAction{
+    if (self.logisPhoneBlock) {
+        self.logisPhoneBlock();
+    }
 }
 
 - (UIImageView *)iconImageView{
@@ -100,20 +115,21 @@
     return _numLab;
 }
 
-- (UILabel *)pointLab{
-    if (!_pointLab) {
-        _pointLab = [[UILabel alloc] init];
-        _pointLab.font = [UIFont systemFontOfSize:SizeWidth(14)];
-        _pointLab.textColor = RGB(253, 125, 39);
-        _pointLab.text = @"4.9分";
-    }
-    return _pointLab;
-}
+//- (UILabel *)pointLab{
+//    if (!_pointLab) {
+//        _pointLab = [[UILabel alloc] init];
+//        _pointLab.font = [UIFont systemFontOfSize:SizeWidth(14)];
+//        _pointLab.textColor = RGB(253, 125, 39);
+//        _pointLab.text = @"4.9分";
+//    }
+//    return _pointLab;
+//}
 
 - (UIButton *)phontBtn{
     if (!_phontBtn) {
         _phontBtn= [[UIButton alloc] init];
         [_phontBtn setImage:[UIImage imageNamed:@"ddxq_icon_dh"] forState:UIControlStateNormal];
+        [_phontBtn addTarget:self action:@selector(phontBtnAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _phontBtn;
 }

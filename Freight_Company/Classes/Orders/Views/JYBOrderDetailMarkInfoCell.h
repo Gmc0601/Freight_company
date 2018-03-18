@@ -10,4 +10,6 @@
 
 @interface JYBOrderDetailMarkInfoCell : UITableViewCell
 
+- (void)updateCellWithMark:(NSString *)mark;
+
 @end

@@ -7,7 +7,19 @@
 //
 
 #import "CCBaseViewController.h"
+#import "CPHomeBoxAddressModel.h"
+
+
+@protocol JYBHomePackAddressListVCDelegate <NSObject>
+
+- (void)selectaddressModel:(CPHomeBoxAddressModel *)addressModel;
+
+@end
+
 
 @interface JYBHomePackAddressListVC : CCBaseViewController
+
+@property (nonatomic, weak)id <JYBHomePackAddressListVCDelegate>delegate;
+
 
 @end

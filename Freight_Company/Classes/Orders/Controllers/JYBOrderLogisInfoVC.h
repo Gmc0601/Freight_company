@@ -7,7 +7,10 @@
 //
 
 #import "CCBaseViewController.h"
+#import "JYBOrderListModel.h"
 
 @interface JYBOrderLogisInfoVC : CCBaseViewController
+
+@property (nonatomic ,strong)JYBOrderListModel *orderModel;
 
 @end

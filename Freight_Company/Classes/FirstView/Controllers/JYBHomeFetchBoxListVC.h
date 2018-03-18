@@ -7,7 +7,10 @@
 //
 
 #import "CCBaseViewController.h"
+#import "CPHomeBoxAddressModel.h"
 
 @interface JYBHomeFetchBoxListVC : CCBaseViewController
+
+@property (nonatomic ,strong)CPHomeBoxAddressModel *addressModel;
 
 @end

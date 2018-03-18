@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "JYBOrderListModel.h"
 @interface JYBOrderDetailCostCell : UITableViewCell
+
+- (void)updataCellWithModel:(JYBOrderListModel *)model;
 
 @end

@@ -99,6 +99,11 @@
 		F61217392033D305002D762A /* JYBOrderOtherCostMarkCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61217382033D305002D762A /* JYBOrderOtherCostMarkCell.m */; };
 		F612173C2033D321002D762A /* JYBOrderOtherCostImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F612173B2033D321002D762A /* JYBOrderOtherCostImageCell.m */; };
 		F612173F2033DC60002D762A /* JYBOrderOtherCostVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F612173E2033DC60002D762A /* JYBOrderOtherCostVC.m */; };
+		F6123949205D328A00B58AA5 /* JYBHomeImproveItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6123948205D328A00B58AA5 /* JYBHomeImproveItemCell.m */; };
+		F612394C205D664100B58AA5 /* JYBHomeOrderImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F612394B205D664100B58AA5 /* JYBHomeOrderImageCell.m */; };
+		F612394F205DF96100B58AA5 /* JYBOrderDetailBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F612394E205DF96100B58AA5 /* JYBOrderDetailBottomView.m */; };
+		F6123952205E2B7100B58AA5 /* JYBHomeImproBoxSaveCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6123951205E2B7100B58AA5 /* JYBHomeImproBoxSaveCell.m */; };
+		F6123955205E656B00B58AA5 /* JYBHomeShipAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F6123954205E656B00B58AA5 /* JYBHomeShipAddressModel.m */; };
 		F61B8461202E8FB5003AF684 /* JYBHomeTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8460202E8FB5003AF684 /* JYBHomeTitleCell.m */; };
 		F61B8464202E8FCE003AF684 /* JYBHomeModuleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8463202E8FCE003AF684 /* JYBHomeModuleCell.m */; };
 		F61B8467202E8FEF003AF684 /* JYBHomeTagCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B8466202E8FEF003AF684 /* JYBHomeTagCell.m */; };
@@ -336,6 +341,16 @@
 		F612173B2033D321002D762A /* JYBOrderOtherCostImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderOtherCostImageCell.m; sourceTree = "<group>"; };
 		F612173D2033DC60002D762A /* JYBOrderOtherCostVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderOtherCostVC.h; sourceTree = "<group>"; };
 		F612173E2033DC60002D762A /* JYBOrderOtherCostVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderOtherCostVC.m; sourceTree = "<group>"; };
+		F6123947205D328A00B58AA5 /* JYBHomeImproveItemCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeImproveItemCell.h; sourceTree = "<group>"; };
+		F6123948205D328A00B58AA5 /* JYBHomeImproveItemCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeImproveItemCell.m; sourceTree = "<group>"; };
+		F612394A205D664100B58AA5 /* JYBHomeOrderImageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeOrderImageCell.h; sourceTree = "<group>"; };
+		F612394B205D664100B58AA5 /* JYBHomeOrderImageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeOrderImageCell.m; sourceTree = "<group>"; };
+		F612394D205DF96100B58AA5 /* JYBOrderDetailBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderDetailBottomView.h; sourceTree = "<group>"; };
+		F612394E205DF96100B58AA5 /* JYBOrderDetailBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderDetailBottomView.m; sourceTree = "<group>"; };
+		F6123950205E2B7100B58AA5 /* JYBHomeImproBoxSaveCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeImproBoxSaveCell.h; sourceTree = "<group>"; };
+		F6123951205E2B7100B58AA5 /* JYBHomeImproBoxSaveCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeImproBoxSaveCell.m; sourceTree = "<group>"; };
+		F6123953205E656B00B58AA5 /* JYBHomeShipAddressModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeShipAddressModel.h; sourceTree = "<group>"; };
+		F6123954205E656B00B58AA5 /* JYBHomeShipAddressModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeShipAddressModel.m; sourceTree = "<group>"; };
 		F61B845F202E8FB5003AF684 /* JYBHomeTitleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeTitleCell.h; sourceTree = "<group>"; };
 		F61B8460202E8FB5003AF684 /* JYBHomeTitleCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeTitleCell.m; sourceTree = "<group>"; };
 		F61B8462202E8FCE003AF684 /* JYBHomeModuleCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeModuleCell.h; sourceTree = "<group>"; };
@@ -909,6 +924,8 @@
 				F6108118205C2BB7007781A0 /* CPHomeMyDriverModel.m */,
 				F6108120205CD3CA007781A0 /* CPHomeBoxAddressModel.h */,
 				F6108121205CD3CA007781A0 /* CPHomeBoxAddressModel.m */,
+				F6123953205E656B00B58AA5 /* JYBHomeShipAddressModel.h */,
+				F6123954205E656B00B58AA5 /* JYBHomeShipAddressModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -964,6 +981,12 @@
 				F610811E205C3328007781A0 /* JYBHomePackAddressCell.m */,
 				F6108123205CD582007781A0 /* JYBHomePackAddressSectionFooterView.h */,
 				F6108124205CD582007781A0 /* JYBHomePackAddressSectionFooterView.m */,
+				F6123947205D328A00B58AA5 /* JYBHomeImproveItemCell.h */,
+				F6123948205D328A00B58AA5 /* JYBHomeImproveItemCell.m */,
+				F612394A205D664100B58AA5 /* JYBHomeOrderImageCell.h */,
+				F612394B205D664100B58AA5 /* JYBHomeOrderImageCell.m */,
+				F6123950205E2B7100B58AA5 /* JYBHomeImproBoxSaveCell.h */,
+				F6123951205E2B7100B58AA5 /* JYBHomeImproBoxSaveCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1025,6 +1048,8 @@
 				F61217382033D305002D762A /* JYBOrderOtherCostMarkCell.m */,
 				F612173A2033D321002D762A /* JYBOrderOtherCostImageCell.h */,
 				F612173B2033D321002D762A /* JYBOrderOtherCostImageCell.m */,
+				F612394D205DF96100B58AA5 /* JYBOrderDetailBottomView.h */,
+				F612394E205DF96100B58AA5 /* JYBOrderDetailBottomView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1198,6 +1223,7 @@
 				F61B84BF203274ED003AF684 /* JYBHomeOtherCostItemCell.m in Sources */,
 				F61B8486202FE306003AF684 /* TYLimitedTextField.m in Sources */,
 				4268EE752011D49900091D5F /* SystemMessageViewController.m in Sources */,
+				F612394C205D664100B58AA5 /* JYBHomeOrderImageCell.m in Sources */,
 				F61B84CD2032B96A003AF684 /* JYBOrderSingleVC.m in Sources */,
 				427C6974200C98C5006A9EBB /* UINavigationController+SXFullScreen.m in Sources */,
 				427C698F200CA5CA006A9EBB /* LoginViewController.m in Sources */,
@@ -1207,6 +1233,7 @@
 				F61B849E20313E8E003AF684 /* JYBImproveFetchBoxVC.m in Sources */,
 				F61B846A202EC686003AF684 /* JYBPortSelectCell.m in Sources */,
 				427C6971200C98C4006A9EBB /* UITabBar+TBBadge.m in Sources */,
+				F6123955205E656B00B58AA5 /* JYBHomeShipAddressModel.m in Sources */,
 				F61080F9205BF052007781A0 /* LGProvinceModel.m in Sources */,
 				427C696E200C98C4006A9EBB /* BaseViewController.m in Sources */,
 				F61B84AA20317475003AF684 /* JYBHomeDriverSelVC.m in Sources */,
@@ -1237,6 +1264,7 @@
 				F612173F2033DC60002D762A /* JYBOrderOtherCostVC.m in Sources */,
 				F61B84D72032FE03003AF684 /* JYBOrderDetailVC.m in Sources */,
 				F61217332033BCD7002D762A /* JYBHomeOrderLogisItemCell.m in Sources */,
+				F612394F205DF96100B58AA5 /* JYBOrderDetailBottomView.m in Sources */,
 				F61B84CA2032B893003AF684 /* HMSegmentedControl.m in Sources */,
 				F61B8471202FB544003AF684 /* JYBAlertView.m in Sources */,
 				F61B847A202FBF5D003AF684 /* JYBHomePackingSelCell.m in Sources */,
@@ -1302,9 +1330,11 @@
 				427C6983200C98C5006A9EBB /* MeViewController.m in Sources */,
 				F66A6A26202A0C0E00E40F56 /* TAAbstractDotView.m in Sources */,
 				427C68CF200C9849006A9EBB /* Freight_Company.xcdatamodeld in Sources */,
+				F6123952205E2B7100B58AA5 /* JYBHomeImproBoxSaveCell.m in Sources */,
 				F61080F0205BE97F007781A0 /* JYBHomeSelectStationVC.m in Sources */,
 				F61B84A120313FE3003AF684 /* JYBHomeFetchBoxPortCell.m in Sources */,
 				F610810D205C073B007781A0 /* JYBHomeQuickOrderModel.m in Sources */,
+				F6123949205D328A00B58AA5 /* JYBHomeImproveItemCell.m in Sources */,
 				427C6973200C98C5006A9EBB /* UIViewController+BarButton.m in Sources */,
 				F61080F3205BE9E3007781A0 /* JYBHomeSeleStationHeaderView.m in Sources */,
 				427C6962200C98C4006A9EBB /* NSString+SBJSON.m in Sources */,

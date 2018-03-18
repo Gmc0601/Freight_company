@@ -47,13 +47,16 @@
     
 }
 
+- (void)updateCellWithMark:(NSString *)mark{
+    self.desLab.text = [NSString stringIsNilOrEmpty:mark]?@"无":mark;
+}
 
 - (UILabel *)titleLab{
     if (!_titleLab) {
         _titleLab = [[UILabel alloc] init];
         _titleLab.textColor = RGB(52, 52, 52);
         _titleLab.font = [UIFont systemFontOfSize:SizeWidth(13)];
-        _titleLab.text = @"其他费用说明";
+        _titleLab.text = @"其他费用说明:";
     }
     return _titleLab;
 }

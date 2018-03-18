@@ -120,12 +120,13 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(selectDriveMessage:)]) {
         [self.delegate selectDriveMessage:self.headerView.inputTextView.text];
     }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64 - SizeWidth(50)) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64 - SizeWidth(50)) style:UITableViewStyleGrouped];
         _myTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _myTableView.backgroundColor = [UIColor whiteColor];
         _myTableView.showsVerticalScrollIndicator = NO;

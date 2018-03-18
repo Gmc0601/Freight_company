@@ -17,6 +17,8 @@
 
 @interface JYBHomeSelectStationVC : CCBaseViewController
 
+@property (nonatomic ,assign)BOOL   isPoint;
+
 @property (nonatomic ,weak)id <JYBHomeSelectStationVCDelegate>delegate;
 
 @end

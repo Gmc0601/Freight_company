@@ -1,20 +1,20 @@
 //
-//  JYBOrderOtherCostImageCell.m
+//  JYBHomeOrderImageCell.m
 //  Freight_Company
 //
-//  Created by ToneWang on 2018/2/14.
+//  Created by ToneWang on 2018/3/17.
 //  Copyright © 2018年 cc. All rights reserved.
-//
+//  105  -- 50
 
-#import "JYBOrderOtherCostImageCell.h"
+#import "JYBHomeOrderImageCell.h"
 
-@interface JYBHomeOtherImageColectionCell : UICollectionViewCell
+@interface JYBHomeOrderImageColectionCell : UICollectionViewCell
 
 @property (nonatomic ,strong)UIImageView *iconImageView;
 @end
 
 
-@implementation JYBHomeOtherImageColectionCell
+@implementation JYBHomeOrderImageColectionCell
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self =[super initWithFrame:frame]) {
@@ -40,8 +40,9 @@
 @end
 
 
+@interface JYBHomeOrderImageCell ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
-@interface JYBOrderOtherCostImageCell()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@property (nonatomic ,strong)UIButton   *iconBtn;
 
 @property (nonatomic ,strong)UILabel    *titleLab;
 
@@ -51,7 +52,7 @@
 
 @end
 
-@implementation JYBOrderOtherCostImageCell
+@implementation JYBHomeOrderImageCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
@@ -63,18 +64,26 @@
 }
 
 - (void)p_initUI{
+    [self.contentView addSubview:self.iconBtn];
     [self.contentView addSubview:self.titleLab];
     [self.contentView addSubview:self.myCollectionView];
     
+    [self.iconBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.contentView).offset(SizeWidth(10));
+        make.left.equalTo(self.contentView);
+        make.width.mas_equalTo(SizeWidth(50));
+        make.height.mas_equalTo(SizeWidth(40));
+    }];
+    
     [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(SizeWidth(10));
-        make.left.equalTo(self.contentView).offset(SizeWidth(15));
+        make.left.equalTo(self.iconBtn.mas_right);
         make.width.mas_greaterThanOrEqualTo(10);
         make.height.mas_equalTo(SizeWidth(40));
     }];
     
     [self.myCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleLab.mas_bottom);
+        make.top.equalTo(self.iconBtn.mas_bottom);
         make.right.and.bottom.equalTo(self.contentView);
         make.left.equalTo(self.contentView).offset(SizeWidth(50));
     }];
@@ -95,7 +104,7 @@
 
 - (__kindof UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    JYBHomeOtherImageColectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([JYBHomeOtherImageColectionCell class]) forIndexPath:indexPath];
+    JYBHomeOrderImageColectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass([JYBHomeOrderImageColectionCell class]) forIndexPath:indexPath];
     NSString *imageStr = [self.dataArr objectAtIndex:indexPath.row];
     [cell.iconImageView setImageWithURL:[NSURL URLWithString:imageStr] placeholder:nil];
     return cell;
@@ -123,7 +132,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
+
 }
 
 
@@ -142,7 +151,7 @@
         if (@available(iOS 11.0, *)) {
             _myCollectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
         }
-        [_myCollectionView registerClass:[JYBHomeOtherImageColectionCell class] forCellWithReuseIdentifier:NSStringFromClass([JYBHomeOtherImageColectionCell class])];
+        [_myCollectionView registerClass:[JYBHomeOrderImageColectionCell class] forCellWithReuseIdentifier:NSStringFromClass([JYBHomeOrderImageColectionCell class])];
     }
     return _myCollectionView;
 }
@@ -154,12 +163,20 @@
     return _dataArr;
 }
 
+- (UIButton *)iconBtn{
+    if (!_iconBtn) {
+        _iconBtn = [[UIButton alloc] init];
+        [_iconBtn setImage:[UIImage imageNamed:@"ddxq_icon_zp"] forState:UIControlStateNormal];
+    }
+    return _iconBtn;
+}
+
 - (UILabel *)titleLab{
     if (!_titleLab) {
         _titleLab = [[UILabel alloc] init];
-        _titleLab.font = [UIFont systemFontOfSize:SizeWidth(15)];
+        _titleLab.font = [UIFont systemFontOfSize:SizeWidth(16)];
         _titleLab.textColor = RGB(52, 52, 52);
-        _titleLab.text = @"其他费用凭证";
+        _titleLab.text = @"集装箱照片";
     }
     return _titleLab;
 }

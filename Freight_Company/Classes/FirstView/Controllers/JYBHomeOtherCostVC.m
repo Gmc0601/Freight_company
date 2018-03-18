@@ -218,6 +218,7 @@
         [self.delegate selectWeightModel:weightModel dotModel:dotModel];
     }
     
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -267,7 +268,7 @@
         
         UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(SizeWidth(10), SizeWidth(5), kScreenW - SizeWidth(20), SizeWidth(40))];
         commitBtn.backgroundColor = RGB(24, 141, 240);
-        [commitBtn setTitle:@"+ 添加拿箱单地址" forState:UIControlStateNormal];
+        [commitBtn setTitle:@"确定" forState:UIControlStateNormal];
         [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         commitBtn.layer.cornerRadius = 2;
         commitBtn.layer.masksToBounds = YES;

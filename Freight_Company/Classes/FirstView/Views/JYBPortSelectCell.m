@@ -115,6 +115,8 @@
         _portLabel = [[UILabel alloc] init];
         _portLabel.textColor = RGB(52, 52, 52);
         _portLabel.font = [UIFont systemFontOfSize:SizeWidth(15)];
+        _portLabel.userInteractionEnabled = YES;
+        [_portLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(portSeleBtnAction)]];
     }
     return _portLabel;
 }
@@ -123,7 +125,7 @@
     if (!_portSeleBtn) {
         _portSeleBtn = [[UIButton alloc] init];
         [_portSeleBtn setImage:[UIImage imageNamed:@"icon_jh"] forState:UIControlStateNormal];
-        [_portSeleBtn addTarget:self action:@selector(portSeleBtnAction) forControlEvents:UIControlEventTouchUpInside];
+//        [_portSeleBtn addTarget:self action:@selector(portSeleBtnAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _portSeleBtn;
 }

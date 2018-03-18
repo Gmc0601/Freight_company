@@ -67,6 +67,8 @@
         _deleBtn.titleLabel.font = [UIFont systemFontOfSize:SizeWidth(15)];
         _deleBtn.layer.cornerRadius = SizeWidth(15);
         _deleBtn.layer.masksToBounds = YES;
+        _deleBtn.layer.borderColor = RGB(102, 102, 102).CGColor;
+        _deleBtn.layer.borderWidth = 1;
         [_deleBtn addTarget:self action:@selector(deleBtnAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _deleBtn;
@@ -80,6 +82,8 @@
         _editBtn.titleLabel.font = [UIFont systemFontOfSize:SizeWidth(15)];
         _editBtn.layer.cornerRadius = SizeWidth(15);
         _editBtn.layer.masksToBounds = YES;
+        _editBtn.layer.borderColor = RGB(102, 102, 102).CGColor;
+        _editBtn.layer.borderWidth = 1;
         [_editBtn addTarget:self action:@selector(editBtnAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _editBtn;

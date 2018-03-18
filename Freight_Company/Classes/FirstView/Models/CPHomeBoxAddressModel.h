@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JYBHomePortModel.h"
 
 @interface CPHomeBoxAddressModel : NSObject
 
@@ -25,5 +26,9 @@
 @property (nonatomic ,strong)NSString   *is_use;  //是否常用地址 0-否 1-是
 
 @property (nonatomic ,strong)NSString   *is_delete;  //是否删除 0-否 1-是
+
+@property (nonatomic ,strong)NSString   *tiOrderNum;  //手动添加
+
+@property (nonatomic ,strong)JYBHomePortModel   *portModel;  //港口model
 
 @end

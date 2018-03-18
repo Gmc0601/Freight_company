@@ -7,10 +7,10 @@
 //
 
 #import "JYBHomeFetchBoxPortCell.h"
+#import "UIView+line.h"
 
 @interface JYBHomeFetchBoxPortCell ()
 
-@property (nonatomic ,strong)UILabel        *portLab;
 
 @end
 
@@ -33,14 +33,14 @@
         make.left.equalTo(self.contentView).offset(SizeWidth(10));
         make.width.mas_greaterThanOrEqualTo(SizeWidth(10));
     }];
-    
+    [self.contentView addLineWithInset:UIEdgeInsetsMake(-1, SizeWidth(15), 0, -SizeWidth(15))];
 }
 
 - (UILabel *)portLab{
     if (!_portLab) {
         _portLab = [[UILabel alloc] init];
         _portLab.textColor = [UIColor blackColor];
-        _portLab.font = [UIFont boldSystemFontOfSize:SizeWidth(20)];
+        _portLab.font = [UIFont boldSystemFontOfSize:SizeWidth(17)];
         _portLab.text = @"宁波港  ▼";
     }
     return _portLab;

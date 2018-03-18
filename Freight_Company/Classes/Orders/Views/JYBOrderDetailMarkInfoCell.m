@@ -57,6 +57,10 @@
     
 }
 
+- (void)updateCellWithMark:(NSString *)mark{
+    
+    self.valueLab.text = mark;
+}
 
 - (UIButton *)iconBtn{
     if (!_iconBtn) {

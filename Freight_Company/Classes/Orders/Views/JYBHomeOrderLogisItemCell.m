@@ -68,7 +68,13 @@
         make.width.mas_equalTo(1);
     }];
     
- 
+}
+
+
+- (void)updateCellWithModel:(JYBOrderLogisticsModel *)model{
+    
+    self.timeLabel.text = model.create_time;
+    self.titleLabel.text = model.logistics_title;
 }
 
 

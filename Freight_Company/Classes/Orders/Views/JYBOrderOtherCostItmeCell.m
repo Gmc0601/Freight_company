@@ -28,6 +28,13 @@
     return self;
 }
 
+- (void)updateCellWithTitle:(NSString *)title des:(NSString *)des value:(NSString *)value{
+    self.titleLab.text = title;
+    self.desLab.text = [NSString stringIsNilOrEmpty:des]?@"":[NSString stringWithFormat:@"(%@)",des];
+    self.valueLab.text = value;
+}
+
+
 - (void)p_initUI{
     [self.contentView addSubview:self.titleLab];
     [self.contentView addSubview:self.desLab];

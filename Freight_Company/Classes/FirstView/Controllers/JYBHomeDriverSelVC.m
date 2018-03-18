@@ -100,6 +100,7 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(selectDriverModel:)]) {
         [self.delegate selectDriverModel:model];
     }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)commitBtnAction{

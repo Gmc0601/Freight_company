@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JYBOrderListModel.h"
+
 
 typedef enum : NSUInteger {
     JYBHomeOrderListActionContact,
@@ -15,9 +17,11 @@ typedef enum : NSUInteger {
 } JYBHomeOrderListAction;
 
 
-typedef void(^JYBHomeOrderListBlock)(JYBHomeOrderListAction action);
+typedef void(^JYBHomeOrderListBlock)(JYBHomeOrderListAction action,JYBOrderListModel *listModel);
 
 @interface JYBHomeOrderListCell : UITableViewCell
+
+- (void)udpateCellWithModel:(JYBOrderListModel *)listModel;
 
 @property (nonatomic ,copy)JYBHomeOrderListBlock listBlock;
 

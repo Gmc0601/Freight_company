@@ -47,6 +47,13 @@
     
 }
 
+- (void)updataCellWithModel:(JYBOrderListModel *)model{
+    
+    self.orderLab.text = [NSString stringWithFormat:@"订单编号: %@",model.order_no];
+    self.timeLab.text = [NSString stringWithFormat:@"下单时间: %@",model.create_time];
+
+}
+
 - (UILabel *)orderLab{
     if (!_orderLab) {
         _orderLab = [[UILabel alloc] init];

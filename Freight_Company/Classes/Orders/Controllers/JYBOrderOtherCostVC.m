@@ -39,8 +39,10 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-    return 6;
+    if (self.orderModel.other_price_img.count) {
+        return 6;
+    }
+    return 5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -66,14 +68,27 @@
     
     if (indexPath.row == 4) {
         JYBOrderOtherCostMarkCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderOtherCostMarkCell class]) forIndexPath:indexPath];
+        [cell updateCellWithMark:self.orderModel.other_price_desc];
         return cell;
 
     }else if (indexPath.row == 5){
         JYBOrderOtherCostImageCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderOtherCostImageCell class]) forIndexPath:indexPath];
+        [cell updateCellWithArr:self.orderModel.other_price_img.mutableCopy];
         return cell;
         
     }else{
         JYBOrderOtherCostItmeCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderOtherCostItmeCell class]) forIndexPath:indexPath];
+        
+        if (indexPath.row == 0) {
+            [cell updateCellWithTitle:@"进港码头" des:self.orderModel.dock_name value:[NSString stringWithFormat:@"¥%@",self.orderModel.order_price]];
+        }else if (indexPath.row == 1){
+            [cell updateCellWithTitle:@"货重" des:self.orderModel.weight_desc value:[NSString stringWithFormat:@"¥%@",self.orderModel.weight_price]];
+        }else if (indexPath.row == 2){
+            [cell updateCellWithTitle:@"提箱费" des:self.orderModel.yard_name value:[NSString stringWithFormat:@"¥%@",self.orderModel.yard_price]];
+        }else{
+            [cell updateCellWithTitle:@"其他费用" des:nil value:[NSString stringWithFormat:@"¥%@",self.orderModel.other_price]];
+        }
+        
         return cell;
         
     }

@@ -9,8 +9,10 @@
 #import "JYBHomeEditPacktingListVC.h"
 #import "JYBHomePackingSelCell.h"
 #import "JYBHomePackingInputCell.h"
+#import "JYBHomeSelectStationVC.h"
+#import "JYBHomeShipAddressModel.h"
 
-@interface JYBHomeEditPacktingListVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface JYBHomeEditPacktingListVC ()<UITableViewDelegate,UITableViewDataSource,JYBHomeSelectStationVCDelegate>
 
 @property (nonatomic ,strong)UITableView *myTableView;
 
@@ -23,6 +25,11 @@
 @property (nonatomic ,strong)UIView   *footerView;
 
 @property (nonatomic ,strong)UIButton *defaltAddressBtn;
+
+@property (nonatomic ,strong)JYBHomeStationSeleModel *stationModel;
+
+@property (nonatomic ,strong)JYBHomeShipAddressModel *pointModel;
+
 
 @end
 
@@ -37,9 +44,20 @@
 }
 
 - (void)resetFather {
-    self.titleLab.text = @"添加装箱点";
-    self.rightBar.hidden = YES;
+    
+    self.titleLab.text = @"编辑装箱点";
+    [self.rightBar setTitle:@"常用地址" forState:UIControlStateNormal];
+
 }
+
+//  右侧点击
+- (void)more:(UIButton *)sender{
+//    JYBHomePackAddressListVC *vc = [[JYBHomePackAddressListVC alloc] init];
+//    vc.delegate = self;
+//    [self.navigationController pushViewController:vc animated:YES];
+//
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
@@ -68,11 +86,11 @@
     }else{
         JYBHomePackingInputCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomePackingInputCell class]) forIndexPath:indexPath];
         if (indexPath.row == 2) {
-            [cell updateCellWithTitle:@"详细地址" placeHoler:@"街道、门牌号(非必填)"];
+            [cell updateCellWithTitle:@"详细地址" placeHoler:@"街道、门牌号(非必填)" value:nil];
         }else if (indexPath.row == 3){
-            [cell updateCellWithTitle:@"联系人" placeHoler:@"请填写装箱联系人(非必填)"];
+            [cell updateCellWithTitle:@"联系人" placeHoler:@"请填写装箱联系人(非必填)" value:nil];
         }else{
-            [cell updateCellWithTitle:@"电话" placeHoler:@"请填写装箱联系人电话(必填)"];
+            [cell updateCellWithTitle:@"电话" placeHoler:@"请填写装箱联系人电话(必填)" value:nil];
         }
         
         return cell;
@@ -82,6 +100,14 @@
 
 - (void)__pickPack:(NSIndexPath *)indexPath{
     
+    JYBHomeSelectStationVC *vc = [[JYBHomeSelectStationVC alloc] init];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+- (void)selectStationModel:(JYBHomeStationSeleModel *)model{
+    self.stationModel = model;
 }
 
 - (void)commitBtnAction{

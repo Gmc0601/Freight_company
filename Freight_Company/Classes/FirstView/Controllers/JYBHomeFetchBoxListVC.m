@@ -27,10 +27,71 @@
 
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (self.addressModel) {
+        JYBHomePackingInputCell *addresscell = [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        addresscell.myTextField.text = self.addressModel.box_address_desc;
+        JYBHomePackingInputCell *namecell = [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+        namecell.myTextField.text = self.addressModel.box_linkman;
+        JYBHomePackingInputCell *phonecell = [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+        phonecell.myTextField.text = self.addressModel.box_linkman_phone;
+
+    }
+
+}
+
 - (void)resetFather {
-    self.titleLab.text = @"编辑拿箱单地址";
+    self.titleLab.text = self.addressModel?@"编辑拿箱单地址":@"新增拿箱单地址";
     self.rightBar.hidden = YES;
 }
+
+
+
+- (void)commitBtnAction{
+    
+    JYBHomePackingInputCell *addresscell = [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    JYBHomePackingInputCell *namecell = [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    JYBHomePackingInputCell *phonecell = [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic addUnEmptyString:self.addressModel.box_address_id forKey:@"box_address_id"];
+    [dic addUnEmptyString:addresscell.myTextField.text forKey:@"box_address_desc"];
+    [dic addUnEmptyString:namecell.myTextField.text forKey:@"box_linkman"];
+    [dic addUnEmptyString:phonecell.myTextField.text forKey:@"box_linkman_phone"];
+    
+    
+    [ConfigModel showHud:self];
+    NSLog(@"~~~~para:%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/User/addEditBoxAddress" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+            
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [weak.navigationController popViewControllerAnimated:YES];
+            });
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
+    
+    
+}
+
+
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -48,25 +109,19 @@
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
 
     JYBHomePackingInputCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomePackingInputCell class]) forIndexPath:indexPath];
     if (indexPath.row == 0) {
-        [cell updateCellWithTitle:@"拿箱单地址" placeHoler:@"请填写拿箱单地址(必填)"];
+        [cell updateCellWithTitle:@"拿箱单地址" placeHoler:@"请填写拿箱单地址(必填)" value:nil];
     }else if (indexPath.row == 1){
-        [cell updateCellWithTitle:@"联系人" placeHoler:@"请填写联系人姓名(必填)"];
+        [cell updateCellWithTitle:@"联系人" placeHoler:@"请填写联系人姓名(必填)" value:nil];
     }else{
-        [cell updateCellWithTitle:@"电话" placeHoler:@"请填写联系人电话(必填)"];
+        [cell updateCellWithTitle:@"电话" placeHoler:@"请填写联系人电话(必填)" value:nil];
     }
     
     return cell;
     
 }
-
-- (void)commitBtnAction{
-    
-}
-
 
 - (UITableView *)myTableView{
     if (!_myTableView) {

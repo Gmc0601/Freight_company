@@ -71,7 +71,7 @@
 
 
 - (void)updateCellWithModel:(CPHomeMyDriverModel *)model{
-    self.nameLab.text = model.fleet_name;
+    self.nameLab.text = model.driver_name;
     self.desLab.text = model.fleet_name;
     self.numLab.text = model.car_no;
     

@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JYBOrderListModel.h"
+
+typedef void(^JYBOrderDetailLogisBlock)();
 
 @interface JYBOrderDetailLogisUserCell : UITableViewCell
+
+@property (nonatomic ,copy)JYBOrderDetailLogisBlock logisPhoneBlock;
+
+- (void)updateCellWithModel:(JYBOrderListModel *)model;
 
 @end

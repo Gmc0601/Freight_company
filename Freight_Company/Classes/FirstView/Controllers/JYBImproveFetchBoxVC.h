@@ -7,7 +7,17 @@
 //
 
 #import "CCBaseViewController.h"
+#import "CPHomeBoxAddressModel.h"
+
+@protocol JYBImproveFetchBoxVCDelegate <NSObject>
+
+- (void)selectBoxAddressModel:(CPHomeBoxAddressModel *)model;
+
+@end
+
 
 @interface JYBImproveFetchBoxVC : CCBaseViewController
+
+@property (nonatomic ,weak)id <JYBImproveFetchBoxVCDelegate>delegate;
 
 @end

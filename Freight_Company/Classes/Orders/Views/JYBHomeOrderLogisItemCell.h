@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JYBOrderLogisticsModel.h"
 
 @interface JYBHomeOrderLogisItemCell : UITableViewCell
 
@@ -15,5 +16,7 @@
 @property (nonatomic ,strong)UIView      *topLine;          ///<上划线
 
 @property (nonatomic ,strong)UIView      *bottomLine;       ///<下划线
+
+- (void)updateCellWithModel:(JYBOrderLogisticsModel *)model;
 
 @end

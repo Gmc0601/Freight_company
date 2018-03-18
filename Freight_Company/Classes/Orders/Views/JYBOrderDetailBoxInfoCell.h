@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^JYBOrderDetailBoxOtherBlock)();
+
 @interface JYBOrderDetailBoxInfoCell : UITableViewCell
+
+@property (nonatomic ,copy)JYBOrderDetailBoxOtherBlock otherBlock;
+
+- (void)updateCellWithIcon:(NSString *)icon title:(NSString *)title value:(NSString *)value other:(BOOL)other;
 
 @end

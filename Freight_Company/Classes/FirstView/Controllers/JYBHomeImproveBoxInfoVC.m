@@ -14,8 +14,12 @@
 #import "JYBHomeSendDriveMesgVC.h"
 #import "JYBHomeOtherCostVC.h"
 #import "JYBHomeBoxInfoSpecView.h"
+#import "JYBHomeImproveItemCell.h"
+#import "CPHomeBoxAddressModel.h"
+#import "JYBImproveFetchBoxVC.h"
+#import "JYBHomeEditPacktingListVC.h"
 
-@interface JYBHomeImproveBoxInfoVC ()<UITableViewDelegate,UITableViewDataSource,JYBHomeOtherCostVCDelegate,JYBHomeSendDriveMesgVCDelegate,JYBHomeDriverSelVCDelegate>
+@interface JYBHomeImproveBoxInfoVC ()<UITableViewDelegate,UITableViewDataSource,JYBHomeOtherCostVCDelegate,JYBHomeSendDriveMesgVCDelegate,JYBHomeDriverSelVCDelegate,JYBImproveFetchBoxVCDelegate>
 
 @property (nonatomic ,strong)UITableView *myTableView;
 
@@ -36,6 +40,11 @@
 @property (nonatomic ,strong)NSString       *seleMessage;
 
 @property (nonatomic ,strong)CPHomeMyDriverModel *seleDriver;
+
+@property (nonatomic, strong)NSMutableArray     *seleStationArr;
+
+@property (nonatomic ,strong)CPHomeBoxAddressModel *seleBoxAddreModel;
+
 @end
 
 @implementation JYBHomeImproveBoxInfoVC
@@ -57,13 +66,29 @@
 - (void)more:(UIButton *)sender{
     
     NSArray *sepcArr = @[@"1x20GP(拼)",@"1x20GP",@"1x40GP",@"1x40HQ",@"1x45HQ"];
-
+    WeakSelf(weak)
     [[[JYBHomeBoxInfoSpecView alloc] initWithArr:sepcArr.mutableCopy clickAction:^(NSInteger index) {
-        NSString *sepx = [sepcArr objectAtIndex:index];
-        [self.rightBar setTitle:sepx forState:UIControlStateNormal];
+        weak.sepc = [sepcArr objectAtIndex:index];
+        [weak.rightBar setTitle:weak.sepc forState:UIControlStateNormal];
 
     }] show];
 }
+
+- (NSString *)__getOrderTypeWithName:(NSString *)name{
+    if ([name isEqualToString:@"1x20GP(拼)"]) {
+        return @"small_carpool";
+    }else if ([name isEqualToString:@"1x20GP"]){
+        return @"small_single";
+    }else if ([name isEqualToString:@"1x40GP"]){
+        return @"big_cabinet";
+    }else if ([name isEqualToString:@"1x40HQ"]){
+        return @"tall_cabinet";
+    }else{
+        return @"super_tall_cabinet";
+    }
+    
+}
+
 
 - (void)selectWeightModel:(JYBHomeDockWeightModel *)weightModel dotModel:(JYBHomeDotModel *)dotModel{
     self.seleWightModel = weightModel;
@@ -80,6 +105,88 @@
 - (void)selectDriverModel:(CPHomeMyDriverModel *)driverModel{
     self.seleDriver = driverModel;
 }
+
+- (void)selectBoxAddressModel:(CPHomeBoxAddressModel *)model{
+    self.seleBoxAddreModel = model;
+    [self.myTableView reloadData];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic addUnEmptyString:model.portModel.port_id forKey:@"port_id"];
+    [dic addUnEmptyString:[self __getOrderTypeWithName:self.sepc] forKey:@"order_type"];
+    [dic addUnEmptyString:self.loadarea_id forKey:@"loadarea_id"];
+
+    
+    [ConfigModel showHud:self];
+    NSLog(@"~~~~para:%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Order/getOrderPrice" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            self.priceLab.text = [NSString stringWithFormat:@"¥%@",datadic[@"data"][@"order_price"]];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+
+}
+
+
+
+- (void)commitBtnAction{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic addUnEmptyString:self.seleBoxAddreModel.portModel.port_id forKey:@"port_id"];
+    [dic addUnEmptyString:[self __getOrderTypeWithName:self.sepc] forKey:@"order_type"];
+    [dic addUnEmptyString:self.startTime forKey:@"shipment_time"];
+    [dic addUnEmptyString:self.endTime forKey:@"cutoff_time"];
+    [dic addUnEmptyString:self.seleBoxAddreModel.tiOrderNum forKey:@"pick_no"];
+    [dic addUnEmptyString:self.seleBoxAddreModel.box_address_id forKey:@"box_address_id"];
+
+    
+    [dic addUnEmptyString:nil forKey:@"loadarea_id"];
+    [dic addUnEmptyString:nil forKey:@"shipment_address_id"];
+
+    
+    [dic addUnEmptyString:self.seleDriver.driver_id forKey:@"driver_id"];
+    [dic addUnEmptyString:self.seleMessage forKey:@"message"];
+    [dic addUnEmptyString:self.seleDotModel.dock_id forKey:@"dock_id"];
+    [dic addUnEmptyString:self.seleWightModel.weight_id forKey:@"weight_id"];
+
+    
+    
+    [ConfigModel showHud:self];
+    NSLog(@"~~~~para:%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Order/getOrderPrice" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            self.priceLab.text = [NSString stringWithFormat:@"¥%@",datadic[@"data"][@"order_price"]];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
+    
+    
+    
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 3;
@@ -98,7 +205,7 @@
     if (section == 0) {
         return 2;
     }else if (section == 1){
-        return 0;
+        return self.seleStationArr.count +2;
     }else{
         return 3;
     }
@@ -111,13 +218,36 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    JYBHomeInproveBoxInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeInproveBoxInfoCell class]) forIndexPath:indexPath];
     
     if (indexPath.section == 0) {
+        JYBHomeInproveBoxInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeInproveBoxInfoCell class]) forIndexPath:indexPath];
         [cell updateCellIcon:@"xx_icon_sj" Title:(indexPath.row == 0)?@"装箱时间":@"截关时间" value:(indexPath.row == 0)?self.startTime:self.endTime BoxType:JYBHomeInproveBoxTime indexPath:indexPath];
+        return cell;
     }else if (indexPath.section == 1){
+        JYBHomeImproveItemCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeImproveItemCell class]) forIndexPath:indexPath];
+
+        if (indexPath.row == 0) {
+            [cell updateCellWithIcon:@"icon_txddz" title:self.seleBoxAddreModel?[NSString stringWithFormat:@"%@\n%@",self.seleBoxAddreModel.portModel.port_name,self.seleBoxAddreModel.tiOrderNum]:@"" placeholder:@"请完善拿箱单地址" editIcon:@"" indexPath:indexPath];
+            //区域
+        }else if (indexPath.row == self.seleStationArr.count + 1){
+            //最后一个
+            [cell updateCellWithIcon:@"icon_nxddz" title:@"" placeholder:@"请选择装箱点地址" editIcon:@"xd_icon_tj" indexPath:indexPath];
+        }else{
+            //已经选中的类型
+            [cell updateCellWithIcon:@"icon_tjnxddz" title:self.seleBoxAddreModel.box_address_desc placeholder:@"请输入拿箱单地址" editIcon:@"xd_icon_sc" indexPath:indexPath];
+        }
+        WeakSelf(weak)
+        [cell setImproveBlock:^(NSIndexPath *indexPath) {
+            
+            JYBHomeEditPacktingListVC *vc = [[JYBHomeEditPacktingListVC alloc] init];
+            [weak.navigationController pushViewController:vc animated:YES];
+        }];
+        
+        return cell;
         
     }else{
+        JYBHomeInproveBoxInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeInproveBoxInfoCell class]) forIndexPath:indexPath];
+
         if (indexPath.row == 0) {
             NSString *wight;
             if (self.seleDotModel && self.seleWightModel) {
@@ -129,16 +259,32 @@
         }else{
              [cell updateCellIcon:@"xd_icon_yx" Title:@"优先发送给我的司机" value:self.seleDriver.fleet_name BoxType:JYBHomeInproveBoxNormal indexPath:indexPath];
         }
+        return cell;
+
     }
     
-    return cell;
     
 }
+
+
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         [self __seleTime:indexPath.row];
     }else if (indexPath.section == 1){
+        
+        if (indexPath.row == 0) {
+            //区域
+            JYBImproveFetchBoxVC *vc  = [[JYBImproveFetchBoxVC alloc] init];
+            vc.delegate = self;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (indexPath.row == self.seleStationArr.count + 1){
+            //最后一个
+            
+        }else{
+            //已经选中的类型
+        }
         
     }else{
         if (indexPath.row == 0) {
@@ -164,23 +310,18 @@
     NSDate *date = [NSDate dateWithString:(index == 0)?self.startTime:self.endTime format:@"yyyy-MM-dd HH:mm"];
     [self.pickerView animationShowWithDate:date maximumDate:nil minimumDate:nil selectedItemComplete:^(ESPickerView *pickerView, NSString *item, NSDate *date) {
         if (index == 0) {
-            selfWeak.startTime = [date stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            selfWeak.startTime = [date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
         }else{
-            selfWeak.endTime = [date stringWithFormat:@"yyyy-MM-dd HH:mm"];
+            selfWeak.endTime = [date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
         }
         [selfWeak.myTableView reloadData];
         [pickerView animationDismiss];
     }];
 }
 
-
-- (void)commitBtnAction{
-    
-}
-
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64 - SizeWidth(135)) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64 - SizeWidth(135)) style:UITableViewStyleGrouped];
         _myTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _myTableView.backgroundColor = [UIColor whiteColor];
         _myTableView.showsVerticalScrollIndicator = NO;
@@ -196,6 +337,9 @@
         
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_myTableView registerClass:[JYBHomeInproveBoxInfoCell class] forCellReuseIdentifier:NSStringFromClass([JYBHomeInproveBoxInfoCell class])];
+        [_myTableView registerClass:[JYBHomeImproveItemCell class] forCellReuseIdentifier:NSStringFromClass([JYBHomeImproveItemCell class])];
+
+        
     }
     return _myTableView;
 }
@@ -245,4 +389,12 @@
     }
     return _pickerView;
 }
+
+- (NSMutableArray *)seleStationArr{
+    if (!_seleStationArr) {
+        _seleStationArr = [[NSMutableArray alloc] init];
+    }
+    return _seleStationArr;
+}
+
 @end

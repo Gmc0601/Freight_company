@@ -34,7 +34,8 @@
     [self.backView addSubview:self.addressLab];
     
     [self.backView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.equalTo(self.contentView);
+        make.top.equalTo(self.contentView).offset(SizeWidth(5));
+        make.bottom.equalTo(self.contentView).offset(-SizeWidth(5));
         make.left.equalTo(self.contentView).offset(SizeWidth(10));
         make.right.equalTo(self.contentView).offset(-SizeWidth(10));
     }];

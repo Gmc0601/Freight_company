@@ -8,6 +8,7 @@
 
 #import "JYBOrderLogisInfoVC.h"
 #import "JYBHomeOrderLogisItemCell.h"
+#import "JYBOrderLogisticsModel.h"
 
 @interface JYBOrderLogisInfoVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -35,10 +36,9 @@
     return 1;
 }
 
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 3;
+    return self.orderModel.logistics.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -58,7 +58,23 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     JYBHomeOrderLogisItemCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeOrderLogisItemCell class]) forIndexPath:indexPath];
-
+    JYBOrderLogisticsModel *model = [self.orderModel.logistics objectAtIndex:indexPath.row];
+    [cell updateCellWithModel:model];
+    
+    if (indexPath.row == 0) {
+        cell.topLine.hidden = YES;
+        cell.bottomLine.hidden = NO;
+        [cell.dotBtn setImage:[UIImage imageNamed:@"wlxx_icon_dw"] forState:UIControlStateNormal];
+    }else if (indexPath.row == self.orderModel.logistics.count - 1){
+        cell.topLine.hidden = NO;
+        cell.bottomLine.hidden = NO;
+        [cell.dotBtn setImage:[UIImage imageNamed:@"icon_xz"] forState:UIControlStateNormal];
+    }else{
+        cell.topLine.hidden = NO;
+        cell.bottomLine.hidden = YES;
+        [cell.dotBtn setImage:[UIImage imageNamed:@"icon_xz"] forState:UIControlStateNormal];
+    }
+    
     return cell;
     
 }

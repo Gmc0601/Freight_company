@@ -152,16 +152,16 @@
         allVC.type = JYBOrderTypeAll;
         
         JYBOrderSingleVC *waitpayVC = [[JYBOrderSingleVC alloc] init];
-        allVC.type = JYBOrderTypeWait;
+        waitpayVC.type = JYBOrderTypeWait;
 
         JYBOrderSingleVC *paiingVC = [[JYBOrderSingleVC alloc] init];
-        allVC.type = JYBOrderTypePai;
+        paiingVC.type = JYBOrderTypePai;
 
         JYBOrderSingleVC *hasreviceVC = [[JYBOrderSingleVC alloc] init];
-        allVC.type = JYBOrderTypeReviced;
+        hasreviceVC.type = JYBOrderTypeReviced;
 
         JYBOrderSingleVC *ingVC = [[JYBOrderSingleVC alloc] init];
-        allVC.type = JYBOrderTypeIng;
+        ingVC.type = JYBOrderTypeIng;
 
         _vcArr = @[allVC,waitpayVC,paiingVC,hasreviceVC,ingVC];
     }

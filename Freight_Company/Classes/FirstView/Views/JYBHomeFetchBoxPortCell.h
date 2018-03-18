@@ -10,4 +10,6 @@
 
 @interface JYBHomeFetchBoxPortCell : UITableViewCell
 
+@property (nonatomic ,strong)UILabel        *portLab;
+
 @end

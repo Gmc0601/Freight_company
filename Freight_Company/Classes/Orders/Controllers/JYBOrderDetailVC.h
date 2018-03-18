@@ -10,4 +10,6 @@
 
 @interface JYBOrderDetailVC : CCBaseViewController
 
+@property (nonatomic ,strong)NSString       *order_id;
+
 @end
