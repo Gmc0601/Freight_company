@@ -8,10 +8,14 @@
 
 #import "CCBaseViewController.h"
 #import "JYBHomeStationSeleModel.h"
+#import <AMapSearchKit/AMapSearchKit.h>
 
 @protocol JYBHomeSelectStationVCDelegate <NSObject>
 
+@optional
 - (void)selectStationModel:(JYBHomeStationSeleModel *)model;
+
+- (void)selectPoint:(AMapTip *)point provice:(NSString *)provice city:(NSString *)city;
 
 @end
 

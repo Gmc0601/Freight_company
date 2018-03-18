@@ -8,16 +8,23 @@
 
 #import "CCBaseViewController.h"
 #import "CPHomeBoxAddressModel.h"
+#import "JYBHomeShipAddressModel.h"
 
 
 @protocol JYBHomePackAddressListVCDelegate <NSObject>
 
+@optional
+
 - (void)selectaddressModel:(CPHomeBoxAddressModel *)addressModel;
+
+- (void)selectPointModel:(JYBHomeShipAddressModel *)pointModel;
 
 @end
 
 
 @interface JYBHomePackAddressListVC : CCBaseViewController
+
+@property (nonatomic ,assign)BOOL       isPoint;
 
 @property (nonatomic, weak)id <JYBHomePackAddressListVCDelegate>delegate;
 

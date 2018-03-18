@@ -64,6 +64,7 @@
 - (UIButton *)iconImageView{
     if (!_iconImageView) {
         _iconImageView = [[UIButton alloc] init];
+        _iconImageView.userInteractionEnabled = NO;
     }
     return _iconImageView;
 }
@@ -119,6 +120,8 @@
             make.width.mas_equalTo((kScreenW - SizeWidth(30))/2);
             make.height.mas_equalTo(SizeWidth(73));
         }];
+        moudleView.tag = 300+i;
+        [moudleView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(moudleViewClick:)]];
         
         NSDictionary *subDic = moudleArr[i];
         [moudleView updateMoudleWithImg:subDic[@"img"] title:subDic[@"title"]  des:subDic[@"des"]];
@@ -127,5 +130,11 @@
     }
 }
 
+- (void)moudleViewClick:(UIGestureRecognizer *)ges{
+    JYBHomeModuleView *view = (JYBHomeModuleView *)ges.view;
+    if (self.moudleBlock) {
+        self.moudleBlock(view.tag-300);
+    }
+}
 
 @end

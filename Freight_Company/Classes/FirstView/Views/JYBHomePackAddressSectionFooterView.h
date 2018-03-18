@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "CPHomeBoxAddressModel.h"
 
-typedef void(^JYBHomePackDeleBlock)(CPHomeBoxAddressModel *addressModel);
+typedef void(^JYBHomePackDeleBlock)(id addressModel);
 
-typedef void(^JYBHomePackEditBlock)(CPHomeBoxAddressModel *addressModel);
+typedef void(^JYBHomePackEditBlock)(id addressModel);
 
 
 @interface JYBHomePackAddressSectionFooterView : UITableViewHeaderFooterView
@@ -20,6 +20,6 @@ typedef void(^JYBHomePackEditBlock)(CPHomeBoxAddressModel *addressModel);
 
 @property (nonatomic ,copy)JYBHomePackDeleBlock editBlock;
 
-@property (nonatomic, strong)CPHomeBoxAddressModel *addressModel;
+@property (nonatomic, strong)id addressModel;
 
 @end

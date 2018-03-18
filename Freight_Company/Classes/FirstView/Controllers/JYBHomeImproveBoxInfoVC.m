@@ -19,7 +19,7 @@
 #import "JYBImproveFetchBoxVC.h"
 #import "JYBHomeEditPacktingListVC.h"
 
-@interface JYBHomeImproveBoxInfoVC ()<UITableViewDelegate,UITableViewDataSource,JYBHomeOtherCostVCDelegate,JYBHomeSendDriveMesgVCDelegate,JYBHomeDriverSelVCDelegate,JYBImproveFetchBoxVCDelegate>
+@interface JYBHomeImproveBoxInfoVC ()<UITableViewDelegate,UITableViewDataSource,JYBHomeOtherCostVCDelegate,JYBHomeSendDriveMesgVCDelegate,JYBHomeDriverSelVCDelegate,JYBImproveFetchBoxVCDelegate,JYBHomeEditPacktingDelegate>
 
 @property (nonatomic ,strong)UITableView *myTableView;
 
@@ -52,8 +52,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self resetFather];
+    JYBHomeShipAddressModel *model = [[JYBHomeShipAddressModel alloc] init];
+    [self.seleStationArr addObject:model];
     [self.view addSubview:self.myTableView];
     [self.view addSubview:self.bottomView];
+    
 }
 
 - (void)resetFather {
@@ -138,9 +141,38 @@
 
 }
 
-
+- (void)portPackStationSel:(JYBHomeShipAddressModel *)packStation index:(NSIndexPath *)index{
+    
+    [self.seleStationArr replaceObjectAtIndex:index.row-1 withObject:packStation];
+    
+    [self.myTableView reloadData];
+    
+}
 
 - (void)commitBtnAction{
+    
+    if ([NSString stringIsNilOrEmpty:self.startTime]) {
+        [ConfigModel mbProgressHUD:@"请选择装箱时间 " andView:nil];
+        return;
+    }
+    if ([NSString stringIsNilOrEmpty:self.endTime]) {
+        [ConfigModel mbProgressHUD:@"请选择截关时间时间 " andView:nil];
+        return;
+    }
+    if (!self.seleBoxAddreModel) {
+        [ConfigModel mbProgressHUD:@"请选择装箱区域" andView:nil];
+        return;
+    }
+    BOOL ship = NO;
+    for (JYBHomeShipAddressModel *shipModel in self.seleStationArr) {
+        if (![NSString stringIsNilOrEmpty:shipModel.shipment_address_id]) {
+            ship = YES;
+        }
+    }
+    if (!ship) {
+        [ConfigModel mbProgressHUD:@"请选择装箱地点" andView:nil];
+        return;
+    }
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic addUnEmptyString:self.seleBoxAddreModel.portModel.port_id forKey:@"port_id"];
@@ -150,6 +182,7 @@
     [dic addUnEmptyString:self.seleBoxAddreModel.tiOrderNum forKey:@"pick_no"];
     [dic addUnEmptyString:self.seleBoxAddreModel.box_address_id forKey:@"box_address_id"];
 
+    //缺少装箱字段
     
     [dic addUnEmptyString:nil forKey:@"loadarea_id"];
     [dic addUnEmptyString:nil forKey:@"shipment_address_id"];
@@ -165,7 +198,7 @@
     [ConfigModel showHud:self];
     NSLog(@"~~~~para:%@", dic);
     WeakSelf(weak)
-    [HttpRequest postPath:@"/Home/Order/getOrderPrice" params:dic resultBlock:^(id responseObject, NSError *error) {
+    [HttpRequest postPath:@"/Home/Order/addOrder" params:dic resultBlock:^(id responseObject, NSError *error) {
         [ConfigModel hideHud:weak];
         NSLog(@"%@", responseObject);
         if([error isEqual:[NSNull null]] || error == nil){
@@ -173,17 +206,13 @@
         }
         NSDictionary *datadic = responseObject;
         if ([datadic[@"success"] intValue] == 1) {
-            
-            self.priceLab.text = [NSString stringWithFormat:@"¥%@",datadic[@"data"][@"order_price"]];
-            
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
         }else {
             NSString *str = datadic[@"msg"];
             [ConfigModel mbProgressHUD:str andView:nil];
         }
     }];
-    
-    
-    
     
 }
 
@@ -205,7 +234,7 @@
     if (section == 0) {
         return 2;
     }else if (section == 1){
-        return self.seleStationArr.count +2;
+        return self.seleStationArr.count +1;
     }else{
         return 3;
     }
@@ -229,18 +258,27 @@
         if (indexPath.row == 0) {
             [cell updateCellWithIcon:@"icon_txddz" title:self.seleBoxAddreModel?[NSString stringWithFormat:@"%@\n%@",self.seleBoxAddreModel.portModel.port_name,self.seleBoxAddreModel.tiOrderNum]:@"" placeholder:@"请完善拿箱单地址" editIcon:@"" indexPath:indexPath];
             //区域
-        }else if (indexPath.row == self.seleStationArr.count + 1){
-            //最后一个
-            [cell updateCellWithIcon:@"icon_nxddz" title:@"" placeholder:@"请选择装箱点地址" editIcon:@"xd_icon_tj" indexPath:indexPath];
         }else{
+            //最后一个
+            
+            JYBHomeShipAddressModel *model = [self.seleStationArr objectAtIndex:indexPath.row -1];
             //已经选中的类型
-            [cell updateCellWithIcon:@"icon_tjnxddz" title:self.seleBoxAddreModel.box_address_desc placeholder:@"请输入拿箱单地址" editIcon:@"xd_icon_sc" indexPath:indexPath];
+            [cell updateCellWithIcon:@"icon_nxddz" title:model.address placeholder:@"请选择装箱点地址" editIcon:(indexPath.row  == self.seleStationArr.count)?@"xd_icon_tj":@"xd_icon_sc" indexPath:indexPath];
         }
         WeakSelf(weak)
         [cell setImproveBlock:^(NSIndexPath *indexPath) {
             
-            JYBHomeEditPacktingListVC *vc = [[JYBHomeEditPacktingListVC alloc] init];
-            [weak.navigationController pushViewController:vc animated:YES];
+            if (indexPath.row == weak.seleStationArr.count) {
+                JYBHomeShipAddressModel *model = [[JYBHomeShipAddressModel alloc] init];
+                [weak.seleStationArr addObject:model];
+                [weak.myTableView reloadData];
+                
+            }else{
+
+                [weak.seleStationArr removeObjectAtIndex:indexPath.row];
+                [weak.myTableView reloadData];
+
+            }
         }];
         
         return cell;
@@ -279,11 +317,12 @@
             JYBImproveFetchBoxVC *vc  = [[JYBImproveFetchBoxVC alloc] init];
             vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
-        }else if (indexPath.row == self.seleStationArr.count + 1){
-            //最后一个
-            
         }else{
-            //已经选中的类型
+            
+            JYBHomeEditPacktingListVC *vc = [[JYBHomeEditPacktingListVC alloc] init];
+            vc.delegate = self;
+            vc.indexPath = indexPath;
+            [self.navigationController pushViewController:vc animated:YES];
         }
         
     }else{

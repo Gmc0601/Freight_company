@@ -107,6 +107,7 @@
     if (!_arrowBtn) {
         _arrowBtn = [[UIButton alloc] init];
         [_arrowBtn setImage:[UIImage imageNamed:@"icon_gd"] forState:UIControlStateNormal];
+        _arrowBtn.userInteractionEnabled = NO;
     }
     return _arrowBtn;
 }

@@ -187,6 +187,16 @@
 
 - (void)__commit{
     
+    if (!self.selPortModel) {
+        [ConfigModel mbProgressHUD:@"请选择港口" andView:nil];
+        return;
+    }
+    
+    if (!self.stationModel) {
+        [ConfigModel mbProgressHUD:@"请选择装箱区域" andView:nil];
+        return;
+    }
+    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic addUnEmptyString:self.stationModel.loadarea_id forKey:@"loadarea_id"];
     [dic addUnEmptyString:self.selPortModel.port_id forKey:@"prot_id"];
@@ -334,6 +344,10 @@
             return cell;
         }else if (indexPath.row == 1){
             JYBHomeModuleCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeModuleCell class]) forIndexPath:indexPath];
+            WeakSelf(weak)
+            [cell setMoudleBlock:^(NSInteger index) {
+                [weak __turnNextIndex:index];
+            }];
             return cell;
         }else{
             JYBHomeTagCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeTagCell class]) forIndexPath:indexPath];
@@ -342,6 +356,29 @@
     }
 }
 
+- (void)__turnNextIndex:(NSInteger)index{
+    if (index == 5) {
+        return ;
+    }
+
+    if (!self.selPortModel) {
+        [ConfigModel mbProgressHUD:@"请选择港口" andView:nil];
+        return;
+    }
+    
+    if (!self.stationModel) {
+        [ConfigModel mbProgressHUD:@"请选择装箱区域" andView:nil];
+        return;
+    }
+    
+    NSArray *sepcArr = @[@"1x20GP(拼)",@"1x20GP",@"1x40GP",@"1x40HQ",@"1x45HQ"];
+    JYBHomeImproveBoxInfoVC *vc = [[JYBHomeImproveBoxInfoVC alloc] init];
+    vc.loadarea_id = self.stationModel.loadarea_id;
+    vc.prot_id = self.selPortModel.port_id;
+    //                vc.port_price_id = model.port_price_id;
+    vc.sepc = [sepcArr objectAtIndex:index];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 
 #pragma mark - SDCycleScrollViewDelegate

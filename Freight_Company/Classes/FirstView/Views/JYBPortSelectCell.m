@@ -79,7 +79,8 @@
 - (void)updateCellWithPort:(JYBHomePortModel *)port station:(NSString *)station{
     
     self.portLabel.text = [NSString stringIsNilOrEmpty:port.port_name]?@"请选择": port.port_name;
-    [self.portStationBtn setTitle:[NSString stringIsNilOrEmpty:station]?@"请输入装箱地点":station forState:UIControlStateNormal];
+    [self.portStationBtn setTitle:[NSString stringIsNilOrEmpty:station]?@"请选择装箱地点":station forState:UIControlStateNormal];
+    [self.portStationBtn setTitleColor:[NSString stringIsNilOrEmpty:station]?RGB(162, 162, 162):RGB(52, 52, 52) forState:UIControlStateNormal];
 }
 
 - (void)commitBtnAction{
@@ -133,8 +134,8 @@
 - (UIButton *)portStationBtn{
     if (!_portStationBtn) {
         _portStationBtn = [[UIButton alloc] init];
-        [_portStationBtn setTitle:@"请输入装箱地点" forState:UIControlStateNormal];
-        [_portStationBtn setTitleColor:RGB(203, 203, 203) forState:UIControlStateNormal];
+        [_portStationBtn setTitle:@"请选择装箱地点" forState:UIControlStateNormal];
+        [_portStationBtn setTitleColor:RGB(162, 162, 162) forState:UIControlStateNormal];
         _portStationBtn.titleLabel.font = [UIFont systemFontOfSize:SizeWidth(14)];
         _portStationBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         [_portStationBtn addTarget:self action:@selector(portStationBtnAction) forControlEvents:UIControlEventTouchUpInside];
@@ -150,6 +151,8 @@
         [_commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _commitBtn.titleLabel.font = [UIFont systemFontOfSize:SizeWidth(14)];
         [_commitBtn addTarget:self action:@selector(commitBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        _commitBtn.layer.cornerRadius = 3;
+        _commitBtn.layer.masksToBounds = YES;
         _commitBtn.backgroundColor = RGB(24, 141, 239);
     }
     return _commitBtn;

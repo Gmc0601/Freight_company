@@ -11,8 +11,9 @@
 #import "JYBHomePackingInputCell.h"
 #import "JYBHomeSelectStationVC.h"
 #import "JYBHomeShipAddressModel.h"
+#import "JYBHomePackAddressListVC.h"
 
-@interface JYBHomeEditPacktingListVC ()<UITableViewDelegate,UITableViewDataSource,JYBHomeSelectStationVCDelegate>
+@interface JYBHomeEditPacktingListVC ()<UITableViewDelegate,UITableViewDataSource,JYBHomeSelectStationVCDelegate,JYBHomePackAddressListVCDelegate>
 
 @property (nonatomic ,strong)UITableView *myTableView;
 
@@ -28,8 +29,11 @@
 
 @property (nonatomic ,strong)JYBHomeStationSeleModel *stationModel;
 
-@property (nonatomic ,strong)JYBHomeShipAddressModel *pointModel;
+@property (nonatomic ,strong)AMapTip *pointModel;
 
+@property (nonatomic ,strong)NSString *provice;
+
+@property (nonatomic ,strong)NSString *city;
 
 @end
 
@@ -52,10 +56,20 @@
 
 //  右侧点击
 - (void)more:(UIButton *)sender{
-//    JYBHomePackAddressListVC *vc = [[JYBHomePackAddressListVC alloc] init];
-//    vc.delegate = self;
-//    [self.navigationController pushViewController:vc animated:YES];
-//
+    JYBHomePackAddressListVC *vc = [[JYBHomePackAddressListVC alloc] init];
+    vc.delegate = self;
+    vc.isPoint = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+
+}
+
+- (void)selectPointModel:(JYBHomeShipAddressModel *)pointModel{
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(portPackStationSel:index:)]) {
+        [self.delegate portPackStationSel:pointModel index:self.indexPath];
+    }
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -77,7 +91,7 @@
     
     if (indexPath.row < 2) {
         JYBHomePackingSelCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomePackingSelCell class]) forIndexPath:indexPath];
-        [cell updateCellWithTitle:(indexPath.row == 0?@"装箱区域":@"装箱地点") result:(indexPath.row == 0?self.packArea:self.packStation) indexPath:indexPath];
+        [cell updateCellWithTitle:(indexPath.row == 0?@"装箱区域":@"装箱地点") result:(indexPath.row == 0?self.stationModel.loadarea_name:self.pointModel.name) indexPath:indexPath];
         WeakObj(self);
         [cell setSelBlock:^(NSIndexPath *selIndexPath) {
             [selfWeak __pickPack:selIndexPath];
@@ -102,19 +116,87 @@
     
     JYBHomeSelectStationVC *vc = [[JYBHomeSelectStationVC alloc] init];
     vc.delegate = self;
+    vc.isPoint = (indexPath.row == 1);
     [self.navigationController pushViewController:vc animated:YES];
-    
+  
 }
 
 - (void)selectStationModel:(JYBHomeStationSeleModel *)model{
     self.stationModel = model;
+    [self.myTableView reloadData];
+}
+
+- (void)selectPoint:(AMapTip *)point provice:(NSString *)provice city:(NSString *)city{
+    self.pointModel = point;
+    self.provice = provice;
+    self.city = city;
+    [self.myTableView reloadData];
 }
 
 - (void)commitBtnAction{
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(portPackStationSel:)]) {
-        [self.delegate portPackStationSel:@""];
+    if (!self.stationModel) {
+        [ConfigModel mbProgressHUD:@"请选择装箱区域" andView:nil];
     }
+    
+    if (!self.pointModel) {
+        [ConfigModel mbProgressHUD:@"请选择装箱地点" andView:nil];
+    }
+    
+    JYBHomePackingInputCell *addresCell = [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    JYBHomePackingInputCell *nameCell = [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    JYBHomePackingInputCell *phoneCell = [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic addUnEmptyString:self.shipment_address_id forKey:@"shipment_address_id"];
+    [dic addUnEmptyString:self.provice forKey:@"province"];
+    [dic addUnEmptyString:self.city forKey:@"city"];
+    [dic addUnEmptyString:[NSString stringWithFormat:@"%lf",self.pointModel.location.longitude] forKey:@"long"];
+    [dic addUnEmptyString:[NSString stringWithFormat:@"%lf",self.pointModel.location.latitude] forKey:@"lat"];
+    [dic addUnEmptyString:self.pointModel.name forKey:@"address"];
+    [dic addUnEmptyString:addresCell.myTextField.text forKey:@"address_desc"];
+    [dic addUnEmptyString:nameCell.myTextField.text forKey:@"shipment_linkman"];
+    [dic addUnEmptyString:phoneCell.myTextField.text forKey:@"shipment_linkman_phone"];
+    [dic addUnEmptyString:self.stationModel.loadarea_id forKey:@"loadarea_id"];
+    
+    
+    [ConfigModel showHud:self];
+    NSLog(@"~~~~para:%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/User/addEditShipAddress" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+            
+            JYBHomeShipAddressModel * model = [[JYBHomeShipAddressModel alloc] init];
+            model.shipment_address_id = datadic[@"data"][@"shipment_address_id"];
+            model.province = weak.provice;
+            model.city = weak.city;
+            model.address = addresCell.myTextField.text;
+            model.shipment_linkman = nameCell.myTextField.text;
+            model.shipment_linkman_phone = phoneCell.myTextField.text;
+            
+            if (self.delegate && [self.delegate respondsToSelector:@selector(portPackStationSel:index:)]) {
+                [self.delegate portPackStationSel:model index:self.indexPath];
+            }
+            
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
+    
+
 }
 
 - (void)defaltAddressBtnAction:(UIButton *)aBtn{

@@ -61,6 +61,11 @@
     self.addressLab.text = model.box_address_desc;
 }
 
+- (void)updatePointCellWithModel:(JYBHomeShipAddressModel *)model{
+    
+    self.nameLab.text = [NSString stringWithFormat:@"%@%@",model.shipment_linkman,model.shipment_linkman_phone];
+    self.addressLab.text = model.address;
+}
 
 #pragma mark - lazy
 - (UIView *)backView{

@@ -35,7 +35,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self __fetchData];
+    [self __getData];
 }
 
 - (void)resetFather {
@@ -44,7 +44,7 @@
     
 }
 
-- (void)__deleteWithModel:(CPHomeBoxAddressModel *)model{
+- (void)__deleteWithModel:(id)model{
     WeakSelf(weak)
     [[[JYBAlertView alloc] initWithTitle:@"确定删除该地址吗？" message:nil cancelItem:@"取消" sureItem:@"确认" clickAction:^(NSInteger index) {
         if (index == 1) {
@@ -54,16 +54,23 @@
  
 }
 
-- (void)__fetchDeleteDataModel:(CPHomeBoxAddressModel *)model{
+- (void)__fetchDeleteDataModel:(id)model{
     
     [self.dataArr removeAllObjects];
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic addUnEmptyString:model.box_address_id forKey:@"box_address_id"];
+    if (self.isPoint) {
+        JYBHomeShipAddressModel *shipModel = (JYBHomeShipAddressModel *)model;
+        [dic addUnEmptyString:shipModel.shipment_address_id forKey:@"shipment_address_id"];
+
+    }else{
+        CPHomeBoxAddressModel *shipModel = (CPHomeBoxAddressModel *)model;
+        [dic addUnEmptyString:shipModel.box_address_id forKey:@"box_address_id"];
+    }
     
     [ConfigModel showHud:self];
     NSLog(@"~~~~para:%@", dic);
     WeakSelf(weak)
-    [HttpRequest postPath:@"/Home/User/delBoxAddress" params:dic resultBlock:^(id responseObject, NSError *error) {
+    [HttpRequest postPath:self.isPoint?@"Home/User/delShipAddress":@"/Home/User/delBoxAddress" params:dic resultBlock:^(id responseObject, NSError *error) {
         [ConfigModel hideHud:weak];
         NSLog(@"%@", responseObject);
         if([error isEqual:[NSNull null]] || error == nil){
@@ -74,7 +81,7 @@
             
             NSString *str = datadic[@"msg"];
             [ConfigModel mbProgressHUD:str andView:nil];
-            [weak __fetchData];
+            [weak __getData];
             
         }else {
             NSString *str = datadic[@"msg"];
@@ -84,14 +91,64 @@
     
 }
 
-- (void)__editWithModel:(CPHomeBoxAddressModel *)model{
-    JYBHomeFetchBoxListVC *vc = [[JYBHomeFetchBoxListVC alloc] init];
-    vc.addressModel = model;
-    [self.navigationController pushViewController:vc animated:YES];
+
+- (void)__getData{
+    if (self.isPoint) {
+        [self __fetchPointData];
+    }else{
+        [self __fetchAddressData];
+    }
+    
+}
+
+- (void)__fetchPointData{
+    
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+    [ConfigModel showHud:self];
+    NSLog(@"~~~~para:%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/User/getShipAddress" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            [weak.dataArr removeAllObjects];
+            for (NSDictionary *subDic in datadic[@"data"]) {
+                JYBHomeShipAddressModel *model = [JYBHomeShipAddressModel modelWithDictionary:subDic];
+                [weak.dataArr addObject:model];
+            }
+            [weak.myTableView reloadData];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
 }
 
 
-- (void)__fetchData{
+
+
+- (void)__editWithModel:(id)model{
+    if (self.isPoint) {
+
+        
+        
+    }else{
+        JYBHomeFetchBoxListVC *vc = [[JYBHomeFetchBoxListVC alloc] init];
+        vc.addressModel = model;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
+}
+
+
+- (void)__fetchAddressData{
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     
@@ -143,8 +200,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
     JYBHomePackAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomePackAddressCell class]) forIndexPath:indexPath];
-    CPHomeBoxAddressModel *model = [self.dataArr objectAtIndex:indexPath.section];
-    [cell updateCellWithModel:model];
+    if (self.isPoint) {
+        JYBHomeShipAddressModel *model = [self.dataArr objectAtIndex:indexPath.section];
+        [cell updatePointCellWithModel:model];
+    }else{
+        CPHomeBoxAddressModel *model = [self.dataArr objectAtIndex:indexPath.section];
+        [cell updateCellWithModel:model];
+    }
+
     return cell;
     
 }
@@ -152,14 +215,20 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     
     JYBHomePackAddressSectionFooterView *footer = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([JYBHomePackAddressSectionFooterView class])];
-    CPHomeBoxAddressModel *model = [self.dataArr objectAtIndex:section];
-    footer.addressModel = model;
+    if (self.isPoint) {
+        JYBHomeShipAddressModel *model = [self.dataArr objectAtIndex:section];
+        footer.addressModel = model;
+    }else{
+        CPHomeBoxAddressModel *model = [self.dataArr objectAtIndex:section];
+        footer.addressModel = model;
+    }
+
     WeakSelf(weak)
-    [footer setDeleBlock:^(CPHomeBoxAddressModel *addressModel) {
+    [footer setDeleBlock:^(id addressModel) {
         [weak __deleteWithModel:addressModel];
     }];
     
-    [footer setEditBlock:^(CPHomeBoxAddressModel *addressModel) {
+    [footer setEditBlock:^(id addressModel) {
         [weak __editWithModel:addressModel];
     }];
     
@@ -167,11 +236,20 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    CPHomeBoxAddressModel *model = [self.dataArr objectAtIndex:indexPath.section];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(selectaddressModel:)]) {
-        [self.delegate selectaddressModel:model];
+    if (self.isPoint) {
+        JYBHomeShipAddressModel *model = [self.dataArr objectAtIndex:indexPath.section];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(selectPointModel:)]) {
+            [self.delegate selectPointModel:model];
+        }
+        [self.navigationController popViewControllerAnimated:NO];
+    }else{
+        CPHomeBoxAddressModel *model = [self.dataArr objectAtIndex:indexPath.section];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(selectaddressModel:)]) {
+            [self.delegate selectaddressModel:model];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

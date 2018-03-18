@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CPHomeBoxAddressModel.h"
+#import "JYBHomeShipAddressModel.h"
 
 @interface JYBHomePackAddressCell : UITableViewCell
 
 - (void)updateCellWithModel:(CPHomeBoxAddressModel *)model;
 
+- (void)updatePointCellWithModel:(JYBHomeShipAddressModel *)model;
 @end

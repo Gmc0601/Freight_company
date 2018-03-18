@@ -27,6 +27,8 @@
 
 @property (nonatomic ,strong)UITableView *myTableView;
 
+@property (nonatomic ,strong)AMapSearchAPI *search;
+
 @end
 
 @implementation JYBHomeSelectStationVC
@@ -52,7 +54,7 @@
 }
 
 - (void)resetFather {
-    self.titleLab.text = @"选择装箱点";
+    self.titleLab.text = self.isPoint?@"选择装箱点":@"选择装箱区域";
     self.rightBar.hidden = YES;
 }
 
@@ -85,16 +87,13 @@
 }
 
 
-
-
-
-- (void)searchBtnAction{
+- (void)__searchAreaData{
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic addUnEmptyString:[NSString stringWithFormat:@"%@省",self.province] forKey:@"province"];
     [dic addUnEmptyString:[NSString stringWithFormat:@"%@市",self.city] forKey:@"city"];
     [dic addUnEmptyString:self.headerView.myTextField.text forKey:@"name"];
-
+    
     [ConfigModel showHud:self];
     NSLog(@"%@", dic);
     WeakSelf(weak)
@@ -123,6 +122,34 @@
 }
 
 
+- (void)searchBtnAction{
+    
+    if ([NSString stringIsNilOrEmpty:self.city]) {
+        [ConfigModel mbProgressHUD:@"请先选择城市" andView:nil];
+        return;
+    }
+    
+    if (self.isPoint) {
+        AMapInputTipsSearchRequest *tips = [[AMapInputTipsSearchRequest alloc] init];
+        tips.keywords = self.headerView.myTextField.text;
+        tips.city = self.city;
+        [self.search AMapInputTipsSearch:tips];
+    }else{
+        [self __searchAreaData];
+    }
+}
+
+
+/* 输入提示回调. */
+- (void)onInputTipsSearchDone:(AMapInputTipsSearchRequest *)request response:(AMapInputTipsSearchResponse *)response
+{
+    [self.portArr removeAllObjects];
+    //解析response获取提示词，具体解析见 Demo
+    
+    [self.portArr addObjectsFromArray:response.tips];
+    [self.myTableView reloadData];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
@@ -137,18 +164,34 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     JYBHomeSeleStaionCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeSeleStaionCell class]) forIndexPath:indexPath];
-    JYBHomeStationSeleModel *model = [self.portArr objectAtIndex:indexPath.row];
-    cell.nameLab.text = model.loadarea_name;
+    if (self.isPoint) {
+        AMapTip *tip = [self.portArr objectAtIndex:indexPath.row];
+        cell.nameLab.text = tip.name;
+
+    }else{
+        JYBHomeStationSeleModel *model = [self.portArr objectAtIndex:indexPath.row];
+        cell.nameLab.text = model.loadarea_name;
+    }
+
     return cell;
 
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    JYBHomeStationSeleModel *model = [self.portArr objectAtIndex:indexPath.row];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(selectStationModel:)]) {
-        [self.delegate selectStationModel:model];
+    if (self.isPoint) {
+        AMapTip *tip = [self.portArr objectAtIndex:indexPath.row];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(selectPoint:)]) {
+            [self.delegate selectPoint:tip provice:self.province city:self.city];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        JYBHomeStationSeleModel *model = [self.portArr objectAtIndex:indexPath.row];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(selectStationModel:)]) {
+            [self.delegate selectStationModel:model];
+        }
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    [self.navigationController popViewControllerAnimated:YES];
+
 }
 - (JYBHomeSeleStationHeaderView *)headerView{
     if (!_headerView) {
