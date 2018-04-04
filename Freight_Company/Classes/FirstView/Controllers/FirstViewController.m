@@ -244,7 +244,6 @@
         JYBHomeImproveBoxInfoVC *vc = [[JYBHomeImproveBoxInfoVC alloc] init];
         vc.loadarea_id = model.loadarea_id;
         vc.prot_id = model.port_id;
-        vc.port_price_id = model.port_price_id;
         JYBHomeQuickModel *quickmodel = [modelArr objectAtIndex:index];
         vc.sepc = quickmodel.sepc;
         [selfWeak.navigationController pushViewController:vc animated:YES];
@@ -358,17 +357,10 @@
 
 - (void)__turnNextIndex:(NSInteger)index{
     if (index == 5) {
+        CCWebViewViewController *vc = [[CCWebViewViewController alloc] init];
+        vc.UrlStr = @"http://www.baidu.com";
+        [self.navigationController pushViewController:vc animated:YES];
         return ;
-    }
-
-    if (!self.selPortModel) {
-        [ConfigModel mbProgressHUD:@"请选择港口" andView:nil];
-        return;
-    }
-    
-    if (!self.stationModel) {
-        [ConfigModel mbProgressHUD:@"请选择装箱区域" andView:nil];
-        return;
     }
     
     NSArray *sepcArr = @[@"1x20GP(拼)",@"1x20GP",@"1x40GP",@"1x40HQ",@"1x45HQ"];

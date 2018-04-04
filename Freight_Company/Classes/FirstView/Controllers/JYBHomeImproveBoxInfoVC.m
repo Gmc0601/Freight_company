@@ -107,6 +107,7 @@
 
 - (void)selectDriverModel:(CPHomeMyDriverModel *)driverModel{
     self.seleDriver = driverModel;
+    [self.myTableView reloadData];
 }
 
 - (void)selectBoxAddressModel:(CPHomeBoxAddressModel *)model{
@@ -295,7 +296,7 @@
         }else if (indexPath.row == 1){
              [cell updateCellIcon:@"xd_icon_sjh" Title:@"给司机捎句话" value:self.seleMessage BoxType:JYBHomeInproveBoxNormal indexPath:indexPath];
         }else{
-             [cell updateCellIcon:@"xd_icon_yx" Title:@"优先发送给我的司机" value:self.seleDriver.fleet_name BoxType:JYBHomeInproveBoxNormal indexPath:indexPath];
+             [cell updateCellIcon:@"xd_icon_yx" Title:@"优先发送给我的司机" value:self.seleDriver.driver_name BoxType:JYBHomeInproveBoxNormal indexPath:indexPath];
         }
         return cell;
 
@@ -327,8 +328,12 @@
         
     }else{
         if (indexPath.row == 0) {
+            if (!self.seleBoxAddreModel) {
+                [ConfigModel mbProgressHUD:@"请先完善拿箱单地址" andView:nil];
+                return;
+            }
             JYBHomeOtherCostVC *vc = [[JYBHomeOtherCostVC alloc] init];
-            vc.prot_id = self.prot_id;
+            vc.prot_id = self.seleBoxAddreModel.portModel.port_id;
             vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
             

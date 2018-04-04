@@ -61,7 +61,7 @@
         _cityBtn = [[UIButton alloc] init];
         [_cityBtn setTitleColor:RGB(52, 52, 52) forState:UIControlStateNormal];
         _cityBtn.titleLabel.font = [UIFont systemFontOfSize:SizeWidth(15)];
-        [_cityBtn setTitle:@"绍兴" forState:UIControlStateNormal];
+        [_cityBtn setTitle:@"请选择" forState:UIControlStateNormal];
     }
     return _cityBtn;
 }

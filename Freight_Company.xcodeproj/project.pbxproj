@@ -1117,7 +1117,12 @@
 				TargetAttributes = {
 					427C68C0200C9849006A9EBB = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -1492,8 +1497,10 @@
 			baseConfigurationReference = 4429C470FFB6F6CA84B03013 /* Pods-Freight_Company.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PA574T6LR3;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guoping Ma (BZYPB6P24R)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guoping Ma (BZYPB6P24R)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = MZ9WYN694W;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Freight_Company/Main/Header.pch;
 				HEADER_SEARCH_PATHS = (
@@ -1513,6 +1520,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cc.Freight-Company";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4bd57c64-e04f-489c-b963-de1c874b8e6c";
+				PROVISIONING_PROFILE_SPECIFIER = Fre_Company_dev;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "\"${SRCROOT}\"/** \"$(SRCROOT)/Pods/SDWebImage\"";
 			};
@@ -1523,8 +1532,10 @@
 			baseConfigurationReference = 537AE1D939255ECA6F4D0FBB /* Pods-Freight_Company.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PA574T6LR3;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Guoping Ma (BZYPB6P24R)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guoping Ma (BZYPB6P24R)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = MZ9WYN694W;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Freight_Company/Main/Header.pch;
 				HEADER_SEARCH_PATHS = (
@@ -1544,6 +1555,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cc.Freight-Company";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "4bd57c64-e04f-489c-b963-de1c874b8e6c";
+				PROVISIONING_PROFILE_SPECIFIER = Fre_Company_dev;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "\"${SRCROOT}\"/** \"$(SRCROOT)/Pods/SDWebImage\"";
 			};
