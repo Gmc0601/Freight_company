@@ -86,12 +86,7 @@
         }
     }];
     
-    
-    
 }
-
-
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -112,7 +107,7 @@
 
     JYBHomePackingInputCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomePackingInputCell class]) forIndexPath:indexPath];
     if (indexPath.row == 0) {
-        [cell updateCellWithTitle:@"拿箱单地址" placeHoler:@"请填写拿箱单地址(必填)" value:nil];
+        [cell updateCellWithTitle:@"地址" placeHoler:@"请填写拿箱单地址(必填)" value:nil];
     }else if (indexPath.row == 1){
         [cell updateCellWithTitle:@"联系人" placeHoler:@"请填写联系人姓名(必填)" value:nil];
     }else{

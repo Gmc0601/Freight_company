@@ -14,7 +14,6 @@
 #import "JYBPortSelectCell.h"
 #import "ESPickerView.h"
 #import "AppDelegate.h"
-#import "JYBHomeEditPacktingListVC.h"
 #import "JYBHomeQuickOrderView.h"
 #import "JYBHomeImproveBoxInfoVC.h"
 #import "CCWebViewViewController.h"
@@ -26,11 +25,11 @@
 #import "JYBHomePortModel.h"
 #import "JYBHomeQuickOrderPriceModel.h"
 #import "JYBHomeQuickModel.h"
+#import "CPConfig.h"
 
 
 
-
-@interface FirstViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,JYBHomeEditPacktingDelegate,JYBHomeSelectStationVCDelegate>
+@interface FirstViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,JYBHomeSelectStationVCDelegate>
 
 @property (nonatomic ,strong) UIView *headerView;
 
@@ -58,6 +57,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self navigation];
+    
+    //获取存储的port
+    self.selPortModel = [[CPConfig sharedManager] lastPort];
     
     [self.view addSubview:self.myTableView];
     
@@ -120,10 +122,6 @@
                 JYBHomePortModel *model = [JYBHomePortModel modelWithDictionary:subDic];
                 [weak.portArr addObject:model];
             }
-            
-//            if (weak.portArr.count) {
-//                self.selPortModel = [weak.portArr firstObject];
-//            }
             [weak.myTableView reloadData];
             
         }else {
@@ -242,8 +240,6 @@
     WeakObj(self);
     [[[JYBHomeQuickOrderView alloc] initWithArr:modelArr clickAction:^(NSInteger index) {
         JYBHomeImproveBoxInfoVC *vc = [[JYBHomeImproveBoxInfoVC alloc] init];
-        vc.loadarea_id = model.loadarea_id;
-        vc.prot_id = model.port_id;
         JYBHomeQuickModel *quickmodel = [modelArr objectAtIndex:index];
         vc.sepc = quickmodel.sepc;
         [selfWeak.navigationController pushViewController:vc animated:YES];
@@ -261,6 +257,7 @@
     [self.pickerView animationShowWithItems:titleArr selectedItemComplete:^(ESPickerView *pickerView, NSString *item, NSDate *date) {
         if (item) {
             selfWeak.selPortModel = [selfWeak __selectPortWithName:item];
+            [[CPConfig sharedManager] saveLastPort:selfWeak.selPortModel];
             [selfWeak.myTableView reloadData];
         }
         
@@ -331,9 +328,6 @@
             vc.delegate = self;
             [selfWeak.navigationController pushViewController:vc animated:YES];
             
-//            JYBHomeEditPacktingListVC *vc = [[JYBHomeEditPacktingListVC alloc] init];
-//            vc.delegate = self;
-//            [selfWeak.navigationController pushViewController:vc animated:YES];
         }];
 
         return cell;
@@ -365,9 +359,6 @@
     
     NSArray *sepcArr = @[@"1x20GP(拼)",@"1x20GP",@"1x40GP",@"1x40HQ",@"1x45HQ"];
     JYBHomeImproveBoxInfoVC *vc = [[JYBHomeImproveBoxInfoVC alloc] init];
-    vc.loadarea_id = self.stationModel.loadarea_id;
-    vc.prot_id = self.selPortModel.port_id;
-    //                vc.port_price_id = model.port_price_id;
     vc.sepc = [sepcArr objectAtIndex:index];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -383,11 +374,6 @@
     vc.UrlStr = model.ad_link;
     [self.navigationController pushViewController:vc animated:YES];
     NSLog(@"---点击了第%ld张图片", (long)index);
-    
-}
-
-#pragma mark - JYBHomeEditPacktingDelegate
-- (void)portPackStationSel:(NSString *)packStation{
     
 }
 

@@ -9,11 +9,10 @@
 #import "BaseViewController.h"
 
 typedef enum : NSUInteger {
-    JYBOrderTypeAll,
-    JYBOrderTypeWait,
-    JYBOrderTypePai,
-    JYBOrderTypeReviced,
-    JYBOrderTypeIng,
+    JYBOrderTypeAll,      //
+    JYBOrderTypeHasPai,   //已接单
+    JYBOrderTypeIng,      //进行中
+    JYBOrderTypeReviced,  //已到港
 } JYBOrderType;
 
 @interface JYBOrderSingleVC : BaseViewController

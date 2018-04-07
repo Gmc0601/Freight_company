@@ -79,7 +79,7 @@
 - (void)updateCellWithPort:(JYBHomePortModel *)port station:(NSString *)station{
     
     self.portLabel.text = [NSString stringIsNilOrEmpty:port.port_name]?@"请选择": port.port_name;
-    [self.portStationBtn setTitle:[NSString stringIsNilOrEmpty:station]?@"请选择装箱地点":station forState:UIControlStateNormal];
+    [self.portStationBtn setTitle:[NSString stringIsNilOrEmpty:station]?@"选择装箱点":station forState:UIControlStateNormal];
     [self.portStationBtn setTitleColor:[NSString stringIsNilOrEmpty:station]?RGB(162, 162, 162):RGB(52, 52, 52) forState:UIControlStateNormal];
 }
 
@@ -134,7 +134,7 @@
 - (UIButton *)portStationBtn{
     if (!_portStationBtn) {
         _portStationBtn = [[UIButton alloc] init];
-        [_portStationBtn setTitle:@"请选择装箱地点" forState:UIControlStateNormal];
+        [_portStationBtn setTitle:@"选择装箱点" forState:UIControlStateNormal];
         [_portStationBtn setTitleColor:RGB(162, 162, 162) forState:UIControlStateNormal];
         _portStationBtn.titleLabel.font = [UIFont systemFontOfSize:SizeWidth(14)];
         _portStationBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;

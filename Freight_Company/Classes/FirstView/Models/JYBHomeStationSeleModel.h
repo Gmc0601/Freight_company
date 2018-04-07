@@ -14,6 +14,10 @@
 
 @property (nonatomic ,strong)NSString   *loadarea_name;  //装箱区域名
 
-@property (nonatomic ,strong)NSString   *create_time;  //港口ID
+@property (nonatomic ,strong)NSString   *province;  // 省
+
+@property (nonatomic ,strong)NSString   *city;  //市
+
+@property (nonatomic ,strong)NSString   *create_time;  //
 
 @end

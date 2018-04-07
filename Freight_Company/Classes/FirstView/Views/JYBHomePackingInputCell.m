@@ -52,7 +52,7 @@
 - (UILabel *)titleLab{
     if (!_titleLab) {
         _titleLab = [[UILabel alloc] init];
-        _titleLab.textColor = RGB(52, 52, 52);
+        _titleLab.textColor = RGB(162, 162, 162);
         _titleLab.font = [UIFont systemFontOfSize:SizeWidth(15)];
     }
     return _titleLab;

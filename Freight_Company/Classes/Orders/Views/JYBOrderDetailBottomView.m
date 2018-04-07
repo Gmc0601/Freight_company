@@ -113,8 +113,19 @@
 }
 
 - (void)commitBtnBtnAction{
+    JYBOrderDetailBottomType type;
+    
+    //订单状态 状态：0-待支付 10-派单中 20-已接单 30-进行中 40-已到港（待支付,支付额外费用） 50-已完成 60-已取消
+    if (self.listModel.order_status.integerValue == 0) {
+        type = JYBOrderDetailBottomTypePay;
+    }else if (self.listModel.order_status.integerValue == 10) {
+        type = JYBOrderDetailBottomTypeCancel;
+    }else if (self.listModel.order_status.integerValue == 40){
+        type = JYBOrderDetailBottomTypePayOther;
+    }
+    
     if (self.payBlock) {
-        self.payBlock(!(self.listModel.order_status.integerValue == 0));
+        self.payBlock(type);
     }
 }
 

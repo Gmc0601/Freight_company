@@ -20,6 +20,8 @@
 #import "JYBHomeOrderImageCell.h"
 #import "JYBOrderDetailBottomView.h"
 #import "JYBOrderPayPopView.h"
+#import "CPConfig.h"
+#import "JYBOrderLogisMapViewCell.h"
 
 typedef enum : NSUInteger {
     JYBOrderDetailTypeLogisUser,
@@ -131,6 +133,9 @@ typedef enum : NSUInteger {
         case 30:
             return @"进行中";
             break;
+        case 31:
+            return @"已进港待支付(额外费用待审核)";
+            break;
         case 40:
             return @"已到港";
             break;
@@ -180,12 +185,122 @@ typedef enum : NSUInteger {
     [self presentViewController:alertVC animated:YES completion:nil];
 }
 
-- (void)__orderPay:(BOOL)isOther{
+- (void)__orderPay:(JYBOrderDetailBottomType)type{
+    
     WeakObj(self);
-    [[[JYBOrderPayPopView alloc] initWithClickAction:^{
+
+    [[[JYBOrderPayPopView alloc] initWithPayAmount:self.detailModel.order_price.floatValue totalAmount:[[CPConfig sharedManager] totalAmount].floatValue ClickAction:^{
+        
+        if (type == JYBOrderDetailBottomTypePay) {
+            [selfWeak __pay];
+            
+        }else{
+            [selfWeak __payOther];
+        }
         
     }] show];
 }
+
+- (void)__payOther{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic addUnEmptyString:self.detailModel.order_id forKey:@"order_id"];
+    
+    [ConfigModel showHud:self];
+    NSLog(@"%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Order/payOrderOtherPrice" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+            //刷新
+            [weak __fetchOrderDetail];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
+    
+}
+
+
+- (void)__pay{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic addUnEmptyString:self.detailModel.order_id forKey:@"order_id"];
+    
+    [ConfigModel showHud:self];
+    NSLog(@"%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Order/payOrder" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+            //刷新
+            [weak __fetchOrderDetail];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
+    
+}
+
+- (void)__cancelOrder{
+    WeakSelf(weak)
+    [[[JYBAlertView alloc ] initWithTitle:@"确定取消订单？" message:nil cancelItem:@"取消" sureItem:@"确定" clickAction:^(NSInteger index) {
+        if (index == 1) {
+            [weak __sureCancel];
+        }
+    }] show];
+}
+
+- (void)__sureCancel{
+    
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic addUnEmptyString:self.detailModel.order_id forKey:@"order_id"];
+    
+    [ConfigModel showHud:self];
+    NSLog(@"%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Order/cancelOrder" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+            //刷新
+            [weak __fetchOrderDetail];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
+}
+
 
 - (void)__turnToOtherCostSchVC{
     JYBOrderOtherCostVC *vc = [[JYBOrderOtherCostVC alloc] init];
@@ -205,6 +320,7 @@ typedef enum : NSUInteger {
     if (section == JYBOrderDetailTypeLogisUser) {
         return [NSString stringIsNilOrEmpty:self.detailModel.driver_id]?0:1;
     }else if (section == JYBOrderDetailTypeLogisInfo){
+        return 2;
         return self.detailModel.logistics.count?2:0;
     }else if (section == JYBOrderDetailTypeAddressInfo){
         return self.detailModel.shipment_address.count + 1;
@@ -221,8 +337,8 @@ typedef enum : NSUInteger {
 
 - (NSInteger)__fetchTypeBoxInfoNum{
     if (self.detailModel) {
-        if (self.detailModel.order_status.integerValue == 40 || self.detailModel.order_status.integerValue == 50 ) {
-            if (self.detailModel.other_price_img.count) {
+        if (self.detailModel.order_status.integerValue == 30 || self.detailModel.order_status.integerValue == 31 || self.detailModel.order_status.integerValue == 40 || self.detailModel.order_status.integerValue == 50 ) {
+            if (self.detailModel.box_img.count) {
                 return 6;
             }else{
                 return 5;
@@ -242,12 +358,16 @@ typedef enum : NSUInteger {
     if (indexPath.section == JYBOrderDetailTypeLogisUser) {
         return SizeWidth(85);
     }else if (indexPath.section == JYBOrderDetailTypeLogisInfo){
-        return SizeWidth(90);
+        if (indexPath.row == 0) {
+            return SizeWidth(90);
+        }else{
+            return SizeWidth(150);
+        }
     }else if (indexPath.section == JYBOrderDetailTypeAddressInfo){
         return SizeWidth(110);
     }else if (indexPath.section == JYBOrderDetailTypeBoxInfo){
         if (indexPath.row == 5) {
-            return SizeWidth(100);
+            return SizeWidth(110);
         }else{
             return SizeWidth(55);
         }
@@ -302,10 +422,15 @@ typedef enum : NSUInteger {
         return cell;
         
     }else if (indexPath.section == JYBOrderDetailTypeLogisInfo){
+        if (indexPath.row == 0) {
+            JYBOrderDetailLogisInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderDetailLogisInfoCell class]) forIndexPath:indexPath];
+            [cell updateCellWithModel:self.detailModel];
+            return cell;
+        }else{
+            JYBOrderLogisMapViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderLogisMapViewCell class]) forIndexPath:indexPath];
+            return cell;
+        }
 
-        JYBOrderDetailLogisInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderDetailLogisInfoCell class]) forIndexPath:indexPath];
-        [cell updateCellWithModel:self.detailModel];
-        return cell;
     }else if (indexPath.section == JYBOrderDetailTypeAddressInfo){
         JYBOrderDetailAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderDetailAddressCell class]) forIndexPath:indexPath];
         if (indexPath.row == 0) {
@@ -315,8 +440,8 @@ typedef enum : NSUInteger {
             [cell updateCellWithModel:subModel isBox:NO box_no:nil];
         }
         WeakObj(self);
-        [cell setPhoneBlock:^(JYBOrderBoxAddressModel *addModel) {
-            [selfWeak __phoneWithPhone:addModel.shipment_linkman_phone];
+        [cell setPhoneBlock:^(NSString *phone) {
+            [selfWeak __phoneWithPhone:phone];
         }];
         return cell;
         
@@ -324,7 +449,7 @@ typedef enum : NSUInteger {
         
         if (indexPath.row == 5) {
             JYBHomeOrderImageCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeOrderImageCell class]) forIndexPath:indexPath];
-            [cell updateCellWithArr:self.detailModel.other_price_img.mutableCopy];
+            [cell updateCellWithArr:self.detailModel.box_img.mutableCopy];
             return cell;
         }else{
             JYBOrderDetailBoxInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderDetailBoxInfoCell class]) forIndexPath:indexPath];
@@ -414,6 +539,7 @@ typedef enum : NSUInteger {
         [_myTableView registerClass:[JYBOrderDetailMarkInfoCell class] forCellReuseIdentifier:NSStringFromClass([JYBOrderDetailMarkInfoCell class])];
         [_myTableView registerClass:[JYBOrderDetailCostCell class] forCellReuseIdentifier:NSStringFromClass([JYBOrderDetailCostCell class])];
         [_myTableView registerClass:[JYBHomeOrderImageCell class] forCellReuseIdentifier:NSStringFromClass([JYBHomeOrderImageCell class])];
+        [_myTableView registerClass:[JYBOrderLogisMapViewCell class] forCellReuseIdentifier:NSStringFromClass([JYBOrderLogisMapViewCell class])];
 
         
         
@@ -428,8 +554,12 @@ typedef enum : NSUInteger {
         [_bottomView setScheBlock:^{
             [weak __turnToOtherCostSchVC];
         }];
-        [_bottomView setPayBlock:^(BOOL isOther) {
-            [weak __orderPay:isOther];
+        [_bottomView setPayBlock:^(JYBOrderDetailBottomType type) {
+            if (type == JYBOrderDetailBottomTypeCancel) {
+                [weak __cancelOrder];
+            }else{
+                [weak __orderPay:type];
+            }
         }];
     }
     return _bottomView;

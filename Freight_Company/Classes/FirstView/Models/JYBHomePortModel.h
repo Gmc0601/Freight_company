@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface JYBHomePortModel : NSObject
+@interface JYBHomePortModel : NSObject<NSCoding>
 
 @property (nonatomic ,strong)NSString   *port_id;  //港口ID
 

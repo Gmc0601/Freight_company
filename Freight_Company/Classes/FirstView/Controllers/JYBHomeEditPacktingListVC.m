@@ -23,10 +23,6 @@
 
 @property (nonatomic ,strong)UIView   *bottomView;
 
-@property (nonatomic ,strong)UIView   *footerView;
-
-@property (nonatomic ,strong)UIButton *defaltAddressBtn;
-
 @property (nonatomic ,strong)JYBHomeStationSeleModel *stationModel;
 
 @property (nonatomic ,strong)AMapTip *pointModel;
@@ -44,33 +40,68 @@
     [self resetFather];
     [self.view addSubview:self.myTableView];
     [self.view addSubview:self.bottomView];
-    self.myTableView.tableFooterView = self.footerView;
 }
 
 - (void)resetFather {
     
     self.titleLab.text = @"编辑装箱点";
-    [self.rightBar setTitle:@"常用地址" forState:UIControlStateNormal];
+    self.rightBar.hidden = YES;
+//    [self.rightBar setTitle:@"常用地址" forState:UIControlStateNormal];
 
 }
 
-//  右侧点击
-- (void)more:(UIButton *)sender{
-    JYBHomePackAddressListVC *vc = [[JYBHomePackAddressListVC alloc] init];
-    vc.delegate = self;
-    vc.isPoint = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+////  右侧点击
+//- (void)more:(UIButton *)sender{
+//    JYBHomePackAddressListVC *vc = [[JYBHomePackAddressListVC alloc] init];
+//    vc.delegate = self;
+//    vc.isPoint = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+//
+//}
 
-}
+//- (void)selectPointModel:(JYBHomeShipAddressModel *)pointModel{
+//
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(portPackStationSel:)]) {
+//        [self.delegate portPackStationSel:pointModel];
+//    }
+//
+//    [self.navigationController popViewControllerAnimated:YES];
+//}
 
-- (void)selectPointModel:(JYBHomeShipAddressModel *)pointModel{
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(portPackStationSel:index:)]) {
-        [self.delegate portPackStationSel:pointModel index:self.indexPath];
+    if (self.shipAddressModel) {
+        [self initSetUpWithModel:self.shipAddressModel];
     }
-    
-    [self.navigationController popViewControllerAnimated:YES];
 }
+
+
+- (void)initSetUpWithModel:(JYBHomeShipAddressModel *)model{
+    
+    JYBHomeStationSeleModel *stationModel = [[JYBHomeStationSeleModel alloc] init];
+    stationModel.loadarea_id = model.loadarea_id;
+    stationModel.loadarea_name = model.loadarea_name;
+    self.stationModel = stationModel;
+    
+    AMapTip *amapModel = [[AMapTip alloc] init];
+    amapModel.name = model.address;
+    amapModel.location.latitude = model.lat.floatValue;
+    amapModel.location.longitude = model.lon.floatValue;
+    self.pointModel = amapModel;
+    
+    JYBHomePackingInputCell *addressCell = [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]];
+    addressCell.myTextField.text = model.address_desc;
+    
+    JYBHomePackingInputCell *nameCell = [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]];
+    nameCell.myTextField.text = model.shipment_linkman;
+
+    JYBHomePackingInputCell *phoneCell = [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
+    phoneCell.myTextField.text = model.shipment_linkman_phone;
+
+    [self.myTableView reloadData];
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
@@ -100,11 +131,11 @@
     }else{
         JYBHomePackingInputCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomePackingInputCell class]) forIndexPath:indexPath];
         if (indexPath.row == 2) {
-            [cell updateCellWithTitle:@"详细地址" placeHoler:@"街道、门牌号(非必填)" value:nil];
+            [cell updateCellWithTitle:@"详细地址" placeHoler:@"街道、门牌号" value:nil];
         }else if (indexPath.row == 3){
-            [cell updateCellWithTitle:@"联系人" placeHoler:@"请填写装箱联系人(非必填)" value:nil];
+            [cell updateCellWithTitle:@"联系人" placeHoler:@"请填写装箱联系人" value:nil];
         }else{
-            [cell updateCellWithTitle:@"电话" placeHoler:@"请填写装箱联系人电话(必填)" value:nil];
+            [cell updateCellWithTitle:@"电话" placeHoler:@"请填写装箱联系人电话" value:nil];
         }
         
         return cell;
@@ -114,9 +145,16 @@
 
 - (void)__pickPack:(NSIndexPath *)indexPath{
     
+    if (indexPath.row == 1 && !self.stationModel) {
+        [ConfigModel mbProgressHUD:@"请先选择装箱区域" andView:nil];
+        return;
+    }
+    
     JYBHomeSelectStationVC *vc = [[JYBHomeSelectStationVC alloc] init];
     vc.delegate = self;
     vc.isPoint = (indexPath.row == 1);
+    vc.city = self.stationModel.city;
+    vc.keyWords = self.stationModel.loadarea_name;
     [self.navigationController pushViewController:vc animated:YES];
   
 }
@@ -126,10 +164,8 @@
     [self.myTableView reloadData];
 }
 
-- (void)selectPoint:(AMapTip *)point provice:(NSString *)provice city:(NSString *)city{
+- (void)selectPoint:(AMapTip *)point{
     self.pointModel = point;
-    self.provice = provice;
-    self.city = city;
     [self.myTableView reloadData];
 }
 
@@ -148,9 +184,7 @@
     JYBHomePackingInputCell *phoneCell = [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:4 inSection:0]];
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic addUnEmptyString:self.shipment_address_id forKey:@"shipment_address_id"];
-    [dic addUnEmptyString:self.provice forKey:@"province"];
-    [dic addUnEmptyString:self.city forKey:@"city"];
+    [dic addUnEmptyString:self.shipAddressModel.shipment_address_id forKey:@"shipment_address_id"];
     [dic addUnEmptyString:[NSString stringWithFormat:@"%lf",self.pointModel.location.longitude] forKey:@"long"];
     [dic addUnEmptyString:[NSString stringWithFormat:@"%lf",self.pointModel.location.latitude] forKey:@"lat"];
     [dic addUnEmptyString:self.pointModel.name forKey:@"address"];
@@ -158,7 +192,8 @@
     [dic addUnEmptyString:nameCell.myTextField.text forKey:@"shipment_linkman"];
     [dic addUnEmptyString:phoneCell.myTextField.text forKey:@"shipment_linkman_phone"];
     [dic addUnEmptyString:self.stationModel.loadarea_id forKey:@"loadarea_id"];
-    
+    [dic addUnEmptyString:self.stationModel.province forKey:@"province"];
+    [dic addUnEmptyString:self.stationModel.city forKey:@"city"];
     
     [ConfigModel showHud:self];
     NSLog(@"~~~~para:%@", dic);
@@ -174,18 +209,18 @@
             
             NSString *str = datadic[@"msg"];
             [ConfigModel mbProgressHUD:str andView:nil];
-            
-            JYBHomeShipAddressModel * model = [[JYBHomeShipAddressModel alloc] init];
-            model.shipment_address_id = datadic[@"data"][@"shipment_address_id"];
-            model.province = weak.provice;
-            model.city = weak.city;
-            model.address = addresCell.myTextField.text;
-            model.shipment_linkman = nameCell.myTextField.text;
-            model.shipment_linkman_phone = phoneCell.myTextField.text;
-            
-            if (self.delegate && [self.delegate respondsToSelector:@selector(portPackStationSel:index:)]) {
-                [self.delegate portPackStationSel:model index:self.indexPath];
-            }
+//            
+//            JYBHomeShipAddressModel * model = [[JYBHomeShipAddressModel alloc] init];
+//            model.shipment_address_id = datadic[@"data"][@"shipment_address_id"];
+//            model.province = weak.provice;
+//            model.city = weak.city;
+//            model.address = addresCell.myTextField.text;
+//            model.shipment_linkman = nameCell.myTextField.text;
+//            model.shipment_linkman_phone = phoneCell.myTextField.text;
+//            
+//            if (self.delegate && [self.delegate respondsToSelector:@selector(portPackStationSel:)]) {
+//                [self.delegate portPackStationSel:model];
+//            }
             
             [self.navigationController popViewControllerAnimated:YES];
             
@@ -197,11 +232,6 @@
     
     
 
-}
-
-- (void)defaltAddressBtnAction:(UIButton *)aBtn{
-    
-    self.defaltAddressBtn.selected = !aBtn.selected;
 }
 
 - (UITableView *)myTableView{
@@ -244,25 +274,5 @@
     return _bottomView;
 }
 
-- (UIView *)footerView{
-    if (!_footerView) {
-        _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, SizeWidth(55))];
-        _footerView.backgroundColor = [UIColor whiteColor];
-        
-        UILabel *titelLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kScreenW, SizeWidth(55))];
-        titelLab.text = @"    保存为常用装箱地址";
-        titelLab.font = [UIFont systemFontOfSize:SizeWidth(14)];
-        titelLab.textColor = RGB(52, 52, 52);
-        [_footerView addSubview:titelLab];
-        
-        self.defaltAddressBtn = [[UIButton alloc] initWithFrame:CGRectMake(kScreenW - SizeWidth(50), 0, SizeWidth(50), SizeWidth(55))];
-        [self.defaltAddressBtn setImage:[UIImage imageNamed:@"icon_xz"] forState:UIControlStateNormal];
-        [self.defaltAddressBtn setImage:[UIImage imageNamed:@"icon_xz_pre"] forState:UIControlStateSelected];
-        [self.defaltAddressBtn addTarget:self action:@selector(defaltAddressBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        [_footerView addSubview:self.defaltAddressBtn];
-        
-    }
-    return _footerView;
-}
 
 @end

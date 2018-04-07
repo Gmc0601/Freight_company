@@ -117,7 +117,7 @@
     if (!_datePicker) {
         _datePicker = [[UIDatePicker alloc] init];
         _datePicker.backgroundColor = [UIColor whiteColor];
-        _datePicker.datePickerMode = UIDatePickerModeDate;
+        _datePicker.datePickerMode = UIDatePickerModeDateAndTime;
         //这里有一个疑问。正常情况下locale会根据手机设置自动国际化，但是测试手机中文系统，datapick确是英文，所以在此设置一下
         _datePicker.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
     }

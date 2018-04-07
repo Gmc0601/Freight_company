@@ -10,8 +10,10 @@
 #import "JYBHomePackAddressCell.h"
 #import "JYBHomePackAddressSectionFooterView.h"
 #import "JYBHomeFetchBoxListVC.h"
+#import "JYBImproveFetchBoxVC.h"
+#import "JYBHomeEditPacktingListVC.h"
 
-@interface JYBHomePackAddressListVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface JYBHomePackAddressListVC ()<UITableViewDelegate,UITableViewDataSource,JYBImproveFetchBoxVCDelegate>
 
 @property (nonatomic ,strong)UITableView *myTableView;
 
@@ -39,7 +41,7 @@
 }
 
 - (void)resetFather {
-    self.titleLab.text = @"管理拿箱单地址";
+    self.titleLab.text = @"选择常用地址";
     self.rightBar.hidden = YES;
     
 }
@@ -137,7 +139,10 @@
 - (void)__editWithModel:(id)model{
     if (self.isPoint) {
 
-        
+        JYBHomeEditPacktingListVC *vc = [[JYBHomeEditPacktingListVC alloc] init];
+        vc.shipAddressModel = model;
+        [self.navigationController pushViewController:vc animated:YES];
+
         
     }else{
         JYBHomeFetchBoxListVC *vc = [[JYBHomeFetchBoxListVC alloc] init];
@@ -179,9 +184,27 @@
 
 
 - (void)commitBtnAction{
-    JYBHomeFetchBoxListVC *vc = [[JYBHomeFetchBoxListVC alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (self.isPoint) {
+        JYBHomeEditPacktingListVC *vc = [[JYBHomeEditPacktingListVC alloc] init];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        JYBHomeFetchBoxListVC *vc = [[JYBHomeFetchBoxListVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
+
+
+- (void)selectBoxAddressModel:(CPHomeBoxAddressModel *)model{
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(selectaddressModel:)]) {
+        [self.delegate selectaddressModel:model];
+    }
+    [self.navigationController popToViewController:self animated:NO];
+    [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.dataArr.count;
@@ -194,7 +217,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return UITableViewAutomaticDimension;
+    return SizeWidth(85);
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -238,16 +261,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.isPoint) {
         JYBHomeShipAddressModel *model = [self.dataArr objectAtIndex:indexPath.section];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(selectPointModel:)]) {
-            [self.delegate selectPointModel:model];
+        if (self.delegate && [self.delegate respondsToSelector:@selector(selectPointModel:indexPaht:)]) {
+            [self.delegate selectPointModel:model indexPaht:self.indexPath];
         }
         [self.navigationController popViewControllerAnimated:NO];
     }else{
-        CPHomeBoxAddressModel *model = [self.dataArr objectAtIndex:indexPath.section];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(selectaddressModel:)]) {
-            [self.delegate selectaddressModel:model];
+        if (self.fromBox) {
+            CPHomeBoxAddressModel *model = [self.dataArr objectAtIndex:indexPath.section];
+            if (self.delegate && [self.delegate respondsToSelector:@selector(selectaddressModel:)]) {
+                [self.delegate selectaddressModel:model];
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            CPHomeBoxAddressModel *model = [self.dataArr objectAtIndex:indexPath.section];
+            JYBImproveFetchBoxVC *vc = [[JYBImproveFetchBoxVC alloc] init];
+            vc.delegate = self;
+            vc.addressModel = model;
+            [self.navigationController pushViewController:vc animated:YES];
         }
-        [self.navigationController popViewControllerAnimated:YES];
     }
 
 }
@@ -298,7 +329,7 @@
         
         UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(SizeWidth(10), SizeWidth(5), kScreenW - SizeWidth(20), SizeWidth(40))];
         commitBtn.backgroundColor = RGB(24, 141, 240);
-        [commitBtn setTitle:@"+ 添加拿箱单地址" forState:UIControlStateNormal];
+        [commitBtn setTitle:@"添加一个新地址" forState:UIControlStateNormal];
         [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         commitBtn.layer.cornerRadius = 2;
         commitBtn.layer.masksToBounds = YES;

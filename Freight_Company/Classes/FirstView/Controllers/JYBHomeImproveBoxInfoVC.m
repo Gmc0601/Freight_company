@@ -15,35 +15,17 @@
 #import "JYBHomeOtherCostVC.h"
 #import "JYBHomeBoxInfoSpecView.h"
 #import "JYBHomeImproveItemCell.h"
-#import "CPHomeBoxAddressModel.h"
-#import "JYBImproveFetchBoxVC.h"
-#import "JYBHomeEditPacktingListVC.h"
-
-@interface JYBHomeImproveBoxInfoVC ()<UITableViewDelegate,UITableViewDataSource,JYBHomeOtherCostVCDelegate,JYBHomeSendDriveMesgVCDelegate,JYBHomeDriverSelVCDelegate,JYBImproveFetchBoxVCDelegate,JYBHomeEditPacktingDelegate>
+#import "JYBHomePackAddressListVC.h"
+#import "JYBHomeImproveBoxInfoBottomView.h"
+#import "CCWebViewViewController.h"
+@interface JYBHomeImproveBoxInfoVC ()<UITableViewDelegate,UITableViewDataSource,JYBHomeSendDriveMesgVCDelegate,JYBHomePackAddressListVCDelegate>
 
 @property (nonatomic ,strong)UITableView *myTableView;
 
-@property (nonatomic ,strong)UIView   *bottomView;
-
-@property (nonatomic ,strong)UILabel    *priceLab;
+@property (nonatomic ,strong)JYBHomeImproveBoxInfoBottomView   *bottomView;
 
 @property (nonatomic, strong) ESPickerView *pickerView;
 
-@property (nonatomic ,strong)NSString *startTime;
-
-@property (nonatomic ,strong)NSString *endTime;
-
-@property (nonatomic ,strong)JYBHomeDockWeightModel *seleWightModel;
-
-@property (nonatomic ,strong)JYBHomeDotModel *seleDotModel;
-
-@property (nonatomic ,strong)NSString       *seleMessage;
-
-@property (nonatomic ,strong)CPHomeMyDriverModel *seleDriver;
-
-@property (nonatomic, strong)NSMutableArray     *seleStationArr;
-
-@property (nonatomic ,strong)CPHomeBoxAddressModel *seleBoxAddreModel;
 
 @end
 
@@ -52,10 +34,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self resetFather];
-    JYBHomeShipAddressModel *model = [[JYBHomeShipAddressModel alloc] init];
-    [self.seleStationArr addObject:model];
+    if (!self.seleStationArr.count) {
+        JYBHomeShipAddressModel *model = [[JYBHomeShipAddressModel alloc] init];
+        [self.seleStationArr addObject:model];
+    }
     [self.view addSubview:self.myTableView];
     [self.view addSubview:self.bottomView];
+    
+    if (self.seleBoxAddreModel) {
+        [self __caluteOrderPrice];
+    }
     
 }
 
@@ -92,33 +80,36 @@
     
 }
 
-
-- (void)selectWeightModel:(JYBHomeDockWeightModel *)weightModel dotModel:(JYBHomeDotModel *)dotModel{
-    self.seleWightModel = weightModel;
-    self.seleDotModel = dotModel;
-    [self.myTableView reloadData];
-    
-}
-
 - (void)selectDriveMessage:(NSString *)message{
     self.seleMessage = message;
     [self.myTableView reloadData];
 }
 
-- (void)selectDriverModel:(CPHomeMyDriverModel *)driverModel{
-    self.seleDriver = driverModel;
-    [self.myTableView reloadData];
-}
-
-- (void)selectBoxAddressModel:(CPHomeBoxAddressModel *)model{
-    self.seleBoxAddreModel = model;
+- (void)selectaddressModel:(CPHomeBoxAddressModel *)addressModel{
+    self.seleBoxAddreModel = addressModel;
     [self.myTableView reloadData];
     
-    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic addUnEmptyString:model.portModel.port_id forKey:@"port_id"];
-    [dic addUnEmptyString:[self __getOrderTypeWithName:self.sepc] forKey:@"order_type"];
-    [dic addUnEmptyString:self.loadarea_id forKey:@"loadarea_id"];
+    //计算价格
+    [self __caluteOrderPrice];
 
+}
+
+- (void)selectPointModel:(JYBHomeShipAddressModel *)pointModel indexPaht:(NSIndexPath *)indexPath{
+    [self.seleStationArr replaceObjectAtIndex:indexPath.row-1 withObject:pointModel];
+    [self.myTableView reloadData];
+    
+    //计算价格
+    [self __caluteOrderPrice];
+    
+}
+
+- (void)__caluteOrderPrice{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic addUnEmptyString:self.seleBoxAddreModel.portModel.port_id forKey:@"prot_id"];
+    [dic addUnEmptyString:[self __getOrderTypeWithName:self.sepc] forKey:@"order_type"];
+    JYBHomeShipAddressModel *firstModel = [self.seleStationArr firstObject];
+    [dic addUnEmptyString:firstModel.loadarea_id forKey:@"loadarea_id"];
     
     [ConfigModel showHud:self];
     NSLog(@"~~~~para:%@", dic);
@@ -132,23 +123,23 @@
         NSDictionary *datadic = responseObject;
         if ([datadic[@"success"] intValue] == 1) {
             
-            self.priceLab.text = [NSString stringWithFormat:@"¥%@",datadic[@"data"][@"order_price"]];
-            
+            [self.bottomView updateBottomView:[datadic[@"data"][@"order_price"] floatValue]];
+                        
         }else {
             NSString *str = datadic[@"msg"];
             [ConfigModel mbProgressHUD:str andView:nil];
         }
     }];
-
-}
-
-- (void)portPackStationSel:(JYBHomeShipAddressModel *)packStation index:(NSIndexPath *)index{
-    
-    [self.seleStationArr replaceObjectAtIndex:index.row-1 withObject:packStation];
-    
-    [self.myTableView reloadData];
     
 }
+
+- (void)priceScheBtnAction{
+    
+    CCWebViewViewController *vc = [[CCWebViewViewController alloc] init];
+    vc.titlestr = @"价格明细";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 - (void)commitBtnAction{
     
@@ -176,7 +167,7 @@
     }
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic addUnEmptyString:self.seleBoxAddreModel.portModel.port_id forKey:@"port_id"];
+    [dic addUnEmptyString:self.seleBoxAddreModel.portModel.port_id forKey:@"prot_id"];
     [dic addUnEmptyString:[self __getOrderTypeWithName:self.sepc] forKey:@"order_type"];
     [dic addUnEmptyString:self.startTime forKey:@"shipment_time"];
     [dic addUnEmptyString:self.endTime forKey:@"cutoff_time"];
@@ -184,17 +175,11 @@
     [dic addUnEmptyString:self.seleBoxAddreModel.box_address_id forKey:@"box_address_id"];
 
     //缺少装箱字段
+    JYBHomeShipAddressModel *shipModel = [self.seleStationArr firstObject];
+    [dic addUnEmptyString:shipModel.loadarea_id forKey:@"loadarea_id"];
+    [dic addUnEmptyString:shipModel.shipment_address_id forKey:@"shipment_address_id"];
     
-    [dic addUnEmptyString:nil forKey:@"loadarea_id"];
-    [dic addUnEmptyString:nil forKey:@"shipment_address_id"];
-
-    
-    [dic addUnEmptyString:self.seleDriver.driver_id forKey:@"driver_id"];
     [dic addUnEmptyString:self.seleMessage forKey:@"message"];
-    [dic addUnEmptyString:self.seleDotModel.dock_id forKey:@"dock_id"];
-    [dic addUnEmptyString:self.seleWightModel.weight_id forKey:@"weight_id"];
-
-    
     
     [ConfigModel showHud:self];
     NSLog(@"~~~~para:%@", dic);
@@ -209,6 +194,7 @@
         if ([datadic[@"success"] intValue] == 1) {
             NSString *str = datadic[@"msg"];
             [ConfigModel mbProgressHUD:str andView:nil];
+            [weak __payOrderWithOrderId:datadic[@"data"][@"order_id"]];
         }else {
             NSString *str = datadic[@"msg"];
             [ConfigModel mbProgressHUD:str andView:nil];
@@ -216,6 +202,36 @@
     }];
     
 }
+
+- (void)__payOrderWithOrderId:(NSString *)orderId{
+    
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic addUnEmptyString:orderId forKey:@"order_id"];
+    
+    [ConfigModel showHud:self];
+    NSLog(@"%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Order/payOrder" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+        weak.tabBarController.selectedIndex = 1;
+    }];
+    
+}
+
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -237,7 +253,7 @@
     }else if (section == 1){
         return self.seleStationArr.count +1;
     }else{
-        return 3;
+        return 1;
     }
 }
 
@@ -257,14 +273,14 @@
         JYBHomeImproveItemCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeImproveItemCell class]) forIndexPath:indexPath];
 
         if (indexPath.row == 0) {
-            [cell updateCellWithIcon:@"icon_txddz" title:self.seleBoxAddreModel?[NSString stringWithFormat:@"%@\n%@",self.seleBoxAddreModel.portModel.port_name,self.seleBoxAddreModel.tiOrderNum]:@"" placeholder:@"请完善拿箱单地址" editIcon:@"" indexPath:indexPath];
+            [cell updateCellWithIcon:@"icon_txddz" title:self.seleBoxAddreModel?[NSString stringWithFormat:@"%@\n提单号%@",self.seleBoxAddreModel.portModel.port_name,self.seleBoxAddreModel.tiOrderNum]:@"" placeholder:@"请完善拿箱单地址" editIcon:@"" indexPath:indexPath];
             //区域
         }else{
             //最后一个
             
             JYBHomeShipAddressModel *model = [self.seleStationArr objectAtIndex:indexPath.row -1];
             //已经选中的类型
-            [cell updateCellWithIcon:@"icon_nxddz" title:model.address placeholder:@"请选择装箱点地址" editIcon:(indexPath.row  == self.seleStationArr.count)?@"xd_icon_tj":@"xd_icon_sc" indexPath:indexPath];
+            [cell updateCellWithIcon:@"icon_nxddz" title:[NSString stringIsNilOrEmpty:model.address]?@"":[NSString stringWithFormat:@"%@\n%@",model.address,model.address_desc] placeholder:@"请选择装箱点地址" editIcon:(indexPath.row  == self.seleStationArr.count)?@"xd_icon_tj":@"xd_icon_sc" indexPath:indexPath];
         }
         WeakSelf(weak)
         [cell setImproveBlock:^(NSIndexPath *indexPath) {
@@ -286,19 +302,19 @@
         
     }else{
         JYBHomeInproveBoxInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeInproveBoxInfoCell class]) forIndexPath:indexPath];
-
-        if (indexPath.row == 0) {
-            NSString *wight;
-            if (self.seleDotModel && self.seleWightModel) {
-                wight = [NSString stringWithFormat:@"%@%@",self.seleWightModel.weight_desc,self.seleDotModel.dock_name];
-            }
-            [cell updateCellIcon:@"xd_icon_ewfy" Title:@"额外费用" value:wight BoxType:JYBHomeInproveBoxNormal indexPath:indexPath];
-        }else if (indexPath.row == 1){
-             [cell updateCellIcon:@"xd_icon_sjh" Title:@"给司机捎句话" value:self.seleMessage BoxType:JYBHomeInproveBoxNormal indexPath:indexPath];
-        }else{
-             [cell updateCellIcon:@"xd_icon_yx" Title:@"优先发送给我的司机" value:self.seleDriver.driver_name BoxType:JYBHomeInproveBoxNormal indexPath:indexPath];
-        }
+        [cell updateCellIcon:@"xd_icon_sjh" Title:@"给司机捎句话" value:self.seleMessage BoxType:JYBHomeInproveBoxNormal indexPath:indexPath];
         return cell;
+
+//        if (indexPath.row == 0) {
+//            NSString *wight;
+//            if (self.seleDotModel && self.seleWightModel) {
+//                wight = [NSString stringWithFormat:@"%@%@",self.seleWightModel.weight_desc,self.seleDotModel.dock_name];
+//            }
+//            [cell updateCellIcon:@"xd_icon_ewfy" Title:@"额外费用" value:wight BoxType:JYBHomeInproveBoxNormal indexPath:indexPath];
+//        }else if (indexPath.row == 1){
+//        }else{
+//             [cell updateCellIcon:@"xd_icon_yx" Title:@"优先发送给我的司机" value:self.seleDriver.driver_name BoxType:JYBHomeInproveBoxNormal indexPath:indexPath];
+//        }
 
     }
     
@@ -315,43 +331,53 @@
         
         if (indexPath.row == 0) {
             //区域
-            JYBImproveFetchBoxVC *vc  = [[JYBImproveFetchBoxVC alloc] init];
+            JYBHomePackAddressListVC *vc  = [[JYBHomePackAddressListVC alloc] init];
             vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
         }else{
             
-            JYBHomeEditPacktingListVC *vc = [[JYBHomeEditPacktingListVC alloc] init];
+            //点
+            JYBHomePackAddressListVC *vc  = [[JYBHomePackAddressListVC alloc] init];
             vc.delegate = self;
+            vc.isPoint = YES;
             vc.indexPath = indexPath;
             [self.navigationController pushViewController:vc animated:YES];
         }
         
     }else{
-        if (indexPath.row == 0) {
-            if (!self.seleBoxAddreModel) {
-                [ConfigModel mbProgressHUD:@"请先完善拿箱单地址" andView:nil];
-                return;
-            }
-            JYBHomeOtherCostVC *vc = [[JYBHomeOtherCostVC alloc] init];
-            vc.prot_id = self.seleBoxAddreModel.portModel.port_id;
-            vc.delegate = self;
-            [self.navigationController pushViewController:vc animated:YES];
-            
-        }else if (indexPath.row == 1){
-            JYBHomeSendDriveMesgVC *vc = [[JYBHomeSendDriveMesgVC alloc] init];
-            vc.delegate = self;
-            [self.navigationController pushViewController:vc animated:YES];
-        }else{
-            JYBHomeDriverSelVC *vc = [[JYBHomeDriverSelVC alloc] init];
-            vc.delegate = self;
-            [self.navigationController pushViewController:vc animated:YES];
+        if ([NSString stringIsNilOrEmpty:self.seleBoxAddreModel.portModel.port_id]) {
+            [ConfigModel mbProgressHUD:@"请先完善拿箱单地址" andView:nil];
+            return;
         }
+        
+        JYBHomeSendDriveMesgVC *vc = [[JYBHomeSendDriveMesgVC alloc] init];
+        vc.delegate = self;
+        vc.prot_id = self.seleBoxAddreModel.portModel.port_id;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+//        if (indexPath.row == 0) {
+//            if (!self.seleBoxAddreModel) {
+//                [ConfigModel mbProgressHUD:@"请先完善拿箱单地址" andView:nil];
+//                return;
+//            }
+//            JYBHomeOtherCostVC *vc = [[JYBHomeOtherCostVC alloc] init];
+//            vc.prot_id = self.seleBoxAddreModel.portModel.port_id;
+//            vc.delegate = self;
+//            [self.navigationController pushViewController:vc animated:YES];
+//
+//        }else if (indexPath.row == 1){
+//
+//        }else{
+//            JYBHomeDriverSelVC *vc = [[JYBHomeDriverSelVC alloc] init];
+//            vc.delegate = self;
+//            [self.navigationController pushViewController:vc animated:YES];
+//        }
     }
 }
 
 - (void)__seleTime:(NSInteger)index{
     WeakObj(self);
-    NSDate *date = [NSDate dateWithString:(index == 0)?self.startTime:self.endTime format:@"yyyy-MM-dd HH:mm"];
+    NSDate *date = [NSDate dateWithString:(index == 0)?(self.startTime?self.startTime:[self __nextDayAfterDay:1 currntTime:nil]):(self.endTime?self.endTime:[self __nextDataWithCurrrnt:self.startTime]) format:@"yyyy-MM-dd HH:mm:ss"];
     [self.pickerView animationShowWithDate:date maximumDate:nil minimumDate:nil selectedItemComplete:^(ESPickerView *pickerView, NSString *item, NSDate *date) {
         if (index == 0) {
             selfWeak.startTime = [date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -363,11 +389,27 @@
     }];
 }
 
+- (NSString *)__nextDayAfterDay:(NSInteger)day currntTime:(NSString *)current{
+    NSDate *currDate = current?[NSDate dateWithString:current format:@"yyyy-MM-dd HH:mm:ss"]:[NSDate date];
+    NSDate *date = [currDate dateByAddingDays:1];
+    NSString *dateStr = [date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *nextStr = [NSString stringWithFormat:@"%@ 08:00:00",[dateStr componentsSeparatedByString:@" "].firstObject];
+    return nextStr;
+}
+
+
+- (NSString *)__nextDataWithCurrrnt:(NSString *)current{
+    NSDate *currDate = current?[NSDate dateWithString:current format:@"yyyy-MM-dd HH:mm:ss"]:[NSDate date];
+    NSDate *date = [currDate dateByAddingDays:1];
+    NSString *nextStr = [date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+    return nextStr;
+}
+
 - (UITableView *)myTableView{
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64 - SizeWidth(135)) style:UITableViewStyleGrouped];
         _myTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        _myTableView.backgroundColor = [UIColor whiteColor];
+        _myTableView.backgroundColor = RGB(245, 245, 245);
         _myTableView.showsVerticalScrollIndicator = NO;
         _myTableView.showsHorizontalScrollIndicator = NO;
         _myTableView.delegate = self;
@@ -388,33 +430,12 @@
     return _myTableView;
 }
 
-- (UIView *)bottomView{
+- (JYBHomeImproveBoxInfoBottomView *)bottomView{
     if (!_bottomView) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenH - SizeWidth(135) , kScreenW, SizeWidth(135))];
+        _bottomView = [[JYBHomeImproveBoxInfoBottomView alloc] initWithFrame:CGRectMake(0, kScreenH - SizeWidth(135) , kScreenW, SizeWidth(135))];
         _bottomView.backgroundColor = [UIColor whiteColor];
-        
-        self.priceLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kScreenW, SizeWidth(55))];
-        self.priceLab.font = [UIFont boldSystemFontOfSize:SizeWidth(18)];
-        self.priceLab.textColor = RGB(250, 125, 39);
-        self.priceLab.text = @"¥0";
-        self.priceLab.textAlignment = NSTextAlignmentCenter;
-        [_bottomView addSubview:self.priceLab];
-        
-        UILabel *desLab = [[UILabel alloc] initWithFrame:CGRectMake(0, self.priceLab.bottom, kScreenW, SizeWidth(25))];
-        desLab.font = [UIFont boldSystemFontOfSize:SizeWidth(12)];
-        desLab.textColor = RGB(162, 162, 162);
-        desLab.text = @"实际费用可能因等待时间／码头额外费用等因素而变动";
-        desLab.textAlignment = NSTextAlignmentCenter;
-        [_bottomView addSubview:desLab];
-        
-        UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(SizeWidth(10), desLab.bottom + SizeWidth(10), kScreenW - SizeWidth(20), SizeWidth(40))];
-        commitBtn.backgroundColor = RGB(24, 141, 240);
-        [commitBtn setTitle:@"确认下单" forState:UIControlStateNormal];
-        [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        commitBtn.layer.cornerRadius = 2;
-        commitBtn.layer.masksToBounds = YES;
-        [commitBtn addTarget:self action:@selector(commitBtnAction) forControlEvents:UIControlEventTouchUpInside];
-        [_bottomView addSubview:commitBtn];
+        [_bottomView.commitBtn addTarget:self action:@selector(commitBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomView.priceScheBtn addTarget:self action:@selector(priceScheBtnAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _bottomView;
 }

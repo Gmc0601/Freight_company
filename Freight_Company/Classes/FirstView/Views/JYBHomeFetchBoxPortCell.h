@@ -8,8 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^JYBHomeFetchBoxPortBlock)();
+
 @interface JYBHomeFetchBoxPortCell : UITableViewCell
 
-@property (nonatomic ,strong)UILabel        *portLab;
+@property (nonatomic ,copy)JYBHomeFetchBoxPortBlock boxPortBlock;
+
+@property (nonatomic ,strong)UIButton        *portLab;
+
+@property (nonatomic ,strong)UITextField    *myTextFeild;
 
 @end

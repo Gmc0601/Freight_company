@@ -19,4 +19,9 @@
 
 @property (nonatomic ,weak)id <JYBHomeSendDriveMesgVCDelegate>delegate;
 
+/**
+ 货重码头
+ */
+@property (nonatomic ,strong)NSString       *prot_id;
+
 @end

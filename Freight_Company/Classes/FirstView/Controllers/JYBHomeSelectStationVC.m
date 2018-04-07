@@ -12,16 +12,17 @@
 #import "AppDelegate.h"
 #import "LGProvinceModel.h"
 #import "JYBHomeSeleStaionCell.h"
+#import "JYBHomeSelePointHeaderView.h"
 
 @interface JYBHomeSelectStationVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic ,strong)JYBHomeSeleStationHeaderView *headerView;
 
+@property (nonatomic ,strong)JYBHomeSelePointHeaderView     *pointHeaderView;
+
 @property (nonatomic ,strong)LGCityPickerView *cityPickerView;
 
 @property (nonatomic ,strong)NSString   *province;
-
-@property (nonatomic ,strong)NSString    *city;
 
 @property (nonatomic ,strong)NSMutableArray     *portArr;
 
@@ -36,20 +37,39 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self resetFather];
-    
-    [self.view addSubview:self.headerView];
+    if (self.isPoint) {
+        [self.view addSubview:self.pointHeaderView];
+        [self.pointHeaderView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view).offset(64);
+            make.left.right.equalTo(self.view);
+            make.height.mas_equalTo(SizeWidth(60));
+        }];
+        
+    }else{
+        [self.view addSubview:self.headerView];
+        [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view).offset(64);
+            make.left.right.equalTo(self.view);
+            make.height.mas_equalTo(SizeWidth(60));
+        }];
+        
+    }
     [self.view addSubview:self.myTableView];
     
-    [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).offset(64);
-        make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(SizeWidth(60));
-    }];
-    
+
     [self.myTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.headerView.mas_bottom);
+        if (self.isPoint) {
+            make.top.equalTo(self.pointHeaderView.mas_bottom);
+        }else{
+            make.top.equalTo(self.headerView.mas_bottom);
+        }
         make.left.right.and.bottom.equalTo(self.view);
     }];
+    
+    if (self.isPoint) {
+        [self searchStationAddressWithKeyWord:nil];
+    }
+    
     
 }
 
@@ -59,12 +79,34 @@
 }
 
 
+- (void)searchStationAddressWithKeyWord:(NSString *)keyWord{
+    
+    AMapInputTipsSearchRequest *tips = [[AMapInputTipsSearchRequest alloc] init];
+    tips.keywords = [NSString stringIsNilOrEmpty:self.pointHeaderView.myTextField.text]?self.keyWords:self.headerView.myTextField.text;
+    tips.city = self.city;
+    [self.search AMapInputTipsSearch:tips];
+
+}
+
+
+/* 输入提示回调. */
+- (void)onInputTipsSearchDone:(AMapInputTipsSearchRequest *)request response:(AMapInputTipsSearchResponse *)response
+{
+    [self.portArr removeAllObjects];
+    //解析response获取提示词，具体解析见 Demo
+    
+    [self.portArr addObjectsFromArray:response.tips];
+    [self.myTableView reloadData];
+}
+
+
 -(NSArray *)getBPCityList
 {
     NSString *path = [[NSBundle mainBundle] pathForResource:@"bpCityList.plist" ofType:nil];
     NSArray * newData = [NSArray arrayWithContentsOfFile:path];
     return newData;
 }
+
 
 - (void)citySelectAction{
     
@@ -80,6 +122,8 @@
             weak.province = [dict objectForKey:@"provCode"];
             weak.city = [dict objectForKey:@"cityCode"];
             [weak.headerView.cityBtn setTitle:weak.city forState:UIControlStateNormal];
+            [weak __searchAreaData];
+
         }
         [pickerView animationDismiss];
     }];
@@ -92,7 +136,6 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic addUnEmptyString:[NSString stringWithFormat:@"%@省",self.province] forKey:@"province"];
     [dic addUnEmptyString:[NSString stringWithFormat:@"%@市",self.city] forKey:@"city"];
-    [dic addUnEmptyString:self.headerView.myTextField.text forKey:@"name"];
     
     [ConfigModel showHud:self];
     NSLog(@"%@", dic);
@@ -122,34 +165,6 @@
 }
 
 
-- (void)searchBtnAction{
-    
-    if ([NSString stringIsNilOrEmpty:self.city]) {
-        [ConfigModel mbProgressHUD:@"请先选择城市" andView:nil];
-        return;
-    }
-    
-    if (self.isPoint) {
-        AMapInputTipsSearchRequest *tips = [[AMapInputTipsSearchRequest alloc] init];
-        tips.keywords = self.headerView.myTextField.text;
-        tips.city = self.city;
-        [self.search AMapInputTipsSearch:tips];
-    }else{
-        [self __searchAreaData];
-    }
-}
-
-
-/* 输入提示回调. */
-- (void)onInputTipsSearchDone:(AMapInputTipsSearchRequest *)request response:(AMapInputTipsSearchResponse *)response
-{
-    [self.portArr removeAllObjects];
-    //解析response获取提示词，具体解析见 Demo
-    
-    [self.portArr addObjectsFromArray:response.tips];
-    [self.myTableView reloadData];
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
@@ -164,6 +179,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
     JYBHomeSeleStaionCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeSeleStaionCell class]) forIndexPath:indexPath];
+
     if (self.isPoint) {
         AMapTip *tip = [self.portArr objectAtIndex:indexPath.row];
         cell.nameLab.text = tip.name;
@@ -178,13 +194,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
     if (self.isPoint) {
         AMapTip *tip = [self.portArr objectAtIndex:indexPath.row];
         if (self.delegate && [self.delegate respondsToSelector:@selector(selectPoint:)]) {
-            [self.delegate selectPoint:tip provice:self.province city:self.city];
+            [self.delegate selectPoint:tip];
         }
         [self.navigationController popViewControllerAnimated:YES];
     }else{
+        
         JYBHomeStationSeleModel *model = [self.portArr objectAtIndex:indexPath.row];
         if (self.delegate && [self.delegate respondsToSelector:@selector(selectStationModel:)]) {
             [self.delegate selectStationModel:model];
@@ -192,16 +210,30 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 
+
 }
 - (JYBHomeSeleStationHeaderView *)headerView{
     if (!_headerView) {
         _headerView = [[JYBHomeSeleStationHeaderView alloc] init];
         [_headerView.cityBtn addTarget:self action:@selector(citySelectAction) forControlEvents:UIControlEventTouchUpInside];
         [_headerView.arrowBtn addTarget:self action:@selector(citySelectAction) forControlEvents:UIControlEventTouchUpInside];        
-        [_headerView.searchBtn addTarget:self action:@selector(searchBtnAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _headerView;
 }
+
+- (JYBHomeSelePointHeaderView *)pointHeaderView{
+    if (!_pointHeaderView) {
+        _pointHeaderView = [[JYBHomeSelePointHeaderView alloc] init];
+        [_pointHeaderView.cityBtn setTitle:[NSString stringWithFormat:@"%@%@",self.city,self.keyWords] forState:UIControlStateNormal];
+        WeakObj(self);
+        [_pointHeaderView setHeaderSearchBlock:^(NSString *keyWord) {
+            [selfWeak searchStationAddressWithKeyWord:keyWord]; 
+        }];
+        
+    }
+    return _pointHeaderView;
+}
+
 
 - (LGCityPickerView *)cityPickerView {
     if (!_cityPickerView) {

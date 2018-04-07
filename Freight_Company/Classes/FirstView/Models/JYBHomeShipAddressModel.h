@@ -18,8 +18,18 @@
 
 @property (nonatomic ,strong)NSString   *address;  //装箱点地址
 
+@property (nonatomic ,strong)NSString   *address_desc;  //装箱点地址
+
+@property (nonatomic ,strong)NSString   *lon;  //
+
+@property (nonatomic ,strong)NSString   *lat;  //
+
 @property (nonatomic ,strong)NSString   *shipment_linkman;  //装箱点联系人
 
 @property (nonatomic ,strong)NSString   *shipment_linkman_phone;  //联系方式
+
+@property (nonatomic ,strong)NSString   *loadarea_name;  // 区域名字
+
+@property (nonatomic ,strong)NSString   *loadarea_id;  //   区域id
 
 @end

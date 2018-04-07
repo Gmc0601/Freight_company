@@ -20,4 +20,6 @@
 
 @property (nonatomic ,weak)id <JYBImproveFetchBoxVCDelegate>delegate;
 
+@property (nonatomic ,strong)CPHomeBoxAddressModel *addressModel;
+
 @end

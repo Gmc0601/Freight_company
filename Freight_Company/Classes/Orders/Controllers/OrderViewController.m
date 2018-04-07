@@ -126,7 +126,7 @@
 
 - (HMSegmentedControl *)headTabView{
     if (!_headTabView) {
-        _headTabView = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"全部",@"待支付",@"派单中",@"已接单",@"进行中"]];
+        _headTabView = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"全部",@"已接单",@"进行中",@"待确认"]];
         _headTabView.segmentWidthStyle = HMSegmentedControlSegmentWidthStyleFixed;
         _headTabView.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
         _headTabView.selectionIndicatorColor = RGB(26, 143, 241);
@@ -151,19 +151,16 @@
         JYBOrderSingleVC *allVC = [[JYBOrderSingleVC alloc] init];
         allVC.type = JYBOrderTypeAll;
         
-        JYBOrderSingleVC *waitpayVC = [[JYBOrderSingleVC alloc] init];
-        waitpayVC.type = JYBOrderTypeWait;
-
-        JYBOrderSingleVC *paiingVC = [[JYBOrderSingleVC alloc] init];
-        paiingVC.type = JYBOrderTypePai;
-
-        JYBOrderSingleVC *hasreviceVC = [[JYBOrderSingleVC alloc] init];
-        hasreviceVC.type = JYBOrderTypeReviced;
+        JYBOrderSingleVC *hasPaiVC = [[JYBOrderSingleVC alloc] init];
+        hasPaiVC.type = JYBOrderTypeHasPai;
 
         JYBOrderSingleVC *ingVC = [[JYBOrderSingleVC alloc] init];
         ingVC.type = JYBOrderTypeIng;
 
-        _vcArr = @[allVC,waitpayVC,paiingVC,hasreviceVC,ingVC];
+        JYBOrderSingleVC *hasreviceVC = [[JYBOrderSingleVC alloc] init];
+        hasreviceVC.type = JYBOrderTypeReviced;
+
+        _vcArr = @[allVC,hasPaiVC,ingVC,hasreviceVC];
     }
     return _vcArr;
 }

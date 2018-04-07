@@ -61,7 +61,7 @@
     
     self.indexPath = indexPath;
     self.titleLab.text = title;
-    self.resultLab.text = [NSString stringIsNilOrEmpty:result]?((indexPath.row == 0)?@"请选择装箱区域(必选择)":@"请选择装箱地点(必选)"):result;
+    self.resultLab.text = [NSString stringIsNilOrEmpty:result]?((indexPath.row == 0)?@"请选择装箱区域":@"请选择装箱地点"):result;
     self.resultLab.textColor = [NSString stringIsNilOrEmpty:result]?RGB(203, 203, 203):RGB(52, 52, 52);
     
 }

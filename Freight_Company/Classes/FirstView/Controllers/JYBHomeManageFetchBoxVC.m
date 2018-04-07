@@ -43,13 +43,16 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UILabel *headLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kScreenW, SizeWidth(55))];
-    headLab.textColor = RGB(204, 204, 204);
-    headLab.font = [UIFont systemFontOfSize:SizeWidth(12)];
-    headLab.textAlignment = NSTextAlignmentCenter;
-    headLab.text = @"------    最近留言记录    ------";
-    return headLab;
-    
+    if (section == 0) {
+        return [UIView new];
+    }else{
+        UILabel *headLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kScreenW, SizeWidth(55))];
+        headLab.textColor = RGB(204, 204, 204);
+        headLab.font = [UIFont systemFontOfSize:SizeWidth(12)];
+        headLab.textAlignment = NSTextAlignmentCenter;
+        headLab.text = @"------    最近留言记录    ------";
+        return headLab;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{

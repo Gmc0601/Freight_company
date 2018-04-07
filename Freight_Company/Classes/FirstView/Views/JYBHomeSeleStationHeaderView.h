@@ -14,8 +14,6 @@
 
 @property (nonatomic ,strong)UITextField    *myTextField;
 
-@property (nonatomic ,strong)UIButton       *searchBtn;
-
 @property (nonatomic ,strong)UIButton       *arrowBtn;
 
 @end

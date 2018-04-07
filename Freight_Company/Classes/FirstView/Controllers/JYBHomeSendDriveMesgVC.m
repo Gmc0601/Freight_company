@@ -9,6 +9,8 @@
 #import "JYBHomeSendDriveMesgVC.h"
 #import "JYBHomeHasDriveMsgCell.h"
 #import "JYBHomeSendDriveHeaderView.h"
+#import "JYBHomeDockWeightModel.h"
+#import "JYBHomeGoodWeightCell.h"
 
 @interface JYBHomeSendDriveMesgVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -20,6 +22,7 @@
 
 @property (nonatomic ,strong)NSMutableArray *dataArr;
 
+@property (nonatomic ,strong)NSMutableArray *dotArr;
 
 @end
 
@@ -61,6 +64,38 @@
                 [weak.dataArr addObject:sub];
             }
             [weak.myTableView reloadData];
+            [weak __fetchDoctWeightPriceData];
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+            [weak __fetchDoctWeightPriceData];
+        }
+    }];
+}
+
+
+- (void)__fetchDoctWeightPriceData{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic addUnEmptyString:self.prot_id forKey:@"port_id"];
+    
+    [ConfigModel showHud:self];
+    NSLog(@"~~~~para:%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Public/getDockWeightPrice" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            for (NSDictionary *subDic in datadic[@"data"]) {
+                JYBHomeDockWeightModel *model = [JYBHomeDockWeightModel modelWithDictionary:subDic];
+                [weak.dotArr addObject:model];
+            }
+            [weak.myTableView reloadData];
             
         }else {
             NSString *str = datadic[@"msg"];
@@ -69,51 +104,74 @@
     }];
 }
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return SizeWidth(55);
+    if (section == 0) {
+        return CGFLOAT_MIN;
+    }else{
+        return SizeWidth(55);
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UILabel *headLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kScreenW, SizeWidth(55))];
-    headLab.textColor = RGB(204, 204, 204);
-    headLab.font = [UIFont systemFontOfSize:SizeWidth(12)];
-    headLab.textAlignment = NSTextAlignmentCenter;
-    headLab.text = @"------    最近留言记录    ------";
-    return headLab;
-    
+    if (section == 0) {
+        return [UIView new];
+    }else{
+        UILabel *headLab = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, kScreenW, SizeWidth(55))];
+        headLab.textColor = RGB(204, 204, 204);
+        headLab.font = [UIFont systemFontOfSize:SizeWidth(12)];
+        headLab.textAlignment = NSTextAlignmentCenter;
+        headLab.text = @"------    最近留言记录    ------";
+        return headLab;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    
-    return self.dataArr.count;
+    if (section == 0) {
+        return 1;
+    }else{
+        return self.dataArr.count;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return UITableViewAutomaticDimension;
+    if (indexPath.section == 0) {
+        return (self.dotArr.count/4 +((self.dotArr.count%4 == 0)?0:1))*SizeWidth(75);
+    }else{
+        return UITableViewAutomaticDimension;
+    }
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-    JYBHomeHasDriveMsgCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeHasDriveMsgCell class]) forIndexPath:indexPath];
-    
-    cell.contentLab.text = [self.dataArr objectAtIndex:indexPath.row];
-    
-    return cell;
-    
+    if (indexPath.section == 0) {
+        JYBHomeGoodWeightCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeGoodWeightCell class]) forIndexPath:indexPath];
+        [cell updateCellWithArr:self.dotArr];
+        WeakSelf(weak)
+        [cell setWeightBlock:^(JYBHomeDockWeightModel *model) {
+            weak.headerView.inputTextView.text = [weak.headerView.inputTextView.text stringByAppendingString:model.weight_desc];            
+        }];
+        return cell;
+    }else{
+        JYBHomeHasDriveMsgCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeHasDriveMsgCell class]) forIndexPath:indexPath];
+        
+        cell.contentLab.text = [self.dataArr objectAtIndex:indexPath.row];
+        
+        return cell;
+    }
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    NSString *mes = [self.dataArr objectAtIndex:indexPath.row];
-    self.headerView.inputTextView.text = mes;
-
+    if (indexPath.section == 0) {
+        
+    }else{
+        NSString *mes = [self.dataArr objectAtIndex:indexPath.row];
+        self.headerView.inputTextView.text = [self.headerView.inputTextView.text stringByAppendingString:mes];
+    }
 }
 
 - (void)commitBtnAction{
@@ -142,6 +200,9 @@
         
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_myTableView registerClass:[JYBHomeHasDriveMsgCell class] forCellReuseIdentifier:NSStringFromClass([JYBHomeHasDriveMsgCell class])];
+        [_myTableView registerClass:[JYBHomeGoodWeightCell class] forCellReuseIdentifier:NSStringFromClass([JYBHomeGoodWeightCell class])];
+
+        
     }
     return _myTableView;
 }
@@ -160,6 +221,13 @@
         _dataArr = [[NSMutableArray alloc] init];
     }
     return _dataArr;
+}
+
+- (NSMutableArray *)dotArr{
+    if (!_dotArr) {
+        _dotArr = [[NSMutableArray alloc] init];
+    }
+    return _dotArr;
 }
 
 - (UIView *)bottomView{

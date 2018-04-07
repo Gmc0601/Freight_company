@@ -10,6 +10,11 @@
 #import "CCBaseViewController.h"
 #import <JavaScriptCore/JavaScriptCore.h>
 
+typedef enum : NSUInteger {
+    CCWebViewViewTypeNormal,
+    CCWebViewViewTypePrice,
+} CCWebViewViewType;
+
 @protocol JSObjcDelegate <JSExport>
 
 - (void)getUserToken;
@@ -24,6 +29,8 @@
 @end
 
 @interface CCWebViewViewController : CCBaseViewController
+
+@property (nonatomic ,assign)CCWebViewViewType type;
 
 @property (nonatomic, copy) NSString *UrlStr;
 

@@ -54,16 +54,40 @@
 
 - (void)loadWebView {
     
-    if (self.content) {
-      [self.webView loadHTMLString:self.content baseURL:nil];
-    }else {
-        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.UrlStr]];
-        [self.webView loadRequest:request];
-        [self.webView reload];
+    if (self.type == CCWebViewViewTypeNormal) {
+        if (self.content) {
+            [self.webView loadHTMLString:self.content baseURL:nil];
+        }else {
+            NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.UrlStr]];
+            [self.webView loadRequest:request];
+            [self.webView reload];
+        }
+    }else{
+        
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        
+        [ConfigModel showHud:self];
+        NSLog(@"~~~~para:%@", dic);
+        WeakSelf(weak)
+        [HttpRequest postPath:@"/Home/Public/jgmx" params:dic resultBlock:^(id responseObject, NSError *error) {
+            [ConfigModel hideHud:weak];
+            NSLog(@"%@", responseObject);
+            if([error isEqual:[NSNull null]] || error == nil){
+                NSLog(@"success");
+            }
+            NSDictionary *datadic = responseObject;
+            if ([datadic[@"success"] intValue] == 1) {
+                [self.webView loadHTMLString:datadic[@"data"] baseURL:nil];
+                
+            }else {
+                NSString *str = datadic[@"msg"];
+                [ConfigModel mbProgressHUD:str andView:nil];
+            }
+        }];
+        
+        
     }
-    
-    
-   
+
 }
 
 

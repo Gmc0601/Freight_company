@@ -58,7 +58,7 @@
     [self.desLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.contentView);
         make.right.equalTo(self.arrowBtn.mas_left);
-        make.width.mas_greaterThanOrEqualTo(10);
+        make.left.equalTo(self.titleLab.mas_right).offset(10);
     }];
     
     [self.contentView addLineWithInset:UIEdgeInsetsMake(-1, SizeWidth(15), 0, -SizeWidth(15))];
@@ -70,19 +70,21 @@
     [self.iconBtn setImage:[UIImage imageNamed:icon] forState:UIControlStateNormal];
     
     if (type == JYBHomeInproveBoxTime) {
-        self.titleLab.text = [NSString stringWithFormat:@"%@  %@",title,([NSString stringIsNilOrEmpty:value]?@"":value)];
-        self.desLab.textColor = RGB(162, 162, 162);
-        self.desLab.text = [NSString stringIsNilOrEmpty:value]?@"选择时间":@"点击修改";
+        self.titleLab.text = title;
+        self.desLab.textColor = [NSString stringIsNilOrEmpty:value]?RGB(162, 162, 162):RGB(52, 52, 52);
+        self.desLab.text = [NSString stringIsNilOrEmpty:value]?@"选择时间":value;
         
     }else{
         self.titleLab.text = title;
-        if (indexPath.row == 0) {
-            self.desLab.text = [NSString stringIsNilOrEmpty:value]?@"重量、码头等费用":value;
-        }else if (indexPath.row ==1){
-            self.desLab.text = [NSString stringIsNilOrEmpty:value]?@"货物类型、特殊情况":value;
-        }else{
-            self.desLab.text = [NSString stringIsNilOrEmpty:value]?@"选择我的司机":value;
-        }
+        self.desLab.textColor = [NSString stringIsNilOrEmpty:value]?RGB(162, 162, 162):RGB(52, 52, 52);
+        self.desLab.text = [NSString stringIsNilOrEmpty:value]?@"货重，特殊情况等":value;
+
+//        if (indexPath.row == 0) {
+//            self.desLab.text = [NSString stringIsNilOrEmpty:value]?@"重量、码头等费用":value;
+//        }else if (indexPath.row ==1){
+//        }else{
+//            self.desLab.text = [NSString stringIsNilOrEmpty:value]?@"选择我的司机":value;
+//        }
 
     }
 }
@@ -117,6 +119,7 @@
         _desLab = [[UILabel alloc] init];
         _desLab.font = [UIFont systemFontOfSize:SizeWidth(13)];
         _desLab.textColor = RGB(162, 162, 162);
+        _desLab.textAlignment = NSTextAlignmentRight;
     }
     return _desLab;
 }

@@ -11,15 +11,13 @@
 
 @protocol JYBHomeEditPacktingDelegate <NSObject>
 
-- (void)portPackStationSel:(JYBHomeShipAddressModel *)packStation index:(NSIndexPath *)index;
+- (void)portPackStationSel:(JYBHomeShipAddressModel *)packStation;
 
 @end
 
 @interface JYBHomeEditPacktingListVC : CCBaseViewController
 
-@property (nonatomic ,strong)NSString   *shipment_address_id;
-
-@property (nonatomic ,strong)NSIndexPath        *indexPath;
+@property (nonatomic ,strong)JYBHomeShipAddressModel *shipAddressModel;
 
 @property (nonatomic ,weak)id <JYBHomeEditPacktingDelegate>delegate;
 

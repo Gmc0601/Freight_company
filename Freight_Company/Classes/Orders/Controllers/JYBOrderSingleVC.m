@@ -12,6 +12,10 @@
 #import "JYBOrderDetailVC.h"
 #import "JYBOrderListModel.h"
 #import "TBRefresh.h"
+#import "CPConfig.h"
+#import "JYBHomeImproveBoxInfoVC.h"
+#import "JYBOrderBoxAddressModel.h"
+#import "JYBHomeShipAddressModel.h"
 
 @interface JYBOrderSingleVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -34,17 +38,20 @@
 
 - (void)__fetchOrderList{
     
+//    JYBOrderTypeAll,      //
+//    JYBOrderTypeHasPai,   //已接单
+//    JYBOrderTypeIng,      //进行中
+//    JYBOrderTypeReviced,  //已到港
+    
     NSString *status;
     if (self.type == JYBOrderTypeAll) {
         status = @"";
-    }else if (self.type == JYBOrderTypeWait){
-        status = @"0";
-    }else if (self.type == JYBOrderTypePai){
-        status = @"10";
-    }else if (self.type == JYBOrderTypeReviced){
+    }else if (self.type == JYBOrderTypeHasPai){
         status = @"20";
-    }else{
+    }else if (self.type == JYBOrderTypeIng){
         status = @"30";
+    }else{
+        status = @"40";
     }
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
@@ -150,15 +157,100 @@
 }
 
 - (void)__orderWithModel:(JYBOrderListModel *)model{
+    JYBHomeImproveBoxInfoVC *vc = [[JYBHomeImproveBoxInfoVC alloc] init];
+    vc.startTime = model.shipment_time;
+    vc.endTime = model.cutoff_time;
+    vc.seleMessage = model.message;
+    vc.sepc = [self __getSpec:model.order_type];
+    CPHomeBoxAddressModel *boxAddressModel = [[CPHomeBoxAddressModel alloc] init];
+    boxAddressModel.box_address_id = model.box_address_id;
+    boxAddressModel.tiOrderNum = model.pick_no;
+    JYBHomePortModel *portModel = [[JYBHomePortModel alloc] init];
+    portModel.port_id = model.port_id;
+    portModel.port_name = model.port_name;
+    boxAddressModel.portModel = portModel;
+    vc.seleBoxAddreModel = boxAddressModel;
+
+    NSMutableArray *shipArr = [[NSMutableArray alloc] init];
+    for (JYBOrderBoxAddressModel *shipModel in model.shipment_address) {
+        JYBHomeShipAddressModel *model = [[JYBHomeShipAddressModel alloc] init];
+        
+        model.shipment_address_id = shipModel.shipment_address_id;
+        model.province = shipModel.province;
+        model.city = shipModel.city;
+        model.address = shipModel.address;
+        model.address_desc = shipModel.address_desc;
+        model.lon = shipModel.lon;
+        model.lat = shipModel.lat;
+        model.shipment_linkman = shipModel.shipment_linkman;
+        model.shipment_linkman_phone = shipModel.shipment_linkman_phone;
+        model.loadarea_name = shipModel.loadarea_name;
+        model.loadarea_id = shipModel.loadarea_id;
+        
+        [shipArr addObject:model];
+    }
+    vc.seleStationArr = shipArr;
     
+    [self.navigationController pushViewController:vc animated:YES];
 }
+
+- (NSString *)__getSpec:(NSString *)sepc{
+    
+    if ([sepc isEqualToString:@"small_carpool"]) {
+        return @"1x20GP(拼)";
+    }else if ([sepc isEqualToString:@"small_single"]){
+        return @"1x20GP";
+    }else if ([sepc isEqualToString:@"big_cabinet"]){
+        return @"1x40GP";
+    }else if ([sepc isEqualToString:@"tall_cabinet"]){
+        return @"1x40HQ";
+    }else{
+        return @"1x45HQ";
+    }
+}
+
 
 - (void)__payWithModel:(JYBOrderListModel *)model{
     WeakObj(self);
-    [[[JYBOrderPayPopView alloc] initWithClickAction:^{
-        
+    [[[JYBOrderPayPopView alloc] initWithPayAmount:model.order_price.floatValue totalAmount:[[CPConfig sharedManager] totalAmount].floatValue ClickAction:^{
+        [selfWeak __payOrderWithModel:model];
+
     }] show];
 }
+
+
+- (void)__payOrderWithModel:(JYBOrderListModel *)model{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    [dic addUnEmptyString:model.order_id forKey:@"order_id"];
+    
+    [ConfigModel showHud:self];
+    NSLog(@"%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Order/payOrder" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        [weak.myTableView.header endHeadRefresh];
+        [weak.myTableView.footer endFooterRefreshing];
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+            weak.currentPage = 1;
+            [weak __fetchOrderList];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
+    
+    
+}
+
 
 - (UITableView *)myTableView{
     if (!_myTableView) {

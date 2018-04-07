@@ -28,7 +28,6 @@
     [self addSubview:self.cityBtn];
     [self addSubview:self.arrowBtn];
     [self addSubview:self.myTextField];
-    [self addSubview:self.searchBtn];
     
     [self.cityBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.top.bottom.equalTo(self);
@@ -45,14 +44,7 @@
         make.left.equalTo(self.arrowBtn.mas_right).offset(SizeWidth(10));
         make.right.equalTo(self).offset(-SizeWidth(90));
     }];
-    [self.searchBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(SizeWidth(40));
-        make.width.mas_equalTo(SizeWidth(70));
-        make.right.equalTo(self).offset(-SizeWidth(10));
-        make.centerY.equalTo(self);
-    }];
-    
-    
+
     [self addLineWithInset:UIEdgeInsetsMake(-1, 0, 0, 0)];
 }
 
@@ -77,23 +69,12 @@
 - (UITextField *)myTextField{
     if (!_myTextField) {
         _myTextField = [[UITextField alloc] init];
-        _myTextField.placeholder = @"输入集箱点,如绍兴";
+        _myTextField.placeholder = @"请选择以下装箱区域";
         _myTextField.font = [UIFont systemFontOfSize:SizeWidth(15)];
+        _myTextField.enabled = NO;
     }
     return _myTextField;
 }
 
-- (UIButton *)searchBtn{
-    if (!_searchBtn) {
-        _searchBtn = [[UIButton alloc] init];
-        [_searchBtn setTitleColor:RGB(52, 52, 52) forState:UIControlStateNormal];
-        [_searchBtn setTitle:@"搜索" forState:UIControlStateNormal];
-        _searchBtn.titleLabel.font = [UIFont systemFontOfSize:SizeWidth(13)];
-        _searchBtn.backgroundColor = RGB(246, 246, 246);
-        _searchBtn.layer.cornerRadius = 3;
-        _arrowBtn.layer.masksToBounds = YES;
-    }
-    return _searchBtn;
-}
 
 @end

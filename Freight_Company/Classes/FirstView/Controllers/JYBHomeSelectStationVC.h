@@ -15,7 +15,7 @@
 @optional
 - (void)selectStationModel:(JYBHomeStationSeleModel *)model;
 
-- (void)selectPoint:(AMapTip *)point provice:(NSString *)provice city:(NSString *)city;
+- (void)selectPoint:(AMapTip *)point;
 
 @end
 
@@ -24,5 +24,10 @@
 @property (nonatomic ,assign)BOOL   isPoint;
 
 @property (nonatomic ,weak)id <JYBHomeSelectStationVCDelegate>delegate;
+
+@property (nonatomic ,strong)NSString   *city;
+
+@property (nonatomic ,strong)NSString   *keyWords;
+
 
 @end
