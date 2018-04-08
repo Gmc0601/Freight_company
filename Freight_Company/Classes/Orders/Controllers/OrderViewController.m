@@ -75,9 +75,9 @@
 }
 
 - (void)backAction {
-    [[[JYBAlertView alloc] initWithTitle:@"确定联系平台客服？" message:@"400-9999-0000" cancelItem:@"取消" sureItem:@"确认" clickAction:^(NSInteger index) {
+    [[[JYBAlertView alloc] initWithTitle:@"确定联系平台客服？" message:[ConfigModel getStringforKey:Servicephone] cancelItem:@"取消" sureItem:@"确认" clickAction:^(NSInteger index) {
         if (index == 1) {
-            NSString *phoneStr = [NSString stringWithFormat:@"tel://%@",@"400-9999-0000"];
+            NSString *phoneStr = [NSString stringWithFormat:@"tel://%@",[ConfigModel getStringforKey:Servicephone]];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneStr]];
         }
     }] show];

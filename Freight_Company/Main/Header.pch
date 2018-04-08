@@ -130,6 +130,8 @@
 
 #define UserId @"user_id"
 
+#define Servicephone @"Servicephone"  //   客服电话 
+
 
 
 #endif /* Header_pch */

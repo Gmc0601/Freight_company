@@ -18,6 +18,8 @@
 #import "JYBHomeImproveBoxInfoVC.h"
 #import "CCWebViewViewController.h"
 #import "JYBHomeSelectStationVC.h"
+#import "LoginViewController.h"
+#import <MJExtension.h>
 
 
 //model
@@ -26,6 +28,7 @@
 #import "JYBHomeQuickOrderPriceModel.h"
 #import "JYBHomeQuickModel.h"
 #import "CPConfig.h"
+
 
 
 
@@ -72,6 +75,8 @@
 }
 
 - (void)__fetchBannerData{
+    
+    
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     
@@ -147,6 +152,22 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    //   插 一个获取个人信息
+    [HttpRequest postPath:@"/Home/User/getUserInfo" params:nil resultBlock:^(id responseObject, NSError *error) {
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            NSDictionary *data = datadic[@"data"];
+            UserModel *user = [UserModel mj_objectWithKeyValues:data];
+            [[CPConfig sharedManager] saveTotalAmount:user.company_info.total_amount];
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
 }
 
 - (void)navigation {
@@ -173,9 +194,9 @@
 //  客服
 -(void)backAction {
     
-    [[[JYBAlertView alloc] initWithTitle:@"确定联系平台客服？" message:@"400-9999-0000" cancelItem:@"取消" sureItem:@"确认" clickAction:^(NSInteger index) {
+    [[[JYBAlertView alloc] initWithTitle:@"确定联系平台客服？" message:[ConfigModel getStringforKey:Servicephone] cancelItem:@"取消" sureItem:@"确认" clickAction:^(NSInteger index) {
         if (index == 1) {
-            NSString *phoneStr = [NSString stringWithFormat:@"tel://%@",@"400-9999-0000"];
+            NSString *phoneStr = [NSString stringWithFormat:@"tel://%@",[ConfigModel getStringforKey:Servicephone]];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:phoneStr]];
         }
     }] show];

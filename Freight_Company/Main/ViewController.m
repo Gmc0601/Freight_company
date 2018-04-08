@@ -20,16 +20,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [HttpRequest postPath:@"/Home/User/getUserInfo" params:nil resultBlock:^(id responseObject, NSError *error) {
-        NSLog(@"%@", responseObject);
+    //     客服电话
+    [HttpRequest postPath:@"/Home/Public/kfdh" params:nil resultBlock:^(id responseObject, NSError *error) {
         if([error isEqual:[NSNull null]] || error == nil){
             NSLog(@"success");
         }
         NSDictionary *datadic = responseObject;
         if ([datadic[@"success"] intValue] == 1) {
-            NSDictionary *data = datadic[@"data"];
-            UserModel *user = [UserModel mj_objectWithKeyValues:data];
-            [[CPConfig sharedManager] saveTotalAmount:user.company_info.total_amount];
+            NSString *data = datadic[@"data"];
+            [ConfigModel saveString:data forKey:Servicephone];
         }else {
             NSString *str = datadic[@"msg"];
             [ConfigModel mbProgressHUD:str andView:nil];
