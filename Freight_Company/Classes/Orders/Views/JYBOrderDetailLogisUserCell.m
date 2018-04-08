@@ -77,7 +77,7 @@
 
     [self.iconImageView setImageWithURL:[NSURL URLWithString:model.driver_phone] placeholder:[UIImage imageNamed:@"grzx_icon_68  (2)"]];
     self.nameLab.text = model.driver_name;
-    self.numLab.text = model.driver_id;
+    self.numLab.text = model.car_no;
 
 }
 

@@ -147,6 +147,7 @@
 		F62B77A92078D4A6005AC91A /* JYBHomeImproveBoxInfoBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77A82078D4A6005AC91A /* JYBHomeImproveBoxInfoBottomView.m */; };
 		F62B77AC2078F8B1005AC91A /* CPConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77AB2078F8B1005AC91A /* CPConfig.m */; };
 		F62B77AF20792725005AC91A /* JYBOrderLogisMapViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77AE20792725005AC91A /* JYBOrderLogisMapViewCell.m */; };
+		F62B77B2207A90B8005AC91A /* JYBOrderMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77B1207A90B8005AC91A /* JYBOrderMapVC.m */; };
 		F658428F2033089D0040B194 /* JYBOrderDetailLogisUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F658428E2033089D0040B194 /* JYBOrderDetailLogisUserCell.m */; };
 		F6584292203308C00040B194 /* JYBOrderDetailLogisInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6584291203308C00040B194 /* JYBOrderDetailLogisInfoCell.m */; };
 		F6584295203308DE0040B194 /* JYBOrderDetailAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6584294203308DE0040B194 /* JYBOrderDetailAddressCell.m */; };
@@ -441,6 +442,8 @@
 		F62B77AB2078F8B1005AC91A /* CPConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPConfig.m; sourceTree = "<group>"; };
 		F62B77AD20792725005AC91A /* JYBOrderLogisMapViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderLogisMapViewCell.h; sourceTree = "<group>"; };
 		F62B77AE20792725005AC91A /* JYBOrderLogisMapViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderLogisMapViewCell.m; sourceTree = "<group>"; };
+		F62B77B0207A90B8005AC91A /* JYBOrderMapVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderMapVC.h; sourceTree = "<group>"; };
+		F62B77B1207A90B8005AC91A /* JYBOrderMapVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderMapVC.m; sourceTree = "<group>"; };
 		F658428D2033089D0040B194 /* JYBOrderDetailLogisUserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderDetailLogisUserCell.h; sourceTree = "<group>"; };
 		F658428E2033089D0040B194 /* JYBOrderDetailLogisUserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderDetailLogisUserCell.m; sourceTree = "<group>"; };
 		F6584290203308C00040B194 /* JYBOrderDetailLogisInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderDetailLogisInfoCell.h; sourceTree = "<group>"; };
@@ -896,6 +899,8 @@
 				F612172F2033BC6C002D762A /* JYBOrderLogisInfoVC.m */,
 				F612173D2033DC60002D762A /* JYBOrderOtherCostVC.h */,
 				F612173E2033DC60002D762A /* JYBOrderOtherCostVC.m */,
+				F62B77B0207A90B8005AC91A /* JYBOrderMapVC.h */,
+				F62B77B1207A90B8005AC91A /* JYBOrderMapVC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1378,6 +1383,7 @@
 				427C6977200C98C5006A9EBB /* UIView+TBFrame.m in Sources */,
 				F61B847D202FBF7D003AF684 /* JYBHomePackingInputCell.m in Sources */,
 				F61B8461202E8FB5003AF684 /* JYBHomeTitleCell.m in Sources */,
+				F62B77B2207A90B8005AC91A /* JYBOrderMapVC.m in Sources */,
 				F62B77A62078C6E1005AC91A /* JYBHomeSelePointHeaderView.m in Sources */,
 				427C6961200C98C4006A9EBB /* SBJSON.m in Sources */,
 				F6584292203308C00040B194 /* JYBOrderDetailLogisInfoCell.m in Sources */,

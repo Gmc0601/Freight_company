@@ -1,56 +1,61 @@
 //
-//  JYBOrderLogisMapViewCell.m
+//  JYBOrderMapVC.m
 //  Freight_Company
 //
-//  Created by ToneWang on 2018/4/8.
+//  Created by ToneWang on 2018/4/9.
 //  Copyright © 2018年 cc. All rights reserved.
 //
 
-#import "JYBOrderLogisMapViewCell.h"
+#import "JYBOrderMapVC.h"
 #import "MAMapView.h"
 #import <MAMapKit/MAMapKit.h>
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import "JYBOrderBoxAddressModel.h"
 
-@interface JYBOrderLogisMapViewCell ()<MAMapViewDelegate>
+@interface JYBOrderMapVC ()<MAMapViewDelegate>
 
 @property (nonatomic ,strong)MAMapView *mapView;
 
+@property (nonatomic ,strong)UIButton *backBtn;
 
 @end
 
-@implementation JYBOrderLogisMapViewCell
+@implementation JYBOrderMapVC
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        [self p_initUI];
-    }
-    return self;
-}
+- (void)viewDidLoad {
+    [super viewDidLoad];
 
-- (void)p_initUI{
+    [self resetFather];
     
-    [self.contentView addSubview:self.mapView];
+    [self.view addSubview:self.mapView];
+    
+    
+    [self.view addSubview:self.backBtn];
+    
+    
+    [self setUIWithModel:self.listModel];
+    
 }
 
-- (void)updateCellWithModel:(JYBOrderListModel *)model{
+- (void)resetFather {
+    self.navigationView.hidden = YES;
+    
+}
+
+- (void)setUIWithModel:(JYBOrderListModel *)model{
     
     JYBOrderBoxAddressModel *shipModel = [model.shipment_address firstObject];
     
     CLLocation *location = [[CLLocation alloc] initWithLatitude:shipModel.lat.floatValue longitude:shipModel.lon.floatValue];
-
+    
     MAPointAnnotation *pointAnnotaiton = [[MAPointAnnotation alloc] init];
     [pointAnnotaiton setCoordinate:location.coordinate];
-
+    
     [self.mapView addAnnotation:pointAnnotaiton];
     
     [self.mapView setCenterCoordinate:location.coordinate];
     
-    
     [self.mapView setZoomLevel:12 animated:NO];
-    
-    self.mapView.frame = CGRectMake(0, 0, kScreenW, SizeWidth(150));
 }
 
 /*!
@@ -81,16 +86,26 @@
 }
 
 
-
 - (MAMapView *)mapView{
     if(!_mapView){
-       _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, SizeWidth(150))];
+        _mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
         [_mapView setDelegate:self];
-        _mapView.userInteractionEnabled = NO;
-
     }
     
     return _mapView;
+}
+
+- (void)backAction{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (UIButton *)backBtn{
+    if (!_backBtn) {
+        _backBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 30, 44, 44)];
+        [_backBtn setImage:[UIImage imageNamed:@"qpdt_icon_fh"] forState:UIControlStateNormal];
+        [_backBtn addTarget:self action:@selector(backAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _backBtn;
 }
 
 @end

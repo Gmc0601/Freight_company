@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "JYBOrderListModel.h"
 @interface JYBOrderLogisMapViewCell : UITableViewCell
+
+- (void)updateCellWithModel:(JYBOrderListModel *)model;
 
 @end

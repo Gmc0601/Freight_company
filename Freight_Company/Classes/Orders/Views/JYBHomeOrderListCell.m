@@ -250,6 +250,20 @@
         }
             //再次下单 。 联系司机
             break;
+        case 32:
+        {
+            self.leftBtn.hidden = NO;
+            self.rightBtn.hidden = NO;
+            [self.leftBtn setTitle:@"再次下单" forState:UIControlStateNormal];
+            [self.leftBtn setTitleColor:RGB(52, 52, 52) forState:UIControlStateNormal];
+            self.leftBtn.layer.borderColor = RGB(52, 52, 52).CGColor;
+            [self.rightBtn setTitle:@"联系司机" forState:UIControlStateNormal];
+            [self.rightBtn setTitleColor:RGB(55, 164, 242) forState:UIControlStateNormal];
+            self.rightBtn.layer.borderColor = RGB(55, 164, 242).CGColor;
+            return @"已到港待支付(额外费用已拒绝)";
+        }
+            //再次下单 。 联系司机
+            break;
         case 40:
         {
             self.leftBtn.hidden = NO;
@@ -317,6 +331,14 @@
             //再次下单 。 联系司机
             break;
         case 30:
+            action = JYBHomeOrderListActionContact;
+            //再次下单 。 联系司机
+            break;
+        case 31:
+            action = JYBHomeOrderListActionContact;
+            //再次下单 。 联系司机
+            break;
+        case 32:
             action = JYBHomeOrderListActionContact;
             //再次下单 。 联系司机
             break;

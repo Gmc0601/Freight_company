@@ -22,6 +22,7 @@
 #import "JYBOrderPayPopView.h"
 #import "CPConfig.h"
 #import "JYBOrderLogisMapViewCell.h"
+#import "JYBOrderMapVC.h"
 
 typedef enum : NSUInteger {
     JYBOrderDetailTypeLogisUser,
@@ -122,7 +123,7 @@ typedef enum : NSUInteger {
     
     switch (model.order_status.integerValue) {
         case 0:
-            return @"待支付";
+            return @"待确认";
             break;
         case 10:
             return @"派单中";
@@ -135,6 +136,9 @@ typedef enum : NSUInteger {
             break;
         case 31:
             return @"已进港待支付(额外费用待审核)";
+            break;
+        case 32:
+            return @"已进港待支付(额外费用已拒绝)";
             break;
         case 40:
             return @"已到港";
@@ -320,7 +324,6 @@ typedef enum : NSUInteger {
     if (section == JYBOrderDetailTypeLogisUser) {
         return [NSString stringIsNilOrEmpty:self.detailModel.driver_id]?0:1;
     }else if (section == JYBOrderDetailTypeLogisInfo){
-        return 2;
         return self.detailModel.logistics.count?2:0;
     }else if (section == JYBOrderDetailTypeAddressInfo){
         return self.detailModel.shipment_address.count + 1;
@@ -331,13 +334,15 @@ typedef enum : NSUInteger {
     }else if (section == JYBOrderDetailTypeCostInfo){
         return 2;
     }else{
-        return [NSString stringIsNilOrEmpty:self.detailModel.other_price]?0:1;
+        return ([NSString stringIsNilOrEmpty:self.detailModel.other_price] || self.detailModel.other_price.floatValue <= 0)?0:1;
     }
 }
 
 - (NSInteger)__fetchTypeBoxInfoNum{
     if (self.detailModel) {
-        if (self.detailModel.order_status.integerValue == 30 || self.detailModel.order_status.integerValue == 31 || self.detailModel.order_status.integerValue == 40 || self.detailModel.order_status.integerValue == 50 ) {
+        if (self.detailModel.order_status.integerValue == 30 || self.detailModel.order_status.integerValue == 31 ||
+            self.detailModel.order_status.integerValue == 32 ||
+            self.detailModel.order_status.integerValue == 40 || self.detailModel.order_status.integerValue == 50 ) {
             if (self.detailModel.box_img.count) {
                 return 6;
             }else{
@@ -428,6 +433,7 @@ typedef enum : NSUInteger {
             return cell;
         }else{
             JYBOrderLogisMapViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderLogisMapViewCell class]) forIndexPath:indexPath];
+            [cell updateCellWithModel:self.detailModel];
             return cell;
         }
 
@@ -494,9 +500,16 @@ typedef enum : NSUInteger {
     if (indexPath.section == JYBOrderDetailTypeLogisUser) {
 
     }else if (indexPath.section == JYBOrderDetailTypeLogisInfo){
-        JYBOrderLogisInfoVC *vc = [[JYBOrderLogisInfoVC alloc] init];
-        vc.orderModel = self.detailModel;
-        [self.navigationController pushViewController:vc animated:YES];
+        if (indexPath.row == 0) {
+            JYBOrderLogisInfoVC *vc = [[JYBOrderLogisInfoVC alloc] init];
+            vc.orderModel = self.detailModel;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            JYBOrderMapVC *vc = [[JYBOrderMapVC alloc] init];
+            vc.listModel = self.detailModel;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+
         
     }else if (indexPath.section == JYBOrderDetailTypeAddressInfo){
 

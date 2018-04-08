@@ -14,7 +14,7 @@
 #import "JYBHomeSeleStaionCell.h"
 #import "JYBHomeSelePointHeaderView.h"
 
-@interface JYBHomeSelectStationVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface JYBHomeSelectStationVC ()<UITableViewDelegate,UITableViewDataSource,AMapSearchDelegate>
 
 @property (nonatomic ,strong)JYBHomeSeleStationHeaderView *headerView;
 
@@ -80,6 +80,9 @@
 
 
 - (void)searchStationAddressWithKeyWord:(NSString *)keyWord{
+    
+    self.search = [[AMapSearchAPI alloc] init];
+    self.search.delegate = self;
     
     AMapInputTipsSearchRequest *tips = [[AMapInputTipsSearchRequest alloc] init];
     tips.keywords = [NSString stringIsNilOrEmpty:self.pointHeaderView.myTextField.text]?self.keyWords:self.headerView.myTextField.text;

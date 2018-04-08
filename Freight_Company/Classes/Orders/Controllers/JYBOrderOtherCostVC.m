@@ -58,7 +58,7 @@
     if (indexPath.row == 4) {
         return UITableViewAutomaticDimension;
     }else if (indexPath.row == 5){
-        return SizeWidth(100);
+        return SizeWidth(110);
     }else{
         return SizeWidth(45);
     }

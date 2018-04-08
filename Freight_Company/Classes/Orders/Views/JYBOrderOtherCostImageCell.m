@@ -75,8 +75,8 @@
     
     [self.myCollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLab.mas_bottom);
-        make.right.and.bottom.equalTo(self.contentView);
-        make.left.equalTo(self.contentView).offset(SizeWidth(50));
+        make.left.right.equalTo(self.contentView);
+        make.bottom.equalTo(self.contentView).offset(-SizeWidth(10));
     }];
     
     
