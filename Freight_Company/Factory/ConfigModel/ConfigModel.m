@@ -8,7 +8,17 @@
 
 #import "ConfigModel.h"
 #import <MBProgressHUD.h>
+#import "LoginViewController.h"
 @implementation ConfigModel
+
++ (BOOL)haveLogin:(UIViewController *)vc {
+    if (![ConfigModel getBoolObjectforKey:IsLogin]) {
+        [vc presentViewController:[LoginViewController new] animated:YES completion:nil];
+        return NO;
+    }else {
+        return YES;
+    }
+}
 
 + (void)showHud:(UIViewController *)vc {
     [MBProgressHUD showHUDAddedTo:vc.view animated:YES];

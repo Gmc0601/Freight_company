@@ -18,6 +18,7 @@
 #import "SystemMessageViewController.h"
 #import <MJExtension.h>
 #import <UIImageView+WebCache.h>
+#import "CPConfig.h"
 
 
 @interface MeViewController ()<UITableViewDelegate, UITableViewDataSource>{
@@ -103,6 +104,7 @@
             weak.nickName.text = user.user_name;
             weak.companyName.text = user.company_info.company_name;
             NSString *blanceStr = [NSString stringWithFormat:@"余额：￥%@", user.company_info.total_amount];
+            [[CPConfig sharedManager] saveTotalAmount:user.company_info.total_amount];
             weak.balanceLab.text = blanceStr;
         }else {
             NSString *str = datadic[@"msg"];

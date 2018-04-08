@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "ViewController.h"
 #import <AMapFoundationKit/AMapFoundationKit.h>
+#import "LoginViewController.h"
 
 @interface AppDelegate ()
 
@@ -28,7 +29,12 @@
         UITableView.appearance.estimatedSectionHeaderHeight = 0;
     }
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.rootViewController = [[ViewController alloc] init];
+    if (![ConfigModel getBoolObjectforKey:IsLogin]) {
+        UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:[LoginViewController new]];
+        self.window.rootViewController = na;
+    }else {
+        self.window.rootViewController = [ViewController new];
+    }
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     

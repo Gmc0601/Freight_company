@@ -46,7 +46,6 @@
 }
 
 - (NSString *)totalAmount{
-    return @"132454";
    return [[NSUserDefaults standardUserDefaults] objectForKey:@"totalAmount"];
 }
 

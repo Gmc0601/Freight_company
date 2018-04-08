@@ -58,13 +58,11 @@ static MainApi *request = nil;
     
 
     NSMutableDictionary *mutArr = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    [mutArr addEntriesFromDictionary:@{@"user_id":@"1"}];
 
         [mutArr addEntriesFromDictionary:@{@"apiCode":URLString}];
         if ([ConfigModel getBoolObjectforKey:IsLogin]) {
-//    if (YES) {
-//            NSString *usertoken = [ConfigModel getStringforKey:UserId];
-//            [mutArr addEntriesFromDictionary:@{@"user_id":usertoken}];
+            NSString *usertoken = [ConfigModel getStringforKey:UserId];
+            [mutArr addEntriesFromDictionary:@{@"user_id":usertoken}];
 
 #if UDID
             KeychainUUID *keychain = [[KeychainUUID alloc] init];

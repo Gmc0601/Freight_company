@@ -12,6 +12,7 @@
 #import "AddInfoViewController.h"
 #import <MJExtension.h>
 #import "ReviewViewController.h"
+#import "ViewController.h"
 
 
 @implementation UserModel
@@ -201,7 +202,7 @@
                     if ([user.company_info.company_status intValue] == 1) {
                         [ConfigModel saveString:user.user_id forKey:UserId];
                         [ConfigModel saveBoolObject:YES forKey:IsLogin];
-                        [self dismissViewControllerAnimated:YES completion:nil];
+                        [self presentViewController:[ViewController new] animated:YES completion:nil];
                     }else if ([user.company_info.company_status intValue] == 0 ){
                         vc.type = Reviewing;
                         [self.navigationController pushViewController:vc animated:YES];
