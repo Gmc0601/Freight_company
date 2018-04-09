@@ -9,7 +9,7 @@
 #import "ChangeSonMemberViewController.h"
 #import "AddInfoTableViewCell.h"
 
-@interface ChangeSonMemberViewController ()<UITableViewDelegate,  UITableViewDataSource>
+@interface ChangeSonMemberViewController ()<UITableViewDelegate,  UITableViewDataSource, UITextFieldDelegate>
 
 @property (nonatomic, retain) UITableView *noUseTableView;
 
@@ -48,7 +48,7 @@
     AddInfoTableViewCell *cell = [self.noUseTableView dequeueReusableCellWithIdentifier:cellId];
     if (!cell) {
         cell = [[AddInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
-        UILabel *line = [[UILabel alloc] initWithFrame:FRAME(0, SizeHeight(55) - 1, kScreenW, 1)];
+        UILabel *line = [[UILabel alloc] initWithFrame:FRAME(0, 55 - 1, kScreenW, 1)];
         line.backgroundColor = RGB(239, 240, 241);
         [cell.contentView addSubview:line];
     }
@@ -56,6 +56,9 @@
         self.text1 = cell.text;
     }else {
         self.text2 = cell.text;
+        self.text2.keyboardType = UIKeyboardTypeNumberPad;
+        self.text2.delegate = self;
+    
     }
     if (self.type == ChangeInfo) {
         self.text1.text = self.model.company_user_name;
@@ -71,10 +74,24 @@
     return cell;
     
 }
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+
+{
+    
+    if (textField == self.text2) {
+        
+        if (textField.text.length >= 11) return NO;
+        
+    }
+    
+
+    return YES;
+    
+}
 
 #pragma mark - UITableDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return SizeHeight(55);
+    return 55;
 }
 
 
@@ -136,12 +153,23 @@
         [ConfigModel mbProgressHUD:@"请输入手机号" andView:nil];
     }
 //    company_user_id   ...  子账号user_id 编辑时必填
-    NSDictionary* dic = @{
-                          @"company_user_name" : self.text1.text,
-                          @"company_user_phone" : self.text2.text
-                          };
+    NSDictionary *dic;
+    if (self.type == AddMember) {
+        dic = @{
+                @"company_user_name" : self.text1.text,
+                @"company_user_phone" : self.text2.text
+                };
+    }else {
+        dic = @{
+                @"company_user_name" : self.text1.text,
+                @"company_user_phone" : self.text2.text,
+                @"company_user_id" : self.model.company_user_id
+                };
+    }
     
-    [HttpRequest postPath:@"" params:dic resultBlock:^(id responseObject, NSError *error) {
+    
+    
+    [HttpRequest postPath:@"Home/User/addEditUser" params:dic resultBlock:^(id responseObject, NSError *error) {
         if([error isEqual:[NSNull null]] || error == nil){
             NSLog(@"success");
         }

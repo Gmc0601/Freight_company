@@ -68,6 +68,8 @@
 		427C699B200D9A19006A9EBB /* ReviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 427C6999200D9A19006A9EBB /* ReviewViewController.xib */; };
 		427C69A1200D9D0B006A9EBB /* NODataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C69A0200D9D0B006A9EBB /* NODataView.m */; };
 		427C69AC200EE277006A9EBB /* AddInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C69AB200EE277006A9EBB /* AddInfoTableViewCell.m */; };
+		42EC97EF207B4C5300B7043A /* SBMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EC97ED207B4C5300B7043A /* SBMessageViewController.m */; };
+		42EC97F0207B4C5300B7043A /* SBMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42EC97EE207B4C5300B7043A /* SBMessageViewController.xib */; };
 		B52FBD6EFDDB0053CDAD176F /* libPods-Freight_Company.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7531F0399824241557149359 /* libPods-Freight_Company.a */; };
 		F61080D8205998F3007781A0 /* JYBHomeBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F61080D7205998F3007781A0 /* JYBHomeBannerModel.m */; };
 		F61080DB20599CBF007781A0 /* JYBHomePortModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F61080DA20599CBF007781A0 /* JYBHomePortModel.m */; };
@@ -284,6 +286,9 @@
 		427C69A0200D9D0B006A9EBB /* NODataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NODataView.m; sourceTree = "<group>"; };
 		427C69AA200EE277006A9EBB /* AddInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddInfoTableViewCell.h; sourceTree = "<group>"; };
 		427C69AB200EE277006A9EBB /* AddInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInfoTableViewCell.m; sourceTree = "<group>"; };
+		42EC97EC207B4C5300B7043A /* SBMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBMessageViewController.h; sourceTree = "<group>"; };
+		42EC97ED207B4C5300B7043A /* SBMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBMessageViewController.m; sourceTree = "<group>"; };
+		42EC97EE207B4C5300B7043A /* SBMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SBMessageViewController.xib; sourceTree = "<group>"; };
 		4429C470FFB6F6CA84B03013 /* Pods-Freight_Company.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Freight_Company.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Freight_Company/Pods-Freight_Company.debug.xcconfig"; sourceTree = "<group>"; };
 		537AE1D939255ECA6F4D0FBB /* Pods-Freight_Company.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Freight_Company.release.xcconfig"; path = "Pods/Target Support Files/Pods-Freight_Company/Pods-Freight_Company.release.xcconfig"; sourceTree = "<group>"; };
 		7531F0399824241557149359 /* libPods-Freight_Company.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Freight_Company.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -855,6 +860,9 @@
 				42399AA22011A19E009263E5 /* ChangeSonMemberViewController.m */,
 				4268EE732011D49900091D5F /* SystemMessageViewController.h */,
 				4268EE742011D49900091D5F /* SystemMessageViewController.m */,
+				42EC97EC207B4C5300B7043A /* SBMessageViewController.h */,
+				42EC97ED207B4C5300B7043A /* SBMessageViewController.m */,
+				42EC97EE207B4C5300B7043A /* SBMessageViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1175,6 +1183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				427C68D4200C9849006A9EBB /* LaunchScreen.storyboard in Resources */,
+				42EC97F0207B4C5300B7043A /* SBMessageViewController.xib in Resources */,
 				F62B77A32075BAF5005AC91A /* bpCityList.plist in Resources */,
 				427C68D1200C9849006A9EBB /* Assets.xcassets in Resources */,
 				427C6990200CA5CA006A9EBB /* LoginViewController.xib in Resources */,
@@ -1337,6 +1346,7 @@
 				427C695B200C98C4006A9EBB /* TBRefreshFootView.m in Sources */,
 				427C695F200C98C4006A9EBB /* GTMBase64.m in Sources */,
 				F61080D8205998F3007781A0 /* JYBHomeBannerModel.m in Sources */,
+				42EC97EF207B4C5300B7043A /* SBMessageViewController.m in Sources */,
 				F6108128205CD914007781A0 /* JYBOrderListModel.m in Sources */,
 				F658429E2033094B0040B194 /* JYBOrderDetailCostCell.m in Sources */,
 				427C6972200C98C4006A9EBB /* TBTabBar.m in Sources */,
@@ -1527,6 +1537,7 @@
 			baseConfigurationReference = 4429C470FFB6F6CA84B03013 /* Pods-Freight_Company.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Guoping Ma (BZYPB6P24R)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guoping Ma (BZYPB6P24R)";
 				CODE_SIGN_STYLE = Manual;
@@ -1550,7 +1561,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cc.Freight-Company";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4bd57c64-e04f-489c-b963-de1c874b8e6c";
+				PROVISIONING_PROFILE = "218c81eb-c869-47f3-9cba-d8dbf4d591c8";
 				PROVISIONING_PROFILE_SPECIFIER = Fre_Company_dev;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "\"${SRCROOT}\"/** \"$(SRCROOT)/Pods/SDWebImage\"";
@@ -1562,6 +1573,7 @@
 			baseConfigurationReference = 537AE1D939255ECA6F4D0FBB /* Pods-Freight_Company.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Guoping Ma (BZYPB6P24R)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guoping Ma (BZYPB6P24R)";
 				CODE_SIGN_STYLE = Manual;

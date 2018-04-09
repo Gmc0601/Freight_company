@@ -9,6 +9,7 @@
 #import "OrderViewController.h"
 #import "HMSegmentedControl.h"
 #import "JYBOrderSingleVC.h"
+#import "LoginViewController.h"
 
 @interface OrderViewController ()<UIPageViewControllerDelegate,UIPageViewControllerDataSource>
 
@@ -54,12 +55,23 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (![ConfigModel getBoolObjectforKey:IsLogin]) {
+        LoginViewController *vc = [[LoginViewController alloc] init];
+        vc.homeBlocl = ^{
+            self.tabBarController.selectedIndex = 0;
+        };
+        UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self presentViewController:na animated:YES completion:nil];
+        return;
+    }
+}
+
 - (void)navigation {
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-    
-    
     [self addLeftBarButtonWithImage:[UIImage imageNamed:@"nav_icon_kf"] action:@selector(backAction)];
     [self addRightBarButtonWithFirstImage:[UIImage imageNamed:@"nav_icon_xx"] action:@selector(message)];
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 180, 20)];
@@ -71,7 +83,7 @@
 }
 
 - (void)message {
-    
+    JumpMessage
 }
 
 - (void)backAction {

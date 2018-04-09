@@ -54,7 +54,6 @@
     if (!imgStr) {
         imgStr = nil;
     }
-    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     if (havephoto) {
         [dic setValue:imgStr forKey:@"company_head_img"];

@@ -62,9 +62,7 @@ static MainApi *request = nil;
         [mutArr addEntriesFromDictionary:@{@"apiCode":URLString}];
         if ([ConfigModel getBoolObjectforKey:IsLogin]) {
             NSString *usertoken = [ConfigModel getStringforKey:UserId];
-            NSLog(@"~~~~~~~~~~~~~~~~user_id=======>%@~~~~~",usertoken);
-            [mutArr addEntriesFromDictionary:@{@"user_id":@"1"}];
-
+            [mutArr setValue:usertoken forKey:@"user_id"];
 #if UDID
             KeychainUUID *keychain = [[KeychainUUID alloc] init];
             id data = [keychain readUDID];
@@ -77,9 +75,10 @@ static MainApi *request = nil;
     NSDictionary *jsStr = [DicToString parametersString:mutArr];
     
     
+    NSLog(@"?????%@", mutArr);
+    
     if ([method isEqualToString:@"POST"]) {
         
-//        NSLog(@"%@==============",jsStr);
         URLString = [NSString stringWithFormat:@"%@%@",BaseApi,URLString];
 
         [self.manager POST:URLString parameters:mutArr progress:^(NSProgress * _Nonnull uploadProgress) {

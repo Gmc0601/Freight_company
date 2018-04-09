@@ -155,6 +155,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     //   插 一个获取个人信息
+    if (![ConfigModel getIntObjectforKey:IsLogin]) {
+        return;
+    }
     [HttpRequest postPath:@"/Home/User/getUserInfo" params:nil resultBlock:^(id responseObject, NSError *error) {
         NSLog(@"%@", responseObject);
         if([error isEqual:[NSNull null]] || error == nil){
@@ -171,6 +174,8 @@
         }
     }];
 }
+
+
 
 - (void)navigation {
     
@@ -190,7 +195,7 @@
 
 
 - (void)message {
-    
+    JumpMessage
 }
 
 //  客服
