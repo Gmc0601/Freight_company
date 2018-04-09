@@ -83,8 +83,8 @@
         if (indexPath.row == 1) {
             [cell.contentView addSubview:self.man];
             [cell.contentView addSubview:self.womam];
-            self.man.centerY = cell.contentView.centerY;
-            self.womam.centerY = cell.contentView.centerY;
+            self.man.top = 17.5;
+            self.womam.top = 17.5;
             cell.text.width = kScreenW/2 - SizeWidth(50);
         }
         
@@ -141,7 +141,7 @@
 
 #pragma mark - UITableDelegate
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return SizeHeight(55);
+    return 55;
 }
 
 

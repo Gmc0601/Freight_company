@@ -26,9 +26,9 @@
 
 - (UILabel *)titleLab {
     if (!_titleLab) {
-        _titleLab = [[UILabel alloc] initWithFrame:FRAME(SizeWidth(10), 0, SizeWidth(110), SizeHeight(20))];
+        _titleLab = [[UILabel alloc] initWithFrame:FRAME(SizeWidth(10), 17.5, SizeWidth(110), 20)];
         _titleLab.font = [UIFont systemFontOfSize:14];
-        _titleLab.centerY = self.contentView.centerY;
+//        _titleLab.centerY = self.contentView.centerY;
         _titleLab.text = @"tittle";
     }
     return _titleLab;
@@ -42,8 +42,8 @@
 
 - (UITextField *)text {
     if (!_text) {
-        _text = [[UITextField alloc] initWithFrame:FRAME(self.titleLab.right, 0, kScreenW - SizeWidth(110), SizeHeight(20))];
-        _text.centerY = self.contentView.centerY;
+        _text = [[UITextField alloc] initWithFrame:FRAME(self.titleLab.right, 17.5, kScreenW - SizeWidth(110), 20)];
+//        _text.centerY = self.contentView.centerY;
         _text.font = [UIFont systemFontOfSize:14];
         [_text addTarget:self action:@selector(textchange) forControlEvents:UIControlEventEditingChanged];
     }

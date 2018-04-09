@@ -26,7 +26,7 @@
 @end
 
 
-@interface LoginViewController (){
+@interface LoginViewController ()<UITextFieldDelegate>{
     NSString *UserAgreeContent;
 }
 
@@ -51,12 +51,13 @@
     self.view2.layer.masksToBounds = YES;
     self.view1.layer.borderWidth = 1;
     self.view2.layer.borderWidth = 1;
-    self.view1.layer.borderColor = [UIColorFromHex(0x999999) CGColor];
-    self.view2.layer.borderColor = [UIColorFromHex(0x999999) CGColor];
+    self.view1.layer.borderColor = [UIColorFromHex(0xe3e3e3) CGColor];
+    self.view2.layer.borderColor = [UIColorFromHex(0xe3e3e3) CGColor];
     [self.leftBar setImage:[UIImage imageNamed:@"dl_icon_sc"] forState:UIControlStateNormal];
-    [self.phoneText addTarget:self action:@selector(textchange) forControlEvents:UIControlEventEditingChanged];
-    [self.codeText addTarget:self action:@selector(textchange) forControlEvents:UIControlEventEditingChanged];
- 
+    self.phoneText.delegate= self;
+    self.codeText.delegate = self;
+    self.phoneText.keyboardType = UIKeyboardTypeNumberPad;
+    self.codeText.keyboardType = UIKeyboardTypeNumberPad;
     
     [HttpRequest postPath:@"/Home/Public/yhxy" params:nil resultBlock:^(id responseObject, NSError *error) {
         
@@ -74,6 +75,25 @@
             [ConfigModel mbProgressHUD:str andView:nil];
         }
     }];
+    
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+
+{
+    
+    if (textField == self.phoneText) {
+        
+        if (textField.text.length >= 11) return NO;
+        
+    }
+    
+    if (textField == self.codeText) {
+        if (textField.text.length >= 4) return NO;
+    }
+    
+    
+    return YES;
     
 }
 
@@ -203,7 +223,6 @@
                         [ConfigModel saveString:user.user_id forKey:UserId];
                         [ConfigModel saveBoolObject:YES forKey:IsLogin];
                         [self dismissViewControllerAnimated:YES completion:nil];
-//                        [self presentViewController:[ViewController new] animated:YES completion:nil];
                     }else if ([user.company_info.company_status intValue] == 0 ){
                         vc.type = Reviewing;
                         [self.navigationController pushViewController:vc animated:YES];

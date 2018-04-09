@@ -108,6 +108,7 @@
                     NSDictionary *datadic = responseObject;
                     if ([datadic[@"success"] intValue] == 1) {
                         [ConfigModel mbProgressHUD:@"操作成功" andView:nil];
+                        [self getData];
                     }else {
                         NSString *str = datadic[@"msg"];
                         [ConfigModel mbProgressHUD:str andView:nil];
