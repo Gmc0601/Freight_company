@@ -116,7 +116,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:YES];
+     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
     
     if (![ConfigModel getBoolObjectforKey:IsLogin]) {
         LoginViewController *vc = [[LoginViewController alloc] init];
@@ -302,7 +302,8 @@
 - (void)logout {
     [[[JYBAlertView alloc] initWithTitle:@"提示" message:@"是否退出账号" cancelItem:@"取消" sureItem:@"确认" clickAction:^(NSInteger index) {
         if (index == 1) {
-            
+            [ConfigModel saveBoolObject:NO forKey:IsLogin];
+            [ConfigModel saveString:nil forKey:UserId];
         }
     }] show];
  }
