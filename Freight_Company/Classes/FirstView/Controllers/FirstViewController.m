@@ -50,6 +50,8 @@
 
 @property (nonatomic ,strong)JYBHomeStationSeleModel *stationModel;
 
+@property (nonatomic ,assign)BOOL           exchange;
+
 @end
 
 @implementation FirstViewController
@@ -333,7 +335,7 @@
     
     if (indexPath.section == 0) {
         JYBPortSelectCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBPortSelectCell class]) forIndexPath:indexPath];
-        [cell updateCellWithPort:self.selPortModel station:self.stationModel.loadarea_name];
+        [cell updateCellWithPort:self.selPortModel station:self.stationModel.loadarea_name exchange:self.exchange];
         WeakObj(self);
         [cell setSelectBlock:^{
             [selfWeak __pickPort];
@@ -351,6 +353,10 @@
             
         }];
 
+        [cell setExchangeBlock:^{
+            selfWeak.exchange = !selfWeak.exchange;
+            [selfWeak.myTableView reloadData];
+        }];
         return cell;
     }else{
         if (indexPath.row == 0) {
