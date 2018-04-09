@@ -213,6 +213,16 @@
 
 - (void)__commit{
     
+    if (![ConfigModel getBoolObjectforKey:IsLogin]) {
+        LoginViewController *vc = [[LoginViewController alloc] init];
+        vc.homeBlocl = ^{
+//            self.tabBarController.selectedIndex = 0;
+        };
+        UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self presentViewController:na animated:YES completion:nil];
+        return;
+    }
+
     if (!self.selPortModel) {
         [ConfigModel mbProgressHUD:@"请选择港口" andView:nil];
         return;
@@ -382,6 +392,17 @@
 }
 
 - (void)__turnNextIndex:(NSInteger)index{
+    
+    if (![ConfigModel getBoolObjectforKey:IsLogin]) {
+        LoginViewController *vc = [[LoginViewController alloc] init];
+        vc.homeBlocl = ^{
+            //            self.tabBarController.selectedIndex = 0;
+        };
+        UINavigationController *na = [[UINavigationController alloc] initWithRootViewController:vc];
+        [self presentViewController:na animated:YES completion:nil];
+        return;
+    }
+    
     if (index == 5) {
         CCWebViewViewController *vc = [[CCWebViewViewController alloc] init];
         vc.UrlStr = @"http://www.baidu.com";
