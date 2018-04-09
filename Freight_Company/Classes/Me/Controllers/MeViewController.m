@@ -67,6 +67,7 @@
             
             NSString *data = datadic[@"data"];
             phone2 = data;
+            [self.noUseTableView reloadData];
             
         }else {
             NSString *str = datadic[@"msg"];
@@ -83,6 +84,7 @@
         if ([datadic[@"success"] intValue] == 1) {
             NSString *data = datadic[@"data"];
             phone = data;
+            [self.noUseTableView reloadData];
         }else {
             NSString *str = datadic[@"msg"];
             [ConfigModel mbProgressHUD:str andView:nil];
@@ -186,10 +188,11 @@
     cell.imageView.image = [UIImage imageNamed:imagestr];
     [cell.imageView sizeToFit];
     cell.textLabel.text = self.titleArr[indexPath.row];
-    if ([cell.textLabel.text isEqualToString:@"平台客服"]) {
+    if (indexPath.row == 1) {
+        
         cell.detailTextLabel.text = phone;
     }
-    if ([cell.textLabel.text isEqualToString:@"平台账户"]) {
+    if (indexPath.row == 3) {
         cell.detailTextLabel.text = phone2;
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -209,8 +212,8 @@
         [self.navigationController pushViewController:[SonMemberViewController new] animated:YES];
     }
     if (indexPath.row == 3) {
-        NSMutableString* str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",phone2];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+//        NSMutableString* str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",phone2];
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
     }
     if (indexPath.row == 1) {
         NSMutableString* str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",phone];

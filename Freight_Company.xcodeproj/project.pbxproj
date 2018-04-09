@@ -1537,6 +1537,7 @@
 			baseConfigurationReference = 4429C470FFB6F6CA84B03013 /* Pods-Freight_Company.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Guoping Ma (BZYPB6P24R)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guoping Ma (BZYPB6P24R)";
 				CODE_SIGN_STYLE = Manual;
@@ -1572,6 +1573,7 @@
 			baseConfigurationReference = 537AE1D939255ECA6F4D0FBB /* Pods-Freight_Company.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Guoping Ma (BZYPB6P24R)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guoping Ma (BZYPB6P24R)";
 				CODE_SIGN_STYLE = Manual;
