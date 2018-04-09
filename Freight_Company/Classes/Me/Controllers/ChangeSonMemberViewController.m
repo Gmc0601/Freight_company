@@ -141,7 +141,7 @@
                           @"company_user_phone" : self.text2.text
                           };
     
-    [HttpRequest postPath:@"" params:dic resultBlock:^(id responseObject, NSError *error) {
+    [HttpRequest postPath:@"Home/User/addEditUser" params:dic resultBlock:^(id responseObject, NSError *error) {
         if([error isEqual:[NSNull null]] || error == nil){
             NSLog(@"success");
         }

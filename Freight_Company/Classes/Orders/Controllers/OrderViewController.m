@@ -72,8 +72,6 @@
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-    
-    
     [self addLeftBarButtonWithImage:[UIImage imageNamed:@"nav_icon_kf"] action:@selector(backAction)];
     [self addRightBarButtonWithFirstImage:[UIImage imageNamed:@"nav_icon_xx"] action:@selector(message)];
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 180, 20)];
@@ -85,7 +83,7 @@
 }
 
 - (void)message {
-    
+    JumpMessage
 }
 
 - (void)backAction {

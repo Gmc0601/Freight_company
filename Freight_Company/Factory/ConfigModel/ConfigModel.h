@@ -11,6 +11,8 @@
 
 @interface ConfigModel : NSObject
 
++ (void)jumpmessage:(UIViewController *)vc;
+
 + (BOOL)haveLogin:(UIViewController *)vc;
 
 + (void)showHud:(UIViewController *)vc;

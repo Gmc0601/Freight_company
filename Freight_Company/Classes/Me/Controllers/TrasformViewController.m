@@ -28,10 +28,12 @@
     self.titleLab.text = @"收支明细";
     self.rightBar.hidden = YES;
     [self.view addSubview:self.noUseTableView];
+    [self getData];
 }
 
 - (void)getData {
     [HttpRequest postPath:@"/Home/User/walletFlow" params:nil resultBlock:^(id responseObject, NSError *error) {
+        NSLog(@">>>>>%@", responseObject);
         if([error isEqual:[NSNull null]] || error == nil){
             NSLog(@"success");
         }

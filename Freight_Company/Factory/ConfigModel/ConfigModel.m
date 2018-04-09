@@ -9,7 +9,12 @@
 #import "ConfigModel.h"
 #import <MBProgressHUD.h>
 #import "LoginViewController.h"
+#import "SBMessageViewController.h"
 @implementation ConfigModel
+
++ (void)jumpmessage:(UIViewController *)vc {
+    [vc.navigationController pushViewController:[SBMessageViewController new] animated:YES];
+}
 
 + (BOOL)haveLogin:(UIViewController *)vc {
     if (![ConfigModel getBoolObjectforKey:IsLogin]) {

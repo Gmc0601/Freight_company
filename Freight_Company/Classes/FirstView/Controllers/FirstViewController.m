@@ -193,7 +193,7 @@
 
 
 - (void)message {
-    
+    JumpMessage
 }
 
 //  客服

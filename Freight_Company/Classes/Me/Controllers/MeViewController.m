@@ -19,10 +19,11 @@
 #import <MJExtension.h>
 #import <UIImageView+WebCache.h>
 #import "CPConfig.h"
+#import "SBMessageViewController.h"
 
 
 @interface MeViewController ()<UITableViewDelegate, UITableViewDataSource>{
-    NSString *phone, *UserAgreeContent;
+    NSString *phone, *UserAgreeContent,*phone2;
     UserModel *selfuser;
 }
 @property (nonatomic, retain) UITableView *noUseTableView;
@@ -55,6 +56,23 @@
 }
 
 - (void)getData {
+    
+    //   平台电话
+    [HttpRequest postPath:@"/Home/Public/ptzh" params:nil resultBlock:^(id responseObject, NSError *error) {
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            NSString *data = datadic[@"data"];
+            phone2 = data;
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
     
 //     客服电话
     [HttpRequest postPath:@"/Home/Public/kfdh" params:nil resultBlock:^(id responseObject, NSError *error) {
@@ -111,7 +129,22 @@
             [ConfigModel mbProgressHUD:str andView:nil];
         }
     }];
-    
+    //  未读消息数
+    [HttpRequest postPath:@"/Home/User/msgNoReadcount" params:nil resultBlock:^(id responseObject, NSError *error) {
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSLog(@">>>>>%@", responseObject);
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            NSDictionary *dic = datadic[@"data"];
+            NSString *str = dic[@"msg_no_read_count"];
+            [self.messageBtn setBadgeValue:[str intValue]];
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -152,8 +185,13 @@
     NSString *imagestr = self.picArr[indexPath.row];
     cell.imageView.image = [UIImage imageNamed:imagestr];
     [cell.imageView sizeToFit];
-    
     cell.textLabel.text = self.titleArr[indexPath.row];
+    if ([cell.textLabel.text isEqualToString:@"平台客服"]) {
+        cell.detailTextLabel.text = phone;
+    }
+    if ([cell.textLabel.text isEqualToString:@"平台账户"]) {
+        cell.detailTextLabel.text = phone2;
+    }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     
@@ -170,14 +208,15 @@
     if (indexPath.row == 0) {
         [self.navigationController pushViewController:[SonMemberViewController new] animated:YES];
     }
-    if (indexPath.row == 1) {
-        [self.navigationController pushViewController:[MyDriverViewController new] animated:YES];
+    if (indexPath.row == 3) {
+        NSMutableString* str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",phone2];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
     }
-    if (indexPath.row == 2) {
+    if (indexPath.row == 1) {
         NSMutableString* str=[[NSMutableString alloc] initWithFormat:@"telprompt://%@",phone];
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
     }
-    if (indexPath.row == 3) {
+    if (indexPath.row == 2) {
         CCWebViewViewController *vc = [[CCWebViewViewController alloc] init];
         vc.titlestr = @"用户协议";
         vc.content = UserAgreeContent;
@@ -200,8 +239,8 @@
         _noUseTableView.tableFooterView = ({
             UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenW,  SizeHeight(60))];
             UIButton *logoutBtn = [[UIButton alloc] initWithFrame:FRAME(10, SizeHeight(10), kScreenW - 20, SizeHeight(50))];
-            logoutBtn.backgroundColor = RGB(239, 240, 241);
-            [logoutBtn setTitleColor:UIColorFromHex(0x999999) forState:UIControlStateNormal];
+            logoutBtn.backgroundColor = RGB(24, 141, 239);
+            [logoutBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [logoutBtn setTitle:@"退出登录" forState:UIControlStateNormal];
             logoutBtn.layer.masksToBounds = YES;
             [logoutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
@@ -214,7 +253,7 @@
 }
 
 - (void)messageClick {
-    [self.navigationController pushViewController:[SystemMessageViewController new] animated:YES];
+    [self.navigationController pushViewController:[SBMessageViewController new] animated:YES];
 }
 
 - (void)addheadView:(UIView *)view {
@@ -226,7 +265,7 @@
     self.messageBtn = [[UIButton alloc] initWithFrame:FRAME(kScreenW - SizeWidth(46), SizeHeight(34), SizeWidth(30), SizeHeight(24))];
     self.messageBtn.backgroundColor = [UIColor clearColor];
     [self.messageBtn setImage:[UIImage imageNamed:@"nav_icon_xx"] forState:UIControlStateNormal];
-    [self.messageBtn setBadgeValue:10];
+    
     [self.messageBtn addTarget:self action:@selector(messageClick) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:self.messageBtn];
     
@@ -304,6 +343,7 @@
         if (index == 1) {
             [ConfigModel saveBoolObject:NO forKey:IsLogin];
             [ConfigModel saveString:nil forKey:UserId];
+            UnloginReturn;
         }
     }] show];
  }
@@ -315,7 +355,7 @@
 
 - (NSArray *)titleArr {
     if (!_titleArr) {
-        _titleArr = @[@"子账号管理", @"我的司机", @"平台客服", @"用户协议"];
+        _titleArr = @[@"子账号管理", @"平台客服", @"用户协议", @"平台账户"];
     }
     return _titleArr;
 }
@@ -323,7 +363,7 @@
 
 - (NSArray *)picArr {
     if (!_picArr) {
-        _picArr = @[@"wd_icon_zzhgl", @"wd_icon_wdsj", @"wd_icon_ptkf", @"wd_icon_yhxy"];
+        _picArr = @[@"wd_icon_zzhgl", @"wd_icon_ptkf", @"wd_icon_yhxy", @"zhanghu"];
     }
     return _picArr;
 }
