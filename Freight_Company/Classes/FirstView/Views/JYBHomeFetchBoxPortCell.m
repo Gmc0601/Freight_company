@@ -13,6 +13,8 @@
 
 @property (nonatomic ,strong)UIView *lineView;
 
+@property (nonatomic ,strong)UIButton   *arrowBtn;
+
 @end
 
 
@@ -29,25 +31,32 @@
 - (void)p_initUI{
     
     [self.contentView addSubview:self.portLab];
+    [self.contentView addSubview:self.arrowBtn];
     [self.contentView addSubview:self.lineView];
     [self.contentView addSubview:self.myTextFeild];
     
     [self.portLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.contentView);
         make.left.equalTo(self.contentView).offset(SizeWidth(10));
-        make.width.mas_equalTo(SizeWidth(100));
+        make.width.mas_equalTo(SizeWidth(75));
+    }];
+    
+    [self.arrowBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.equalTo(self.contentView);
+        make.left.equalTo(self.portLab.mas_right);
+        make.width.mas_equalTo(SizeWidth(20));
     }];
     
     [self.lineView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView).offset(SizeWidth(10));
         make.bottom.equalTo(self.contentView).offset(-SizeWidth(10));
-        make.left.equalTo(self.portLab.mas_right);
+        make.left.mas_equalTo(SizeWidth(110));
         make.width.mas_equalTo(1);
     }];
     
     [self.myTextFeild mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(self.contentView);
-        make.left.equalTo(self.portLab.mas_right).offset(SizeWidth(10));
+        make.left.mas_equalTo(SizeWidth(120));
         make.right.equalTo(self.contentView).offset(-SizeWidth(10));
     }];
     
@@ -64,10 +73,20 @@
     if (!_portLab) {
         _portLab = [[UIButton alloc] init];
         [_portLab setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        _portLab.titleLabel.font = [UIFont boldSystemFontOfSize:SizeWidth(17)];
+        _portLab.titleLabel.font = [UIFont systemFontOfSize:SizeWidth(16)];
         [_portLab addTarget:self action:@selector(portLabAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _portLab;
+}
+
+
+- (UIButton *)arrowBtn{
+    if (!_arrowBtn) {
+        _arrowBtn = [[UIButton alloc] init];
+        [_arrowBtn setImage:[UIImage imageNamed:@"jyb_arrow_down"] forState:UIControlStateNormal];
+        [_arrowBtn addTarget:self action:@selector(portLabAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _arrowBtn;
 }
 
 - (UITextField *)myTextFeild{
@@ -80,6 +99,7 @@
         [leftBtn setImage:[UIImage imageNamed:@"bi"] forState:UIControlStateNormal];
         _myTextFeild.leftView = leftBtn;
         _myTextFeild.leftViewMode = UITextFieldViewModeAlways;
+        _myTextFeild.keyboardType = UIKeyboardTypeNamePhonePad;
     }
     return _myTextFeild;
 }

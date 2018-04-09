@@ -23,7 +23,8 @@
     [super viewDidLoad];
     [self resetFather];
     [self.view addSubview:self.myTableView];
-    [self.view addSubview:self.bottomView];
+
+    self.myTableView.tableFooterView = self.bottomView;
 
 }
 
@@ -142,10 +143,10 @@
 
 - (UIView *)bottomView{
     if (!_bottomView) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenH - SizeWidth(50) , kScreenW, SizeWidth(50))];
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 , kScreenW, SizeWidth(90))];
         _bottomView.backgroundColor = [UIColor whiteColor];
         
-        UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(SizeWidth(10), SizeWidth(5), kScreenW - SizeWidth(20), SizeWidth(40))];
+        UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(SizeWidth(10), SizeWidth(20), kScreenW - SizeWidth(20), SizeWidth(45))];
         commitBtn.backgroundColor = RGB(24, 141, 240);
         [commitBtn setTitle:@"保存" forState:UIControlStateNormal];
         [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

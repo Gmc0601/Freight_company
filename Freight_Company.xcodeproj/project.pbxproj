@@ -144,12 +144,12 @@
 		F61B84D12032C1F5003AF684 /* JYBHomeOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84D02032C1F5003AF684 /* JYBHomeOrderListCell.m */; };
 		F61B84D42032E23B003AF684 /* JYBOrderPayPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84D32032E23B003AF684 /* JYBOrderPayPopView.m */; };
 		F61B84D72032FE03003AF684 /* JYBOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84D62032FE03003AF684 /* JYBOrderDetailVC.m */; };
-		F62B77A32075BAF5005AC91A /* bpCityList.plist in Resources */ = {isa = PBXBuildFile; fileRef = F62B77A22075BAF4005AC91A /* bpCityList.plist */; };
 		F62B77A62078C6E1005AC91A /* JYBHomeSelePointHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77A52078C6E1005AC91A /* JYBHomeSelePointHeaderView.m */; };
 		F62B77A92078D4A6005AC91A /* JYBHomeImproveBoxInfoBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77A82078D4A6005AC91A /* JYBHomeImproveBoxInfoBottomView.m */; };
 		F62B77AC2078F8B1005AC91A /* CPConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77AB2078F8B1005AC91A /* CPConfig.m */; };
 		F62B77AF20792725005AC91A /* JYBOrderLogisMapViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77AE20792725005AC91A /* JYBOrderLogisMapViewCell.m */; };
 		F62B77B2207A90B8005AC91A /* JYBOrderMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77B1207A90B8005AC91A /* JYBOrderMapVC.m */; };
+		F62B77B7207BD67B005AC91A /* bpCityList.plist in Resources */ = {isa = PBXBuildFile; fileRef = F62B77B6207BD67B005AC91A /* bpCityList.plist */; };
 		F658428F2033089D0040B194 /* JYBOrderDetailLogisUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F658428E2033089D0040B194 /* JYBOrderDetailLogisUserCell.m */; };
 		F6584292203308C00040B194 /* JYBOrderDetailLogisInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6584291203308C00040B194 /* JYBOrderDetailLogisInfoCell.m */; };
 		F6584295203308DE0040B194 /* JYBOrderDetailAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6584294203308DE0040B194 /* JYBOrderDetailAddressCell.m */; };
@@ -438,7 +438,6 @@
 		F61B84D32032E23B003AF684 /* JYBOrderPayPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderPayPopView.m; sourceTree = "<group>"; };
 		F61B84D52032FE03003AF684 /* JYBOrderDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderDetailVC.h; sourceTree = "<group>"; };
 		F61B84D62032FE03003AF684 /* JYBOrderDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderDetailVC.m; sourceTree = "<group>"; };
-		F62B77A22075BAF4005AC91A /* bpCityList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bpCityList.plist; sourceTree = "<group>"; };
 		F62B77A42078C6E1005AC91A /* JYBHomeSelePointHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeSelePointHeaderView.h; sourceTree = "<group>"; };
 		F62B77A52078C6E1005AC91A /* JYBHomeSelePointHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeSelePointHeaderView.m; sourceTree = "<group>"; };
 		F62B77A72078D4A6005AC91A /* JYBHomeImproveBoxInfoBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeImproveBoxInfoBottomView.h; sourceTree = "<group>"; };
@@ -449,6 +448,7 @@
 		F62B77AE20792725005AC91A /* JYBOrderLogisMapViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderLogisMapViewCell.m; sourceTree = "<group>"; };
 		F62B77B0207A90B8005AC91A /* JYBOrderMapVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderMapVC.h; sourceTree = "<group>"; };
 		F62B77B1207A90B8005AC91A /* JYBOrderMapVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderMapVC.m; sourceTree = "<group>"; };
+		F62B77B6207BD67B005AC91A /* bpCityList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bpCityList.plist; sourceTree = "<group>"; };
 		F658428D2033089D0040B194 /* JYBOrderDetailLogisUserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderDetailLogisUserCell.h; sourceTree = "<group>"; };
 		F658428E2033089D0040B194 /* JYBOrderDetailLogisUserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderDetailLogisUserCell.m; sourceTree = "<group>"; };
 		F6584290203308C00040B194 /* JYBOrderDetailLogisInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderDetailLogisInfoCell.h; sourceTree = "<group>"; };
@@ -525,8 +525,8 @@
 				427C6932200C98C4006A9EBB /* Factory */,
 				427C68DD200C98C4006A9EBB /* Library */,
 				427C68FE200C98C4006A9EBB /* Main */,
-				F62B77A22075BAF4005AC91A /* bpCityList.plist */,
 				427C68CA200C9849006A9EBB /* Main.storyboard */,
+				F62B77B6207BD67B005AC91A /* bpCityList.plist */,
 				427C68D0200C9849006A9EBB /* Assets.xcassets */,
 				427C68D2200C9849006A9EBB /* LaunchScreen.storyboard */,
 				427C68D5200C9849006A9EBB /* Info.plist */,
@@ -1184,8 +1184,8 @@
 			files = (
 				427C68D4200C9849006A9EBB /* LaunchScreen.storyboard in Resources */,
 				42EC97F0207B4C5300B7043A /* SBMessageViewController.xib in Resources */,
-				F62B77A32075BAF5005AC91A /* bpCityList.plist in Resources */,
 				427C68D1200C9849006A9EBB /* Assets.xcassets in Resources */,
+				F62B77B7207BD67B005AC91A /* bpCityList.plist in Resources */,
 				427C6990200CA5CA006A9EBB /* LoginViewController.xib in Resources */,
 				427C699B200D9A19006A9EBB /* ReviewViewController.xib in Resources */,
 				427C695D200C98C4006A9EBB /* arrowdown@2x.png in Resources */,

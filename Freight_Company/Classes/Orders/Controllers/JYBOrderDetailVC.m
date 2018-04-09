@@ -132,7 +132,7 @@ typedef enum : NSUInteger {
             return @"已接单";
             break;
         case 30:
-            return @"进行中";
+            return @"运输中";
             break;
         case 31:
             return @"已进港待支付(额外费用待审核)";
@@ -141,7 +141,7 @@ typedef enum : NSUInteger {
             return @"已进港待支付(额外费用已拒绝)";
             break;
         case 40:
-            return @"已到港";
+            return @"确认额外费用";
             break;
         case 50:
             return @"已完成";
@@ -193,16 +193,23 @@ typedef enum : NSUInteger {
     
     WeakObj(self);
 
-    [[[JYBOrderPayPopView alloc] initWithPayAmount:self.detailModel.order_price.floatValue totalAmount:[[CPConfig sharedManager] totalAmount].floatValue ClickAction:^{
-        
+    if (self.detailModel.order_price.floatValue <= [[CPConfig sharedManager] totalAmount].floatValue) {
         if (type == JYBOrderDetailBottomTypePay) {
             [selfWeak __pay];
-            
         }else{
             [selfWeak __payOther];
         }
+    }else{
         
-    }] show];
+        [[[JYBOrderPayPopView alloc] initWithPayAmount:self.detailModel.order_price.floatValue totalAmount:[[CPConfig sharedManager] totalAmount].floatValue ClickAction:^{
+            
+            if (type == JYBOrderDetailBottomTypePay) {
+                [selfWeak __pay];
+            }else{
+                [selfWeak __payOther];
+            }
+        }] show];
+    }
 }
 
 - (void)__payOther{
@@ -322,7 +329,7 @@ typedef enum : NSUInteger {
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
     if (section == JYBOrderDetailTypeLogisUser) {
-        return [NSString stringIsNilOrEmpty:self.detailModel.driver_id]?0:1;
+        return ([NSString stringIsNilOrEmpty:self.detailModel.driver_id] || self.detailModel.order_status.integerValue == 0 || self.detailModel.order_status.integerValue == 10 || self.detailModel.order_status.integerValue == 60)?0:1;
     }else if (section == JYBOrderDetailTypeLogisInfo){
         return self.detailModel.logistics.count?2:0;
     }else if (section == JYBOrderDetailTypeAddressInfo){
@@ -344,9 +351,9 @@ typedef enum : NSUInteger {
             self.detailModel.order_status.integerValue == 32 ||
             self.detailModel.order_status.integerValue == 40 || self.detailModel.order_status.integerValue == 50 ) {
             if (self.detailModel.box_img.count) {
-                return 6;
+                return 7;
             }else{
-                return 5;
+                return 6;
             }
             
         }else{
@@ -371,7 +378,7 @@ typedef enum : NSUInteger {
     }else if (indexPath.section == JYBOrderDetailTypeAddressInfo){
         return SizeWidth(110);
     }else if (indexPath.section == JYBOrderDetailTypeBoxInfo){
-        if (indexPath.row == 5) {
+        if (indexPath.row == 6) {
             return SizeWidth(110);
         }else{
             return SizeWidth(55);
@@ -397,7 +404,7 @@ typedef enum : NSUInteger {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if (section == JYBOrderDetailTypeLogisUser) {
-        return [NSString stringIsNilOrEmpty:self.detailModel.driver_id]?CGFLOAT_MIN:SizeWidth(10);
+        return ([NSString stringIsNilOrEmpty:self.detailModel.driver_id] ||self.detailModel.order_status.integerValue == 0 || self.detailModel.order_status.integerValue == 10 || self.detailModel.order_status.integerValue == 60)?CGFLOAT_MIN:SizeWidth(10);
     }else if (section == JYBOrderDetailTypeLogisInfo){
         return self.detailModel.logistics.count?SizeWidth(10):CGFLOAT_MIN;
     }else if (section == JYBOrderDetailTypeAddressInfo){
@@ -453,7 +460,7 @@ typedef enum : NSUInteger {
         
     }else if (indexPath.section == JYBOrderDetailTypeBoxInfo){
         
-        if (indexPath.row == 5) {
+        if (indexPath.row == 6) {
             JYBHomeOrderImageCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeOrderImageCell class]) forIndexPath:indexPath];
             [cell updateCellWithArr:self.detailModel.box_img.mutableCopy];
             return cell;
@@ -466,6 +473,8 @@ typedef enum : NSUInteger {
             }else if (indexPath.row == 2){
                 [cell updateCellWithIcon:@"xx_icon_sj" title:@"截箱时间" value:self.detailModel.cutoff_time other:NO];
             }else if (indexPath.row == 3){
+                [cell updateCellWithIcon:@"xx_icon_sj" title:@"提箱时间" value:self.detailModel.cutoff_time other:NO];
+            }else if (indexPath.row == 4){
                 [cell updateCellWithIcon:@"ddxq_icon_xh" title:@"箱号" value:self.detailModel.box_no other:NO];
             }else{
                 [cell updateCellWithIcon:@"ddxq_icon_fh" title:@"封号" value:self.detailModel.close_no other:NO];

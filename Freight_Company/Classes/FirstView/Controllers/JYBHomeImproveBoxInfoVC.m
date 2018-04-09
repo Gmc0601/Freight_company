@@ -105,6 +105,19 @@
 
 - (void)__caluteOrderPrice{
     
+    if (!self.seleBoxAddreModel) {
+        return;
+    }
+    BOOL ship = NO;
+    for (JYBHomeShipAddressModel *shipModel in self.seleStationArr) {
+        if (![NSString stringIsNilOrEmpty:shipModel.shipment_address_id]) {
+            ship = YES;
+        }
+    }
+    if (!ship) {
+        return;
+    }
+    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic addUnEmptyString:self.seleBoxAddreModel.portModel.port_id forKey:@"prot_id"];
     [dic addUnEmptyString:[self __getOrderTypeWithName:self.sepc] forKey:@"order_type"];
@@ -227,7 +240,14 @@
             NSString *str = datadic[@"msg"];
             [ConfigModel mbProgressHUD:str andView:nil];
         }
-        weak.tabBarController.selectedIndex = 1;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"JYBOrderNotication" object:nil];
+        
+        if (weak.tabBarController.selectedIndex == 1) {
+            [weak.navigationController popToRootViewControllerAnimated:YES];
+        }else{
+            weak.tabBarController.selectedIndex = 1;
+        }
     }];
     
 }

@@ -7,6 +7,7 @@
 //  50
 
 #import "JYBHomePackAddressSectionFooterView.h"
+#import "UIView+line.h"
 
 @interface JYBHomePackAddressSectionFooterView ()
 
@@ -45,6 +46,7 @@
         make.centerY.equalTo(self.contentView);
     }];
 
+    [self.contentView addLineWithInset:UIEdgeInsetsMake(-1, 0, 0, 0)];
 }
 
 - (void)deleBtnAction{

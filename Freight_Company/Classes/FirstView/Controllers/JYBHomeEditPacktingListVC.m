@@ -39,7 +39,7 @@
     [super viewDidLoad];
     [self resetFather];
     [self.view addSubview:self.myTableView];
-    [self.view addSubview:self.bottomView];
+    self.myTableView.tableFooterView = self.bottomView;
 }
 
 - (void)resetFather {
@@ -131,16 +131,22 @@
     }else{
         JYBHomePackingInputCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomePackingInputCell class]) forIndexPath:indexPath];
         if (indexPath.row == 2) {
-            [cell updateCellWithTitle:@"详细地址" placeHoler:@"街道、门牌号" value:nil];
+            [cell updateCellWithTitle:@"详细地址：" placeHoler:@"街道、门牌号" value:nil];
         }else if (indexPath.row == 3){
-            [cell updateCellWithTitle:@"联系人" placeHoler:@"请填写装箱联系人" value:nil];
+            [cell updateCellWithTitle:@"联系人：" placeHoler:@"请填写装箱联系人" value:nil];
         }else{
-            [cell updateCellWithTitle:@"电话" placeHoler:@"请填写装箱联系人电话" value:nil];
+            [cell updateCellWithTitle:@"电话：" placeHoler:@"请填写装箱联系人电话" value:nil];
         }
         
         return cell;
     }
     
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row < 2) {
+        [self __pickPack:indexPath];
+    }
 }
 
 - (void)__pickPack:(NSIndexPath *)indexPath{
@@ -162,6 +168,10 @@
 - (void)selectStationModel:(JYBHomeStationSeleModel *)model{
     self.stationModel = model;
     [self.myTableView reloadData];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self __pickPack:[NSIndexPath indexPathForRow:1 inSection:0]];
+    });
 }
 
 - (void)selectPoint:(AMapTip *)point{
@@ -185,7 +195,7 @@
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic addUnEmptyString:self.shipAddressModel.shipment_address_id forKey:@"shipment_address_id"];
-    [dic addUnEmptyString:[NSString stringWithFormat:@"%lf",self.pointModel.location.longitude] forKey:@"long"];
+    [dic addUnEmptyString:[NSString stringWithFormat:@"%lf",self.pointModel.location.longitude] forKey:@"lon"];
     [dic addUnEmptyString:[NSString stringWithFormat:@"%lf",self.pointModel.location.latitude] forKey:@"lat"];
     [dic addUnEmptyString:self.pointModel.name forKey:@"address"];
     [dic addUnEmptyString:addresCell.myTextField.text forKey:@"address_desc"];
@@ -236,7 +246,7 @@
 
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64 - SizeWidth(50)) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64) style:UITableViewStylePlain];
         _myTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _myTableView.backgroundColor = [UIColor whiteColor];
         _myTableView.showsVerticalScrollIndicator = NO;
@@ -259,10 +269,10 @@
 
 - (UIView *)bottomView{
     if (!_bottomView) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenH - SizeWidth(50) , kScreenW, SizeWidth(50))];
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 , kScreenW, SizeWidth(80))];
         _bottomView.backgroundColor = [UIColor whiteColor];
         
-        UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(SizeWidth(10), SizeWidth(5), kScreenW - SizeWidth(20), SizeWidth(40))];
+        UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(SizeWidth(10), SizeWidth(20), kScreenW - SizeWidth(20), SizeWidth(45))];
         commitBtn.backgroundColor = RGB(24, 141, 240);
         [commitBtn setTitle:@"确定" forState:UIControlStateNormal];
         [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

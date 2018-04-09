@@ -41,8 +41,8 @@
     self.portModel = [[CPConfig sharedManager] lastPort];
     
     [self.view addSubview:self.myTableView];
-    [self.view addSubview:self.bottomView];
-
+    self.myTableView.tableFooterView = self.bottomView;
+    
     [self __fetchPortListData];
 }
 
@@ -237,7 +237,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
         JYBHomeFetchBoxPortCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeFetchBoxPortCell class]) forIndexPath:indexPath];
-        [cell.portLab setTitle:self.portModel?[NSString stringWithFormat:@"%@  ▼",self.portModel.port_name]:@"请选择  ▼" forState:UIControlStateNormal];
+        [cell.portLab setTitle:self.portModel?[NSString stringWithFormat:@"%@",self.portModel.port_name]:@"请选择" forState:UIControlStateNormal];
         WeakSelf(weak)
         [cell setBoxPortBlock:^{
             [weak __pickPort];
@@ -265,7 +265,7 @@
 
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64 - SizeWidth(50)) style:UITableViewStyleGrouped];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64) style:UITableViewStyleGrouped];
         _myTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _myTableView.backgroundColor = [UIColor whiteColor];
         _myTableView.showsVerticalScrollIndicator = NO;
@@ -288,10 +288,10 @@
 
 - (UIView *)bottomView{
     if (!_bottomView) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenH - SizeWidth(50) , kScreenW, SizeWidth(50))];
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 , kScreenW, SizeWidth(80))];
         _bottomView.backgroundColor = [UIColor whiteColor];
         
-        UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(SizeWidth(10), SizeWidth(5), kScreenW - SizeWidth(20), SizeWidth(40))];
+        UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(SizeWidth(10), SizeWidth(20), kScreenW - SizeWidth(20), SizeWidth(45))];
         commitBtn.backgroundColor = RGB(24, 141, 240);
         [commitBtn setTitle:@"确定" forState:UIControlStateNormal];
         [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

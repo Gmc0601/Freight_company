@@ -88,8 +88,8 @@
     //订单状态 状态：0-待支付 10-派单中 20-已接单 30-进行中 40-已到港（待支付,支付额外费用） 50-已完成 60-已取消
     if (model.order_status.integerValue == 0) {
         self.desLab.hidden = YES;
-        [self.commitBtn setTitle:@"立即支付" forState:UIControlStateNormal];
-        self.commitBtn.backgroundColor = RGB(237, 171, 79);
+        [self.commitBtn setTitle:@"确认费用" forState:UIControlStateNormal];
+        self.commitBtn.backgroundColor = RGB(75, 157, 252);
         [self.commitBtn mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(kScreenW - SizeWidth(30));
         }];
@@ -104,8 +104,8 @@
     }else if (model.order_status.integerValue == 40){
         self.desLab.hidden = YES;
         self.priceLab.text = [NSString stringWithFormat:@"¥%@",model.other_price];
-        [self.commitBtn setTitle:@"立即支付" forState:UIControlStateNormal];
-        self.commitBtn.backgroundColor = RGB(237, 171, 79);
+        [self.commitBtn setTitle:@"立即确认" forState:UIControlStateNormal];
+        self.commitBtn.backgroundColor = RGB(75, 157, 252);
         [self.commitBtn mas_updateConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(SizeWidth(100));
         }];
@@ -149,7 +149,7 @@
         _desLab = [[UILabel alloc] init];
         _desLab.font = [UIFont systemFontOfSize:SizeWidth(13)];
         _desLab.textColor = RGB(162, 162, 162);
-        _desLab.text = @"装箱前一天17:30前支持取消订单";
+        _desLab.text = @"装箱前一天17:30前可以取消订单";
         _desLab.textAlignment = NSTextAlignmentCenter;
     }
     return _desLab;
@@ -193,7 +193,7 @@
 - (UIButton *)commitBtn{
     if (!_commitBtn) {
         _commitBtn = [[UIButton alloc] init];
-        [_commitBtn setTitle:@"立即支付" forState:UIControlStateNormal];
+        [_commitBtn setTitle:@"立即确认" forState:UIControlStateNormal];
         [_commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _commitBtn.titleLabel.font = [UIFont systemFontOfSize:SizeWidth(15)];
         _commitBtn.layer.cornerRadius = 3;

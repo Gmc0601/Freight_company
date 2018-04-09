@@ -138,7 +138,7 @@
 
 - (HMSegmentedControl *)headTabView{
     if (!_headTabView) {
-        _headTabView = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"全部",@"已接单",@"进行中",@"待确认"]];
+        _headTabView = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"全部",@"已接单",@"运输中",@"待确认"]];
         _headTabView.segmentWidthStyle = HMSegmentedControlSegmentWidthStyleFixed;
         _headTabView.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
         _headTabView.selectionIndicatorColor = RGB(26, 143, 241);

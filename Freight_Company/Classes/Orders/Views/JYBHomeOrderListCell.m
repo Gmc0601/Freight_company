@@ -174,7 +174,7 @@
     }
     
     self.startTimeLab.text = [NSString stringWithFormat:@"装箱时间\n%@",listModel.shipment_time];
-    self.endTimeLab.text = [NSString stringWithFormat:@"闭关时间\n%@",listModel.cutoff_time];
+    self.endTimeLab.text = [NSString stringWithFormat:@"截关时间\n%@",listModel.cutoff_time];
 
     self.orderNumLab.text = [NSString stringWithFormat:@"提单号: %@",listModel.pick_no];
 }
@@ -232,7 +232,7 @@
             [self.rightBtn setTitle:@"联系司机" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:RGB(55, 164, 242) forState:UIControlStateNormal];
             self.rightBtn.layer.borderColor = RGB(55, 164, 242).CGColor;
-            return @"进行中";
+            return @"运输中";
         }
             //再次下单 。 联系司机
             break;
@@ -274,7 +274,7 @@
             [self.rightBtn setTitle:@"联系司机" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:RGB(55, 164, 242) forState:UIControlStateNormal];
             self.rightBtn.layer.borderColor = RGB(55, 164, 242).CGColor;
-            return @"已到港";
+            return @"确认额外费用";
         }
             //再次下单 。 联系司机
             break;
