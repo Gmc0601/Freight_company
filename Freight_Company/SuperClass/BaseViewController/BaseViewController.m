@@ -56,7 +56,7 @@
 - (void)backSweepGesture:(UISwipeGestureRecognizer*)gesture{
     
     [self.navigationController popViewControllerAnimated:YES];
-    
+     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault animated:YES];
 }
 
 

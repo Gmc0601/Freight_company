@@ -19,6 +19,11 @@
 
 @implementation JYBHomeSendDriveHeaderView
 
+
+- (void)dealloc{
+    [_inputTextView removeObserver:self forKeyPath:@"text"];
+}
+
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         [self p_initUI];
@@ -44,6 +49,15 @@
     self.lenthLabel.text = [NSString stringWithFormat:@"%ld/200",limitTextView.inputLength];
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    
+    if (object == self && [keyPath isEqualToString:@"text"]) {
+        self.lenthLabel.text = [NSString stringWithFormat:@"%ld/200",self.inputTextView.inputLength];
+
+    }
+}
+
+
 - (TYLimitedTextView *)inputTextView{
     if (!_inputTextView) {
     
@@ -54,6 +68,8 @@
     _inputTextView.placeholderColor = RGB(162, 162, 162);
     _inputTextView.font = [UIFont systemFontOfSize:SizeWidth(13)];
     _inputTextView.backgroundColor = RGB(245, 245, 245);
+    [_inputTextView addObserver:self forKeyPath:@"text" options:NSKeyValueObservingOptionNew context:nil];
+
     }
     return _inputTextView;
 }

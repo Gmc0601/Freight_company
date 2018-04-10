@@ -217,7 +217,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return SizeWidth(85);
+    return SizeWidth(95);
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -231,32 +231,42 @@
         [cell updateCellWithModel:model];
     }
 
-    return cell;
-    
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    
-    JYBHomePackAddressSectionFooterView *footer = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([JYBHomePackAddressSectionFooterView class])];
-    if (self.isPoint) {
-        JYBHomeShipAddressModel *model = [self.dataArr objectAtIndex:section];
-        footer.addressModel = model;
-    }else{
-        CPHomeBoxAddressModel *model = [self.dataArr objectAtIndex:section];
-        footer.addressModel = model;
-    }
-
     WeakSelf(weak)
-    [footer setDeleBlock:^(id addressModel) {
+    [cell setDeleBlock:^(id addressModel) {
         [weak __deleteWithModel:addressModel];
     }];
     
-    [footer setEditBlock:^(id addressModel) {
+    [cell setEditBlock:^(id addressModel) {
         [weak __editWithModel:addressModel];
     }];
     
-    return footer;
+    
+    return cell;
+    
 }
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//    
+//    JYBHomePackAddressSectionFooterView *footer = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([JYBHomePackAddressSectionFooterView class])];
+//    if (self.isPoint) {
+//        JYBHomeShipAddressModel *model = [self.dataArr objectAtIndex:section];
+//        footer.addressModel = model;
+//    }else{
+//        CPHomeBoxAddressModel *model = [self.dataArr objectAtIndex:section];
+//        footer.addressModel = model;
+//    }
+//
+//    WeakSelf(weak)
+//    [footer setDeleBlock:^(id addressModel) {
+//        [weak __deleteWithModel:addressModel];
+//    }];
+//    
+//    [footer setEditBlock:^(id addressModel) {
+//        [weak __editWithModel:addressModel];
+//    }];
+//    
+//    return footer;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.isPoint) {
@@ -288,13 +298,13 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return SizeWidth(40);
+    return CGFLOAT_MIN;
 }
 
 
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64 - SizeWidth(50)) style:UITableViewStyleGrouped];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64 - SizeWidth(60)) style:UITableViewStyleGrouped];
         _myTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _myTableView.backgroundColor = [UIColor whiteColor];
         _myTableView.showsVerticalScrollIndicator = NO;
@@ -324,10 +334,10 @@
 
 - (UIView *)bottomView{
     if (!_bottomView) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenH - SizeWidth(50) , kScreenW, SizeWidth(50))];
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenH - SizeWidth(60) , kScreenW, SizeWidth(60))];
         _bottomView.backgroundColor = [UIColor whiteColor];
         
-        UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(SizeWidth(10), SizeWidth(5), kScreenW - SizeWidth(20), SizeWidth(40))];
+        UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(SizeWidth(10), SizeWidth(7), kScreenW - SizeWidth(20), SizeWidth(45))];
         commitBtn.backgroundColor = RGB(24, 141, 240);
         [commitBtn setTitle:@"添加一个新地址" forState:UIControlStateNormal];
         [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

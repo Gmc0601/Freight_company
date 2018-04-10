@@ -18,7 +18,9 @@
 #import "JYBHomePackAddressListVC.h"
 #import "JYBHomeImproveBoxInfoBottomView.h"
 #import "CCWebViewViewController.h"
-@interface JYBHomeImproveBoxInfoVC ()<UITableViewDelegate,UITableViewDataSource,JYBHomeSendDriveMesgVCDelegate,JYBHomePackAddressListVCDelegate>
+#import "THDatePickerView.h"
+
+@interface JYBHomeImproveBoxInfoVC ()<UITableViewDelegate,UITableViewDataSource,JYBHomeSendDriveMesgVCDelegate,JYBHomePackAddressListVCDelegate,THDatePickerViewDelegate>
 
 @property (nonatomic ,strong)UITableView *myTableView;
 
@@ -26,6 +28,9 @@
 
 @property (nonatomic, strong) ESPickerView *pickerView;
 
+@property (strong, nonatomic) THDatePickerView *dateView;
+
+@property (nonatomic ,assign)NSInteger  currentIndex;
 
 @end
 
@@ -40,6 +45,9 @@
     }
     [self.view addSubview:self.myTableView];
     [self.view addSubview:self.bottomView];
+    
+    [self.view addSubview:self.dateView];
+    
     
     if (self.seleBoxAddreModel) {
         [self __caluteOrderPrice];
@@ -105,6 +113,19 @@
 
 - (void)__caluteOrderPrice{
     
+    if (!self.seleBoxAddreModel) {
+        return;
+    }
+    BOOL ship = NO;
+    for (JYBHomeShipAddressModel *shipModel in self.seleStationArr) {
+        if (![NSString stringIsNilOrEmpty:shipModel.shipment_address_id]) {
+            ship = YES;
+        }
+    }
+    if (!ship) {
+        return;
+    }
+    
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic addUnEmptyString:self.seleBoxAddreModel.portModel.port_id forKey:@"prot_id"];
     [dic addUnEmptyString:[self __getOrderTypeWithName:self.sepc] forKey:@"order_type"];
@@ -136,7 +157,8 @@
 - (void)priceScheBtnAction{
     
     CCWebViewViewController *vc = [[CCWebViewViewController alloc] init];
-    vc.titlestr = @"价格明细";
+    vc.titlestr = @"";
+    vc.type = CCWebViewViewTypePrice;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -227,7 +249,14 @@
             NSString *str = datadic[@"msg"];
             [ConfigModel mbProgressHUD:str andView:nil];
         }
-        weak.tabBarController.selectedIndex = 1;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"JYBOrderNotication" object:nil];
+        
+        if (weak.tabBarController.selectedIndex == 1) {
+            [weak.navigationController popToRootViewControllerAnimated:YES];
+        }else{
+            weak.tabBarController.selectedIndex = 1;
+        }
     }];
     
 }
@@ -376,32 +405,47 @@
 }
 
 - (void)__seleTime:(NSInteger)index{
-    WeakObj(self);
-    NSDate *date = [NSDate dateWithString:(index == 0)?(self.startTime?self.startTime:[self __nextDayAfterDay:1 currntTime:nil]):(self.endTime?self.endTime:[self __nextDataWithCurrrnt:self.startTime]) format:@"yyyy-MM-dd HH:mm:ss"];
-    [self.pickerView animationShowWithDate:date maximumDate:nil minimumDate:nil selectedItemComplete:^(ESPickerView *pickerView, NSString *item, NSDate *date) {
-        if (index == 0) {
-            selfWeak.startTime = [date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
-        }else{
-            selfWeak.endTime = [date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
-        }
-        [selfWeak.myTableView reloadData];
-        [pickerView animationDismiss];
+    
+    self.currentIndex = index;
+    self.dateView.minuteInterval = 1;
+    self.dateView.date = (index == 0)?(self.startTime?self.startTime:[self __nextDayAfterDay:1 currntTime:nil]):(self.startTime?[self __nextDataWithCurrrnt:self.startTime]:[self __nextDayAfterDay:2 currntTime:nil]);
+    
+    self.dateView.title = (index == 0)?@"请选择装箱时间":@"请选择截关时间";
+    [self.dateView.saveBtn setTitle:(index == 0)?@"下一步":@"确定" forState:UIControlStateNormal];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.dateView.frame = CGRectMake(0, self.view.frame.size.height - 300, self.view.frame.size.width, 300);
+        [self.dateView show];
     }];
+    
+    
+    
+//    WeakObj(self);
+//    NSDate *date = [NSDate dateWithString:(index == 0)?(self.startTime?self.startTime:[self __nextDayAfterDay:1 currntTime:nil]):(self.endTime?self.endTime:[self __nextDataWithCurrrnt:self.startTime]) format:@"yyyy-MM-dd HH:mm:ss"];
+//    [self.pickerView animationShowWithDate:date maximumDate:nil minimumDate:nil selectedItemComplete:^(ESPickerView *pickerView, NSString *item, NSDate *date) {
+//        if (index == 0) {
+//            selfWeak.startTime = [date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+//        }else{
+//            selfWeak.endTime = [date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+//        }
+//        [selfWeak.myTableView reloadData];
+//        [pickerView animationDismiss];
+//    }];
 }
 
 - (NSString *)__nextDayAfterDay:(NSInteger)day currntTime:(NSString *)current{
-    NSDate *currDate = current?[NSDate dateWithString:current format:@"yyyy-MM-dd HH:mm:ss"]:[NSDate date];
-    NSDate *date = [currDate dateByAddingDays:1];
-    NSString *dateStr = [date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSString *nextStr = [NSString stringWithFormat:@"%@ 08:00:00",[dateStr componentsSeparatedByString:@" "].firstObject];
+    NSDate *currDate = current?[NSDate dateWithString:current format:@"yyyy-MM-dd HH:mm"]:[NSDate date];
+    NSDate *date = [currDate dateByAddingDays:day];
+    NSString *dateStr = [date stringWithFormat:@"yyyy-MM-dd HH:mm"];
+    NSString *nextStr = [NSString stringWithFormat:@"%@ 08:00",[dateStr componentsSeparatedByString:@" "].firstObject];
     return nextStr;
 }
 
 
 - (NSString *)__nextDataWithCurrrnt:(NSString *)current{
-    NSDate *currDate = current?[NSDate dateWithString:current format:@"yyyy-MM-dd HH:mm:ss"]:[NSDate date];
+    NSDate *currDate = current?[NSDate dateWithString:current format:@"yyyy-MM-dd HH:mm"]:[NSDate date];
     NSDate *date = [currDate dateByAddingDays:1];
-    NSString *nextStr = [date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *nextStr = [date stringWithFormat:@"yyyy-MM-dd HH:mm"];
     return nextStr;
 }
 
@@ -461,5 +505,57 @@
     }
     return _seleStationArr;
 }
+
+
+- (THDatePickerView *)dateView{
+    if (!_dateView) {
+        _dateView = [[THDatePickerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 300)];
+        _dateView.delegate = self;
+        _dateView.title = @"请选择时间";
+        _dateView.minuteInterval = 1;
+        _dateView.isSlide = NO;
+    }
+    return _dateView;
+}
+
+#pragma mark - THDatePickerViewDelegate
+/**
+ 保存按钮代理方法
+ 
+ @param timer 选择的数据
+ */
+- (void)datePickerViewSaveBtnClickDelegate:(NSString *)timer {
+    NSLog(@"保存点击");
+
+    [UIView animateWithDuration:0.3 animations:^{
+        self.dateView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 300);
+    }];
+    
+    if (self.currentIndex == 0) {
+        self.startTime = timer;
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self __seleTime:1];
+        });
+        
+    }else{
+        self.endTime = timer;
+    }
+    [self.myTableView reloadData];
+
+}
+
+/**
+ 取消按钮代理方法
+ */
+- (void)datePickerViewCancelBtnClickDelegate {
+    NSLog(@"取消点击");
+  
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.dateView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 300);
+    }];
+}
+
 
 @end

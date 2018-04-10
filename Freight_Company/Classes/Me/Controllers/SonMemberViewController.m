@@ -42,11 +42,10 @@
     [ConfigModel showHud:self];
     WeakSelf(weak);
     [self.dataArr removeAllObjects];
-    NSDictionary *dic = @{
-                          @"user_id" : [ConfigModel getStringforKey:UserId]
-                          };
-    [HttpRequest postPath:@"/Home/User/companyUser" params:dic resultBlock:^(id responseObject, NSError *error) {
+    
+    [HttpRequest postPath:@"/Home/User/companyUser" params:nil resultBlock:^(id responseObject, NSError *error) {
         [ConfigModel hideHud:weak];
+        NSLog(@">>>>>%@<<<<<<", responseObject);
         if([error isEqual:[NSNull null]] || error == nil){
             NSLog(@"success");
         }
@@ -73,7 +72,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -91,7 +89,8 @@
     cell.changeBlock = ^{
         ChangeSonMemberViewController *son = [[ChangeSonMemberViewController alloc] init];
         son.type =  ChangeInfo;
-        
+        SonmemberModel *model = self.dataArr[indexPath.row];
+        son.model = model;
         [weak.navigationController pushViewController:son animated:YES];
     };
     SonmemberModel *model = self.dataArr[indexPath.row];
@@ -109,6 +108,7 @@
                     NSDictionary *datadic = responseObject;
                     if ([datadic[@"success"] intValue] == 1) {
                         [ConfigModel mbProgressHUD:@"操作成功" andView:nil];
+                        [self getData];
                     }else {
                         NSString *str = datadic[@"msg"];
                         [ConfigModel mbProgressHUD:str andView:nil];

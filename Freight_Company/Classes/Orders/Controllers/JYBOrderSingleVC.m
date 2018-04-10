@@ -33,6 +33,14 @@
     self.currentPage = 1;
     [self.view addSubview:self.myTableView];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshData) name:@"JYBOrderNotication" object:nil];
+    
+    [self __fetchOrderList];
+}
+
+- (void)refreshData{
+    
+    self.currentPage = 1;
     [self __fetchOrderList];
 }
 

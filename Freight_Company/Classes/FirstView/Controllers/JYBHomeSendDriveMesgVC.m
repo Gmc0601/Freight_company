@@ -139,7 +139,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
-        return (self.dotArr.count/4 +((self.dotArr.count%4 == 0)?0:1))*SizeWidth(75);
+        return (self.dotArr.count/5 +((self.dotArr.count%5 == 0)?0:1))*SizeWidth(56);
     }else{
         return UITableViewAutomaticDimension;
     }

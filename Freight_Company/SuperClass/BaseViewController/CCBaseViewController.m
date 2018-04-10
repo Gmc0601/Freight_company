@@ -31,7 +31,7 @@
 
     }
     
-    [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleLightContent animated:YES];
+//    [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleLightContent animated:YES];
 }
 
 - (void)resetFather {

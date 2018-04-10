@@ -8,10 +8,18 @@
 
 #import "SystemMessageViewController.h"
 #import "SystemCellTableViewCell.h"
+#import <MJExtension.h>
+#import "JYBOrderDetailVC.h"
+
+@implementation SystemModel
+
+@end
 
 @interface SystemMessageViewController ()<UITableViewDelegate,  UITableViewDataSource>
 
 @property (nonatomic, retain) UITableView *noUseTableView;
+
+@property (nonatomic, strong) NSMutableArray *dataArr;
 
 @end
 
@@ -21,6 +29,27 @@
     [super viewDidLoad];
     [self resetFather];
     [self.view addSubview:self.noUseTableView];
+    [self getdata];
+}
+
+- (void)getdata {
+    [HttpRequest postPath:@"/Home/User/msglist" params:nil resultBlock:^(id responseObject, NSError *error) {
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSLog(@"???%@", responseObject);
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            NSDictionary *data = datadic[@"data"];
+            self.dataArr = [SystemModel mj_objectArrayWithKeyValuesArray:data];
+            [self.noUseTableView reloadData];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+        }
+    }];
 }
 
 - (void)resetFather {
@@ -33,7 +62,7 @@
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return self.dataArr.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -46,6 +75,7 @@
     if (!cell) {
         cell = [[SystemCellTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
     }
+    [cell update:self.dataArr[indexPath.section]];
     cell.backgroundColor = [UIColor clearColor];
     return cell;
 }
@@ -67,6 +97,8 @@
     lab.backgroundColor = [UIColor clearColor];
     lab.font = [UIFont systemFontOfSize:12];
     lab.textAlignment = NSTextAlignmentCenter;
+    SystemModel *model = self.dataArr[section];
+    lab.text = model.create_time;
     lab.textColor = UIColorFromHex(0x999999);
     
     [headerView addSubview:lab];
@@ -78,17 +110,29 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    //   t
+    SystemModel *model = self.dataArr[indexPath.section];
+    JYBOrderDetailVC *vc = [[JYBOrderDetailVC alloc] init];
+    vc.order_id = model.order_id;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 - (UITableView *)noUseTableView {
     if (!_noUseTableView) {
         _noUseTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64) style:UITableViewStylePlain];
         _noUseTableView.backgroundColor = RGBColor(239, 240, 241);
+        _noUseTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _noUseTableView.delegate = self;
         _noUseTableView.dataSource = self;
+        
     }
     return _noUseTableView;
 }
 
+- (NSMutableArray *)dataArr {
+    if (!_dataArr) {
+        _dataArr = [[NSMutableArray alloc] init];
+    }
+    return _dataArr;
+}
 
 @end

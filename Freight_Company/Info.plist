@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>集运邦</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -29,6 +31,8 @@
 	<string>需要获取您的相册用于“修改头像和发布任务”若不允许则无法设置头像和发布任务</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>需要获取您的位置用于“任务”若不允许则无法获取您周边的内容</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>需要获取您的位置用于“任务”若不允许则无法获取您周边的内容</string>
 	<key>NSLocationUsageDescription</key>
 	<string>需要获取您的位置用于“任务”若不允许则无法获取您周边的内容</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -37,8 +41,6 @@
 	<string>App需要您的同意,才能访问麦克风</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>需要获取您的相机用于“修改头像和发布任务”若不允许则无法设置头像和发布任务</string>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

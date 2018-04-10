@@ -61,19 +61,19 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    return CGSizeMake((kScreenW - SizeWidth(50))/4, SizeWidth(55));
+    return CGSizeMake((kScreenW - SizeWidth(48))/5, SizeWidth(40));
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(SizeWidth(10), SizeWidth(10), SizeWidth(10), SizeWidth(10));
+    return UIEdgeInsetsMake(SizeWidth(8), SizeWidth(8), SizeWidth(8), SizeWidth(8));
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section{
-    return SizeWidth(10);
+    return SizeWidth(8);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section{
-    return SizeWidth(10);
+    return SizeWidth(8);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

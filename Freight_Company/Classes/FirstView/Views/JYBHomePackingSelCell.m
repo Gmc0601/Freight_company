@@ -99,6 +99,7 @@
         _arrowBtn.titleLabel.font = [UIFont systemFontOfSize:SizeWidth(15)];
         [_arrowBtn setImage:[UIImage imageNamed:@"icon_gd"] forState:UIControlStateNormal];
         [_arrowBtn addTarget:self action:@selector(arrowBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        _arrowBtn.userInteractionEnabled = NO;
     }
     return _arrowBtn;
 }

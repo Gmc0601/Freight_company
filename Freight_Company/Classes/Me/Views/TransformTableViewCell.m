@@ -49,7 +49,7 @@
     }
     box =[NSString stringWithFormat:@"提箱号：%@", model.box_no];
     
-    moeny = [NSString stringWithFormat:@"%@￥%@", add, model.change_price];
+    moeny = [NSString stringWithFormat:@"%@", model.change_price];
     self.titleLab.text = title;
     self.detailLab.text = box;
     self.timelab.text = model.create_time;

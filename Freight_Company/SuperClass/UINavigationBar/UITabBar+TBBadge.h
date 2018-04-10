@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface UITabBar (TBBadge)
-- (void)showBadgeOnItemIndex:(int)index;   //显示小红点
+- (void)showBadgeOnItemIndex:(int)index count:(NSInteger)count;   //显示小红点
 
 - (void)hideBadgeOnItemIndex:(int)index; //隐藏小红点
 @end

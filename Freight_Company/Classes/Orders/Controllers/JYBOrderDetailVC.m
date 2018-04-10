@@ -22,15 +22,19 @@
 #import "JYBOrderPayPopView.h"
 #import "CPConfig.h"
 #import "JYBOrderLogisMapViewCell.h"
+#import "JYBOrderMapVC.h"
 
 typedef enum : NSUInteger {
     JYBOrderDetailTypeLogisUser,
     JYBOrderDetailTypeLogisInfo,
+    JYBOrderDetailTypeLogisMap,
     JYBOrderDetailTypeAddressInfo,
     JYBOrderDetailTypeBoxInfo,
     JYBOrderDetailTypeMarkInfo,
     JYBOrderDetailTypeCostInfo,
     JYBOrderDetailTypeOtherCost,
+    JYBOrderDetailTypeOrderInfo,
+
 } JYBOrderDetailType;
 
 @interface JYBOrderDetailVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -50,7 +54,7 @@ typedef enum : NSUInteger {
     [self resetFather];
     
     [self.view addSubview:self.myTableView];
-    
+    [self.view addSubview:self.bottomView];
     [self __fetchOrderDetail];
 }
 
@@ -98,10 +102,13 @@ typedef enum : NSUInteger {
 
 - (void)__setBottomView{
     if (self.detailModel.order_status.integerValue == 0 || self.detailModel.order_status.integerValue == 10 || self.detailModel.order_status.integerValue == 40) {
-        self.myTableView.tableFooterView = self.bottomView;
+        self.bottomView.hidden= NO;
+        self.myTableView.frame = CGRectMake(0, 64, kScreenW, kScreenH - 64 - SizeWidth(95));
         [self.bottomView updateBottomView:self.detailModel];
     }else{
-        self.myTableView.tableFooterView = nil;
+        self.bottomView.hidden= YES;
+        self.myTableView.frame = CGRectMake(0, 64, kScreenW, kScreenH - 64);
+
     }
     
 }
@@ -122,7 +129,7 @@ typedef enum : NSUInteger {
     
     switch (model.order_status.integerValue) {
         case 0:
-            return @"待支付";
+            return @"待确认";
             break;
         case 10:
             return @"派单中";
@@ -131,13 +138,16 @@ typedef enum : NSUInteger {
             return @"已接单";
             break;
         case 30:
-            return @"进行中";
+            return @"运输中";
             break;
         case 31:
             return @"已进港待支付(额外费用待审核)";
             break;
+        case 32:
+            return @"已进港待支付(额外费用已拒绝)";
+            break;
         case 40:
-            return @"已到港";
+            return @"确认额外费用";
             break;
         case 50:
             return @"已完成";
@@ -189,16 +199,23 @@ typedef enum : NSUInteger {
     
     WeakObj(self);
 
-    [[[JYBOrderPayPopView alloc] initWithPayAmount:self.detailModel.order_price.floatValue totalAmount:[[CPConfig sharedManager] totalAmount].floatValue ClickAction:^{
-        
+    if (self.detailModel.order_price.floatValue <= [[CPConfig sharedManager] totalAmount].floatValue) {
         if (type == JYBOrderDetailBottomTypePay) {
             [selfWeak __pay];
-            
         }else{
             [selfWeak __payOther];
         }
+    }else{
         
-    }] show];
+        [[[JYBOrderPayPopView alloc] initWithPayAmount:self.detailModel.order_price.floatValue totalAmount:[[CPConfig sharedManager] totalAmount].floatValue ClickAction:^{
+            
+            if (type == JYBOrderDetailBottomTypePay) {
+                [selfWeak __pay];
+            }else{
+                [selfWeak __payOther];
+            }
+        }] show];
+    }
 }
 
 - (void)__payOther{
@@ -312,16 +329,17 @@ typedef enum : NSUInteger {
 #pragma mark - tableviewdelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 7;
+    return 9;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
     if (section == JYBOrderDetailTypeLogisUser) {
-        return [NSString stringIsNilOrEmpty:self.detailModel.driver_id]?0:1;
+        return ([NSString stringIsNilOrEmpty:self.detailModel.driver_id] || self.detailModel.order_status.integerValue == 0 || self.detailModel.order_status.integerValue == 10 || self.detailModel.order_status.integerValue == 60)?0:1;
     }else if (section == JYBOrderDetailTypeLogisInfo){
-        return 2;
-        return self.detailModel.logistics.count?2:0;
+        return self.detailModel.logistics.count?1:0;
+    }else if (section == JYBOrderDetailTypeLogisMap){
+        return (self.detailModel.order_status.integerValue == 30 )?1:0;
     }else if (section == JYBOrderDetailTypeAddressInfo){
         return self.detailModel.shipment_address.count + 1;
     }else if (section == JYBOrderDetailTypeBoxInfo){
@@ -329,19 +347,23 @@ typedef enum : NSUInteger {
     }else if (section == JYBOrderDetailTypeMarkInfo){
         return [NSString stringIsNilOrEmpty:self.detailModel.message]?0:1;
     }else if (section == JYBOrderDetailTypeCostInfo){
-        return 2;
+        return 1;
+    }else if (section == JYBOrderDetailTypeOtherCost){
+        return ([NSString stringIsNilOrEmpty:self.detailModel.other_price] || self.detailModel.other_price.floatValue <= 0)?0:1;
     }else{
-        return [NSString stringIsNilOrEmpty:self.detailModel.other_price]?0:1;
+        return 1;
     }
 }
 
 - (NSInteger)__fetchTypeBoxInfoNum{
     if (self.detailModel) {
-        if (self.detailModel.order_status.integerValue == 30 || self.detailModel.order_status.integerValue == 31 || self.detailModel.order_status.integerValue == 40 || self.detailModel.order_status.integerValue == 50 ) {
+        if (self.detailModel.order_status.integerValue == 30 || self.detailModel.order_status.integerValue == 31 ||
+            self.detailModel.order_status.integerValue == 32 ||
+            self.detailModel.order_status.integerValue == 40 || self.detailModel.order_status.integerValue == 50 ) {
             if (self.detailModel.box_img.count) {
-                return 6;
+                return 7;
             }else{
-                return 5;
+                return 6;
             }
             
         }else{
@@ -358,15 +380,14 @@ typedef enum : NSUInteger {
     if (indexPath.section == JYBOrderDetailTypeLogisUser) {
         return SizeWidth(85);
     }else if (indexPath.section == JYBOrderDetailTypeLogisInfo){
-        if (indexPath.row == 0) {
             return SizeWidth(90);
-        }else{
+    }else if (indexPath.section == JYBOrderDetailTypeLogisMap){
             return SizeWidth(150);
-        }
-    }else if (indexPath.section == JYBOrderDetailTypeAddressInfo){
+    }
+    else if (indexPath.section == JYBOrderDetailTypeAddressInfo){
         return SizeWidth(110);
     }else if (indexPath.section == JYBOrderDetailTypeBoxInfo){
-        if (indexPath.row == 5) {
+        if (indexPath.row == 6) {
             return SizeWidth(110);
         }else{
             return SizeWidth(55);
@@ -374,13 +395,12 @@ typedef enum : NSUInteger {
     }else if (indexPath.section == JYBOrderDetailTypeMarkInfo){
         return UITableViewAutomaticDimension;
     }else if (indexPath.section== JYBOrderDetailTypeCostInfo){
-        if (indexPath.row == 0) {
-            return SizeWidth(50);
-        }else{
-            return SizeWidth(65);
-        }
-    }else{
+        return SizeWidth(50);
+    }else if (indexPath.section== JYBOrderDetailTypeOtherCost){
         return SizeWidth(55);
+    }
+    else{
+        return SizeWidth(65);
     }
 }
 
@@ -392,9 +412,11 @@ typedef enum : NSUInteger {
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if (section == JYBOrderDetailTypeLogisUser) {
-        return [NSString stringIsNilOrEmpty:self.detailModel.driver_id]?CGFLOAT_MIN:SizeWidth(10);
+        return ([NSString stringIsNilOrEmpty:self.detailModel.driver_id] ||self.detailModel.order_status.integerValue == 0 || self.detailModel.order_status.integerValue == 10 || self.detailModel.order_status.integerValue == 60)?CGFLOAT_MIN:SizeWidth(10);
     }else if (section == JYBOrderDetailTypeLogisInfo){
-        return self.detailModel.logistics.count?SizeWidth(10):CGFLOAT_MIN;
+        return CGFLOAT_MIN;
+    }else if (section == JYBOrderDetailTypeLogisMap){
+        return (self.detailModel.logistics.count || self.detailModel.order_status.integerValue == 30)?SizeWidth(10):CGFLOAT_MIN;
     }else if (section == JYBOrderDetailTypeAddressInfo){
         return SizeWidth(10);
     }else if (section == JYBOrderDetailTypeBoxInfo){
@@ -403,8 +425,10 @@ typedef enum : NSUInteger {
         return [NSString stringIsNilOrEmpty:self.detailModel.message]?CGFLOAT_MIN:SizeWidth(10);
     }else if (section== JYBOrderDetailTypeCostInfo){
         return SizeWidth(10);
+    }else if (section== JYBOrderDetailTypeOtherCost){
+       return ([NSString stringIsNilOrEmpty:self.detailModel.other_price] || self.detailModel.other_price.floatValue <= 0)?CGFLOAT_MIN:SizeWidth(10);
     }else{
-        return [NSString stringIsNilOrEmpty:self.detailModel.other_price]?CGFLOAT_MIN:SizeWidth(10);
+        return SizeWidth(10);
     }
     
 }
@@ -422,15 +446,16 @@ typedef enum : NSUInteger {
         return cell;
         
     }else if (indexPath.section == JYBOrderDetailTypeLogisInfo){
-        if (indexPath.row == 0) {
-            JYBOrderDetailLogisInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderDetailLogisInfoCell class]) forIndexPath:indexPath];
-            [cell updateCellWithModel:self.detailModel];
-            return cell;
-        }else{
-            JYBOrderLogisMapViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderLogisMapViewCell class]) forIndexPath:indexPath];
-            return cell;
-        }
+        JYBOrderDetailLogisInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderDetailLogisInfoCell class]) forIndexPath:indexPath];
+        [cell updateCellWithModel:self.detailModel];
+        return cell;
 
+    }else if (indexPath.section == JYBOrderDetailTypeLogisMap){
+
+        JYBOrderLogisMapViewCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderLogisMapViewCell class]) forIndexPath:indexPath];
+        [cell updateCellWithModel:self.detailModel];
+        return cell;
+        
     }else if (indexPath.section == JYBOrderDetailTypeAddressInfo){
         JYBOrderDetailAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderDetailAddressCell class]) forIndexPath:indexPath];
         if (indexPath.row == 0) {
@@ -447,7 +472,7 @@ typedef enum : NSUInteger {
         
     }else if (indexPath.section == JYBOrderDetailTypeBoxInfo){
         
-        if (indexPath.row == 5) {
+        if (indexPath.row == 6) {
             JYBHomeOrderImageCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeOrderImageCell class]) forIndexPath:indexPath];
             [cell updateCellWithArr:self.detailModel.box_img.mutableCopy];
             return cell;
@@ -460,6 +485,8 @@ typedef enum : NSUInteger {
             }else if (indexPath.row == 2){
                 [cell updateCellWithIcon:@"xx_icon_sj" title:@"截箱时间" value:self.detailModel.cutoff_time other:NO];
             }else if (indexPath.row == 3){
+                [cell updateCellWithIcon:@"xx_icon_sj" title:@"提箱时间" value:self.detailModel.cutoff_time other:NO];
+            }else if (indexPath.row == 4){
                 [cell updateCellWithIcon:@"ddxq_icon_xh" title:@"箱号" value:self.detailModel.box_no other:NO];
             }else{
                 [cell updateCellWithIcon:@"ddxq_icon_fh" title:@"封号" value:self.detailModel.close_no other:NO];
@@ -473,19 +500,20 @@ typedef enum : NSUInteger {
         [cell updateCellWithMark:self.detailModel.message];
         return cell;
     }else if (indexPath.section== JYBOrderDetailTypeCostInfo){
-        if (indexPath.row == 0) {
-            JYBOrderDetailBoxInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderDetailBoxInfoCell class]) forIndexPath:indexPath];            
-            [cell updateCellWithIcon:@"ddxq_icon_yf" title:@"运费" value:[NSString stringWithFormat:@"¥%@",self.detailModel.order_price] other:NO];
-            return cell;
-        }else{
-            JYBOrderDetailCostCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderDetailCostCell class]) forIndexPath:indexPath];
-            [cell updataCellWithModel:self.detailModel];
-            return cell;
-        }
+        
+        JYBOrderDetailBoxInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderDetailBoxInfoCell class]) forIndexPath:indexPath];
+        [cell updateCellWithIcon:@"ddxq_icon_yf" title:@"运费" value:[NSString stringWithFormat:@"¥%@",self.detailModel.order_price] other:NO];
+        return cell;
 
-    }else{
+    }else if (indexPath.section== JYBOrderDetailTypeOtherCost){
+        
         JYBOrderDetailBoxInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderDetailBoxInfoCell class]) forIndexPath:indexPath];
         [cell updateCellWithIcon:@"ddxq_icon_yf" title:@"额外费用" value:[NSString stringWithFormat:@"¥%@",self.detailModel.other_price] other:YES];
+        return cell;
+        
+    }else{
+        JYBOrderDetailCostCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBOrderDetailCostCell class]) forIndexPath:indexPath];
+        [cell updataCellWithModel:self.detailModel];
         return cell;
     }
 }
@@ -497,7 +525,11 @@ typedef enum : NSUInteger {
         JYBOrderLogisInfoVC *vc = [[JYBOrderLogisInfoVC alloc] init];
         vc.orderModel = self.detailModel;
         [self.navigationController pushViewController:vc animated:YES];
-        
+    }else if (indexPath.section == JYBOrderDetailTypeLogisMap){
+        JYBOrderMapVC *vc = [[JYBOrderMapVC alloc] init];
+        vc.listModel = self.detailModel;
+        [self.navigationController pushViewController:vc animated:YES];
+
     }else if (indexPath.section == JYBOrderDetailTypeAddressInfo){
 
     }else if (indexPath.section == JYBOrderDetailTypeBoxInfo){
@@ -506,8 +538,11 @@ typedef enum : NSUInteger {
 
     }else if (indexPath.section == JYBOrderDetailTypeCostInfo){
 
-    }else{
+    }else if (indexPath.section == JYBOrderDetailTypeOtherCost){
         [self __turnToOtherCostSchVC];
+
+    }else{
+        
     }
     
 
@@ -549,7 +584,7 @@ typedef enum : NSUInteger {
 
 - (JYBOrderDetailBottomView *)bottomView{
     if (!_bottomView) {
-        _bottomView = [[JYBOrderDetailBottomView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, SizeWidth(115))];
+        _bottomView = [[JYBOrderDetailBottomView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height -  SizeWidth(95), kScreenW, SizeWidth(95))];
         WeakSelf(weak)
         [_bottomView setScheBlock:^{
             [weak __turnToOtherCostSchVC];

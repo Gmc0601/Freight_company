@@ -68,6 +68,8 @@
 		427C699B200D9A19006A9EBB /* ReviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 427C6999200D9A19006A9EBB /* ReviewViewController.xib */; };
 		427C69A1200D9D0B006A9EBB /* NODataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C69A0200D9D0B006A9EBB /* NODataView.m */; };
 		427C69AC200EE277006A9EBB /* AddInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 427C69AB200EE277006A9EBB /* AddInfoTableViewCell.m */; };
+		42EC97EF207B4C5300B7043A /* SBMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42EC97ED207B4C5300B7043A /* SBMessageViewController.m */; };
+		42EC97F0207B4C5300B7043A /* SBMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42EC97EE207B4C5300B7043A /* SBMessageViewController.xib */; };
 		B52FBD6EFDDB0053CDAD176F /* libPods-Freight_Company.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7531F0399824241557149359 /* libPods-Freight_Company.a */; };
 		F61080D8205998F3007781A0 /* JYBHomeBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F61080D7205998F3007781A0 /* JYBHomeBannerModel.m */; };
 		F61080DB20599CBF007781A0 /* JYBHomePortModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F61080DA20599CBF007781A0 /* JYBHomePortModel.m */; };
@@ -142,11 +144,19 @@
 		F61B84D12032C1F5003AF684 /* JYBHomeOrderListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84D02032C1F5003AF684 /* JYBHomeOrderListCell.m */; };
 		F61B84D42032E23B003AF684 /* JYBOrderPayPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84D32032E23B003AF684 /* JYBOrderPayPopView.m */; };
 		F61B84D72032FE03003AF684 /* JYBOrderDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F61B84D62032FE03003AF684 /* JYBOrderDetailVC.m */; };
-		F62B77A32075BAF5005AC91A /* bpCityList.plist in Resources */ = {isa = PBXBuildFile; fileRef = F62B77A22075BAF4005AC91A /* bpCityList.plist */; };
 		F62B77A62078C6E1005AC91A /* JYBHomeSelePointHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77A52078C6E1005AC91A /* JYBHomeSelePointHeaderView.m */; };
 		F62B77A92078D4A6005AC91A /* JYBHomeImproveBoxInfoBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77A82078D4A6005AC91A /* JYBHomeImproveBoxInfoBottomView.m */; };
 		F62B77AC2078F8B1005AC91A /* CPConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77AB2078F8B1005AC91A /* CPConfig.m */; };
 		F62B77AF20792725005AC91A /* JYBOrderLogisMapViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77AE20792725005AC91A /* JYBOrderLogisMapViewCell.m */; };
+		F62B77B2207A90B8005AC91A /* JYBOrderMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77B1207A90B8005AC91A /* JYBOrderMapVC.m */; };
+		F62B77B7207BD67B005AC91A /* bpCityList.plist in Resources */ = {isa = PBXBuildFile; fileRef = F62B77B6207BD67B005AC91A /* bpCityList.plist */; };
+		F62B77C1207BF3FB005AC91A /* LXCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77B9207BF3FB005AC91A /* LXCircularProgressView.m */; };
+		F62B77C2207BF3FB005AC91A /* LXFullScreenImageBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77BB207BF3FB005AC91A /* LXFullScreenImageBrowser.m */; };
+		F62B77C3207BF3FB005AC91A /* LXZoomingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77BE207BF3FB005AC91A /* LXZoomingScrollView.m */; };
+		F62B77C4207BF3FB005AC91A /* LXImageLoopBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77C0207BF3FB005AC91A /* LXImageLoopBrowser.m */; };
+		F62B77C7207C7360005AC91A /* JYBStationPointModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77C6207C7360005AC91A /* JYBStationPointModel.m */; };
+		F62B77CA207C8366005AC91A /* JYBOrderCountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77C9207C8366005AC91A /* JYBOrderCountModel.m */; };
+		F62B77CD207D1AC7005AC91A /* THDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B77CC207D1AC7005AC91A /* THDatePickerView.m */; };
 		F658428F2033089D0040B194 /* JYBOrderDetailLogisUserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F658428E2033089D0040B194 /* JYBOrderDetailLogisUserCell.m */; };
 		F6584292203308C00040B194 /* JYBOrderDetailLogisInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6584291203308C00040B194 /* JYBOrderDetailLogisInfoCell.m */; };
 		F6584295203308DE0040B194 /* JYBOrderDetailAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F6584294203308DE0040B194 /* JYBOrderDetailAddressCell.m */; };
@@ -283,6 +293,9 @@
 		427C69A0200D9D0B006A9EBB /* NODataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NODataView.m; sourceTree = "<group>"; };
 		427C69AA200EE277006A9EBB /* AddInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddInfoTableViewCell.h; sourceTree = "<group>"; };
 		427C69AB200EE277006A9EBB /* AddInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInfoTableViewCell.m; sourceTree = "<group>"; };
+		42EC97EC207B4C5300B7043A /* SBMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SBMessageViewController.h; sourceTree = "<group>"; };
+		42EC97ED207B4C5300B7043A /* SBMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SBMessageViewController.m; sourceTree = "<group>"; };
+		42EC97EE207B4C5300B7043A /* SBMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SBMessageViewController.xib; sourceTree = "<group>"; };
 		4429C470FFB6F6CA84B03013 /* Pods-Freight_Company.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Freight_Company.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Freight_Company/Pods-Freight_Company.debug.xcconfig"; sourceTree = "<group>"; };
 		537AE1D939255ECA6F4D0FBB /* Pods-Freight_Company.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Freight_Company.release.xcconfig"; path = "Pods/Target Support Files/Pods-Freight_Company/Pods-Freight_Company.release.xcconfig"; sourceTree = "<group>"; };
 		7531F0399824241557149359 /* libPods-Freight_Company.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Freight_Company.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -432,7 +445,6 @@
 		F61B84D32032E23B003AF684 /* JYBOrderPayPopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderPayPopView.m; sourceTree = "<group>"; };
 		F61B84D52032FE03003AF684 /* JYBOrderDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderDetailVC.h; sourceTree = "<group>"; };
 		F61B84D62032FE03003AF684 /* JYBOrderDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderDetailVC.m; sourceTree = "<group>"; };
-		F62B77A22075BAF4005AC91A /* bpCityList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bpCityList.plist; sourceTree = "<group>"; };
 		F62B77A42078C6E1005AC91A /* JYBHomeSelePointHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeSelePointHeaderView.h; sourceTree = "<group>"; };
 		F62B77A52078C6E1005AC91A /* JYBHomeSelePointHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBHomeSelePointHeaderView.m; sourceTree = "<group>"; };
 		F62B77A72078D4A6005AC91A /* JYBHomeImproveBoxInfoBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBHomeImproveBoxInfoBottomView.h; sourceTree = "<group>"; };
@@ -441,6 +453,23 @@
 		F62B77AB2078F8B1005AC91A /* CPConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CPConfig.m; sourceTree = "<group>"; };
 		F62B77AD20792725005AC91A /* JYBOrderLogisMapViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderLogisMapViewCell.h; sourceTree = "<group>"; };
 		F62B77AE20792725005AC91A /* JYBOrderLogisMapViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderLogisMapViewCell.m; sourceTree = "<group>"; };
+		F62B77B0207A90B8005AC91A /* JYBOrderMapVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderMapVC.h; sourceTree = "<group>"; };
+		F62B77B1207A90B8005AC91A /* JYBOrderMapVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderMapVC.m; sourceTree = "<group>"; };
+		F62B77B6207BD67B005AC91A /* bpCityList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = bpCityList.plist; sourceTree = "<group>"; };
+		F62B77B9207BF3FB005AC91A /* LXCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXCircularProgressView.m; sourceTree = "<group>"; };
+		F62B77BA207BF3FB005AC91A /* LXZoomingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXZoomingScrollView.h; sourceTree = "<group>"; };
+		F62B77BB207BF3FB005AC91A /* LXFullScreenImageBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXFullScreenImageBrowser.m; sourceTree = "<group>"; };
+		F62B77BC207BF3FB005AC91A /* LXImageLoopBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXImageLoopBrowser.h; sourceTree = "<group>"; };
+		F62B77BD207BF3FB005AC91A /* LXCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXCircularProgressView.h; sourceTree = "<group>"; };
+		F62B77BE207BF3FB005AC91A /* LXZoomingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXZoomingScrollView.m; sourceTree = "<group>"; };
+		F62B77BF207BF3FB005AC91A /* LXFullScreenImageBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LXFullScreenImageBrowser.h; sourceTree = "<group>"; };
+		F62B77C0207BF3FB005AC91A /* LXImageLoopBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LXImageLoopBrowser.m; sourceTree = "<group>"; };
+		F62B77C5207C7360005AC91A /* JYBStationPointModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBStationPointModel.h; sourceTree = "<group>"; };
+		F62B77C6207C7360005AC91A /* JYBStationPointModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBStationPointModel.m; sourceTree = "<group>"; };
+		F62B77C8207C8366005AC91A /* JYBOrderCountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderCountModel.h; sourceTree = "<group>"; };
+		F62B77C9207C8366005AC91A /* JYBOrderCountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderCountModel.m; sourceTree = "<group>"; };
+		F62B77CB207D1AC6005AC91A /* THDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THDatePickerView.h; sourceTree = "<group>"; };
+		F62B77CC207D1AC7005AC91A /* THDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THDatePickerView.m; sourceTree = "<group>"; };
 		F658428D2033089D0040B194 /* JYBOrderDetailLogisUserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderDetailLogisUserCell.h; sourceTree = "<group>"; };
 		F658428E2033089D0040B194 /* JYBOrderDetailLogisUserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JYBOrderDetailLogisUserCell.m; sourceTree = "<group>"; };
 		F6584290203308C00040B194 /* JYBOrderDetailLogisInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JYBOrderDetailLogisInfoCell.h; sourceTree = "<group>"; };
@@ -517,8 +546,8 @@
 				427C6932200C98C4006A9EBB /* Factory */,
 				427C68DD200C98C4006A9EBB /* Library */,
 				427C68FE200C98C4006A9EBB /* Main */,
-				F62B77A22075BAF4005AC91A /* bpCityList.plist */,
 				427C68CA200C9849006A9EBB /* Main.storyboard */,
+				F62B77B6207BD67B005AC91A /* bpCityList.plist */,
 				427C68D0200C9849006A9EBB /* Assets.xcassets */,
 				427C68D2200C9849006A9EBB /* LaunchScreen.storyboard */,
 				427C68D5200C9849006A9EBB /* Info.plist */,
@@ -530,6 +559,7 @@
 		427C68DD200C98C4006A9EBB /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				F62B77B8207BF3FB005AC91A /* LXImageLoopBrowser */,
 				F66A6A16202A0C0E00E40F56 /* SDCycleScrollView */,
 				427C68DE200C98C4006A9EBB /* Md5 */,
 				427C68E7200C98C4006A9EBB /* MJRefresh */,
@@ -852,6 +882,9 @@
 				42399AA22011A19E009263E5 /* ChangeSonMemberViewController.m */,
 				4268EE732011D49900091D5F /* SystemMessageViewController.h */,
 				4268EE742011D49900091D5F /* SystemMessageViewController.m */,
+				42EC97EC207B4C5300B7043A /* SBMessageViewController.h */,
+				42EC97ED207B4C5300B7043A /* SBMessageViewController.m */,
+				42EC97EE207B4C5300B7043A /* SBMessageViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -896,6 +929,8 @@
 				F612172F2033BC6C002D762A /* JYBOrderLogisInfoVC.m */,
 				F612173D2033DC60002D762A /* JYBOrderOtherCostVC.h */,
 				F612173E2033DC60002D762A /* JYBOrderOtherCostVC.m */,
+				F62B77B0207A90B8005AC91A /* JYBOrderMapVC.h */,
+				F62B77B1207A90B8005AC91A /* JYBOrderMapVC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1035,6 +1070,10 @@
 				F610812A205CDBAD007781A0 /* JYBOrderLogisticsModel.m */,
 				F610812C205CDC31007781A0 /* JYBOrderBoxAddressModel.h */,
 				F610812D205CDC31007781A0 /* JYBOrderBoxAddressModel.m */,
+				F62B77C5207C7360005AC91A /* JYBStationPointModel.h */,
+				F62B77C6207C7360005AC91A /* JYBStationPointModel.m */,
+				F62B77C8207C8366005AC91A /* JYBOrderCountModel.h */,
+				F62B77C9207C8366005AC91A /* JYBOrderCountModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1042,6 +1081,8 @@
 		F61B84CE2032C1D7003AF684 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F62B77CB207D1AC6005AC91A /* THDatePickerView.h */,
+				F62B77CC207D1AC7005AC91A /* THDatePickerView.m */,
 				F61B84CF2032C1F5003AF684 /* JYBHomeOrderListCell.h */,
 				F61B84D02032C1F5003AF684 /* JYBHomeOrderListCell.m */,
 				F61B84D22032E23B003AF684 /* JYBOrderPayPopView.h */,
@@ -1072,6 +1113,21 @@
 				F612394E205DF96100B58AA5 /* JYBOrderDetailBottomView.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F62B77B8207BF3FB005AC91A /* LXImageLoopBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				F62B77B9207BF3FB005AC91A /* LXCircularProgressView.m */,
+				F62B77BA207BF3FB005AC91A /* LXZoomingScrollView.h */,
+				F62B77BB207BF3FB005AC91A /* LXFullScreenImageBrowser.m */,
+				F62B77BC207BF3FB005AC91A /* LXImageLoopBrowser.h */,
+				F62B77BD207BF3FB005AC91A /* LXCircularProgressView.h */,
+				F62B77BE207BF3FB005AC91A /* LXZoomingScrollView.m */,
+				F62B77BF207BF3FB005AC91A /* LXFullScreenImageBrowser.h */,
+				F62B77C0207BF3FB005AC91A /* LXImageLoopBrowser.m */,
+			);
+			path = LXImageLoopBrowser;
 			sourceTree = "<group>";
 		};
 		F66A6A16202A0C0E00E40F56 /* SDCycleScrollView */ = {
@@ -1170,8 +1226,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				427C68D4200C9849006A9EBB /* LaunchScreen.storyboard in Resources */,
-				F62B77A32075BAF5005AC91A /* bpCityList.plist in Resources */,
+				42EC97F0207B4C5300B7043A /* SBMessageViewController.xib in Resources */,
 				427C68D1200C9849006A9EBB /* Assets.xcassets in Resources */,
+				F62B77B7207BD67B005AC91A /* bpCityList.plist in Resources */,
 				427C6990200CA5CA006A9EBB /* LoginViewController.xib in Resources */,
 				427C699B200D9A19006A9EBB /* ReviewViewController.xib in Resources */,
 				427C695D200C98C4006A9EBB /* arrowdown@2x.png in Resources */,
@@ -1278,6 +1335,7 @@
 				427C6980200C98C5006A9EBB /* FirstViewController.m in Sources */,
 				F610811C205C32B7007781A0 /* JYBHomePackAddressListVC.m in Sources */,
 				F61B8483202FE07C003AF684 /* JYBHomeFetchBoxListVC.m in Sources */,
+				F62B77C3207BF3FB005AC91A /* LXZoomingScrollView.m in Sources */,
 				F610810A205C0726007781A0 /* JYBHomeQuickOrderPriceModel.m in Sources */,
 				427C697A200C98C5006A9EBB /* MainApi.m in Sources */,
 				427C6979200C98C5006A9EBB /* UIFactory.m in Sources */,
@@ -1292,6 +1350,7 @@
 				F612173F2033DC60002D762A /* JYBOrderOtherCostVC.m in Sources */,
 				F61B84D72032FE03003AF684 /* JYBOrderDetailVC.m in Sources */,
 				F61217332033BCD7002D762A /* JYBHomeOrderLogisItemCell.m in Sources */,
+				F62B77CA207C8366005AC91A /* JYBOrderCountModel.m in Sources */,
 				F612394F205DF96100B58AA5 /* JYBOrderDetailBottomView.m in Sources */,
 				F61B84CA2032B893003AF684 /* HMSegmentedControl.m in Sources */,
 				F61B8471202FB544003AF684 /* JYBAlertView.m in Sources */,
@@ -1332,8 +1391,10 @@
 				427C695B200C98C4006A9EBB /* TBRefreshFootView.m in Sources */,
 				427C695F200C98C4006A9EBB /* GTMBase64.m in Sources */,
 				F61080D8205998F3007781A0 /* JYBHomeBannerModel.m in Sources */,
+				42EC97EF207B4C5300B7043A /* SBMessageViewController.m in Sources */,
 				F6108128205CD914007781A0 /* JYBOrderListModel.m in Sources */,
 				F658429E2033094B0040B194 /* JYBOrderDetailCostCell.m in Sources */,
+				F62B77C7207C7360005AC91A /* JYBStationPointModel.m in Sources */,
 				427C6972200C98C4006A9EBB /* TBTabBar.m in Sources */,
 				F61B84B020317F52003AF684 /* JYBHomeImproveBoxInfoVC.m in Sources */,
 				427C6975200C98C5006A9EBB /* UINavigation+SXFixSpace.m in Sources */,
@@ -1344,6 +1405,7 @@
 				F6108113205C1625007781A0 /* JYBHomeDockWeightModel.m in Sources */,
 				42399AA32011A19F009263E5 /* ChangeSonMemberViewController.m in Sources */,
 				42399A9120109BBF009263E5 /* TrasformViewController.m in Sources */,
+				F62B77CD207D1AC7005AC91A /* THDatePickerView.m in Sources */,
 				F61B848F202FE43B003AF684 /* JYBHomeHasDriveMsgCell.m in Sources */,
 				F6584295203308DE0040B194 /* JYBOrderDetailAddressCell.m in Sources */,
 				427C6968200C98C4006A9EBB /* TBTabBarController.m in Sources */,
@@ -1353,6 +1415,7 @@
 				427C696D200C98C4006A9EBB /* CCBaseViewController.m in Sources */,
 				F6108116205C17B5007781A0 /* JYBHomeDotModel.m in Sources */,
 				42399A8E20109B0D009263E5 /* MyDriverViewController.m in Sources */,
+				F62B77C2207BF3FB005AC91A /* LXFullScreenImageBrowser.m in Sources */,
 				F61B84A420314EB1003AF684 /* JYBHomeQuickOrderView.m in Sources */,
 				F61080DB20599CBF007781A0 /* JYBHomePortModel.m in Sources */,
 				F61080F6205BF026007781A0 /* LGCityPickerView.m in Sources */,
@@ -1378,12 +1441,15 @@
 				427C6977200C98C5006A9EBB /* UIView+TBFrame.m in Sources */,
 				F61B847D202FBF7D003AF684 /* JYBHomePackingInputCell.m in Sources */,
 				F61B8461202E8FB5003AF684 /* JYBHomeTitleCell.m in Sources */,
+				F62B77C1207BF3FB005AC91A /* LXCircularProgressView.m in Sources */,
+				F62B77B2207A90B8005AC91A /* JYBOrderMapVC.m in Sources */,
 				F62B77A62078C6E1005AC91A /* JYBHomeSelePointHeaderView.m in Sources */,
 				427C6961200C98C4006A9EBB /* SBJSON.m in Sources */,
 				F6584292203308C00040B194 /* JYBOrderDetailLogisInfoCell.m in Sources */,
 				F61B849B202FF239003AF684 /* JYBHomeManageFetchBoxCell.m in Sources */,
 				F61B84BC20326F4F003AF684 /* JYBHomePortCostCell.m in Sources */,
 				427C6982200C98C5006A9EBB /* MessageViewController.m in Sources */,
+				F62B77C4207BF3FB005AC91A /* LXImageLoopBrowser.m in Sources */,
 				F66A6A28202A0C0E00E40F56 /* TADotView.m in Sources */,
 				427C6965200C98C4006A9EBB /* AppDelegate.m in Sources */,
 				F6108104205BFCD7007781A0 /* JYBHomeStationSeleModel.m in Sources */,
@@ -1521,6 +1587,7 @@
 			baseConfigurationReference = 4429C470FFB6F6CA84B03013 /* Pods-Freight_Company.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Guoping Ma (BZYPB6P24R)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guoping Ma (BZYPB6P24R)";
 				CODE_SIGN_STYLE = Manual;
@@ -1544,7 +1611,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cc.Freight-Company";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4bd57c64-e04f-489c-b963-de1c874b8e6c";
+				PROVISIONING_PROFILE = "218c81eb-c869-47f3-9cba-d8dbf4d591c8";
 				PROVISIONING_PROFILE_SPECIFIER = Fre_Company_dev;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "\"${SRCROOT}\"/** \"$(SRCROOT)/Pods/SDWebImage\"";
@@ -1556,6 +1623,7 @@
 			baseConfigurationReference = 537AE1D939255ECA6F4D0FBB /* Pods-Freight_Company.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Guoping Ma (BZYPB6P24R)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Guoping Ma (BZYPB6P24R)";
 				CODE_SIGN_STYLE = Manual;

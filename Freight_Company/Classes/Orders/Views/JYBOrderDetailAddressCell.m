@@ -196,7 +196,7 @@
 - (UIButton *)phoneBtn{
     if (!_phoneBtn) {
         _phoneBtn = [[UIButton alloc] init];
-        [_phoneBtn setImage:[UIImage imageNamed:@"icon_dh"] forState:UIControlStateNormal];
+        [_phoneBtn setImage:[UIImage imageNamed:@"ddxq_icon_dh"] forState:UIControlStateNormal];
         [_phoneBtn addTarget:self action:@selector(phoneBtnActin) forControlEvents:UIControlEventTouchUpInside];
     }
     return _phoneBtn;

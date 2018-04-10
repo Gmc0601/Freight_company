@@ -93,8 +93,8 @@
     
     [self.conView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.statusLab.mas_bottom);
-        make.left.equalTo(self.backView).offset(SizeWidth(10));
-        make.right.equalTo(self.backView).offset(-SizeWidth(10));
+        make.left.equalTo(self.backView);
+        make.right.equalTo(self.backView);
         make.height.mas_equalTo(SizeWidth(100));
     }];
     
@@ -174,7 +174,7 @@
     }
     
     self.startTimeLab.text = [NSString stringWithFormat:@"装箱时间\n%@",listModel.shipment_time];
-    self.endTimeLab.text = [NSString stringWithFormat:@"闭关时间\n%@",listModel.cutoff_time];
+    self.endTimeLab.text = [NSString stringWithFormat:@"截关时间\n%@",listModel.cutoff_time];
 
     self.orderNumLab.text = [NSString stringWithFormat:@"提单号: %@",listModel.pick_no];
 }
@@ -232,7 +232,7 @@
             [self.rightBtn setTitle:@"联系司机" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:RGB(55, 164, 242) forState:UIControlStateNormal];
             self.rightBtn.layer.borderColor = RGB(55, 164, 242).CGColor;
-            return @"进行中";
+            return @"运输中";
         }
             //再次下单 。 联系司机
             break;
@@ -250,6 +250,20 @@
         }
             //再次下单 。 联系司机
             break;
+        case 32:
+        {
+            self.leftBtn.hidden = NO;
+            self.rightBtn.hidden = NO;
+            [self.leftBtn setTitle:@"再次下单" forState:UIControlStateNormal];
+            [self.leftBtn setTitleColor:RGB(52, 52, 52) forState:UIControlStateNormal];
+            self.leftBtn.layer.borderColor = RGB(52, 52, 52).CGColor;
+            [self.rightBtn setTitle:@"联系司机" forState:UIControlStateNormal];
+            [self.rightBtn setTitleColor:RGB(55, 164, 242) forState:UIControlStateNormal];
+            self.rightBtn.layer.borderColor = RGB(55, 164, 242).CGColor;
+            return @"已到港待支付(额外费用已拒绝)";
+        }
+            //再次下单 。 联系司机
+            break;
         case 40:
         {
             self.leftBtn.hidden = NO;
@@ -260,7 +274,7 @@
             [self.rightBtn setTitle:@"联系司机" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:RGB(55, 164, 242) forState:UIControlStateNormal];
             self.rightBtn.layer.borderColor = RGB(55, 164, 242).CGColor;
-            return @"已到港";
+            return @"确认额外费用";
         }
             //再次下单 。 联系司机
             break;
@@ -317,6 +331,14 @@
             //再次下单 。 联系司机
             break;
         case 30:
+            action = JYBHomeOrderListActionContact;
+            //再次下单 。 联系司机
+            break;
+        case 31:
+            action = JYBHomeOrderListActionContact;
+            //再次下单 。 联系司机
+            break;
+        case 32:
             action = JYBHomeOrderListActionContact;
             //再次下单 。 联系司机
             break;

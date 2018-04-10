@@ -13,8 +13,9 @@
 #import "LGProvinceModel.h"
 #import "JYBHomeSeleStaionCell.h"
 #import "JYBHomeSelePointHeaderView.h"
+#import <AMapLocationKit/AMapLocationKit.h>
 
-@interface JYBHomeSelectStationVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface JYBHomeSelectStationVC ()<UITableViewDelegate,UITableViewDataSource,AMapSearchDelegate>
 
 @property (nonatomic ,strong)JYBHomeSeleStationHeaderView *headerView;
 
@@ -30,7 +31,10 @@
 
 @property (nonatomic ,strong)AMapSearchAPI *search;
 
+@property (nonatomic, strong) AMapLocationManager *locationManager;
+
 @end
+
 
 @implementation JYBHomeSelectStationVC
 
@@ -70,7 +74,11 @@
         [self searchStationAddressWithKeyWord:nil];
     }
     
-    
+    if (!self.isPoint) {
+        [self configLocationManager];
+        [self reGeocodeAction];
+    }
+
 }
 
 - (void)resetFather {
@@ -78,8 +86,48 @@
     self.rightBar.hidden = YES;
 }
 
+- (void)configLocationManager
+{
+    self.locationManager = [[AMapLocationManager alloc] init];
+    
+    [self.locationManager setDelegate:self];
+    
+    //设置期望定位精度
+    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+    
+    //设置不允许系统暂停定位
+    [self.locationManager setPausesLocationUpdatesAutomatically:NO];
+    
+    //设置定位超时时间
+    [self.locationManager setLocationTimeout:10];
+    
+    //设置逆地理超时时间
+    [self.locationManager setReGeocodeTimeout:10];
+}
+
+
+- (void)reGeocodeAction
+{
+    //进行单次带逆地理定位请求
+    __weak typeof(self)weakSelf= self;
+        [self.locationManager requestLocationWithReGeocode:YES completionBlock:^(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error) {
+        NSLog(@"~~~~~~~~~~~~%@",regeocode);
+        if (error) {
+
+        }else{
+            weakSelf.city = regeocode.city;
+            weakSelf.province = regeocode.province;
+            [weakSelf.headerView.cityBtn setTitle:weakSelf.city forState:UIControlStateNormal];
+            [weakSelf __searchAreaData];
+        }
+        
+    }];
+}
 
 - (void)searchStationAddressWithKeyWord:(NSString *)keyWord{
+    
+    self.search = [[AMapSearchAPI alloc] init];
+    self.search.delegate = self;
     
     AMapInputTipsSearchRequest *tips = [[AMapInputTipsSearchRequest alloc] init];
     tips.keywords = [NSString stringIsNilOrEmpty:self.pointHeaderView.myTextField.text]?self.keyWords:self.headerView.myTextField.text;
@@ -134,8 +182,8 @@
 - (void)__searchAreaData{
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic addUnEmptyString:[NSString stringWithFormat:@"%@省",self.province] forKey:@"province"];
-    [dic addUnEmptyString:[NSString stringWithFormat:@"%@市",self.city] forKey:@"city"];
+    [dic addUnEmptyString:([self.province containsString:@"省"]?self.province:[NSString stringWithFormat:@"%@省",self.province]) forKey:@"province"];
+    [dic addUnEmptyString:([self.city containsString:@"市"]?self.city:[NSString stringWithFormat:@"%@市",self.city]) forKey:@"city"];
     
     [ConfigModel showHud:self];
     NSLog(@"%@", dic);

@@ -23,7 +23,8 @@
     [super viewDidLoad];
     [self resetFather];
     [self.view addSubview:self.myTableView];
-    [self.view addSubview:self.bottomView];
+
+    self.myTableView.tableFooterView = self.bottomView;
 
 }
 
@@ -107,10 +108,13 @@
 
     JYBHomePackingInputCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomePackingInputCell class]) forIndexPath:indexPath];
     if (indexPath.row == 0) {
+        cell.myTextField.keyboardType = UIKeyboardTypeDefault;
         [cell updateCellWithTitle:@"地址" placeHoler:@"请填写拿箱单地址(必填)" value:nil];
     }else if (indexPath.row == 1){
+        cell.myTextField.keyboardType = UIKeyboardTypeDefault;
         [cell updateCellWithTitle:@"联系人" placeHoler:@"请填写联系人姓名(必填)" value:nil];
     }else{
+        cell.myTextField.keyboardType = UIKeyboardTypeNumberPad;
         [cell updateCellWithTitle:@"电话" placeHoler:@"请填写联系人电话(必填)" value:nil];
     }
     
@@ -142,10 +146,10 @@
 
 - (UIView *)bottomView{
     if (!_bottomView) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenH - SizeWidth(50) , kScreenW, SizeWidth(50))];
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 , kScreenW, SizeWidth(90))];
         _bottomView.backgroundColor = [UIColor whiteColor];
         
-        UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(SizeWidth(10), SizeWidth(5), kScreenW - SizeWidth(20), SizeWidth(40))];
+        UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(SizeWidth(10), SizeWidth(20), kScreenW - SizeWidth(20), SizeWidth(45))];
         commitBtn.backgroundColor = RGB(24, 141, 240);
         [commitBtn setTitle:@"保存" forState:UIControlStateNormal];
         [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
