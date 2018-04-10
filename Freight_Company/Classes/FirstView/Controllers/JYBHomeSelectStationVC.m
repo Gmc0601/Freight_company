@@ -182,8 +182,8 @@
 - (void)__searchAreaData{
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
-    [dic addUnEmptyString:([self.province containsString:@"省"]?self.province:[NSString stringWithFormat:@"%@",self.province]) forKey:@"province"];
-    [dic addUnEmptyString:([self.city containsString:@"市"]?self.city:[NSString stringWithFormat:@"%@",self.city]) forKey:@"city"];
+    [dic addUnEmptyString:([self.province containsString:@"省"]?self.province:[NSString stringWithFormat:@"%@省",self.province]) forKey:@"province"];
+    [dic addUnEmptyString:([self.city containsString:@"市"]?self.city:[NSString stringWithFormat:@"%@市",self.city]) forKey:@"city"];
     
     [ConfigModel showHud:self];
     NSLog(@"%@", dic);

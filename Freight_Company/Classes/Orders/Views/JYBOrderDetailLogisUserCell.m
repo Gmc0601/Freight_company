@@ -75,7 +75,7 @@
 
 - (void)updateCellWithModel:(JYBOrderListModel *)model{
 
-    [self.iconImageView setImageWithURL:[NSURL URLWithString:model.driver_phone] placeholder:[UIImage imageNamed:@"grzx_icon_68  (2)"]];
+    [self.iconImageView setImageWithURL:[NSURL URLWithString:model.driver_phone] placeholder:[UIImage imageNamed:@"jyb_order_driver"]];
     self.nameLab.text = [NSString stringWithFormat:@"司机：%@",model.driver_name];
     self.numLab.text = [self __getCarNoWithNo:model.car_no];
 
@@ -104,7 +104,9 @@
 - (UIImageView *)iconImageView{
     if (!_iconImageView) {
         _iconImageView = [[UIImageView alloc] init];
-        _iconImageView.image = [UIImage imageNamed:@"ddxq_icon_96  (1)"];
+        _iconImageView.image = [UIImage imageNamed:@"jyb_order_driver"];
+        _iconImageView.layer.cornerRadius = SizeWidth(25);
+        _iconImageView.layer.masksToBounds = YES;
     }
     return _iconImageView;
 }

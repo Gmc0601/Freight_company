@@ -69,9 +69,15 @@
 - (UITextField *)myTextField{
     if (!_myTextField) {
         _myTextField = [[UITextField alloc] init];
-        _myTextField.placeholder = @"请选择装箱地区";
+        _myTextField.placeholder = @" 请选择装箱地区";
         _myTextField.font = [UIFont systemFontOfSize:SizeWidth(15)];
         _myTextField.enabled = NO;
+        
+        UIButton *leftBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+        [leftBtn setImage:[UIImage imageNamed:@"jyb_arrow_left"] forState:UIControlStateNormal];
+        _myTextField.leftView = leftBtn;
+        _myTextField.leftViewMode = UITextFieldViewModeAlways;
+        
     }
     return _myTextField;
 }
