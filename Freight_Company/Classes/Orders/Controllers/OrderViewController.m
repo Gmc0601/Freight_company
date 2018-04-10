@@ -10,6 +10,7 @@
 #import "HMSegmentedControl.h"
 #import "JYBOrderSingleVC.h"
 #import "LoginViewController.h"
+#import "JYBOrderCountModel.h"
 
 @interface OrderViewController ()<UIPageViewControllerDelegate,UIPageViewControllerDataSource>
 
@@ -18,6 +19,8 @@
 @property (nonatomic ,strong)UIPageViewController *pageViewController;
 
 @property (nonatomic ,strong)NSArray  *vcArr;
+
+@property (nonatomic ,strong)JYBOrderCountModel *countModel;
 
 @end
 
@@ -28,6 +31,43 @@
     [self navigation];
     self.view.backgroundColor = [UIColor whiteColor];
 
+    [self getCountData];
+    
+}
+
+- (void)getCountData{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+    [ConfigModel showHud:self];
+    NSLog(@"%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Order/orderCountList" params:dic resultBlock:^(id responseObject, NSError *error) {
+        [ConfigModel hideHud:weak];
+        
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            weak.countModel = [JYBOrderCountModel modelWithDictionary:datadic[@"data"]];
+            
+            [weak __setUI];
+            
+        }else {
+            NSString *str = datadic[@"msg"];
+            [ConfigModel mbProgressHUD:str andView:nil];
+            [weak __setUI];
+        }
+    }];
+    
+}
+
+
+- (void)__setUI{
+    
     [self.view addSubview:self.headTabView];
     [self.headTabView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.equalTo(self.view);
@@ -49,11 +89,13 @@
     self.headTabView.indexChangeBlock = ^(NSInteger index){
         
         [selfWeak.pageViewController setViewControllers:@[[selfWeak.vcArr objectAtIndex:index]]
-                                          direction:UIPageViewControllerNavigationDirectionReverse
-                                           animated:NO completion:nil];
+                                              direction:UIPageViewControllerNavigationDirectionReverse
+                                               animated:NO completion:nil];
     };
     
+    
 }
+
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -138,7 +180,25 @@
 
 - (HMSegmentedControl *)headTabView{
     if (!_headTabView) {
-        _headTabView = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"全部",@"已接单",@"运输中",@"待确认"]];
+        
+        NSString *one = @"全部";
+        NSString *two = @"已接单";
+        NSString *three = @"运输中";
+        NSString *four = @"待确认";
+        
+        if (![NSString stringIsNilOrEmpty:self.countModel.allotted] && self.countModel.allotted.integerValue > 0) {
+            two = [NSString stringWithFormat:@"已接单(%@)",self.countModel.allotted];
+        }
+
+        if (![NSString stringIsNilOrEmpty:self.countModel.under_way] && self.countModel.under_way.integerValue > 0) {
+            three = [NSString stringWithFormat:@"运输中(%@)",self.countModel.under_way];
+        }
+        
+        if (![NSString stringIsNilOrEmpty:self.countModel.second_wait_pay] && self.countModel.second_wait_pay.integerValue > 0) {
+            four = [NSString stringWithFormat:@"待确认(%@)",self.countModel.second_wait_pay];
+        }
+        
+        _headTabView = [[HMSegmentedControl alloc] initWithSectionTitles:@[one,two,three,four]];
         _headTabView.segmentWidthStyle = HMSegmentedControlSegmentWidthStyleFixed;
         _headTabView.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
         _headTabView.selectionIndicatorColor = RGB(26, 143, 241);

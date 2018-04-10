@@ -29,7 +29,8 @@
 #import "JYBHomeQuickModel.h"
 #import "CPConfig.h"
 
-
+#import "JYBOrderCountModel.h"
+#import "UITabBar+TBBadge.h"
 
 
 @interface FirstViewController ()<UITableViewDelegate,UITableViewDataSource,SDCycleScrollViewDelegate,JYBHomeSelectStationVCDelegate>
@@ -75,6 +76,53 @@
     //获取港口
     [self __fetchPortListData];
 }
+
+
+- (void)getCountData{
+    
+    NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+    
+    NSLog(@"%@", dic);
+    WeakSelf(weak)
+    [HttpRequest postPath:@"/Home/Order/orderCountList" params:dic resultBlock:^(id responseObject, NSError *error) {
+        
+        NSLog(@"%@", responseObject);
+        if([error isEqual:[NSNull null]] || error == nil){
+            NSLog(@"success");
+        }
+        NSDictionary *datadic = responseObject;
+        if ([datadic[@"success"] intValue] == 1) {
+            
+            JYBOrderCountModel *countModel = [JYBOrderCountModel modelWithDictionary:datadic[@"data"]];
+            
+            NSInteger dotCount = [weak __getCountWithModel:countModel];
+            if (dotCount) {
+                [self.tabBarController.tabBar showBadgeOnItemIndex:1 count:dotCount];
+            }else{
+                [self.tabBarController.tabBar hideBadgeOnItemIndex:1];
+            }
+            
+        }else {
+            
+        }
+    }];
+    
+}
+
+- (NSInteger)__getCountWithModel:(JYBOrderCountModel *)model{
+    
+    NSInteger count = 0;
+    count += model.wait_pay.integerValue;
+    count += model.allotting.integerValue;
+    count += model.allotted.integerValue;
+    count += model.under_way.integerValue;
+    count += model.second_wait_pay.integerValue;
+    return count;
+    
+}
+
+
+
 
 - (void)__fetchBannerData{
     
@@ -154,6 +202,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    
+    if ([ConfigModel getIntObjectforKey:IsLogin]) {
+        [self getCountData];
+    }else{
+        //变0；
+        [self.tabBarController.tabBar hideBadgeOnItemIndex:1];
+    }
+
     //   插 一个获取个人信息
     if (![ConfigModel getIntObjectforKey:IsLogin]) {
         return;

@@ -6,29 +6,34 @@
 //  Copyright © 2017年 lujh. All rights reserved.
 //
 
-#define TabbarItemNums 5.0    //tabbar的数量
+#define TabbarItemNums 3.0    //tabbar的数量
 
 #import "UITabBar+TBBadge.h"
 
 @implementation UITabBar (TBBadge)
 
-- (void)showBadgeOnItemIndex:(int)index{
+- (void)showBadgeOnItemIndex:(int)index count:(NSInteger)count{
     
     //移除之前的小红点
     [self removeBadgeOnItemIndex:index];
     
     //新建小红点
-    UIView *badgeView = [[UIView alloc]init];
+    UILabel *badgeView = [[UILabel alloc]init];
     badgeView.tag = 888 + index;
-    badgeView.layer.cornerRadius = 5;
+    badgeView.layer.cornerRadius = 8;
+    badgeView.layer.masksToBounds = YES;
     badgeView.backgroundColor = [UIColor redColor];
+    badgeView.textColor = [UIColor whiteColor];
+    badgeView.font = [UIFont systemFontOfSize:9];
+    badgeView.textAlignment = NSTextAlignmentCenter;
+    badgeView.text = [NSString stringWithFormat:@"%ld",count];
     CGRect tabFrame = self.frame;
     
     //确定小红点的位置
     float percentX = (index +0.6) / TabbarItemNums;
     CGFloat x = ceilf(percentX * tabFrame.size.width);
     CGFloat y = ceilf(0.1 * tabFrame.size.height);
-    badgeView.frame = CGRectMake(x, y, 10, 10);
+    badgeView.frame = CGRectMake(x, y, 16, 16);
     [self addSubview:badgeView];
     
 }
