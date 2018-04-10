@@ -10,7 +10,18 @@
 #import "CPHomeBoxAddressModel.h"
 #import "JYBHomeShipAddressModel.h"
 
+
+typedef void(^JYBHomePackDeleBlock)(id addressModel);
+
+typedef void(^JYBHomePackEditBlock)(id addressModel);
+
 @interface JYBHomePackAddressCell : UITableViewCell
+
+
+@property (nonatomic ,copy)JYBHomePackDeleBlock deleBlock;
+
+@property (nonatomic ,copy)JYBHomePackDeleBlock editBlock;
+
 
 - (void)updateCellWithModel:(CPHomeBoxAddressModel *)model;
 

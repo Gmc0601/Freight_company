@@ -29,6 +29,9 @@
 }
 
 - (void)p_initUI{
+    self.backgroundColor = RGB(245, 245, 245);
+    self.layer.cornerRadius = 4;
+    self.layer.masksToBounds = YES;
     [self addSubview:self.iconImageView];
     [self addSubview:self.titleLab];
     [self addSubview:self.desLab];

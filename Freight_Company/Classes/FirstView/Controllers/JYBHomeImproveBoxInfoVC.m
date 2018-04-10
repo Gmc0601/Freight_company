@@ -149,7 +149,8 @@
 - (void)priceScheBtnAction{
     
     CCWebViewViewController *vc = [[CCWebViewViewController alloc] init];
-    vc.titlestr = @"价格明细";
+    vc.titlestr = @"";
+    vc.type = CCWebViewViewTypePrice;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

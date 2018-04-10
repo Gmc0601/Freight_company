@@ -12,8 +12,6 @@
 
 @property (nonatomic ,strong)UILabel *nameLab;
 
-@property (nonatomic ,strong)UILabel *costLab;
-
 @end
 
 @implementation JYBHomeOtherCostItemCell
@@ -23,6 +21,8 @@
         [self p_initUI];
         self.contentView.layer.borderColor = RGB(162, 162, 162).CGColor;
         self.contentView.layer.borderWidth = 1;
+        self.contentView.layer.cornerRadius = 3;
+        self.contentView.layer.masksToBounds = YES;
     }
     return self;
 }
@@ -33,16 +33,13 @@
         self.contentView.layer.borderColor = RGB(75, 157, 252).CGColor;
         self.contentView.layer.borderWidth = 1;
         self.nameLab.textColor = RGB(75, 157, 252);
-        self.costLab.textColor = RGB(75, 157, 252);
     }else{
         self.contentView.layer.borderColor = RGB(162, 162, 162).CGColor;
         self.contentView.layer.borderWidth = 1;
         self.nameLab.textColor = RGB(102, 102, 102);
-        self.costLab.textColor = RGB(162, 162, 162);
     }
     
     self.nameLab.text = model.weight_desc;
-    self.costLab.text = model.weight_price;
 
 }
 
@@ -51,60 +48,36 @@
         self.contentView.layer.borderColor = RGB(75, 157, 252).CGColor;
         self.contentView.layer.borderWidth = 1;
         self.nameLab.textColor = RGB(75, 157, 252);
-        self.costLab.textColor = RGB(75, 157, 252);
     }else{
         self.contentView.layer.borderColor = RGB(162, 162, 162).CGColor;
         self.contentView.layer.borderWidth = 1;
         self.nameLab.textColor = RGB(102, 102, 102);
-        self.costLab.textColor = RGB(162, 162, 162);
-
-
     }
     
     self.nameLab.text = model.dock_name;
-    self.costLab.text = model.dock_price;
 }
 
 - (void)p_initUI{
     [self.contentView addSubview:self.nameLab];
-    [self.contentView addSubview:self.costLab];
     
     [self.nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.contentView).offset(SizeWidth(10));
+        make.top.bottom.equalTo(self.contentView);
         make.left.equalTo(self.contentView);
         make.right.equalTo(self.contentView);
-        make.height.mas_equalTo(SizeWidth(15));
     }];
     
-    [self.costLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.nameLab.mas_bottom).offset(SizeWidth(5));
-        make.left.equalTo(self.contentView);
-        make.right.equalTo(self.contentView);
-        make.height.mas_equalTo(SizeWidth(15));
-    }];
 }
 
 - (UILabel *)nameLab{
     if (!_nameLab) {
         _nameLab = [[UILabel alloc] init];
         _nameLab.textColor = RGB(102, 102, 102);
-        _nameLab.font = [UIFont systemFontOfSize:SizeWidth(15)];
+        _nameLab.font = [UIFont systemFontOfSize:SizeWidth(13)];
         _nameLab.text = @"答谢码头";
         _nameLab.textAlignment = NSTextAlignmentCenter;
     }
     return _nameLab;
 }
 
-- (UILabel *)costLab{
-    if (!_costLab) {
-        _costLab = [[UILabel alloc] init];
-        _costLab.textColor = RGB(162, 162, 162);
-        _costLab.font = [UIFont systemFontOfSize:SizeWidth(14)];
-        _costLab.text = @"32434";
-        _costLab.textAlignment = NSTextAlignmentCenter;
-
-    }
-    return _costLab;
-}
 
 @end

@@ -29,6 +29,8 @@
 
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self= [super initWithFrame:frame]) {
+        self.backgroundColor = RGB(238, 238, 238);
+
         [self p_initUI];
     }
     return self;
@@ -44,8 +46,7 @@
     [self.backView addSubview:self.commitBtn];
     
     [self.backView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self).offset(SizeWidth(20));
-        make.left.bottom.right.equalTo(self);
+        make.top.left.bottom.right.equalTo(self);
     }];
     
     [self.desLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -139,7 +140,7 @@
 - (UIView *)backView{
     if (!_backView) {
         _backView = [[UIView alloc] init];
-        _backView.backgroundColor = [UIColor whiteColor];
+        _backView.backgroundColor = RGB(238, 238, 238);
     }
     return _backView;
 }

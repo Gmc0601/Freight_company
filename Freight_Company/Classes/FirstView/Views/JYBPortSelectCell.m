@@ -146,8 +146,10 @@
 - (UIView *)backView{
     if (!_backView) {
         _backView = [[UIView alloc] init];
-        _backView.layer.borderColor = RGB(162, 162, 162).CGColor;
+        _backView.layer.borderColor = RGB(220, 220, 220).CGColor;
         _backView.layer.borderWidth = 1;
+        _backView.layer.cornerRadius = 3;
+        _backView.layer.masksToBounds = YES;
     }
     return _backView;
 }

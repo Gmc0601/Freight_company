@@ -93,8 +93,8 @@
     
     [self.conView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.statusLab.mas_bottom);
-        make.left.equalTo(self.backView).offset(SizeWidth(10));
-        make.right.equalTo(self.backView).offset(-SizeWidth(10));
+        make.left.equalTo(self.backView);
+        make.right.equalTo(self.backView);
         make.height.mas_equalTo(SizeWidth(100));
     }];
     

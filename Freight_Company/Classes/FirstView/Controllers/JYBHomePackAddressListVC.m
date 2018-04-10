@@ -217,7 +217,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return SizeWidth(85);
+    return SizeWidth(95);
     
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -231,32 +231,42 @@
         [cell updateCellWithModel:model];
     }
 
-    return cell;
-    
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    
-    JYBHomePackAddressSectionFooterView *footer = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([JYBHomePackAddressSectionFooterView class])];
-    if (self.isPoint) {
-        JYBHomeShipAddressModel *model = [self.dataArr objectAtIndex:section];
-        footer.addressModel = model;
-    }else{
-        CPHomeBoxAddressModel *model = [self.dataArr objectAtIndex:section];
-        footer.addressModel = model;
-    }
-
     WeakSelf(weak)
-    [footer setDeleBlock:^(id addressModel) {
+    [cell setDeleBlock:^(id addressModel) {
         [weak __deleteWithModel:addressModel];
     }];
     
-    [footer setEditBlock:^(id addressModel) {
+    [cell setEditBlock:^(id addressModel) {
         [weak __editWithModel:addressModel];
     }];
     
-    return footer;
+    
+    return cell;
+    
 }
+//
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//    
+//    JYBHomePackAddressSectionFooterView *footer = [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass([JYBHomePackAddressSectionFooterView class])];
+//    if (self.isPoint) {
+//        JYBHomeShipAddressModel *model = [self.dataArr objectAtIndex:section];
+//        footer.addressModel = model;
+//    }else{
+//        CPHomeBoxAddressModel *model = [self.dataArr objectAtIndex:section];
+//        footer.addressModel = model;
+//    }
+//
+//    WeakSelf(weak)
+//    [footer setDeleBlock:^(id addressModel) {
+//        [weak __deleteWithModel:addressModel];
+//    }];
+//    
+//    [footer setEditBlock:^(id addressModel) {
+//        [weak __editWithModel:addressModel];
+//    }];
+//    
+//    return footer;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (self.isPoint) {
@@ -288,7 +298,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return SizeWidth(40);
+    return CGFLOAT_MIN;
 }
 
 

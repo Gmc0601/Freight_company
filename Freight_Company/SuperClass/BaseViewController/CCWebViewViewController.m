@@ -32,7 +32,10 @@
     }else {
        self.titleLab.text = @"资讯详情";
     }
-    
+    if (self.type == CCWebViewViewTypePrice) {
+        self.titleLab.text = @"";
+
+    }
     self.rightBar.hidden = YES;
 }
 

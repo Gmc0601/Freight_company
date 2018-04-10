@@ -54,7 +54,7 @@ typedef enum : NSUInteger {
     [self resetFather];
     
     [self.view addSubview:self.myTableView];
-    
+    [self.view addSubview:self.bottomView];
     [self __fetchOrderDetail];
 }
 
@@ -102,10 +102,13 @@ typedef enum : NSUInteger {
 
 - (void)__setBottomView{
     if (self.detailModel.order_status.integerValue == 0 || self.detailModel.order_status.integerValue == 10 || self.detailModel.order_status.integerValue == 40) {
-        self.myTableView.tableFooterView = self.bottomView;
+        self.bottomView.hidden= NO;
+        self.myTableView.frame = CGRectMake(0, 64, kScreenW, kScreenH - 64 - SizeWidth(95));
         [self.bottomView updateBottomView:self.detailModel];
     }else{
-        self.myTableView.tableFooterView = nil;
+        self.bottomView.hidden= YES;
+        self.myTableView.frame = CGRectMake(0, 64, kScreenW, kScreenH - 64);
+
     }
     
 }
@@ -581,7 +584,7 @@ typedef enum : NSUInteger {
 
 - (JYBOrderDetailBottomView *)bottomView{
     if (!_bottomView) {
-        _bottomView = [[JYBOrderDetailBottomView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, SizeWidth(115))];
+        _bottomView = [[JYBOrderDetailBottomView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height -  SizeWidth(95), kScreenW, SizeWidth(95))];
         WeakSelf(weak)
         [_bottomView setScheBlock:^{
             [weak __turnToOtherCostSchVC];

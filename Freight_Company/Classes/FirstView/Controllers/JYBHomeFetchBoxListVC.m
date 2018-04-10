@@ -108,10 +108,13 @@
 
     JYBHomePackingInputCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomePackingInputCell class]) forIndexPath:indexPath];
     if (indexPath.row == 0) {
+        cell.myTextField.keyboardType = UIKeyboardTypeDefault;
         [cell updateCellWithTitle:@"地址" placeHoler:@"请填写拿箱单地址(必填)" value:nil];
     }else if (indexPath.row == 1){
+        cell.myTextField.keyboardType = UIKeyboardTypeDefault;
         [cell updateCellWithTitle:@"联系人" placeHoler:@"请填写联系人姓名(必填)" value:nil];
     }else{
+        cell.myTextField.keyboardType = UIKeyboardTypeNumberPad;
         [cell updateCellWithTitle:@"电话" placeHoler:@"请填写联系人电话(必填)" value:nil];
     }
     
