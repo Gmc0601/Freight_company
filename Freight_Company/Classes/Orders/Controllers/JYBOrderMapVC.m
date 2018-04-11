@@ -98,11 +98,61 @@
     
     [self.mapView addAnnotations:self.annotations];
 
-    CLLocation *centerlocation = [[CLLocation alloc] initWithLatitude:model.driver_lat.floatValue longitude:model.driver_lon.floatValue];
-    [self.mapView setCenterCoordinate:centerlocation.coordinate];
+
     
-    [self.mapView setZoomLevel:12 animated:NO];
+    
+    if (model.shipment_address.count){
+        JYBStationPointModel *levelModel = [self.allArr objectAtIndex:1];
+
+        CLLocation *centerlocation = [[CLLocation alloc] initWithLatitude:(model.driver_lat.floatValue + levelModel.lat.floatValue)/2 longitude:(model.driver_lon.floatValue + levelModel.lon.floatValue)/2];
+        [self.mapView setCenterCoordinate:centerlocation.coordinate];
+        [self.mapView setZoomLevel:[self __getLevelWithModel:levelModel] animated:NO];
+
+        
+    }else{
+        CLLocation *centerlocation = [[CLLocation alloc] initWithLatitude:model.driver_lat.floatValue longitude:model.driver_lon.floatValue];
+        [self.mapView setCenterCoordinate:centerlocation.coordinate];
+        [self.mapView setZoomLevel:12 animated:NO];
+
+    }
+    
+    
+    
+    
 }
+
+- (NSInteger)__getLevelWithModel:(JYBStationPointModel *)model{
+    
+    NSInteger startIdex = 10000;
+    
+    if(model.distance*1000 < startIdex){
+        return 12;
+    }else if (model.distance*1000 < startIdex*2){
+        return 11;
+    }else if (model.distance*1000 < startIdex*4){
+        return 10;
+    }else if (model.distance*1000 < startIdex*8){
+        return 9;
+    }else if (model.distance*1000 < startIdex*16){
+        return 8;
+    }else if (model.distance*1000 < startIdex*32){
+        return 7;
+    }else if (model.distance*1000 < startIdex*64){
+        return 6;
+    }else if (model.distance*1000 < startIdex*128){
+        return 5;
+    }else if (model.distance*1000 < startIdex*256){
+        return 4;
+    }else{
+        return 3;
+    }
+    
+    
+    
+}
+
+
+
 
 - (NSString *)__culateTimeWithDistance:(CGFloat)distance{
     

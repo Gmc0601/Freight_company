@@ -51,7 +51,7 @@
     
     [self.desLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.and.right.equalTo(self.backView);
-        make.height.mas_equalTo(SizeWidth(50));
+        make.height.mas_equalTo(SizeWidth(30));
     }];
     
     [self.commitBtn mas_makeConstraints:^(MASConstraintMaker *make) {

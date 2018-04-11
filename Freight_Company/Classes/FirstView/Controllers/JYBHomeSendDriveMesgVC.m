@@ -18,7 +18,7 @@
 
 @property (nonatomic ,strong)JYBHomeSendDriveHeaderView     *headerView;
 
-@property (nonatomic ,strong)UIView   *bottomView;
+//@property (nonatomic ,strong)UIView   *bottomView;
 
 @property (nonatomic ,strong)NSMutableArray *dataArr;
 
@@ -33,7 +33,7 @@
     [self resetFather];
     [self.view addSubview:self.myTableView];
     self.myTableView.tableHeaderView = self.headerView;
-    [self.view addSubview:self.bottomView];
+//    [self.view addSubview:self.bottomView];
 
     [self __fetchData];
 }
@@ -115,6 +115,13 @@
         return SizeWidth(55);
     }
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section == 0) {
+        return SizeWidth(70);
+    }else{
+        return CGFLOAT_MIN;
+    }
+}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
@@ -127,6 +134,30 @@
         headLab.text = @"------    最近留言记录    ------";
         return headLab;
     }
+}
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    
+    if (section == 0) {
+
+        UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenH - SizeWidth(50) , kScreenW, SizeWidth(70))];
+        bottomView.backgroundColor = [UIColor whiteColor];
+        
+        UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(SizeWidth(10), SizeWidth(10), kScreenW - SizeWidth(20), SizeWidth(45))];
+        commitBtn.backgroundColor = RGB(24, 141, 240);
+        commitBtn.layer.cornerRadius = 4;
+        commitBtn.layer.masksToBounds = YES;
+        [commitBtn setTitle:@"确定" forState:UIControlStateNormal];
+        [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [commitBtn addTarget:self action:@selector(commitBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        [bottomView addSubview:commitBtn];
+        return bottomView;
+
+    }else{
+        return [UIView new];
+    }
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -184,7 +215,7 @@
 
 - (UITableView *)myTableView{
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64 - SizeWidth(50)) style:UITableViewStyleGrouped];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenW, kScreenH - 64) style:UITableViewStyleGrouped];
         _myTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         _myTableView.backgroundColor = [UIColor whiteColor];
         _myTableView.showsVerticalScrollIndicator = NO;
@@ -230,20 +261,20 @@
     return _dotArr;
 }
 
-- (UIView *)bottomView{
-    if (!_bottomView) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenH - SizeWidth(50) , kScreenW, SizeWidth(50))];
-        _bottomView.backgroundColor = [UIColor whiteColor];
-        
-        UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(SizeWidth(10), SizeWidth(5), kScreenW - SizeWidth(20), SizeWidth(40))];
-        commitBtn.backgroundColor = RGB(24, 141, 240);
-        [commitBtn setTitle:@"确定" forState:UIControlStateNormal];
-        [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        commitBtn.layer.cornerRadius = 2;
-        commitBtn.layer.masksToBounds = YES;
-        [commitBtn addTarget:self action:@selector(commitBtnAction) forControlEvents:UIControlEventTouchUpInside];
-        [_bottomView addSubview:commitBtn];
-    }
-    return _bottomView;
-}
+//- (UIView *)bottomView{
+//    if (!_bottomView) {
+//        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenH - SizeWidth(50) , kScreenW, SizeWidth(50))];
+//        _bottomView.backgroundColor = [UIColor whiteColor];
+//
+//        UIButton *commitBtn = [[UIButton alloc] initWithFrame:CGRectMake(SizeWidth(10), SizeWidth(5), kScreenW - SizeWidth(20), SizeWidth(40))];
+//        commitBtn.backgroundColor = RGB(24, 141, 240);
+//        [commitBtn setTitle:@"确定" forState:UIControlStateNormal];
+//        [commitBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        commitBtn.layer.cornerRadius = 2;
+//        commitBtn.layer.masksToBounds = YES;
+//        [commitBtn addTarget:self action:@selector(commitBtnAction) forControlEvents:UIControlEventTouchUpInside];
+//        [_bottomView addSubview:commitBtn];
+//    }
+//    return _bottomView;
+//}
 @end

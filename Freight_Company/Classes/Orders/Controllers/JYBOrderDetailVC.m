@@ -25,9 +25,9 @@
 #import "JYBOrderMapVC.h"
 
 typedef enum : NSUInteger {
-    JYBOrderDetailTypeLogisUser,
     JYBOrderDetailTypeLogisInfo,
     JYBOrderDetailTypeLogisMap,
+    JYBOrderDetailTypeLogisUser,
     JYBOrderDetailTypeAddressInfo,
     JYBOrderDetailTypeBoxInfo,
     JYBOrderDetailTypeMarkInfo,
@@ -103,7 +103,7 @@ typedef enum : NSUInteger {
 - (void)__setBottomView{
     if (self.detailModel.order_status.integerValue == 0 || self.detailModel.order_status.integerValue == 10 || self.detailModel.order_status.integerValue == 40) {
         self.bottomView.hidden= NO;
-        self.myTableView.frame = CGRectMake(0, 64, kScreenW, kScreenH - 64 - SizeWidth(95));
+        self.myTableView.frame = CGRectMake(0, 64, kScreenW, kScreenH - 64 - SizeWidth(75));
         [self.bottomView updateBottomView:self.detailModel];
     }else{
         self.bottomView.hidden= YES;
@@ -141,10 +141,10 @@ typedef enum : NSUInteger {
             return @"运输中";
             break;
         case 31:
-            return @"已进港待支付(额外费用待审核)";
+            return @"已进港(额外费用待确认)";
             break;
         case 32:
-            return @"已进港待支付(额外费用已拒绝)";
+            return @"已进港(额外费用待确认)";
             break;
         case 40:
             return @"确认额外费用";
@@ -584,7 +584,7 @@ typedef enum : NSUInteger {
 
 - (JYBOrderDetailBottomView *)bottomView{
     if (!_bottomView) {
-        _bottomView = [[JYBOrderDetailBottomView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height -  SizeWidth(95), kScreenW, SizeWidth(95))];
+        _bottomView = [[JYBOrderDetailBottomView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height -  SizeWidth(75), kScreenW, SizeWidth(75))];
         WeakSelf(weak)
         [_bottomView setScheBlock:^{
             [weak __turnToOtherCostSchVC];

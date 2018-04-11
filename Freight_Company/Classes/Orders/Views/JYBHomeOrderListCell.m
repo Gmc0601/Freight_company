@@ -246,7 +246,7 @@
             [self.rightBtn setTitle:@"联系司机" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:RGB(55, 164, 242) forState:UIControlStateNormal];
             self.rightBtn.layer.borderColor = RGB(55, 164, 242).CGColor;
-            return @"已到港待支付(额外费用待审核)";
+            return @"已进港(额外费用待确认)";
         }
             //再次下单 。 联系司机
             break;
@@ -260,7 +260,7 @@
             [self.rightBtn setTitle:@"联系司机" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:RGB(55, 164, 242) forState:UIControlStateNormal];
             self.rightBtn.layer.borderColor = RGB(55, 164, 242).CGColor;
-            return @"已到港待支付(额外费用已拒绝)";
+            return @"已进港(额外费用待确认)";
         }
             //再次下单 。 联系司机
             break;

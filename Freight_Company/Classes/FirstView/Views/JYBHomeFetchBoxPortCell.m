@@ -99,7 +99,7 @@
         [leftBtn setImage:[UIImage imageNamed:@"bi"] forState:UIControlStateNormal];
         _myTextFeild.leftView = leftBtn;
         _myTextFeild.leftViewMode = UITextFieldViewModeAlways;
-        _myTextFeild.keyboardType = UIKeyboardTypeNamePhonePad;
+        _myTextFeild.keyboardType = UIKeyboardTypeASCIICapable;
     }
     return _myTextFeild;
 }

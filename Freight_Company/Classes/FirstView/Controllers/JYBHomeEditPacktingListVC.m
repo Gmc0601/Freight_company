@@ -131,10 +131,13 @@
     }else{
         JYBHomePackingInputCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomePackingInputCell class]) forIndexPath:indexPath];
         if (indexPath.row == 2) {
+            cell.myTextField.keyboardType = UIKeyboardTypeDefault;
             [cell updateCellWithTitle:@"详细地址：" placeHoler:@"街道、门牌号" value:nil];
         }else if (indexPath.row == 3){
+            cell.myTextField.keyboardType = UIKeyboardTypeDefault;
             [cell updateCellWithTitle:@"联系人：" placeHoler:@"请填写装箱联系人" value:nil];
         }else{
+            cell.myTextField.keyboardType = UIKeyboardTypePhonePad;
             [cell updateCellWithTitle:@"电话：" placeHoler:@"请填写装箱联系人电话" value:nil];
         }
         

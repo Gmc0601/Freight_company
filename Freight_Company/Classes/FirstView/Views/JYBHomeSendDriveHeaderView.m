@@ -51,10 +51,8 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
     
-    if (object == self && [keyPath isEqualToString:@"text"]) {
-        self.lenthLabel.text = [NSString stringWithFormat:@"%ld/200",self.inputTextView.inputLength];
+        self.lenthLabel.text = [NSString stringWithFormat:@"%ld/200",[change[@"new"] length]];
 
-    }
 }
 
 

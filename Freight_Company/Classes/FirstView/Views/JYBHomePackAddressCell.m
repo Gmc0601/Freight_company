@@ -162,7 +162,7 @@
         [_deleBtn setTitle:@"删除" forState:UIControlStateNormal];
         [_deleBtn setTitleColor:RGB(102, 102, 102) forState:UIControlStateNormal];
         _deleBtn.titleLabel.font = [UIFont systemFontOfSize:SizeWidth(15)];
-        _deleBtn.layer.cornerRadius = SizeWidth(15);
+        _deleBtn.layer.cornerRadius = SizeWidth(8);
         _deleBtn.layer.masksToBounds = YES;
         _deleBtn.layer.borderColor = RGB(102, 102, 102).CGColor;
         _deleBtn.layer.borderWidth = 1;
@@ -177,7 +177,7 @@
         [_editBtn setTitle:@"编辑" forState:UIControlStateNormal];
         [_editBtn setTitleColor:RGB(102, 102, 102) forState:UIControlStateNormal];
         _editBtn.titleLabel.font = [UIFont systemFontOfSize:SizeWidth(15)];
-        _editBtn.layer.cornerRadius = SizeWidth(15);
+        _editBtn.layer.cornerRadius = SizeWidth(8);
         _editBtn.layer.masksToBounds = YES;
         _editBtn.layer.borderColor = RGB(102, 102, 102).CGColor;
         _editBtn.layer.borderWidth = 1;
