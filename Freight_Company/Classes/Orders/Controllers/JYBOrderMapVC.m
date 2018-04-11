@@ -217,7 +217,7 @@
 
 - (MAMapView *)mapView{
     if(!_mapView){
-        _mapView = [[MAMapView alloc] initWithFrame:self.view.bounds];
+        _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, self.view.bounds.size.height - 70)];
         [_mapView setDelegate:self];
     }
     
