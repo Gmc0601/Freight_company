@@ -126,22 +126,20 @@
     NSInteger startIdex = 10000;
     
     if(model.distance*1000 < startIdex){
-        return 12;
-    }else if (model.distance*1000 < startIdex*2){
         return 11;
-    }else if (model.distance*1000 < startIdex*4){
+    }else if (model.distance*1000 < startIdex*2){
         return 10;
-    }else if (model.distance*1000 < startIdex*8){
+    }else if (model.distance*1000 < startIdex*4){
         return 9;
-    }else if (model.distance*1000 < startIdex*16){
+    }else if (model.distance*1000 < startIdex*8){
         return 8;
-    }else if (model.distance*1000 < startIdex*32){
+    }else if (model.distance*1000 < startIdex*16){
         return 7;
-    }else if (model.distance*1000 < startIdex*64){
+    }else if (model.distance*1000 < startIdex*32){
         return 6;
-    }else if (model.distance*1000 < startIdex*128){
+    }else if (model.distance*1000 < startIdex*64){
         return 5;
-    }else if (model.distance*1000 < startIdex*256){
+    }else if (model.distance*1000 < startIdex*128){
         return 4;
     }else{
         return 3;

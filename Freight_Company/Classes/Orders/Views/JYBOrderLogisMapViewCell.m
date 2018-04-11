@@ -85,7 +85,7 @@
     
     [self.mapView setZoomLevel:12 animated:NO];
     
-    self.mapView.frame = CGRectMake(0, 0, kScreenW, SizeWidth(150));
+    self.mapView.frame = CGRectMake(0, 0, kScreenW, SizeWidth(200));
 }
 
 
@@ -123,7 +123,7 @@
 
 - (MAMapView *)mapView{
     if(!_mapView){
-       _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, SizeWidth(150))];
+       _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, kScreenW, SizeWidth(200))];
         [_mapView setDelegate:self];
         _mapView.userInteractionEnabled = NO;
 

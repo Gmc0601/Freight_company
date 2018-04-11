@@ -382,7 +382,7 @@ typedef enum : NSUInteger {
     }else if (indexPath.section == JYBOrderDetailTypeLogisInfo){
             return SizeWidth(90);
     }else if (indexPath.section == JYBOrderDetailTypeLogisMap){
-            return SizeWidth(150);
+            return SizeWidth(200);
     }
     else if (indexPath.section == JYBOrderDetailTypeAddressInfo){
         return SizeWidth(110);
