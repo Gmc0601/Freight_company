@@ -191,8 +191,8 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic addUnEmptyString:self.seleBoxAddreModel.portModel.port_id forKey:@"prot_id"];
     [dic addUnEmptyString:[self __getOrderTypeWithName:self.sepc] forKey:@"order_type"];
-    [dic addUnEmptyString:self.startTime forKey:@"shipment_time"];
-    [dic addUnEmptyString:self.endTime forKey:@"cutoff_time"];
+    [dic addUnEmptyString:[NSString stringWithFormat:@"%@:00",self.startTime] forKey:@"shipment_time"];
+    [dic addUnEmptyString:[NSString stringWithFormat:@"%@:00",self.endTime] forKey:@"cutoff_time"];
     [dic addUnEmptyString:self.seleBoxAddreModel.tiOrderNum forKey:@"pick_no"];
     [dic addUnEmptyString:self.seleBoxAddreModel.box_address_id forKey:@"box_address_id"];
 

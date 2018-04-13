@@ -442,7 +442,7 @@
 - (NSMutableArray *)yearArr {
     if (!_yearArr) {
         _yearArr = [NSMutableArray array];
-        for (int i = 1970; i < 2099; i ++) {
+        for (int i = 2018; i < 2099; i ++) {
             [_yearArr addObject:[NSString stringWithFormat:@"%d年", i]];
         }
     }

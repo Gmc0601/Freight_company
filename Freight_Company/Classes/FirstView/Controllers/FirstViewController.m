@@ -316,6 +316,10 @@
 }
 
 - (void)__fetchQuickOrderlistWithModel:(JYBHomeQuickOrderPriceModel *)model{
+    if (!model){
+        [ConfigModel mbProgressHUD:@"未获取到数据" andView:nil];
+        return;
+    }
     
     NSMutableArray *modelArr = [[NSMutableArray alloc] init];
     NSArray *nameArr = @[@"小柜拼车",@"小柜单放",@"大柜",@"高柜",@"超高柜"];

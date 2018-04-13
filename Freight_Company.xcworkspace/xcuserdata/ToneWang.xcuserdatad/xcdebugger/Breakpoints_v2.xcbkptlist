@@ -19,40 +19,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Freight_Company/Classes/FirstView/Controllers/JYBHomeImproveBoxInfoVC.m"
-            timestampString = "545078335.355207"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "-commitBtnAction"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Freight_Company/Classes/FirstView/Controllers/JYBHomeImproveBoxInfoVC.m"
-            timestampString = "545078335.374685"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "-commitBtnAction"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Freight_Company/Classes/FirstView/Controllers/JYBHomeEditPacktingListVC.m"
-            timestampString = "545129367.911123"
+            timestampString = "545329289.686124"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "209"
@@ -100,7 +68,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Freight_Company/Classes/FirstView/Controllers/JYBHomeImproveBoxInfoVC.m"
-            timestampString = "545078335.376339"
+            timestampString = "545329289.686345"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "530"
@@ -116,7 +84,7 @@
                   moduleName = "Freight_Company"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ToneWang/Desktop/%E9%A1%B9%E7%9B%AElist/%E7%BB%A7%E8%BF%90%E9%82%A6-master/company/Freight_company/Freight_Company/Classes/FirstView/Controllers/JYBHomeImproveBoxInfoVC.m"
-                  timestampString = "545112389.820673"
+                  timestampString = "545316708.389374"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "530"
@@ -131,7 +99,7 @@
                   moduleName = "Freight_Company"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ToneWang/Desktop/%E9%A1%B9%E7%9B%AElist/%E7%BB%A7%E8%BF%90%E9%82%A6-master/company/Freight_company/Freight_Company/Classes/FirstView/Controllers/JYBHomeImproveBoxInfoVC.m"
-                  timestampString = "545112389.823088"
+                  timestampString = "545316708.3913389"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "531"
@@ -142,11 +110,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.418"
+                  symbolName = "__destroy_helper_block_.420"
                   moduleName = "Freight_Company"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ToneWang/Desktop/%E9%A1%B9%E7%9B%AElist/%E7%BB%A7%E8%BF%90%E9%82%A6-master/company/Freight_company/Freight_Company/Classes/FirstView/Controllers/JYBHomeImproveBoxInfoVC.m"
-                  timestampString = "545112389.826717"
+                  timestampString = "545316708.39382"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "530"
@@ -163,7 +131,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Freight_Company/Classes/Orders/Views/THDatePickerView.m"
-            timestampString = "545078335.3769751"
+            timestampString = "545329289.686407"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "127"

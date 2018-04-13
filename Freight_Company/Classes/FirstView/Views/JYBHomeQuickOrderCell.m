@@ -93,7 +93,7 @@
     self.nameLab.text = model.name;
     self.desLab.text = model.sepc;
     self.priceLab.text = [NSString stringWithFormat:@"¥%@",model.freight];
-    self.originPriceLab.text = [NSString stringWithFormat:@"现金价：¥%@",model.freight];
+    self.originPriceLab.text = [NSString stringWithFormat:@"现金价：¥%@",model.cash];
 
 }
 

@@ -62,8 +62,28 @@
         self.titleLab.text = placeholder;
         self.titleLab.textColor = RGB(162, 162, 162);
     }else{
-        self.titleLab.text = title;
-        self.titleLab.textColor = RGB(52, 52, 52);
+//        self.titleLab.text = title;
+//        self.titleLab.textColor = RGB(52, 52, 52);
+        NSArray *mesArr = [title componentsSeparatedByString:@"\n"];
+        if (mesArr.count > 1){
+            NSString *first = [mesArr objectAtIndex:0];
+            NSString *last = [mesArr objectAtIndex:1];
+            NSRange firstRange = [title rangeOfString:first];
+            NSRange lastRange = [title rangeOfString:last];
+            NSMutableAttributedString *attStr = [[NSMutableAttributedString alloc] initWithString:title];
+            [attStr addAttribute:NSForegroundColorAttributeName value:RGB(52, 52, 52) range:firstRange];
+            [attStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:SizeWidth(16)] range:firstRange];
+
+            [attStr addAttribute:NSForegroundColorAttributeName value:RGB(162, 162, 162) range:lastRange];
+            [attStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:SizeWidth(14)] range:lastRange];
+
+            self.titleLab.attributedText = attStr;
+            
+        }else{
+            self.titleLab.text = title;
+            self.titleLab.textColor = RGB(52, 52, 52);
+            self.titleLab.font = [UIFont systemFontOfSize:SizeWidth(16)];
+        }
     }
     
 }
