@@ -19,8 +19,9 @@
 #import "JYBHomeImproveBoxInfoBottomView.h"
 #import "CCWebViewViewController.h"
 #import "THDatePickerView.h"
-
-@interface JYBHomeImproveBoxInfoVC ()<UITableViewDelegate,UITableViewDataSource,JYBHomeSendDriveMesgVCDelegate,JYBHomePackAddressListVCDelegate,THDatePickerViewDelegate>
+//#import "PGDatePicker.h"
+#import "PGDatePickManager.h"
+@interface JYBHomeImproveBoxInfoVC ()<UITableViewDelegate,UITableViewDataSource,JYBHomeSendDriveMesgVCDelegate,JYBHomePackAddressListVCDelegate,THDatePickerViewDelegate,PGDatePickerDelegate>
 
 @property (nonatomic ,strong)UITableView *myTableView;
 
@@ -31,6 +32,8 @@
 @property (strong, nonatomic) THDatePickerView *dateView;
 
 @property (nonatomic ,assign)NSInteger  currentIndex;
+
+
 
 @end
 
@@ -407,30 +410,44 @@
 - (void)__seleTime:(NSInteger)index{
     
     self.currentIndex = index;
-    self.dateView.minuteInterval = 1;
-    self.dateView.date = (index == 0)?(self.startTime?self.startTime:[self __nextDayAfterDay:1 currntTime:nil]):(self.startTime?[self __nextDataWithCurrrnt:self.startTime]:[self __nextDayAfterDay:2 currntTime:nil]);
+
+    NSString *hasSelDateStr = (index == 0)?(self.startTime?self.startTime:[self __nextDayAfterDay:1 currntTime:nil]):(self.startTime?[self __nextDataWithCurrrnt:self.startTime]:[self __nextDayAfterDay:2 currntTime:nil]);
     
-    self.dateView.title = (index == 0)?@"请选择装箱时间":@"请选择截关时间";
-    [self.dateView.saveBtn setTitle:(index == 0)?@"下一步":@"确定" forState:UIControlStateNormal];
+    PGDatePickManager *datePickManager = [[PGDatePickManager alloc]init];
+    datePickManager.isShadeBackgroud = true;
+    datePickManager.cancelButtonTextColor = RGB(75, 157, 252);
+    datePickManager.cancelButtonText = @"取消";
+
+    datePickManager.confirmButtonTextColor = RGB(75, 157, 252);
+    datePickManager.confirmButtonText = (index == 0)?@"下一步":@"确定";
+
+    datePickManager.titleLabel.text = (index == 0)?@"请选择装箱时间":@"请选择截关时间";
+    datePickManager.titleLabel.textColor = RGB(52, 52, 52);
+    datePickManager.titleLabel.font = [UIFont systemFontOfSize:SizeWidth(16)];
     
-    [UIView animateWithDuration:0.3 animations:^{
-        self.dateView.frame = CGRectMake(0, self.view.frame.size.height - 300, self.view.frame.size.width, 300);
-        [self.dateView show];
-    }];
+    PGDatePicker *datePicker = datePickManager.datePicker;
+    datePicker.delegate = self;
+    datePicker.datePickerType = PGPickerViewType2;
+    datePicker.datePickerMode = PGDatePickerModeDateHourMinute;
+    
+    [self presentViewController:datePickManager animated:false completion:nil];
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm";
+    
+    datePicker.minimumDate = [dateFormatter dateFromString: [[NSDate date] stringWithFormat:@"yyyy-MM-dd HH:mm"]];
+    datePicker.maximumDate = [dateFormatter dateFromString:@"2028-01-01 08:00"];
+    
+    NSDate *date = [dateFormatter dateFromString:hasSelDateStr];
+    [datePicker setDate:date animated: true];
     
     
     
-//    WeakObj(self);
-//    NSDate *date = [NSDate dateWithString:(index == 0)?(self.startTime?self.startTime:[self __nextDayAfterDay:1 currntTime:nil]):(self.endTime?self.endTime:[self __nextDataWithCurrrnt:self.startTime]) format:@"yyyy-MM-dd HH:mm:ss"];
-//    [self.pickerView animationShowWithDate:date maximumDate:nil minimumDate:nil selectedItemComplete:^(ESPickerView *pickerView, NSString *item, NSDate *date) {
-//        if (index == 0) {
-//            selfWeak.startTime = [date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
-//        }else{
-//            selfWeak.endTime = [date stringWithFormat:@"yyyy-MM-dd HH:mm:ss"];
-//        }
-//        [selfWeak.myTableView reloadData];
-//        [pickerView animationDismiss];
+//    [UIView animateWithDuration:0.3 animations:^{
+//        self.dateView.frame = CGRectMake(0, self.view.frame.size.height - 300, self.view.frame.size.width, 300);
+//        [self.dateView show];
 //    }];
+    
 }
 
 - (NSString *)__nextDayAfterDay:(NSInteger)day currntTime:(NSString *)current{
@@ -557,5 +574,24 @@
     }];
 }
 
-
+#pragma PGDatePickerDelegate
+- (void)datePicker:(PGDatePicker *)datePicker didSelectDate:(NSDateComponents *)dateComponents {
+    NSLog(@"dateComponents = %@", dateComponents);
+//    yyyy-MM-dd HH:mm
+    NSString *timer = [NSString stringWithFormat:@"%04ld-%02ld-%02ld %02ld:%02ld",dateComponents.year,dateComponents.month,dateComponents.day,dateComponents.hour,dateComponents.minute];
+    
+    if (self.currentIndex == 0) {
+        self.startTime = timer;
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self __seleTime:1];
+        });
+        
+    }else{
+        self.endTime = timer;
+    }
+    [self.myTableView reloadData];
+    
+    
+}
 @end
