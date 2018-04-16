@@ -100,6 +100,7 @@
         _myTextFeild.leftView = leftBtn;
         _myTextFeild.leftViewMode = UITextFieldViewModeAlways;
         _myTextFeild.keyboardType = UIKeyboardTypeASCIICapable;
+
     }
     return _myTextFeild;
 }

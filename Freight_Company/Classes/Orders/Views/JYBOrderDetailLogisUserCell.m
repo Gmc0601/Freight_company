@@ -77,7 +77,7 @@
 
     [self.iconImageView setImageWithURL:[NSURL URLWithString:model.driver_phone] placeholder:[UIImage imageNamed:@"jyb_order_driver"]];
     self.nameLab.text = [NSString stringWithFormat:@"司机：%@",model.driver_name];
-    self.numLab.text = [self __getCarNoWithNo:model.car_no];
+    self.numLab.text = model.car_no;
 
 }
 

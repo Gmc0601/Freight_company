@@ -48,6 +48,12 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        JYBHomeFetchBoxPortCell *ordercell = [self.myTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [ordercell.myTextFeild becomeFirstResponder];
+    });
+    
     if (self.addressModel) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [self selectaddressModel:self.addressModel];
@@ -238,6 +244,7 @@
     if (indexPath.row == 0) {
         JYBHomeFetchBoxPortCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeFetchBoxPortCell class]) forIndexPath:indexPath];
         [cell.portLab setTitle:self.portModel?[NSString stringWithFormat:@"%@",self.portModel.port_name]:@"请选择" forState:UIControlStateNormal];
+
         WeakSelf(weak)
         [cell setBoxPortBlock:^{
             [weak __pickPort];

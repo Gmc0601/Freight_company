@@ -15,7 +15,7 @@
 #import "JYBHomeSelePointHeaderView.h"
 #import <AMapLocationKit/AMapLocationKit.h>
 
-@interface JYBHomeSelectStationVC ()<UITableViewDelegate,UITableViewDataSource,AMapSearchDelegate>
+@interface JYBHomeSelectStationVC ()<UITableViewDelegate,UITableViewDataSource,AMapSearchDelegate,UITextFieldDelegate>
 
 @property (nonatomic ,strong)JYBHomeSeleStationHeaderView *headerView;
 
@@ -50,6 +50,7 @@
         }];
         
     }else{
+        
         [self.view addSubview:self.headerView];
         [self.headerView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view).offset(64);
@@ -80,6 +81,14 @@
     }
 
 }
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    if (self.isPoint) {
+        [self.pointHeaderView.myTextField becomeFirstResponder];
+    }
+}
+
 
 - (void)resetFather {
     self.titleLab.text = self.isPoint?@"选择装箱点":@"选择装箱区域";
@@ -264,7 +273,7 @@
     if (!_headerView) {
         _headerView = [[JYBHomeSeleStationHeaderView alloc] init];
         [_headerView.cityBtn addTarget:self action:@selector(citySelectAction) forControlEvents:UIControlEventTouchUpInside];
-        [_headerView.arrowBtn addTarget:self action:@selector(citySelectAction) forControlEvents:UIControlEventTouchUpInside];        
+        [_headerView.arrowBtn addTarget:self action:@selector(citySelectAction) forControlEvents:UIControlEventTouchUpInside];
     }
     return _headerView;
 }
@@ -272,6 +281,7 @@
 - (JYBHomeSelePointHeaderView *)pointHeaderView{
     if (!_pointHeaderView) {
         _pointHeaderView = [[JYBHomeSelePointHeaderView alloc] init];
+        _pointHeaderView.myTextField.delegate = self;
         [_pointHeaderView.cityBtn setTitle:[NSString stringWithFormat:@"%@%@",self.city,self.keyWords] forState:UIControlStateNormal];
         WeakObj(self);
         [_pointHeaderView setHeaderSearchBlock:^(NSString *keyWord) {

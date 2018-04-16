@@ -421,7 +421,7 @@
     datePickManager.confirmButtonTextColor = RGB(75, 157, 252);
     datePickManager.confirmButtonText = (index == 0)?@"下一步":@"确定";
 
-    datePickManager.titleLabel.text = (index == 0)?@"请选择装箱时间":@"请选择截关时间";
+    datePickManager.titleLabel.text = (index == 0)?@"装箱时间":@"截关时间";
     datePickManager.titleLabel.textColor = RGB(52, 52, 52);
     datePickManager.titleLabel.font = [UIFont systemFontOfSize:SizeWidth(16)];
     

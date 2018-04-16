@@ -23,11 +23,11 @@
 
 #if HHTest
 //http://139.224.70.219/jyb/index.php?
-#define    BaseApi       @"http://139.224.70.219/jyb/index.php?s="
+#define    BaseApi       @"http://47.97.114.204/index.php?s="
 
 #else
 
-#define    BaseApi      @"正式地址"
+#define    BaseApi      @"http://47.97.114.204/index.php?s="
 
 #endif
 
