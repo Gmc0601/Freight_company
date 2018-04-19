@@ -485,7 +485,7 @@ typedef enum : NSUInteger {
             }else if (indexPath.row == 2){
                 [cell updateCellWithIcon:@"xx_icon_sj" title:@"截关时间" value:self.detailModel.cutoff_time other:NO];
             }else if (indexPath.row == 3){
-                [cell updateCellWithIcon:@"xx_icon_sj" title:@"提箱时间" value:self.detailModel.cutoff_time other:NO];
+                [cell updateCellWithIcon:@"xx_icon_sj" title:@"提箱时间" value:self.detailModel.box_create_time other:NO];
             }else if (indexPath.row == 4){
                 [cell updateCellWithIcon:@"ddxq_icon_xh" title:@"箱号" value:self.detailModel.box_no other:NO];
             }else{

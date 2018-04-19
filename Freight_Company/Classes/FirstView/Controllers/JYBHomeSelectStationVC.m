@@ -14,6 +14,7 @@
 #import "JYBHomeSeleStaionCell.h"
 #import "JYBHomeSelePointHeaderView.h"
 #import <AMapLocationKit/AMapLocationKit.h>
+#import "JYBHomeSelePointAddCell.h"
 
 @interface JYBHomeSelectStationVC ()<UITableViewDelegate,UITableViewDataSource,AMapSearchDelegate,UITextFieldDelegate>
 
@@ -231,33 +232,48 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return SizeWidth(55);
+    if (self.isPoint) {
+        return SizeWidth(75);
+
+    }else{
+        return SizeWidth(55);
+    }
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    JYBHomeSeleStaionCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeSeleStaionCell class]) forIndexPath:indexPath];
-
+    
     if (self.isPoint) {
+        
+        JYBHomeSelePointAddCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeSelePointAddCell class]) forIndexPath:indexPath];
         AMapTip *tip = [self.portArr objectAtIndex:indexPath.row];
         cell.nameLab.text = tip.name;
+        cell.nameDetailLab.text = tip.address;
+        return cell;
 
     }else{
+            JYBHomeSeleStaionCell *cell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([JYBHomeSeleStaionCell class]) forIndexPath:indexPath];
         JYBHomeStationSeleModel *model = [self.portArr objectAtIndex:indexPath.row];
         cell.nameLab.text = model.loadarea_name;
+        return cell;
+
     }
-
-    return cell;
-
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     if (self.isPoint) {
         AMapTip *tip = [self.portArr objectAtIndex:indexPath.row];
-        if (self.delegate && [self.delegate respondsToSelector:@selector(selectPoint:)]) {
-            [self.delegate selectPoint:tip];
+        
+        if (tip.location && tip.location.latitude > 0 && tip.location.longitude>0) {
+            
+            if (self.delegate && [self.delegate respondsToSelector:@selector(selectPoint:)]) {
+                [self.delegate selectPoint:tip];
+            }
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [ConfigModel mbProgressHUD:@"不合规地址，请换一个地址试试" andView:nil];
         }
-        [self.navigationController popViewControllerAnimated:YES];
+
     }else{
         
         JYBHomeStationSeleModel *model = [self.portArr objectAtIndex:indexPath.row];
@@ -334,6 +350,9 @@
         
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_myTableView registerClass:[JYBHomeSeleStaionCell class] forCellReuseIdentifier:NSStringFromClass([JYBHomeSeleStaionCell class])];
+        [_myTableView registerClass:[JYBHomeSelePointAddCell class] forCellReuseIdentifier:NSStringFromClass([JYBHomeSelePointAddCell class])];
+
+        
     }
     return _myTableView;
 }
