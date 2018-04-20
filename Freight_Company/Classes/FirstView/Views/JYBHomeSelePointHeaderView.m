@@ -52,13 +52,13 @@
     [self addLineWithInset:UIEdgeInsetsMake(-1, 0, 0, 0)];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [self.myTextField endEditing:YES];
-    if (self.headerSearchBlock) {
-        self.headerSearchBlock(textField.text);
-    }
-    return YES;
-}
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+//    [self.myTextField endEditing:YES];
+//    if (self.headerSearchBlock) {
+//        self.headerSearchBlock(textField.text);
+//    }
+//    return YES;
+//}
 
 
 

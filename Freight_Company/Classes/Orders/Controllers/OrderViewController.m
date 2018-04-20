@@ -186,15 +186,15 @@
         NSString *three = @"运输中";
         NSString *four = @"待确认";
         
-        if (![NSString stringIsNilOrEmpty:self.countModel.allotted] && self.countModel.allotted.integerValue > 0) {
+        if (![NSString stringIsNilOrEmpty:self.countModel.allotted]) {
             two = [NSString stringWithFormat:@"已接单(%@)",self.countModel.allotted];
         }
 
-        if (![NSString stringIsNilOrEmpty:self.countModel.under_way] && self.countModel.under_way.integerValue > 0) {
+        if (![NSString stringIsNilOrEmpty:self.countModel.under_way]) {
             three = [NSString stringWithFormat:@"运输中(%@)",self.countModel.under_way];
         }
         
-        if (![NSString stringIsNilOrEmpty:self.countModel.second_wait_pay] && self.countModel.second_wait_pay.integerValue > 0) {
+        if (![NSString stringIsNilOrEmpty:self.countModel.second_wait_pay]) {
             four = [NSString stringWithFormat:@"待确认(%@)",self.countModel.second_wait_pay];
         }
         

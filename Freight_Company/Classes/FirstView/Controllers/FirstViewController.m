@@ -57,12 +57,19 @@
 
 @implementation FirstViewController
 
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
  
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self navigation];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paysuccessAction) name:@"paysuccess" object:nil];
+
     
     //获取存储的port
     self.selPortModel = [[CPConfig sharedManager] lastPort];
@@ -107,6 +114,11 @@
         }
     }];
     
+}
+
+- (void)paysuccessAction{
+    
+    [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 - (NSInteger)__getCountWithModel:(JYBOrderCountModel *)model{

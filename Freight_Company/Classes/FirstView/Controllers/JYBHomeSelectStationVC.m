@@ -140,7 +140,7 @@
     self.search.delegate = self;
     
     AMapInputTipsSearchRequest *tips = [[AMapInputTipsSearchRequest alloc] init];
-    tips.keywords = [NSString stringIsNilOrEmpty:self.pointHeaderView.myTextField.text]?self.keyWords:self.headerView.myTextField.text;
+    tips.keywords = [NSString stringIsNilOrEmpty:self.pointHeaderView.myTextField.text]?self.keyWords:self.pointHeaderView.myTextField.text;
     tips.city = self.city;
     [self.search AMapInputTipsSearch:tips];
 
@@ -155,6 +155,16 @@
     
     [self.portArr addObjectsFromArray:response.tips];
     [self.myTableView reloadData];
+}
+
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+
+    [self.pointHeaderView.myTextField endEditing:YES];
+
+    [self searchStationAddressWithKeyWord:textField.text];
+    
+    return YES;
 }
 
 

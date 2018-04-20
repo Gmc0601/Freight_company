@@ -51,6 +51,12 @@
     
 }
 
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+}
+
 - (void)setUIWithModel:(JYBOrderListModel *)model{
     
     [self.mapView removeAnnotations:self.annotations];
@@ -96,26 +102,28 @@
     }
     
     
-    [self.mapView addAnnotations:self.annotations];
-
-
-    
-    
     if (model.shipment_address.count){
         JYBStationPointModel *levelModel = [self.allArr objectAtIndex:1];
-
+        
         CLLocation *centerlocation = [[CLLocation alloc] initWithLatitude:(model.driver_lat.floatValue + levelModel.lat.floatValue)/2 longitude:(model.driver_lon.floatValue + levelModel.lon.floatValue)/2];
         [self.mapView setCenterCoordinate:centerlocation.coordinate];
         [self.mapView setZoomLevel:[self __getLevelWithModel:levelModel] animated:NO];
-
+        
         
     }else{
         CLLocation *centerlocation = [[CLLocation alloc] initWithLatitude:model.driver_lat.floatValue longitude:model.driver_lon.floatValue];
         [self.mapView setCenterCoordinate:centerlocation.coordinate];
         [self.mapView setZoomLevel:12 animated:NO];
-
+        
     }
     
+    
+    
+    [self.mapView addAnnotations:self.annotations];
+
+
+    
+
     
     
     

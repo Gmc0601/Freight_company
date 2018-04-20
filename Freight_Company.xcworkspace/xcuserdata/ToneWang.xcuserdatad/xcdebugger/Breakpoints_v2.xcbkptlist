@@ -35,44 +35,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Freight_Company/Classes/Orders/Controllers/OrderViewController.m"
-            timestampString = "545129037.188234"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "-getCountData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Freight_Company/Classes/Orders/Controllers/OrderViewController.m"
-            timestampString = "545129037.18878"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "-getCountData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Freight_Company/Classes/FirstView/Controllers/JYBHomeImproveBoxInfoVC.m"
-            timestampString = "545838067.624115"
+            timestampString = "545892800.305303"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "547"
-            endingLineNumber = "547"
+            startingLineNumber = "569"
+            endingLineNumber = "569"
             landmarkName = "-datePickerViewSaveBtnClickDelegate:"
             landmarkType = "7">
             <Locations>
@@ -84,11 +52,11 @@
                   moduleName = "Freight_Company"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ToneWang/Desktop/%E9%A1%B9%E7%9B%AElist/%E7%BB%A7%E8%BF%90%E9%82%A6-master/company/Freight_company/Freight_Company/Classes/FirstView/Controllers/JYBHomeImproveBoxInfoVC.m"
-                  timestampString = "545577684.143356"
+                  timestampString = "545890143.316419"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "547"
-                  endingLineNumber = "547"
+                  startingLineNumber = "565"
+                  endingLineNumber = "565"
                   offsetFromSymbolStart = "96">
                </Location>
                <Location
@@ -99,26 +67,26 @@
                   moduleName = "Freight_Company"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ToneWang/Desktop/%E9%A1%B9%E7%9B%AElist/%E7%BB%A7%E8%BF%90%E9%82%A6-master/company/Freight_company/Freight_Company/Classes/FirstView/Controllers/JYBHomeImproveBoxInfoVC.m"
-                  timestampString = "545577684.145409"
+                  timestampString = "545890143.318575"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "548"
-                  endingLineNumber = "548"
+                  startingLineNumber = "566"
+                  endingLineNumber = "566"
                   offsetFromSymbolStart = "20">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.449"
+                  symbolName = "__destroy_helper_block_.453"
                   moduleName = "Freight_Company"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ToneWang/Desktop/%E9%A1%B9%E7%9B%AElist/%E7%BB%A7%E8%BF%90%E9%82%A6-master/company/Freight_company/Freight_Company/Classes/FirstView/Controllers/JYBHomeImproveBoxInfoVC.m"
-                  timestampString = "545577684.147342"
+                  timestampString = "545890143.3206069"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "547"
-                  endingLineNumber = "547"
+                  startingLineNumber = "565"
+                  endingLineNumber = "565"
                   offsetFromSymbolStart = "20">
                </Location>
             </Locations>
@@ -147,11 +115,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Freight_Company/Classes/FirstView/Controllers/JYBHomeImproveBoxInfoVC.m"
-            timestampString = "545838067.624246"
+            timestampString = "545892800.305927"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "581"
-            endingLineNumber = "581"
+            startingLineNumber = "603"
+            endingLineNumber = "603"
             landmarkName = "-datePicker:didSelectDate:"
             landmarkType = "7">
          </BreakpointContent>
@@ -195,7 +163,7 @@
                   moduleName = "Freight_Company"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ToneWang/Desktop/%E9%A1%B9%E7%9B%AElist/%E7%BB%A7%E8%BF%90%E9%82%A6-master/company/Freight_company/Freight_Company/Classes/Login&amp;Regist/LoginViewController.m"
-                  timestampString = "545577684.1578031"
+                  timestampString = "545890143.336116"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "196"
@@ -210,7 +178,7 @@
                   moduleName = "Freight_Company"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ToneWang/Desktop/%E9%A1%B9%E7%9B%AElist/%E7%BB%A7%E8%BF%90%E9%82%A6-master/company/Freight_company/Freight_Company/Classes/Login&amp;Regist/LoginViewController.m"
-                  timestampString = "545577684.15968"
+                  timestampString = "545890143.338845"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "198"
@@ -225,7 +193,7 @@
                   moduleName = "Freight_Company"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ToneWang/Desktop/%E9%A1%B9%E7%9B%AElist/%E7%BB%A7%E8%BF%90%E9%82%A6-master/company/Freight_company/Freight_Company/Classes/Login&amp;Regist/LoginViewController.m"
-                  timestampString = "545577684.1620539"
+                  timestampString = "545890143.342145"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "196"
@@ -264,6 +232,70 @@
             startingLineNumber = "170"
             endingLineNumber = "170"
             landmarkName = "-codeBtnClick:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Freight_Company/Classes/FirstView/Controllers/JYBHomeSelectStationVC.m"
+            timestampString = "545892800.306725"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "-onInputTipsSearchDone:response:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Freight_Company/Classes/FirstView/Controllers/JYBHomeSelectStationVC.m"
+            timestampString = "545892800.306812"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "-textFieldShouldReturn:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Freight_Company/Classes/FirstView/Controllers/JYBHomeSelectStationVC.m"
+            timestampString = "545892800.306887"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
+            landmarkName = "-searchStationAddressWithKeyWord:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Freight_Company/Classes/Orders/Controllers/JYBOrderSingleVC.m"
+            timestampString = "545890028.958005"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
+            landmarkName = "-__orderWithModel:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -194,8 +194,26 @@
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     [dic addUnEmptyString:self.seleBoxAddreModel.portModel.port_id forKey:@"prot_id"];
     [dic addUnEmptyString:[self __getOrderTypeWithName:self.sepc] forKey:@"order_type"];
-    [dic addUnEmptyString:[NSString stringWithFormat:@"%@:00",self.startTime] forKey:@"shipment_time"];
-    [dic addUnEmptyString:[NSString stringWithFormat:@"%@:00",self.endTime] forKey:@"cutoff_time"];
+    
+    NSArray *startArr = [self.startTime componentsSeparatedByString:@" "];
+    NSString *lastStr = [startArr lastObject];
+    NSArray *stattTimeArr = [lastStr componentsSeparatedByString:@":"];
+    
+    if (stattTimeArr.count > 2) {
+        [dic addUnEmptyString:self.startTime forKey:@"shipment_time"];
+    }else{
+        [dic addUnEmptyString:[NSString stringWithFormat:@"%@:00",self.startTime] forKey:@"shipment_time"];
+    }
+    
+    NSArray *endArr = [self.endTime componentsSeparatedByString:@" "];
+    NSString *lastendStr = [endArr lastObject];
+    NSArray *endTimeArr = [lastendStr componentsSeparatedByString:@":"];
+    
+    if (endTimeArr.count > 2) {
+        [dic addUnEmptyString:self.endTime forKey:@"cutoff_time"];
+    }else{
+        [dic addUnEmptyString:[NSString stringWithFormat:@"%@:00",self.endTime] forKey:@"cutoff_time"];
+    }
     [dic addUnEmptyString:self.seleBoxAddreModel.tiOrderNum forKey:@"pick_no"];
     [dic addUnEmptyString:self.seleBoxAddreModel.box_address_id forKey:@"box_address_id"];
 
@@ -258,7 +276,11 @@
         if (weak.tabBarController.selectedIndex == 1) {
             [weak.navigationController popToRootViewControllerAnimated:YES];
         }else{
+//            [weak.navigationController popToRootViewControllerAnimated:NO];
             weak.tabBarController.selectedIndex = 1;
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"paysuccess" object:nil];
+            
         }
     }];
     
